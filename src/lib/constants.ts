@@ -3,9 +3,9 @@ export const CONTACTS = {
   phoneDisplay: "+7 918 052-10-22",
   phoneHref: "tel:+79180521022",
   telegram: "https://t.me/park_Armada_d",
-  /** Чат / бизнес-профиль MAX для заявок */
-  max: "https://max.ru/id235208280463_biz",
-  /** Канал MAX — акции и бонусы */
+  /** Чат MAX для заявок и кнопок «Сообщение в MAX» */
+  max: "https://clck.su/SCdDA",
+  /** Канал MAX — акции и бонусы (кнопка «Подписаться») */
   maxChannel: "https://max.ru/id235208280463_biz",
   hours: "8:00–21:00 Мск, ежедневно",
 } as const;
