@@ -43,7 +43,7 @@ logger = logging.getLogger("armada.support_bot")
 class BotConfig:
     """Конфиг из env. Токены — только из окружения."""
 
-    company_name: str = "Парк АРМАДА"
+    company_name: str = "АРМАДА"
     timezone: str = "Europe/Moscow"
     work_hours: str = "8:00–21:00 Мск"
     support_phone: str = "+79180521022"
