@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "/",
+    canonical: SITE.url,
   },
   icons: {
     icon: "/icon.svg",

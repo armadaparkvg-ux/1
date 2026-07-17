@@ -50,6 +50,7 @@ export const LABOR_OPTIONS = [
 export const SITE = {
   name: "Армада",
   fullName: "Таксопарк «Армада»",
+  domain: "park-armada.ru",
   title:
     "Армада — подключение водителей к Яндекс Такси | Таксопарк",
   description:
