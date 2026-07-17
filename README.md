@@ -14,28 +14,22 @@
 - Zod + React Hook Form
 - Яндекс.Метрика `110811547`
 
-## Запуск
+## Запуск (локально)
 
 ```bash
 npm install
 npm run dev
 ```
 
-Откройте [http://localhost:3000](http://localhost:3000).
-
-## Сборка
+## Сборка ZIP для хостинга
 
 ```bash
-npm run build
-npm start
+npm run zip:hosting
 ```
 
-## API
-
-`POST /api/lead` — приём заявок (заглушка с валидацией Zod и honeypot).
+- `dist/park-armada-hosting-*.zip` — содержимое для `public_html`
+- `dist/park-armada-source-*.zip` — исходники
 
 ## DNS (Reg.ru)
 
-Домен зарегистрирован в REG.RU, NS: `ns1.hosting.reg.ru` / `ns2.hosting.reg.ru`.
-
-В панели хостинга добавьте A-записи на IP сервера и дождитесь распространения DNS (до 24 ч).
+NS: `ns1.hosting.reg.ru` / `ns2.hosting.reg.ru`. Добавьте A-запись на IP хостинга.
