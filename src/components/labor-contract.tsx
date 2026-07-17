@@ -1,0 +1,118 @@
+"use client";
+
+import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
+import { Button } from "@/components/ui/button";
+import { ContactButtons } from "@/components/contact-buttons";
+import { LABOR_OPTIONS } from "@/lib/constants";
+
+function selectAndScroll(option: string) {
+  window.dispatchEvent(
+    new CustomEvent("armada:select-option", { detail: option })
+  );
+  const el = document.getElementById("lead-form");
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+const OPTIONS = [
+  {
+    id: "opt-3pct",
+    optionValue: LABOR_OPTIONS[0].value,
+    title: "3% + 300₽ ежедневные списания",
+    badge: "Популярный",
+    body: [
+      "Преимущества этого вида трудоустройства: если превышен лимит по доходам самозанятого и не хотите открывать ИП, легальность перед контролирующими органами, возможность прохождения процедуры банкротства, получения пособий и т.д. По запросу парк может предоставить: справку 2НДФЛ, сам договор.",
+      "Важно: списания 300₽ ежедневные рассчитаны на каждый день месяца от оклада ровными частями, так как налог мы платим фиксированный за Вас вне зависимости от суммы дохода и количества дней работы.",
+    ],
+  },
+  {
+    id: "opt-5pct",
+    optionValue: LABOR_OPTIONS[1].value,
+    title: "5% + 100₽ ежедневные списания",
+    badge: null as string | null,
+    body: [
+      "Более низкие ежедневные списания при чуть большем проценте комиссии. Подходит тем, кто хочет снизить фиксированную часть расходов на налоги.",
+    ],
+  },
+  {
+    id: "opt-6pct",
+    optionValue: LABOR_OPTIONS[2].value,
+    title: "6% без ежедневных списаний",
+    badge: "Без фикс. списаний",
+    body: [
+      "Суть документа (трудового договора) — только для подтверждения типа занятости в аккаунте Яндекса. Раз в месяц для прохождения проверки в аккаунте парка делаете нам запрос и мы вас оформляем, проходите проверку — увольняем по договору, но продолжаете работать в парке.",
+    ],
+  },
+];
+
+export function LaborContract() {
+  return (
+    <section
+      id="labor-contract"
+      className="section-anchor relative py-20 sm:py-24"
+      aria-labelledby="labor-heading"
+    >
+      <div
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(67,56,202,0.12),transparent_55%)]"
+        aria-hidden
+      />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <FadeIn>
+          <SectionHeading
+            eyebrow="Трудовой договор"
+            title="Три варианта сотрудничества по трудовому договору"
+            description="Выберите подходящий для вас вариант оформления. Условия парка стандартны, меняется только процент комиссии и схема списаний на налоги."
+          />
+        </FadeIn>
+
+        <Stagger className="mt-14 grid gap-6 lg:grid-cols-3" stagger={0.1}>
+          {OPTIONS.map((opt) => (
+            <StaggerItem key={opt.id}>
+              <article
+                id={opt.id}
+                className="glass flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover sm:p-7"
+              >
+                {opt.badge ? (
+                  <span className="mb-3 inline-flex w-fit rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
+                    {opt.badge}
+                  </span>
+                ) : (
+                  <span className="mb-3 inline-flex h-6" />
+                )}
+                <h3 className="font-display text-xl font-semibold text-foreground text-balance">
+                  {opt.title}
+                </h3>
+                <div className="mt-4 flex-1 space-y-3">
+                  {opt.body.map((p) => (
+                    <p
+                      key={p.slice(0, 40)}
+                      className="text-sm leading-relaxed text-muted-foreground"
+                    >
+                      {p}
+                    </p>
+                  ))}
+                </div>
+                <Button
+                  type="button"
+                  shine
+                  className="mt-6 w-full"
+                  onClick={() => selectAndScroll(opt.optionValue)}
+                >
+                  Оформить заявку на этот вариант
+                </Button>
+                <div className="mt-4">
+                  <ContactButtons showLabels size="sm" />
+                </div>
+              </article>
+            </StaggerItem>
+          ))}
+        </Stagger>
+
+        <h2 id="labor-heading" className="sr-only">
+          Варианты трудового договора
+        </h2>
+      </div>
+    </section>
+  );
+}
