@@ -7,6 +7,8 @@ export const CONTACTS = {
   max: "https://max.ru/u/f9LHodD0cOIXrCeWqjiHqb0Gibfo-Ooz0vRKNyY4KeBz6WDuQaesuUaWDT0",
   /** Канал MAX — акции и бонусы (кнопка «Подписаться») */
   maxChannel: "https://max.ru/id235208280463_biz",
+  /** Проверка авто в ФГИС Такси */
+  fgisCheck: "https://sicmt.ru/fgis-taksi?type=car",
   hours: "8:00–21:00 Мск, ежедневно",
 } as const;
 

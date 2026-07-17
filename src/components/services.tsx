@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ApplyButton } from "@/components/messenger-apply";
 import { ContactButtons } from "@/components/contact-buttons";
 import type { ApplyTopic } from "@/lib/apply";
+import { CONTACTS } from "@/lib/constants";
 
 const SERVICES: {
   image: string;
@@ -28,7 +29,7 @@ const SERVICES: {
     cta: "Узнать про лицензию",
     topic: "лицензия ФГИС",
     externalLink: {
-      href: "https://sicmt.ru/fgis-taksi?type=car",
+      href: CONTACTS.fgisCheck,
       label: "Проверить ФГИС Такси",
     },
   },

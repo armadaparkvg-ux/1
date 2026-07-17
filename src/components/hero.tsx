@@ -65,6 +65,21 @@ export function Hero() {
           <Button
             asChild
             size="lg"
+            variant="secondary"
+            shine
+            className="sm:min-w-[200px]"
+          >
+            <a
+              href={CONTACTS.fgisCheck}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Проверить ФГИС Такси
+            </a>
+          </Button>
+          <Button
+            asChild
+            size="lg"
             variant="outline"
             shine
             className="sm:min-w-[200px]"
