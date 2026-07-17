@@ -17,9 +17,10 @@ export function Tariffs() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <SectionHeading
+            id="tariffs-heading"
             eyebrow="Тарифы"
-            title="Выберите формат сотрудничества"
-            description="Три понятных варианта работы с парком «Армада». Условия прозрачны — без скрытых платежей."
+            title="Подключение к Яндекс Такси: тарифы таксопарка"
+            description="Три формата работы с парком «Армада»: парковый самозанятый, парковый ИП и трудовой договор. Комиссия от 1,9% — без скрытых платежей."
           />
         </FadeIn>
 
@@ -117,9 +118,6 @@ export function Tariffs() {
           </StaggerItem>
         </Stagger>
 
-        <h2 id="tariffs-heading" className="sr-only">
-          Тарифы подключения
-        </h2>
       </div>
     </section>
   );

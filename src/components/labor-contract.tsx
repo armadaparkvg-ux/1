@@ -60,9 +60,10 @@ export function LaborContract() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <SectionHeading
+            id="labor-heading"
             eyebrow="Трудовой договор"
-            title="Три варианта сотрудничества по трудовому договору"
-            description="Выберите подходящий для вас вариант оформления. Условия парка стандартны, меняется только процент комиссии и схема списаний на налоги."
+            title="Трудовой договор в Яндекс Такси — три варианта"
+            description="Официальное оформление по ТК РФ для работы в Яндекс Такси. Условия парка стандартны — меняется процент комиссии и схема списаний на налоги."
           />
         </FadeIn>
 
@@ -109,9 +110,6 @@ export function LaborContract() {
           ))}
         </Stagger>
 
-        <h2 id="labor-heading" className="sr-only">
-          Варианты трудового договора
-        </h2>
       </div>
     </section>
   );

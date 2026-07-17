@@ -106,9 +106,10 @@ export function LeadForm() {
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <SectionHeading
+            id="form-heading"
             eyebrow="Заявка"
-            title="Оформить заявку на трудовой договор"
-            description="Единая форма для трёх вариантов ТД. Менеджер свяжется с вами в рабочее время."
+            title="Заявка на подключение по трудовому договору"
+            description="Единая форма для трёх вариантов ТД в Яндекс Такси. Менеджер свяжется с вами в рабочее время."
           />
         </FadeIn>
 
@@ -234,9 +235,6 @@ export function LeadForm() {
           </form>
         </FadeIn>
 
-        <h2 id="form-heading" className="sr-only">
-          Форма заявки
-        </h2>
       </div>
     </section>
   );

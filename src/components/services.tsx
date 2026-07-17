@@ -45,9 +45,10 @@ export function Services() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <SectionHeading
+            id="services-heading"
             eyebrow="Доп. услуги"
-            title="Дополнительные услуги парка «Армада»"
-            description="Помогаем легализовать работу: лицензия, реестр перевозчиков и страхование ОСГОП."
+            title="Лицензия такси, реестр перевозчиков и ОСГОП"
+            description="Дополнительные услуги парка «Армада»: внесение авто в реестр такси (ФГИС), реестр перевозчиков и страхование ОСГОП."
           />
         </FadeIn>
 
@@ -78,9 +79,6 @@ export function Services() {
           })}
         </Stagger>
 
-        <h2 id="services-heading" className="sr-only">
-          Дополнительные услуги
-        </h2>
       </div>
     </section>
   );

@@ -97,12 +97,14 @@ export function SectionHeading({
   description,
   className,
   align = "center",
+  id,
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   className?: string;
   align?: "center" | "left";
+  id?: string;
 }) {
   return (
     <div
@@ -117,7 +119,10 @@ export function SectionHeading({
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl text-balance">
+      <h2
+        id={id}
+        className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl text-balance"
+      >
         {title}
       </h2>
       {description ? (

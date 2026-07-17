@@ -25,10 +25,11 @@ export function Requirements() {
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
           <FadeIn>
             <SectionHeading
+              id="requirements-heading"
               align="left"
               eyebrow="Оформление"
-              title="Условия парка для оформления по трудовому договору"
-              description="Стандартный набор требований для безопасного и легального подключения. Подготовим и проверим документы вместе с вами."
+              title="Условия оформления в таксопарк по трудовому договору"
+              description="Требования для легального подключения к Яндекс Такси: документы, стаж, авто. Подготовим и проверим пакет вместе с вами."
             />
           </FadeIn>
 
@@ -48,9 +49,6 @@ export function Requirements() {
           </FadeIn>
         </div>
 
-        <h2 id="requirements-heading" className="sr-only">
-          Условия оформления по трудовому договору
-        </h2>
       </div>
     </section>
   );

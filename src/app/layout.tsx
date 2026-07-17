@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Inter, Manrope } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { FloatingContacts } from "@/components/floating-contacts";
 import { YandexMetrika } from "@/components/yandex-metrika";
 import { SITE } from "@/lib/constants";
+import { SEO_KEYWORDS, buildJsonLd } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -13,8 +14,8 @@ const inter = Inter({
   display: "swap",
 });
 
-const sora = Sora({
-  subsets: ["latin"],
+const manrope = Manrope({
+  subsets: ["latin", "cyrillic"],
   variable: "--font-sora",
   display: "swap",
 });
@@ -26,15 +27,12 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
-  keywords: [
-    "Яндекс Такси",
-    "таксопарк",
-    "Армада",
-    "подключение водителей",
-    "самозанятый такси",
-    "трудовой договор такси",
-  ],
+  keywords: [...SEO_KEYWORDS],
   authors: [{ name: SITE.fullName }],
+  creator: SITE.fullName,
+  publisher: SITE.fullName,
+  category: "transportation",
+  applicationName: SITE.fullName,
   openGraph: {
     type: "website",
     locale: "ru_RU",
@@ -42,51 +40,49 @@ export const metadata: Metadata = {
     siteName: SITE.fullName,
     title: SITE.title,
     description: SITE.description,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Подключение к Яндекс Такси — таксопарк Армада",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE.title,
     description: SITE.description,
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   alternates: {
     canonical: SITE.url,
+    languages: {
+      "ru-RU": SITE.url,
+    },
   },
   icons: {
-    icon: "/icon.svg",
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/icon.svg" }],
+  },
+  other: {
+    "geo.region": "RU",
+    "format-detection": "telephone=yes",
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "EmploymentAgency",
-      name: SITE.fullName,
-      description: SITE.description,
-      url: SITE.url,
-      telephone: "+79180521022",
-      openingHours: "Mo-Su 08:00-21:00",
-      areaServed: "RU",
-      sameAs: ["https://t.me/park_Armada_d"],
-    },
-    {
-      "@type": "TaxiService",
-      name: SITE.fullName,
-      description:
-        "Подключение водителей к Яндекс Такси: парковый самозанятый, ИП и трудовой договор.",
-      url: SITE.url,
-      telephone: "+79180521022",
-      provider: {
-        "@type": "Organization",
-        name: SITE.fullName,
-      },
-    },
-  ],
-};
+const jsonLd = buildJsonLd();
 
 export default function RootLayout({
   children,
@@ -96,8 +92,14 @@ export default function RootLayout({
   return (
     <html lang="ru" className="dark">
       <body
-        className={`${inter.variable} ${sora.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
+        className={`${inter.variable} ${manrope.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
       >
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-foreground"
+        >
+          Перейти к содержимому
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

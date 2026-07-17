@@ -36,9 +36,10 @@ export function Trust() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <SectionHeading
+            id="trust-heading"
             eyebrow="Почему Армада"
-            title="Цифры, которым доверяют водители"
-            description="Прозрачные условия, быстрое подключение и живая поддержка на каждом этапе."
+            title="Таксопарк «Армада» — цифры, которым доверяют водители"
+            description="Прозрачные условия подключения к Яндекс Такси, быстрая активация и поддержка на каждом этапе."
           />
         </FadeIn>
 
@@ -63,9 +64,6 @@ export function Trust() {
             );
           })}
         </Stagger>
-        <h2 id="trust-heading" className="sr-only">
-          Факты о парке Армада
-        </h2>
       </div>
     </section>
   );

@@ -16,9 +16,10 @@ export function Contacts() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <SectionHeading
+            id="contacts-heading"
             eyebrow="Контакты"
-            title="Свяжитесь с нами"
-            description="Работаем удалённо. Консультации ежедневно в рабочее время."
+            title="Контакты таксопарка «Армада»"
+            description="Работаем удалённо по всей России. Консультации ежедневно в рабочее время."
           />
         </FadeIn>
 
@@ -78,9 +79,6 @@ export function Contacts() {
           </div>
         </FadeIn>
 
-        <h2 id="contacts-heading" className="sr-only">
-          Контактная информация
-        </h2>
       </div>
     </section>
   );

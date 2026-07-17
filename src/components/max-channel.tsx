@@ -34,7 +34,7 @@ export function MaxChannel() {
                   id="max-heading"
                   className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl text-balance"
                 >
-                  Наш канал в MAX — акции и бонусы
+                  Канал в MAX — акции и бонусы для водителей Яндекс Такси
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
                   В нашем канале мы регулярно проводим акции и разыгрываем бонусы

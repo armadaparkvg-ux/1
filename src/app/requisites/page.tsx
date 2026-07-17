@@ -4,7 +4,9 @@ import { CONTACTS, SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Реквизиты компании",
-  description: `Юридическая информация ${SITE.fullName}`,
+  description: `Юридическая информация ${SITE.fullName}. Контакты и режим работы таксопарка для подключения к Яндекс Такси.`,
+  alternates: { canonical: `${SITE.url}/requisites` },
+  robots: { index: true, follow: true },
 };
 
 export default function RequisitesPage() {

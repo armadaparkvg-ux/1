@@ -19,11 +19,20 @@ export const FORMS = {
 
 export const NAV_LINKS = [
   { href: "#tariffs", label: "Тарифы" },
+  { href: "#labor-contract", label: "Трудовой договор" },
   { href: "#services", label: "Доп. услуги" },
   { href: "#how-it-works", label: "Как это работает" },
   { href: "#max-channel", label: "Канал MAX" },
   { href: "#faq", label: "FAQ" },
   { href: "#contacts", label: "Контакты" },
+] as const;
+
+export const FOOTER_LINKS = [
+  { href: "#tariffs", label: "Подключение к Яндекс Такси" },
+  { href: "#labor-contract", label: "Трудовой договор" },
+  { href: "#services", label: "Лицензия такси и ОСГОП" },
+  { href: "#faq", label: "Частые вопросы" },
+  { href: "#lead-form", label: "Оставить заявку" },
 ] as const;
 
 export const LABOR_OPTIONS = [
@@ -52,8 +61,8 @@ export const SITE = {
   fullName: "Таксопарк «Армада»",
   domain: "park-armada.ru",
   title:
-    "Армада — подключение водителей к Яндекс Такси | Таксопарк",
+    "Подключение к Яндекс Такси — таксопарк «Армада» | Самозанятый, ИП, трудовой договор",
   description:
-    "Таксопарк «Армада»: подключение к Яндекс Такси на выгодных условиях. Парковый самозанятый, ИП и трудовой договор. Комиссия от 1,9%. Поддержка 8:00–21:00 Мск.",
+    "Подключение водителей к Яндекс Такси через таксопарк «Армада». Парковый самозанятый и ИП от 1,9%, трудовой договор, лицензия ФГИС, ОСГОП. Активация 1,5–2 часа. Консультация 8:00–21:00 Мск.",
   url: "https://park-armada.ru",
 } as const;

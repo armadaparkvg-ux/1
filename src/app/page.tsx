@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/hero";
 import { Trust } from "@/components/trust";
 import { Tariffs } from "@/components/tariffs";
@@ -10,26 +11,40 @@ import { HowItWorks } from "@/components/how-it-works";
 import { Faq } from "@/components/faq";
 import { LeadForm } from "@/components/lead-form";
 import { Contacts } from "@/components/contacts";
+import { SITE } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  title: SITE.title,
+  description: SITE.description,
+  alternates: {
+    canonical: SITE.url,
+  },
+  openGraph: {
+    title: SITE.title,
+    description: SITE.description,
+    url: SITE.url,
+  },
+};
 
 export default function HomePage() {
   return (
     <>
       <Hero />
       <Trust />
-      <div className="divider-glow mx-auto max-w-7xl" />
+      <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <Tariffs />
-      <div className="divider-glow mx-auto max-w-7xl" />
+      <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <LaborContract />
       <MaxChannel />
-      <div className="divider-glow mx-auto max-w-7xl" />
+      <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <Services />
       <Taxes />
       <Requirements />
-      <div className="divider-glow mx-auto max-w-7xl" />
+      <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <HowItWorks />
-      <div className="divider-glow mx-auto max-w-7xl" />
+      <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <Faq />
-      <div className="divider-glow mx-auto max-w-7xl" />
+      <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <LeadForm />
       <Contacts />
     </>

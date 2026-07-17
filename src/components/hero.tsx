@@ -57,7 +57,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.08 }}
           className="max-w-4xl font-display text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem] lg:leading-[1.15] text-balance"
         >
-          Подключим к Яндекс Такси на выгодных условиях — выберите свой формат
+          Подключение к Яндекс Такси на выгодных условиях — выберите свой формат
           работы
         </motion.h1>
 
@@ -68,8 +68,8 @@ export function Hero() {
           className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
           Таксопарк «Армада»: три формата сотрудничества — парковый самозанятый,
-          парковый ИП и трудовой договор. Прозрачные условия, поддержка 24/7,
-          помощь с документами.
+          парковый ИП и трудовой договор. Прозрачные условия, консультация{" "}
+          {CONTACTS.hours}, помощь с документами и лицензией такси.
         </motion.p>
 
         <motion.div

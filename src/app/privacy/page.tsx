@@ -4,7 +4,9 @@ import { CONTACTS, SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Политика конфиденциальности",
-  description: `Политика конфиденциальности ${SITE.fullName}`,
+  description: `Политика конфиденциальности ${SITE.fullName}: обработка персональных данных при подключении к Яндекс Такси.`,
+  alternates: { canonical: `${SITE.url}/privacy` },
+  robots: { index: true, follow: true },
 };
 
 export default function PrivacyPage() {

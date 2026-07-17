@@ -27,9 +27,10 @@ export function Taxes() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <SectionHeading
+            id="taxes-heading"
             eyebrow="Прозрачность"
-            title="Налоги и документы"
-            description="Понятная схема: кто платит налоги, какие документы вы получаете и как проходит проверка в Яндексе."
+            title="Налоги и документы при трудовом договоре в такси"
+            description="Кто платит налоги, какие документы вы получаете по запросу и как проходит проверка в аккаунте Яндекс Такси."
           />
         </FadeIn>
 
@@ -51,9 +52,6 @@ export function Taxes() {
           ))}
         </div>
 
-        <h2 id="taxes-heading" className="sr-only">
-          Налоги и документы
-        </h2>
       </div>
     </section>
   );
