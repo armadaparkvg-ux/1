@@ -51,7 +51,7 @@ export function MaxChannel() {
                 className="w-full shrink-0 text-base shadow-[0_0_40px_-8px_rgba(16,185,129,0.55)] md:w-auto"
               >
                 <Link
-                  href={CONTACTS.max}
+                  href={CONTACTS.maxChannel}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

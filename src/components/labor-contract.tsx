@@ -1,33 +1,21 @@
 "use client";
 
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
-import { Button } from "@/components/ui/button";
+import { ApplyButton } from "@/components/messenger-apply";
 import { ContactButtons } from "@/components/contact-buttons";
 import { LABOR_OPTIONS } from "@/lib/constants";
+import type { ApplyTopic } from "@/lib/apply";
 
-function selectAndScroll(option: string) {
-  try {
-    sessionStorage.setItem("armada-option", option);
-    const url = new URL(window.location.href);
-    url.searchParams.set("option", option);
-    url.hash = "lead-form";
-    window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
-  } catch {
-    // ignore storage/history errors
-  }
-  window.dispatchEvent(
-    new CustomEvent("armada:select-option", { detail: option })
-  );
-  const el = document.getElementById("lead-form");
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-}
-
-const OPTIONS = [
+const OPTIONS: {
+  id: string;
+  topic: ApplyTopic;
+  title: string;
+  badge: string | null;
+  body: string[];
+}[] = [
   {
     id: "opt-3pct",
-    optionValue: LABOR_OPTIONS[0].value,
+    topic: LABOR_OPTIONS[0].value,
     title: "3% + 300₽ ежедневные списания",
     badge: "Популярный",
     body: [
@@ -37,16 +25,16 @@ const OPTIONS = [
   },
   {
     id: "opt-5pct",
-    optionValue: LABOR_OPTIONS[1].value,
+    topic: LABOR_OPTIONS[1].value,
     title: "5% + 100₽ ежедневные списания",
-    badge: null as string | null,
+    badge: null,
     body: [
       "Более низкие ежедневные списания при чуть большем проценте комиссии. Подходит тем, кто хочет снизить фиксированную часть расходов на налоги.",
     ],
   },
   {
     id: "opt-6pct",
-    optionValue: LABOR_OPTIONS[2].value,
+    topic: LABOR_OPTIONS[2].value,
     title: "6% без ежедневных списаний",
     badge: "Без фикс. списаний",
     body: [
@@ -103,14 +91,9 @@ export function LaborContract() {
                     </p>
                   ))}
                 </div>
-                <Button
-                  type="button"
-                  shine
-                  className="mt-6 w-full"
-                  onClick={() => selectAndScroll(opt.optionValue)}
-                >
+                <ApplyButton topic={opt.topic} className="mt-6 w-full">
                   Оформить заявку на этот вариант
-                </Button>
+                </ApplyButton>
                 <div className="mt-4">
                   <ContactButtons showLabels size="sm" />
                 </div>
@@ -118,7 +101,6 @@ export function LaborContract() {
             </StaggerItem>
           ))}
         </Stagger>
-
       </div>
     </section>
   );

@@ -3,7 +3,10 @@ export const CONTACTS = {
   phoneDisplay: "+7 918 052-10-22",
   phoneHref: "tel:+79180521022",
   telegram: "https://t.me/park_Armada_d",
-  max: "https://clck.su/SCdDA",
+  /** Чат / бизнес-профиль MAX для заявок */
+  max: "https://max.ru/id235208280463_biz",
+  /** Канал MAX — акции и бонусы */
+  maxChannel: "https://max.ru/id235208280463_biz",
   hours: "8:00–21:00 Мск, ежедневно",
 } as const;
 
@@ -33,7 +36,7 @@ export const FOOTER_LINKS = [
   { href: "/#labor-contract", label: "Трудовой договор" },
   { href: "/#services", label: "Лицензия такси и ОСГОП" },
   { href: "/#faq", label: "Частые вопросы" },
-  { href: "/#lead-form", label: "Оставить заявку" },
+  { href: "/#apply", label: "Оставить заявку" },
 ] as const;
 
 export const LABOR_OPTIONS = [

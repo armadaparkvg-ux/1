@@ -4,6 +4,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { FloatingContacts } from "@/components/floating-contacts";
 import { YandexMetrika } from "@/components/yandex-metrika";
+import { Providers } from "@/components/providers";
 import { SITE } from "@/lib/constants";
 import { SEO_KEYWORDS } from "@/lib/seo";
 import "./globals.css";
@@ -93,12 +94,14 @@ export default function RootLayout({
           Перейти к содержимому
         </a>
         <YandexMetrika />
-        <Header />
-        <main id="main" className="pb-20 md:pb-0">
-          {children}
-        </main>
-        <Footer />
-        <FloatingContacts />
+        <Providers>
+          <Header />
+          <main id="main" className="pb-20 md:pb-0">
+            {children}
+          </main>
+          <Footer />
+          <FloatingContacts />
+        </Providers>
       </body>
     </html>
   );

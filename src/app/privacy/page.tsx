@@ -18,8 +18,8 @@ export default function PrivacyPage() {
       <div className="mt-8 space-y-5 text-sm leading-relaxed text-muted-foreground">
         <p>
           Настоящая Политика определяет порядок обработки персональных данных,
-          которые вы передаёте {SITE.fullName} при заполнении формы заявки на
-          сайте или при обращении по контактам парка.
+          которые вы передаёте {SITE.fullName} при обращении через сайт,
+          Telegram, MAX или по телефону.
         </p>
         <p>
           Мы обрабатываем имя, номер телефона, Telegram, город, сведения об

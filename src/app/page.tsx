@@ -9,7 +9,7 @@ import { Taxes } from "@/components/taxes";
 import { Requirements } from "@/components/requirements";
 import { HowItWorks } from "@/components/how-it-works";
 import { Faq } from "@/components/faq";
-import { LeadForm } from "@/components/lead-form";
+import { ApplySection } from "@/components/apply-section";
 import { Contacts } from "@/components/contacts";
 import { SITE } from "@/lib/constants";
 import { buildJsonLd } from "@/lib/seo";
@@ -54,7 +54,7 @@ export default function HomePage() {
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <Faq />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
-      <LeadForm />
+      <ApplySection />
       <Contacts />
     </>
   );

@@ -4,9 +4,18 @@ import Link from "next/link";
 import { FileCheck, Shield, Truck } from "lucide-react";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { Button } from "@/components/ui/button";
+import { ApplyButton } from "@/components/messenger-apply";
 import { ContactButtons } from "@/components/contact-buttons";
+import type { ApplyTopic } from "@/lib/apply";
 
-const SERVICES = [
+const SERVICES: {
+  icon: typeof FileCheck;
+  title: string;
+  description: string;
+  docs: string | null;
+  cta: string;
+  topic: ApplyTopic;
+}[] = [
   {
     icon: FileCheck,
     title: "Лицензия такси (ФГИС)",
@@ -14,7 +23,7 @@ const SERVICES = [
       "Оформляем официальную запись в реестре такси. Стоимость — 3 500 ₽ на 5 лет, оплата по факту выполненной работы, без ежемесячных платежей. Срок оформления — в среднем 1–3 дня, редко до 7 дней.",
     docs: "Документы: фото СТС (2 стороны) + фото авто с 4 сторон под прямым углом.",
     cta: "Узнать про лицензию",
-    href: "/#contacts",
+    topic: "лицензия ФГИС",
   },
   {
     icon: Truck,
@@ -23,16 +32,15 @@ const SERVICES = [
       "Если авто уже внесено нашим парком — оформим реестр перевозчика. Потребуются: справка об отсутствии судимости, договор с агрегатором, статус самозанятого или ИП.",
     docs: null,
     cta: "Уточнить условия",
-    href: "/#contacts",
+    topic: "реестр перевозчиков",
   },
   {
     icon: Shield,
     title: "ОСГОП (страхование)",
-    description:
-      "Оформляем страхование ОСГОП. Стоимость — 3 400 ₽ на 1 год.",
+    description: "Оформляем страхование ОСГОП. Стоимость — 3 400 ₽ на 1 год.",
     docs: null,
     cta: "Оформить ОСГОП",
-    href: "/#contacts",
+    topic: "ОСГОП",
   },
 ];
 
@@ -71,9 +79,13 @@ export function Services() {
                   {service.docs ? (
                     <p className="mt-3 text-sm text-foreground/80">{service.docs}</p>
                   ) : null}
-                  <Button asChild variant="outline" shine className="mt-6 w-full">
-                    <Link href={service.href}>{service.cta}</Link>
-                  </Button>
+                  <ApplyButton
+                    topic={service.topic}
+                    variant="outline"
+                    className="mt-6 w-full"
+                  >
+                    {service.cta}
+                  </ApplyButton>
                   <div className="mt-3">
                     <ContactButtons showLabels size="sm" />
                   </div>
@@ -82,6 +94,12 @@ export function Services() {
             );
           })}
         </Stagger>
+
+        <div className="mt-8 flex justify-center">
+          <Button asChild variant="ghost" size="sm">
+            <Link href="/#contacts">Или перейти в контакты</Link>
+          </Button>
+        </div>
       </div>
     </section>
   );
