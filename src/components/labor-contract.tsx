@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { ApplyButton } from "@/components/messenger-apply";
 import { ContactButtons } from "@/components/contact-buttons";
@@ -12,12 +13,16 @@ const OPTIONS: {
   title: string;
   badge: string | null;
   body: string[];
+  image: string;
+  imageAlt: string;
 }[] = [
   {
     id: "opt-3pct",
     topic: LABOR_OPTIONS[0].value,
     title: "3% + 300₽ ежедневные списания",
     badge: "Популярный",
+    image: "/images/tariff-labor.jpg",
+    imageAlt: "Оформление трудового договора для водителя такси",
     body: [
       "Преимущества этого вида трудоустройства: если превышен лимит по доходам самозанятого и не хотите открывать ИП, легальность перед контролирующими органами, возможность прохождения процедуры банкротства, получения пособий и т.д. По запросу парк может предоставить: справку 2НДФЛ, сам договор.",
       "Важно: списания 300₽ ежедневные рассчитаны на каждый день месяца от оклада ровными частями, так как налог мы платим фиксированный за Вас вне зависимости от суммы дохода и количества дней работы.",
@@ -28,6 +33,8 @@ const OPTIONS: {
     topic: LABOR_OPTIONS[1].value,
     title: "5% + 100₽ ежедневные списания",
     badge: null,
+    image: "/images/tariff-ip.jpg",
+    imageAlt: "Вариант трудового договора с низкими ежедневными списаниями",
     body: [
       "Более низкие ежедневные списания при чуть большем проценте комиссии. Подходит тем, кто хочет снизить фиксированную часть расходов на налоги.",
     ],
@@ -37,6 +44,8 @@ const OPTIONS: {
     topic: LABOR_OPTIONS[2].value,
     title: "6% без ежедневных списаний",
     badge: "Без фикс. списаний",
+    image: "/images/tariff-selfemployed.jpg",
+    imageAlt: "Трудовой договор без ежедневных списаний",
     body: [
       "Суть документа (трудового договора) — только для подтверждения типа занятости в аккаунте Яндекса. Раз в месяц для прохождения проверки в аккаунте парка делаете нам запрос и мы вас оформляем, проходите проверку — увольняем по договору, но продолжаете работать в парке.",
     ],
@@ -69,33 +78,43 @@ export function LaborContract() {
             <StaggerItem key={opt.id}>
               <article
                 id={opt.id}
-                className="glass flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover sm:p-7"
+                className="glass flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
               >
-                {opt.badge ? (
-                  <span className="mb-3 inline-flex w-fit rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
-                    {opt.badge}
-                  </span>
-                ) : (
-                  <span className="mb-3 inline-flex h-6" />
-                )}
-                <h3 className="font-display text-xl font-semibold text-foreground text-balance">
-                  {opt.title}
-                </h3>
-                <div className="mt-4 flex-1 space-y-3">
-                  {opt.body.map((p) => (
-                    <p
-                      key={p.slice(0, 40)}
-                      className="text-sm leading-relaxed text-muted-foreground"
-                    >
-                      {p}
-                    </p>
-                  ))}
+                <div className="relative aspect-[16/10] w-full overflow-hidden">
+                  <Image
+                    src={opt.image}
+                    alt={opt.imageAlt}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f1724] via-transparent to-transparent" />
+                  {opt.badge ? (
+                    <span className="absolute left-4 top-4 rounded-full bg-accent/95 px-3 py-1 text-xs font-semibold text-accent-foreground">
+                      {opt.badge}
+                    </span>
+                  ) : null}
                 </div>
-                <ApplyButton topic={opt.topic} className="mt-6 w-full">
-                  Оформить заявку на этот вариант
-                </ApplyButton>
-                <div className="mt-4">
-                  <ContactButtons showLabels size="sm" />
+                <div className="flex flex-1 flex-col p-6 sm:p-7">
+                  <h3 className="font-display text-xl font-semibold text-foreground text-balance">
+                    {opt.title}
+                  </h3>
+                  <div className="mt-4 flex-1 space-y-3">
+                    {opt.body.map((p) => (
+                      <p
+                        key={p.slice(0, 40)}
+                        className="text-sm leading-relaxed text-muted-foreground"
+                      >
+                        {p}
+                      </p>
+                    ))}
+                  </div>
+                  <ApplyButton topic={opt.topic} className="mt-6 w-full">
+                    Оформить заявку на этот вариант
+                  </ApplyButton>
+                  <div className="mt-4">
+                    <ContactButtons showLabels size="sm" />
+                  </div>
                 </div>
               </article>
             </StaggerItem>
