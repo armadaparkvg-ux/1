@@ -16,6 +16,7 @@ import {
   buildApplyMessage,
   copyText,
   maxApplyUrl,
+  openMessenger,
   telegramApplyUrl,
 } from "@/lib/apply";
 import { cn } from "@/lib/utils";
@@ -62,14 +63,14 @@ export function ApplyProvider({ children }: { children: ReactNode }) {
 
   const openTelegram = async () => {
     await copyText(message);
-    window.open(telegramApplyUrl(message), "_blank", "noopener,noreferrer");
+    openMessenger(telegramApplyUrl(message));
     setOpen(false);
   };
 
   const openMax = async () => {
     const ok = await copyText(message);
     setCopied(ok);
-    window.open(maxApplyUrl(), "_blank", "noopener,noreferrer");
+    openMessenger(maxApplyUrl());
     // keep dialog briefly so user sees copy hint for MAX
     if (ok) {
       setTimeout(() => setOpen(false), 1200);

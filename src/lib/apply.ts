@@ -76,6 +76,14 @@ export function maxApplyUrl(): string {
   return CONTACTS.max;
 }
 
+/** Open messenger/chat without shortener interstitials; fallback if popup blocked. */
+export function openMessenger(url: string): void {
+  const win = window.open(url, "_blank", "noopener,noreferrer");
+  if (!win) {
+    window.location.assign(url);
+  }
+}
+
 export async function copyText(text: string): Promise<boolean> {
   try {
     await navigator.clipboard.writeText(text);
