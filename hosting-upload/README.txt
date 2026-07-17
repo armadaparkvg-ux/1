@@ -1,8 +1,16 @@
-Скачайте файл:
+Архив для загрузки на хостинг Reg.ru (public_html)
+=================================================
 
-  park-armada-hosting-20260717.zip
+Файл: park-armada-public_html.zip
 
-Правый клик по файлу в Cursor → Download / Скачать.
+Что исправлено в этой версии:
+- Ссылка на MAX больше не идёт через clck.su (там была реклама).
+- Открывается прямой чат: max.ru/u/...
 
-Затем распакуйте и загрузите ВСЕ файлы в корень сайта на хостинге
-(обычно www/park-armada.ru или public_html).
+Как загрузить:
+1. Распакуйте ZIP или загрузите содержимое в public_html.
+2. index.html должен оказаться в корне public_html.
+3. Проверьте кнопки MAX / заявку — без рекламного промежуточного экрана.
+
+Скачать релиз на GitHub:
+https://github.com/armadaparkvg-ux/1/releases/download/hosting-v7/park-armada-public_html.zip
