@@ -16,6 +16,7 @@ const SERVICES: {
   docs: string | null;
   cta: string;
   topic: ApplyTopic;
+  externalLink?: { href: string; label: string };
 }[] = [
   {
     image: "/images/service-license.jpg",
@@ -26,6 +27,10 @@ const SERVICES: {
     docs: "Документы: фото СТС (2 стороны) + фото авто с 4 сторон под прямым углом.",
     cta: "Узнать про лицензию",
     topic: "лицензия ФГИС",
+    externalLink: {
+      href: "https://sicmt.ru/fgis-taksi",
+      label: "Проверить ФГИС Такси",
+    },
   },
   {
     image: "/images/service-carriers.jpg",
@@ -89,13 +94,26 @@ export function Services() {
                   {service.docs ? (
                     <p className="mt-3 text-sm text-foreground/80">{service.docs}</p>
                   ) : null}
-                  <ApplyButton
-                    topic={service.topic}
-                    variant="outline"
-                    className="mt-6 w-full"
-                  >
-                    {service.cta}
-                  </ApplyButton>
+                  <div className="mt-6 grid gap-3">
+                    <ApplyButton
+                      topic={service.topic}
+                      variant="outline"
+                      className="w-full"
+                    >
+                      {service.cta}
+                    </ApplyButton>
+                    {service.externalLink ? (
+                      <Button asChild variant="secondary" className="w-full">
+                        <a
+                          href={service.externalLink.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {service.externalLink.label}
+                        </a>
+                      </Button>
+                    ) : null}
+                  </div>
                   <div className="mt-3">
                     <ContactButtons showLabels size="sm" />
                   </div>
