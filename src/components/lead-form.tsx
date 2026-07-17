@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FadeIn, SectionHeading } from "@/components/fade-in";
@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { ContactButtons } from "@/components/contact-buttons";
 import { LABOR_OPTIONS } from "@/lib/constants";
 import { leadSchema, type LeadFormData } from "@/lib/validations";
 import { cn } from "@/lib/utils";
@@ -27,6 +28,7 @@ function normalizeOption(raw: string | null): LeadFormData["option"] | undefined
 }
 
 export function LeadForm() {
+  const formId = useId();
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle"
   );
@@ -56,21 +58,21 @@ export function LeadForm() {
   const selectedOption = watch("option");
 
   useEffect(() => {
-    const applyFromUrl = () => {
-      const params = new URLSearchParams(window.location.search);
-      const fromQuery = normalizeOption(params.get("option"));
-      if (fromQuery) {
-        setValue("option", fromQuery, { shouldValidate: true });
-      }
-    };
-
-    const onSelectOption = (e: Event) => {
-      const detail = (e as CustomEvent<string>).detail;
-      const opt = normalizeOption(detail);
+    const applyOption = (raw: string | null) => {
+      const opt = normalizeOption(raw);
       if (opt) setValue("option", opt, { shouldValidate: true });
     };
 
-    applyFromUrl();
+    const fromQuery = new URLSearchParams(window.location.search).get("option");
+    const fromStorage = sessionStorage.getItem("armada-option");
+    applyOption(fromQuery || fromStorage);
+
+    const onSelectOption = (e: Event) => {
+      const detail = (e as CustomEvent<string>).detail;
+      applyOption(detail);
+      sessionStorage.setItem("armada-option", detail);
+    };
+
     window.addEventListener("armada:select-option", onSelectOption);
     return () => window.removeEventListener("armada:select-option", onSelectOption);
   }, [setValue]);
@@ -90,6 +92,7 @@ export function LeadForm() {
         throw new Error(json.error || "Ошибка отправки");
       }
       setStatus("success");
+      sessionStorage.removeItem("armada-option");
       reset();
     } catch (err) {
       setStatus("error");
@@ -109,20 +112,20 @@ export function LeadForm() {
             id="form-heading"
             eyebrow="Заявка"
             title="Заявка на подключение по трудовому договору"
-            description="Единая форма для трёх вариантов ТД в Яндекс Такси. Менеджер свяжется с вами в рабочее время."
+            description="Единая форма для трёх вариантов ТД в Яндекс Такси. Менеджер свяжется с вами в рабочее время 8:00–21:00 Мск."
           />
         </FadeIn>
 
         <FadeIn delay={0.1} className="mt-10">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="glass space-y-5 rounded-2xl p-6 sm:p-8"
+            className="glass relative space-y-5 rounded-2xl p-6 sm:p-8"
             noValidate
           >
             <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
-              <label htmlFor="website">Не заполняйте</label>
+              <label htmlFor={`${formId}-website`}>Не заполняйте</label>
               <input
-                id="website"
+                id={`${formId}-website`}
                 tabIndex={-1}
                 autoComplete="off"
                 {...register("website")}
@@ -130,16 +133,26 @@ export function LeadForm() {
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">
-              <Field label="Имя" error={errors.name?.message}>
+              <Field
+                id={`${formId}-name`}
+                label="Имя"
+                error={errors.name?.message}
+              >
                 <Input
+                  id={`${formId}-name`}
                   placeholder="Иван"
                   autoComplete="name"
                   aria-invalid={!!errors.name}
                   {...register("name")}
                 />
               </Field>
-              <Field label="Телефон" error={errors.phone?.message}>
+              <Field
+                id={`${formId}-phone`}
+                label="Телефон"
+                error={errors.phone?.message}
+              >
                 <Input
+                  id={`${formId}-phone`}
                   placeholder="+7 900 000-00-00"
                   type="tel"
                   autoComplete="tel"
@@ -150,15 +163,25 @@ export function LeadForm() {
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">
-              <Field label="Telegram" error={errors.telegram?.message}>
+              <Field
+                id={`${formId}-telegram`}
+                label="Telegram"
+                error={errors.telegram?.message}
+              >
                 <Input
+                  id={`${formId}-telegram`}
                   placeholder="@username"
                   autoComplete="off"
                   {...register("telegram")}
                 />
               </Field>
-              <Field label="Город" error={errors.city?.message}>
+              <Field
+                id={`${formId}-city`}
+                label="Город"
+                error={errors.city?.message}
+              >
                 <Input
+                  id={`${formId}-city`}
                   placeholder="Москва"
                   autoComplete="address-level2"
                   aria-invalid={!!errors.city}
@@ -167,8 +190,13 @@ export function LeadForm() {
               </Field>
             </div>
 
-            <Field label="Автомобиль" error={errors.car?.message}>
+            <Field
+              id={`${formId}-car`}
+              label="Автомобиль"
+              error={errors.car?.message}
+            >
               <Input
+                id={`${formId}-car`}
                 placeholder="Марка, модель, год"
                 aria-invalid={!!errors.car}
                 {...register("car")}
@@ -176,8 +204,14 @@ export function LeadForm() {
             </Field>
 
             <div>
-              <Label className="mb-3 block">Вариант оформления</Label>
-              <div className="grid gap-2" role="radiogroup" aria-label="Вариант оформления">
+              <Label id={`${formId}-option-label`} className="mb-3 block">
+                Вариант оформления
+              </Label>
+              <div
+                className="grid gap-2"
+                role="radiogroup"
+                aria-labelledby={`${formId}-option-label`}
+              >
                 {LABOR_OPTIONS.map((opt) => (
                   <label
                     key={opt.id}
@@ -205,22 +239,35 @@ export function LeadForm() {
               ) : null}
             </div>
 
-            <Field label="Комментарий" error={errors.comment?.message}>
+            <Field
+              id={`${formId}-comment`}
+              label="Комментарий"
+              error={errors.comment?.message}
+            >
               <Textarea
+                id={`${formId}-comment`}
                 placeholder="Дополнительная информация (необязательно)"
                 {...register("comment")}
               />
             </Field>
 
             {status === "success" ? (
-              <p className="rounded-xl bg-emerald-500/15 px-4 py-3 text-sm text-emerald-300" role="status">
-                Заявка отправлена. Мы свяжемся с вами в рабочее время.
-              </p>
+              <div className="space-y-3 rounded-xl bg-emerald-500/15 px-4 py-3 text-sm text-emerald-300" role="status">
+                <p>
+                  Заявка принята. Для быстрой связи напишите нам в Telegram или
+                  MAX — так мы ответим быстрее.
+                </p>
+                <ContactButtons showLabels size="sm" />
+              </div>
             ) : null}
             {status === "error" ? (
-              <p className="rounded-xl bg-red-500/15 px-4 py-3 text-sm text-red-300" role="alert">
-                {serverError || "Не удалось отправить заявку. Попробуйте ещё раз или напишите в мессенджер."}
-              </p>
+              <div className="space-y-3 rounded-xl bg-red-500/15 px-4 py-3 text-sm text-red-300" role="alert">
+                <p>
+                  {serverError ||
+                    "Не удалось отправить заявку. Напишите напрямую в мессенджер."}
+                </p>
+                <ContactButtons showLabels size="sm" />
+              </div>
             ) : null}
 
             <Button
@@ -234,27 +281,29 @@ export function LeadForm() {
             </Button>
           </form>
         </FadeIn>
-
       </div>
     </section>
   );
 }
 
 function Field({
+  id,
   label,
   error,
   children,
 }: {
+  id: string;
   label: string;
   error?: string;
   children: React.ReactNode;
 }) {
+  const errorId = `${id}-error`;
   return (
     <div className="space-y-2">
-      <Label>{label}</Label>
+      <Label htmlFor={id}>{label}</Label>
       {children}
       {error ? (
-        <p className="text-sm text-red-400" role="alert">
+        <p id={errorId} className="text-sm text-red-400" role="alert">
           {error}
         </p>
       ) : null}

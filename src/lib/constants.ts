@@ -17,22 +17,23 @@ export const FORMS = {
     "https://forms.fleet.yandex.ru/forms?ref_id=6fca960aa2fb4453be59caee6828e305&iframe=true&lang=ru",
 } as const;
 
+/** Absolute hash links so they work from /privacy, /offer, etc. */
 export const NAV_LINKS = [
-  { href: "#tariffs", label: "Тарифы" },
-  { href: "#labor-contract", label: "Трудовой договор" },
-  { href: "#services", label: "Доп. услуги" },
-  { href: "#how-it-works", label: "Как это работает" },
-  { href: "#max-channel", label: "Канал MAX" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contacts", label: "Контакты" },
+  { href: "/#tariffs", label: "Тарифы" },
+  { href: "/#labor-contract", label: "Трудовой договор" },
+  { href: "/#services", label: "Доп. услуги" },
+  { href: "/#how-it-works", label: "Как это работает" },
+  { href: "/#max-channel", label: "Канал MAX" },
+  { href: "/#faq", label: "FAQ" },
+  { href: "/#contacts", label: "Контакты" },
 ] as const;
 
 export const FOOTER_LINKS = [
-  { href: "#tariffs", label: "Подключение к Яндекс Такси" },
-  { href: "#labor-contract", label: "Трудовой договор" },
-  { href: "#services", label: "Лицензия такси и ОСГОП" },
-  { href: "#faq", label: "Частые вопросы" },
-  { href: "#lead-form", label: "Оставить заявку" },
+  { href: "/#tariffs", label: "Подключение к Яндекс Такси" },
+  { href: "/#labor-contract", label: "Трудовой договор" },
+  { href: "/#services", label: "Лицензия такси и ОСГОП" },
+  { href: "/#faq", label: "Частые вопросы" },
+  { href: "/#lead-form", label: "Оставить заявку" },
 ] as const;
 
 export const LABOR_OPTIONS = [

@@ -79,7 +79,7 @@ export function Hero() {
           className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
         >
           <Button asChild size="lg" shine className="shadow-glow">
-            <Link href="#tariffs">Выбрать тариф</Link>
+            <Link href="/#tariffs">Выбрать тариф</Link>
           </Button>
           <Button asChild size="lg" variant="outline" shine>
             <Link

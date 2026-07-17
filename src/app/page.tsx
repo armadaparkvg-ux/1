@@ -12,9 +12,12 @@ import { Faq } from "@/components/faq";
 import { LeadForm } from "@/components/lead-form";
 import { Contacts } from "@/components/contacts";
 import { SITE } from "@/lib/constants";
+import { buildJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: SITE.title,
+  title: {
+    absolute: SITE.title,
+  },
   description: SITE.description,
   alternates: {
     canonical: SITE.url,
@@ -26,9 +29,15 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = buildJsonLd();
+
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Hero />
       <Trust />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />

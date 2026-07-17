@@ -43,38 +43,43 @@ export function Header() {
           <span className="gradient-text">{SITE.name}</span>
         </Link>
 
-        <nav className="hidden items-center gap-1 xl:flex" aria-label="Основное меню">
+        <nav
+          className="hidden items-center gap-0.5 xl:flex"
+          aria-label="Основное меню"
+        >
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
+              className="rounded-lg px-2.5 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <IconContactLinks />
-          <Button asChild shine size="sm">
-            <Link href="#tariffs">Подключиться</Link>
-          </Button>
-        </div>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="hidden items-center gap-2 sm:flex">
+            <IconContactLinks />
+            <Button asChild shine size="sm" className="hidden lg:inline-flex">
+              <Link href="/#tariffs">Подключиться</Link>
+            </Button>
+          </div>
 
-        <button
-          type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border text-foreground md:hidden"
-          aria-label={open ? "Закрыть меню" : "Открыть меню"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border text-foreground xl:hidden"
+            aria-label={open ? "Закрыть меню" : "Открыть меню"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {open ? (
-        <div className="border-t border-border bg-[#0b0f14]/98 backdrop-blur-xl md:hidden">
+        <div className="border-t border-border bg-[#0b0f14]/98 backdrop-blur-xl xl:hidden">
           <nav
             className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4"
             aria-label="Мобильное меню"
@@ -91,7 +96,7 @@ export function Header() {
             ))}
             <div className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
               <Button asChild shine className="w-full">
-                <Link href="#tariffs" onClick={() => setOpen(false)}>
+                <Link href="/#tariffs" onClick={() => setOpen(false)}>
                   Подключиться
                 </Link>
               </Button>

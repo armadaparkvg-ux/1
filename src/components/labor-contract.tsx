@@ -6,6 +6,15 @@ import { ContactButtons } from "@/components/contact-buttons";
 import { LABOR_OPTIONS } from "@/lib/constants";
 
 function selectAndScroll(option: string) {
+  try {
+    sessionStorage.setItem("armada-option", option);
+    const url = new URL(window.location.href);
+    url.searchParams.set("option", option);
+    url.hash = "lead-form";
+    window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+  } catch {
+    // ignore storage/history errors
+  }
   window.dispatchEvent(
     new CustomEvent("armada:select-option", { detail: option })
   );

@@ -5,7 +5,7 @@ import { Footer } from "@/components/footer";
 import { FloatingContacts } from "@/components/floating-contacts";
 import { YandexMetrika } from "@/components/yandex-metrika";
 import { SITE } from "@/lib/constants";
-import { SEO_KEYWORDS, buildJsonLd } from "@/lib/seo";
+import { SEO_KEYWORDS } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -16,7 +16,7 @@ const inter = Inter({
 
 const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-sora",
+  variable: "--font-manrope",
   display: "swap",
 });
 
@@ -68,9 +68,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE.url,
-    languages: {
-      "ru-RU": SITE.url,
-    },
   },
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
@@ -82,8 +79,6 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = buildJsonLd();
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -94,19 +89,14 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${manrope.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
       >
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-foreground"
-        >
+        <a href="#main" className="skip-link">
           Перейти к содержимому
         </a>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
         <YandexMetrika />
         <Header />
-        <main id="main">{children}</main>
+        <main id="main" className="pb-20 md:pb-0">
+          {children}
+        </main>
         <Footer />
         <FloatingContacts />
       </body>

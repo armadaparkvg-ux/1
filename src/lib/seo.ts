@@ -56,7 +56,7 @@ export const FAQ_ITEMS = [
   },
   {
     q: "Куда отправлять документы для оформления?",
-    a: `В чат на сайте (форма заявки) или напрямую: телефон ${CONTACTS.phoneDisplay}, Telegram или MAX.`,
+    a: `В форму заявки на сайте или напрямую: телефон ${CONTACTS.phoneDisplay}, Telegram или MAX.`,
   },
   {
     q: "Есть ли у парка офис?",
@@ -277,14 +277,8 @@ export function buildJsonLd() {
           {
             "@type": "ListItem",
             position: 1,
-            name: "Главная",
+            name: "Главная — подключение к Яндекс Такси",
             item: SITE.url,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Подключение к Яндекс Такси",
-            item: `${SITE.url}/#tariffs`,
           },
         ],
       },

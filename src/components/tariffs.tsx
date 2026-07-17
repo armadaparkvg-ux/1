@@ -109,7 +109,7 @@ export function Tariffs() {
                 стабильность, пособия, больничные, защита прав.
               </p>
               <Button asChild shine className="mt-6 w-full" size="lg" variant="secondary">
-                <Link href="#labor-contract">Узнать подробнее</Link>
+                <Link href="/#labor-contract">Узнать подробнее</Link>
               </Button>
               <div className="mt-6">
                 <ContactButtons showLabels size="sm" />

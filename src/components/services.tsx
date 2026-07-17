@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FileCheck, Shield, Truck } from "lucide-react";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { Button } from "@/components/ui/button";
+import { ContactButtons } from "@/components/contact-buttons";
 
 const SERVICES = [
   {
@@ -13,7 +14,7 @@ const SERVICES = [
       "Оформляем официальную запись в реестре такси. Стоимость — 3 500 ₽ на 5 лет, оплата по факту выполненной работы, без ежемесячных платежей. Срок оформления — в среднем 1–3 дня, редко до 7 дней.",
     docs: "Документы: фото СТС (2 стороны) + фото авто с 4 сторон под прямым углом.",
     cta: "Узнать про лицензию",
-    href: "#lead-form",
+    href: "/#contacts",
   },
   {
     icon: Truck,
@@ -22,7 +23,7 @@ const SERVICES = [
       "Если авто уже внесено нашим парком — оформим реестр перевозчика. Потребуются: справка об отсутствии судимости, договор с агрегатором, статус самозанятого или ИП.",
     docs: null,
     cta: "Уточнить условия",
-    href: "#contacts",
+    href: "/#contacts",
   },
   {
     icon: Shield,
@@ -31,7 +32,7 @@ const SERVICES = [
       "Оформляем страхование ОСГОП. Стоимость — 3 400 ₽ на 1 год.",
     docs: null,
     cta: "Оформить ОСГОП",
-    href: "#lead-form",
+    href: "/#contacts",
   },
 ];
 
@@ -73,12 +74,14 @@ export function Services() {
                   <Button asChild variant="outline" shine className="mt-6 w-full">
                     <Link href={service.href}>{service.cta}</Link>
                   </Button>
+                  <div className="mt-3">
+                    <ContactButtons showLabels size="sm" />
+                  </div>
                 </article>
               </StaggerItem>
             );
           })}
         </Stagger>
-
       </div>
     </section>
   );
