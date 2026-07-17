@@ -20,6 +20,8 @@
 .DS_Store
 *.pem
 *.zip
+!hosting-upload/
+!hosting-upload/**
 
 # debug
 npm-debug.log*
