@@ -3,6 +3,7 @@ import { Inter, Sora } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { FloatingContacts } from "@/components/floating-contacts";
+import { YandexMetrika } from "@/components/yandex-metrika";
 import { SITE } from "@/lib/constants";
 import "./globals.css";
 
@@ -101,6 +102,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <YandexMetrika />
         <Header />
         <main id="main">{children}</main>
         <Footer />
