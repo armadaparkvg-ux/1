@@ -28,7 +28,7 @@ const SERVICES: {
     cta: "Узнать про лицензию",
     topic: "лицензия ФГИС",
     externalLink: {
-      href: "https://sicmt.ru/fgis-taksi",
+      href: "https://sicmt.ru/fgis-taksi?type=car",
       label: "Проверить ФГИС Такси",
     },
   },
