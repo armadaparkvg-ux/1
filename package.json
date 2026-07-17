@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:static": "bash scripts/build-static.sh",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "zip:hosting": "bash scripts/zip-hosting.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",

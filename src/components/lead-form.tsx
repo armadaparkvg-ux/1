@@ -81,22 +81,49 @@ export function LeadForm() {
     if (data.website) return;
     setStatus("loading");
     setServerError("");
+
+    const message = [
+      "Заявка с сайта park-armada.ru",
+      `Имя: ${data.name}`,
+      `Телефон: ${data.phone}`,
+      data.telegram ? `Telegram: ${data.telegram}` : null,
+      `Город: ${data.city}`,
+      `Авто: ${data.car}`,
+      `Вариант: ${data.option}`,
+      data.comment ? `Комментарий: ${data.comment}` : null,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
     try {
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) {
-        const json = await res.json().catch(() => ({}));
-        throw new Error(json.error || "Ошибка отправки");
+      if (res.ok) {
+        setStatus("success");
+        sessionStorage.removeItem("armada-option");
+        reset();
+        return;
       }
+    } catch {
+      // Static hosting / offline — fallback to Telegram
+    }
+
+    try {
+      const tgUrl = `https://t.me/park_Armada_d?text=${encodeURIComponent(message)}`;
+      window.open(tgUrl, "_blank", "noopener,noreferrer");
       setStatus("success");
       sessionStorage.removeItem("armada-option");
       reset();
     } catch (err) {
       setStatus("error");
-      setServerError(err instanceof Error ? err.message : "Ошибка отправки");
+      setServerError(
+        err instanceof Error
+          ? err.message
+          : "Не удалось отправить. Напишите в Telegram или MAX."
+      );
     }
   };
 

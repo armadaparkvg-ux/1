@@ -105,7 +105,7 @@ export const HOW_TO_STEPS = [
 
 export function buildJsonLd() {
   const logoUrl = `${SITE.url}/icon.svg`;
-  const ogImage = `${SITE.url}/opengraph-image`;
+  const ogImage = `${SITE.url}/og.svg`;
 
   return {
     "@context": "https://schema.org",
