@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CONTACTS, SITE } from "@/lib/constants";
+import { CONTACTS, LEGAL, SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Реквизиты компании",
-  description: `Юридическая информация ${SITE.fullName}. Контакты и режим работы таксопарка для подключения к Яндекс Такси.`,
+  description: `Реквизиты ${LEGAL.legalName}: ИНН ${LEGAL.inn}, ОГРН ${LEGAL.ogrn}. Контакты таксопарка «Армада».`,
   alternates: { canonical: `${SITE.url}/requisites/` },
   robots: { index: true, follow: true },
 };
@@ -17,16 +17,45 @@ export default function RequisitesPage() {
       </h1>
       <div className="mt-8 space-y-5 text-sm leading-relaxed text-muted-foreground">
         <p>
-          Полные юридические реквизиты предоставляются по запросу при
-          оформлении сотрудничества. На сайте не публикуются платёжные
-          реквизиты.
+          Юридические реквизиты {LEGAL.brandName}. Платёжные реквизиты для
+          оплаты услуг уточняйте у менеджера при оформлении.
         </p>
         <dl className="space-y-3 rounded-2xl border border-border bg-surface/50 p-6">
           <div>
             <dt className="text-xs uppercase tracking-wide text-muted-foreground">
-              Наименование
+              Полное наименование
             </dt>
-            <dd className="mt-1 text-foreground">{SITE.fullName}</dd>
+            <dd className="mt-1 text-foreground">{LEGAL.legalName}</dd>
+          </div>
+          <div>
+            <dt className="text-xs uppercase tracking-wide text-muted-foreground">
+              Бренд
+            </dt>
+            <dd className="mt-1 text-foreground">{LEGAL.brandName}</dd>
+          </div>
+          <div>
+            <dt className="text-xs uppercase tracking-wide text-muted-foreground">
+              ИНН
+            </dt>
+            <dd className="mt-1 text-foreground">{LEGAL.inn}</dd>
+          </div>
+          <div>
+            <dt className="text-xs uppercase tracking-wide text-muted-foreground">
+              КПП
+            </dt>
+            <dd className="mt-1 text-foreground">{LEGAL.kpp}</dd>
+          </div>
+          <div>
+            <dt className="text-xs uppercase tracking-wide text-muted-foreground">
+              ОГРН
+            </dt>
+            <dd className="mt-1 text-foreground">{LEGAL.ogrn}</dd>
+          </div>
+          <div>
+            <dt className="text-xs uppercase tracking-wide text-muted-foreground">
+              Юридический адрес
+            </dt>
+            <dd className="mt-1 text-foreground">{LEGAL.address}</dd>
           </div>
           <div>
             <dt className="text-xs uppercase tracking-wide text-muted-foreground">
@@ -56,10 +85,6 @@ export default function RequisitesPage() {
             </dd>
           </div>
         </dl>
-        <p>
-          Для получения полного комплекта юридических документов свяжитесь с
-          менеджером по телефону или в мессенджерах.
-        </p>
         <p>
           <Link href="/" className="text-accent hover:underline">
             ← На главную

@@ -10,6 +10,8 @@ import { Requirements } from "@/components/requirements";
 import { HowItWorks } from "@/components/how-it-works";
 import { TariffQuiz } from "@/components/tariff-quiz";
 import { TariffCompare } from "@/components/tariff-compare";
+import { Reviews } from "@/components/reviews";
+import { FunnyVideo } from "@/components/funny-video";
 import { Faq } from "@/components/faq";
 import { ApplySection } from "@/components/apply-section";
 import { Contacts } from "@/components/contacts";
@@ -56,6 +58,9 @@ export default function HomePage() {
       <Requirements />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <HowItWorks />
+      <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
+      <Reviews />
+      <FunnyVideo />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <Faq />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />

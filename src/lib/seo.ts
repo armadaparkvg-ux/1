@@ -1,4 +1,4 @@
-import { CONTACTS, SITE } from "@/lib/constants";
+import { CONTACTS, LEGAL, SITE } from "@/lib/constants";
 
 export const SEO_KEYWORDS = [
   "подключение к яндекс такси",
@@ -137,7 +137,8 @@ export function buildJsonLd() {
         "@type": "Organization",
         "@id": `${SITE.url}/#organization`,
         name: SITE.fullName,
-        alternateName: ["Армада", "Таксопарк Армада", SITE.domain],
+        legalName: LEGAL.legalName,
+        alternateName: ["Армада", "Таксопарк Армада", LEGAL.legalName, SITE.domain],
         url: SITE.url,
         logo: {
           "@type": "ImageObject",
@@ -145,6 +146,20 @@ export function buildJsonLd() {
         },
         image: ogImage,
         telephone: CONTACTS.phone,
+        taxID: LEGAL.inn,
+        identifier: [
+          { "@type": "PropertyValue", name: "ИНН", value: LEGAL.inn },
+          { "@type": "PropertyValue", name: "ОГРН", value: LEGAL.ogrn },
+          { "@type": "PropertyValue", name: "КПП", value: LEGAL.kpp },
+        ],
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "ул. Неделина, д. 23",
+          addressLocality: "Щёлково",
+          addressRegion: "Московская область",
+          postalCode: "141107",
+          addressCountry: "RU",
+        },
         sameAs: [CONTACTS.telegram, CONTACTS.max],
         contactPoint: {
           "@type": "ContactPoint",

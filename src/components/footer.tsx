@@ -42,21 +42,26 @@ export function Footer() {
             <p className="text-sm font-semibold text-foreground">Документы</p>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link href="/privacy" className="hover:text-accent transition-colors">
+                <Link href="/privacy/" className="hover:text-accent transition-colors">
                   Политика конфиденциальности
                 </Link>
               </li>
               <li>
-                <Link href="/offer" className="hover:text-accent transition-colors">
+                <Link href="/offer/" className="hover:text-accent transition-colors">
                   Публичная оферта
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/requisites"
+                  href="/requisites/"
                   className="hover:text-accent transition-colors"
                 >
                   Реквизиты компании
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog/" className="hover:text-accent transition-colors">
+                  Полезные статьи
                 </Link>
               </li>
             </ul>

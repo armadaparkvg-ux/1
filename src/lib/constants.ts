@@ -26,9 +26,9 @@ export const FORMS = {
 export const NAV_LINKS = [
   { href: "/#quiz", label: "Квиз" },
   { href: "/#tariffs", label: "Тарифы" },
-  { href: "/#labor-contract", label: "Трудовой договор" },
   { href: "/#services", label: "Доп. услуги" },
-  { href: "/#how-it-works", label: "Как это работает" },
+  { href: "/blog/", label: "Статьи" },
+  { href: "/#reviews", label: "Отзывы" },
   { href: "/#faq", label: "FAQ" },
   { href: "/#contacts", label: "Контакты" },
 ] as const;
@@ -36,9 +36,9 @@ export const NAV_LINKS = [
 export const FOOTER_LINKS = [
   { href: "/#quiz", label: "Подобрать тариф" },
   { href: "/#tariffs", label: "Подключение к Яндекс Такси" },
-  { href: "/#labor-contract", label: "Трудовой договор" },
+  { href: "/blog/", label: "Полезные статьи" },
   { href: "/#services", label: "Лицензия такси и ОСГОП" },
-  { href: "/#faq", label: "Частые вопросы" },
+  { href: "/#reviews", label: "Отзывы" },
   { href: "/#apply", label: "Оставить заявку" },
 ] as const;
 
@@ -71,4 +71,15 @@ export const SITE = {
   description:
     "Подключение к Яндекс Такси удалённо по всей России. Самозанятый и ИП от 1,9%, трудовой договор, лицензия ФГИС, ОСГОП. Активация 1,5–2 часа.",
   url: "https://park-armada.ru",
+} as const;
+
+/** Юридические реквизиты ООО «АРМАДА ДРАЙВЕР» */
+export const LEGAL = {
+  legalName: 'ООО «АРМАДА ДРАЙВЕР»',
+  brandName: "Таксопарк «Армада»",
+  inn: "5050165896",
+  kpp: "505001001",
+  ogrn: "1245000114369",
+  address:
+    "141107, Московская область, г.о. Щёлково, г. Щёлково, ул. Неделина, д. 23",
 } as const;
