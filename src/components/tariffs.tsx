@@ -68,15 +68,22 @@ export function Tariffs() {
             id="tariffs-heading"
             eyebrow="Тарифы"
             title="Подключение к Яндекс Такси: тарифы таксопарка"
-            description="Три формата работы с парком «Армада»: парковый самозанятый, парковый ИП и трудовой договор. Комиссия от 1,9% — без скрытых платежей."
+            description="Три формата работы с парком «Армада» — удалённо по всей России: парковый самозанятый, парковый ИП и трудовой договор. Комиссия от 1,9%. Не уверены? Пройдите квиз."
           />
         </FadeIn>
 
-        <Stagger className="mt-14 grid gap-6 lg:grid-cols-3" stagger={0.12}>
+        <div className="mt-6 flex justify-center">
+          <Button asChild variant="outline" size="sm">
+            <Link href="/#quiz">Подобрать тариф в квизе</Link>
+          </Button>
+        </div>
+
+        <Stagger className="mt-10 grid gap-6 lg:grid-cols-3" stagger={0.12}>
           {TARIFFS.map((tariff) => (
             <StaggerItem key={tariff.key}>
               <article
-                className={`glass relative flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
+                id={`tariff-${tariff.key}`}
+                className={`section-anchor glass relative flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
                   tariff.featured ? "ring-1 ring-accent/30" : ""
                 }`}
               >

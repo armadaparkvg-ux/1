@@ -24,16 +24,17 @@ export const FORMS = {
 
 /** Absolute hash links so they work from /privacy, /offer, etc. */
 export const NAV_LINKS = [
+  { href: "/#quiz", label: "Квиз" },
   { href: "/#tariffs", label: "Тарифы" },
   { href: "/#labor-contract", label: "Трудовой договор" },
   { href: "/#services", label: "Доп. услуги" },
   { href: "/#how-it-works", label: "Как это работает" },
-  { href: "/#max-channel", label: "Канал MAX" },
   { href: "/#faq", label: "FAQ" },
   { href: "/#contacts", label: "Контакты" },
 ] as const;
 
 export const FOOTER_LINKS = [
+  { href: "/#quiz", label: "Подобрать тариф" },
   { href: "/#tariffs", label: "Подключение к Яндекс Такси" },
   { href: "/#labor-contract", label: "Трудовой договор" },
   { href: "/#services", label: "Лицензия такси и ОСГОП" },
@@ -69,6 +70,6 @@ export const SITE = {
   title:
     "Подключение к Яндекс Такси — таксопарк «Армада» | Самозанятый, ИП, трудовой договор",
   description:
-    "Подключение водителей к Яндекс Такси через таксопарк «Армада». Парковый самозанятый и ИП от 1,9%, трудовой договор, лицензия ФГИС, ОСГОП. Активация 1,5–2 часа. Консультация 8:00–21:00 Мск.",
+    "Подключение водителей к Яндекс Такси через таксопарк «Армада» — удалённо по всей России. Парковый самозанятый и ИП от 1,9%, трудовой договор, лицензия ФГИС, ОСГОП. Активация 1,5–2 часа. Консультация 8:00–21:00 Мск.",
   url: "https://park-armada.ru",
 } as const;

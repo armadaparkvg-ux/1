@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { MessageCircle, Send } from "lucide-react";
+import { MessageCircle, Phone, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CONTACTS, SITE } from "@/lib/constants";
 
@@ -44,14 +44,24 @@ export function Hero() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-4 sm:px-6 sm:pb-16 lg:px-8">
-        <motion.p
+        <motion.div
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.12 }}
-          className="mb-5 text-center text-sm text-muted-foreground sm:text-base"
+          className="mb-5 text-center"
         >
-          {SITE.fullName} · консультация {CONTACTS.hours}
-        </motion.p>
+          <p className="font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+            {SITE.fullName}
+          </p>
+          <p className="mt-2 text-sm text-muted-foreground sm:text-base">
+            Подключение к Яндекс Такси удалённо по всей России · комиссия от
+            1,9% · {CONTACTS.hours}
+          </p>
+          <p className="mt-3 text-sm text-foreground/80">
+            3 500+ водителей · активация 1,5–2 часа · 7+ лет на рынке · 98%
+            одобрения заявок
+          </p>
+        </motion.div>
 
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 16 }}
@@ -60,7 +70,7 @@ export function Hero() {
           className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center"
         >
           <Button asChild size="lg" shine className="shadow-glow sm:min-w-[200px]">
-            <Link href="/#tariffs">Выбрать тариф</Link>
+            <Link href="/#quiz">Подобрать тариф</Link>
           </Button>
           <Button
             asChild
@@ -84,13 +94,25 @@ export function Hero() {
             shine
             className="sm:min-w-[200px]"
           >
+            <a href={CONTACTS.phoneHref}>
+              <Phone className="h-4 w-4" aria-hidden />
+              {CONTACTS.phoneDisplay}
+            </a>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            shine
+            className="sm:min-w-[200px]"
+          >
             <Link
               href={CONTACTS.telegram}
               target="_blank"
               rel="noopener noreferrer"
             >
               <Send className="h-4 w-4" aria-hidden />
-              Написать в Telegram
+              Telegram
             </Link>
           </Button>
           <Button
@@ -102,7 +124,7 @@ export function Hero() {
           >
             <Link href={CONTACTS.max} target="_blank" rel="noopener noreferrer">
               <MessageCircle className="h-4 w-4" aria-hidden />
-              Сообщение в MAX
+              MAX
             </Link>
           </Button>
         </motion.div>

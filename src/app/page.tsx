@@ -8,6 +8,7 @@ import { Services } from "@/components/services";
 import { Taxes } from "@/components/taxes";
 import { Requirements } from "@/components/requirements";
 import { HowItWorks } from "@/components/how-it-works";
+import { TariffQuiz } from "@/components/tariff-quiz";
 import { Faq } from "@/components/faq";
 import { ApplySection } from "@/components/apply-section";
 import { Contacts } from "@/components/contacts";
@@ -40,6 +41,8 @@ export default function HomePage() {
       />
       <Hero />
       <Trust />
+      <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
+      <TariffQuiz />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <Tariffs />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
