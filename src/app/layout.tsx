@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: [
       {
-        url: "/og.svg",
+        url: "/og.jpg",
         width: 1200,
         height: 630,
         alt: "Подключение к Яндекс Такси — таксопарк Армада",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE.title,
     description: SITE.description,
-    images: ["/og.svg"],
+    images: ["/og.jpg"],
   },
   robots: {
     index: true,

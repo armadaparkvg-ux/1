@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
@@ -12,7 +13,7 @@ const TARIFFS = [
   {
     key: "self",
     image: "/images/tariff-selfemployed.jpg",
-    imageAlt: "Водитель с телефоном в салоне автомобиля",
+    imageAlt: "Парковый самозанятый — подключение водителя к Яндекс Такси",
     eyebrow: "Комиссия парка",
     title: "Парковый самозанятый",
     price: "1,9%",
@@ -26,7 +27,7 @@ const TARIFFS = [
   {
     key: "ip",
     image: "/images/tariff-ip.jpg",
-    imageAlt: "Документы и ключи автомобиля для оформления ИП",
+    imageAlt: "Парковый ИП — моментальный вывод и комиссия 1,9%",
     eyebrow: "Комиссия парка",
     title: "Парковый ИП",
     price: "1,9%",
@@ -41,19 +42,134 @@ const TARIFFS = [
   {
     key: "labor",
     image: "/images/tariff-labor.jpg",
-    imageAlt: "Официальное оформление по трудовому договору",
+    imageAlt: "Трудовой договор для работы в Яндекс Такси по ТК РФ",
     eyebrow: "По ТК РФ",
     title: "Трудовой договор",
     price: "3 варианта",
     text: "Для водителей, которым важно официальное трудоустройство по ТК РФ: стабильность, пособия, больничные, защита прав.",
     cta: "Узнать подробнее",
     href: "/#labor-contract",
-    iframe: null,
+    iframe: null as string | null,
     iframeTitle: "",
     featured: false,
     emerald: true,
   },
 ] as const;
+
+function TariffCard({
+  tariff,
+}: {
+  tariff: (typeof TARIFFS)[number];
+}) {
+  const [showForm, setShowForm] = useState(false);
+
+  return (
+    <article
+      id={`tariff-${tariff.key}`}
+      className={`section-anchor glass relative flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
+        tariff.featured ? "ring-1 ring-accent/30" : ""
+      }`}
+    >
+      {"badge" in tariff && tariff.badge ? (
+        <span className="absolute right-4 top-4 z-10 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
+          {tariff.badge}
+        </span>
+      ) : null}
+
+      <div className="relative aspect-[16/10] w-full overflow-hidden">
+        <Image
+          src={tariff.image}
+          alt={tariff.imageAlt}
+          fill
+          sizes="(max-width: 1024px) 100vw, 33vw"
+          className="object-cover transition-transform duration-500 hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0f1724] via-transparent to-transparent" />
+      </div>
+
+      <div className="flex flex-1 flex-col p-6 sm:p-8">
+        <p
+          className={`text-sm font-medium ${
+            "emerald" in tariff && tariff.emerald
+              ? "text-emerald-glow"
+              : "text-accent"
+          }`}
+        >
+          {tariff.eyebrow}
+        </p>
+        <h3 className="mt-2 font-display text-2xl font-semibold text-foreground">
+          {tariff.title}
+        </h3>
+        <p
+          className={`mt-1 font-display font-bold ${
+            tariff.key === "labor"
+              ? "text-2xl text-foreground/90"
+              : "text-4xl gradient-text"
+          }`}
+        >
+          {tariff.price}
+        </p>
+        <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+          {tariff.text}
+        </p>
+
+        {tariff.key === "labor" ? (
+          <>
+            <Button
+              asChild
+              shine
+              className="mt-6 w-full"
+              size="lg"
+              variant="secondary"
+            >
+              <Link href={tariff.href}>{tariff.cta}</Link>
+            </Button>
+            <div className="mt-6">
+              <ContactButtons showLabels size="sm" />
+            </div>
+          </>
+        ) : (
+          <>
+            <Button asChild shine className="mt-6 w-full" size="lg">
+              <Link
+                href={tariff.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {tariff.cta}
+                <ExternalLink className="h-4 w-4" aria-hidden />
+              </Link>
+            </Button>
+            {tariff.iframe ? (
+              <div className="mt-4">
+                {showForm ? (
+                  <div className="overflow-hidden rounded-xl border border-border bg-background/40">
+                    <iframe
+                      title={tariff.iframeTitle}
+                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                      src={tariff.iframe}
+                      className="h-[420px] w-full max-w-full sm:h-[520px]"
+                      loading="lazy"
+                    />
+                  </div>
+                ) : (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => setShowForm(true)}
+                  >
+                    Открыть форму на сайте
+                  </Button>
+                )}
+              </div>
+            ) : null}
+          </>
+        )}
+      </div>
+    </article>
+  );
+}
 
 export function Tariffs() {
   return (
@@ -81,97 +197,7 @@ export function Tariffs() {
         <Stagger className="mt-10 grid gap-6 lg:grid-cols-3" stagger={0.12}>
           {TARIFFS.map((tariff) => (
             <StaggerItem key={tariff.key}>
-              <article
-                id={`tariff-${tariff.key}`}
-                className={`section-anchor glass relative flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
-                  tariff.featured ? "ring-1 ring-accent/30" : ""
-                }`}
-              >
-                {"badge" in tariff && tariff.badge ? (
-                  <span className="absolute right-4 top-4 z-10 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
-                    {tariff.badge}
-                  </span>
-                ) : null}
-
-                <div className="relative aspect-[16/10] w-full overflow-hidden">
-                  <Image
-                    src={tariff.image}
-                    alt={tariff.imageAlt}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                    className="object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f1724] via-transparent to-transparent" />
-                </div>
-
-                <div className="flex flex-1 flex-col p-6 sm:p-8">
-                  <p
-                    className={`text-sm font-medium ${
-                      "emerald" in tariff && tariff.emerald
-                        ? "text-emerald-glow"
-                        : "text-accent"
-                    }`}
-                  >
-                    {tariff.eyebrow}
-                  </p>
-                  <h3 className="mt-2 font-display text-2xl font-semibold text-foreground">
-                    {tariff.title}
-                  </h3>
-                  <p
-                    className={`mt-1 font-display font-bold ${
-                      tariff.key === "labor"
-                        ? "text-2xl text-foreground/90"
-                        : "text-4xl gradient-text"
-                    }`}
-                  >
-                    {tariff.price}
-                  </p>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {tariff.text}
-                  </p>
-
-                  {tariff.key === "labor" ? (
-                    <>
-                      <Button
-                        asChild
-                        shine
-                        className="mt-6 w-full"
-                        size="lg"
-                        variant="secondary"
-                      >
-                        <Link href={tariff.href}>{tariff.cta}</Link>
-                      </Button>
-                      <div className="mt-6">
-                        <ContactButtons showLabels size="sm" />
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <Button asChild shine className="mt-6 w-full" size="lg">
-                        <Link
-                          href={tariff.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {tariff.cta}
-                          <ExternalLink className="h-4 w-4" aria-hidden />
-                        </Link>
-                      </Button>
-                      {tariff.iframe ? (
-                        <div className="mt-6 overflow-hidden rounded-xl border border-border bg-background/40">
-                          <iframe
-                            title={tariff.iframeTitle}
-                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                            src={tariff.iframe}
-                            className="h-[420px] w-full max-w-full sm:h-[520px] lg:h-[560px]"
-                            loading="lazy"
-                          />
-                        </div>
-                      ) : null}
-                    </>
-                  )}
-                </div>
-              </article>
+              <TariffCard tariff={tariff} />
             </StaggerItem>
           ))}
         </Stagger>

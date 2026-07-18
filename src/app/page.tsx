@@ -9,6 +9,7 @@ import { Taxes } from "@/components/taxes";
 import { Requirements } from "@/components/requirements";
 import { HowItWorks } from "@/components/how-it-works";
 import { TariffQuiz } from "@/components/tariff-quiz";
+import { TariffCompare } from "@/components/tariff-compare";
 import { Faq } from "@/components/faq";
 import { ApplySection } from "@/components/apply-section";
 import { Contacts } from "@/components/contacts";
@@ -45,6 +46,7 @@ export default function HomePage() {
       <TariffQuiz />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <Tariffs />
+      <TariffCompare />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <LaborContract />
       <MaxChannel />

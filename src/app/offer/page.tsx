@@ -5,7 +5,7 @@ import { CONTACTS, SITE } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Публичная оферта",
   description: `Публичная оферта ${SITE.fullName} на услуги подключения водителей к Яндекс Такси, лицензии ФГИС и ОСГОП.`,
-  alternates: { canonical: `${SITE.url}/offer` },
+  alternates: { canonical: `${SITE.url}/offer/` },
   robots: { index: true, follow: true },
 };
 

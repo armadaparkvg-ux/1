@@ -12,14 +12,6 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-[#07090d] pt-[72px]">
-      <h1 className="sr-only">
-        Подключение к Яндекс Такси на выгодных условиях — таксопарк «Армада»
-      </h1>
-
-      {/*
-        Full banner visible on all devices (object-contain):
-        text and car stay readable — no cover-crop cutting off Cyrillic copy.
-      */}
       <div className="relative mx-auto w-full max-w-[1600px] bg-[#0a0a0a]">
         <motion.div
           initial={reduce ? false : { opacity: 0, scale: 1.02 }}
@@ -48,18 +40,20 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.12 }}
-          className="mb-5 text-center"
+          className="mb-6 text-center"
         >
-          <p className="font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+          <p className="text-sm font-medium uppercase tracking-wide text-accent">
             {SITE.fullName}
           </p>
-          <p className="mt-2 text-sm text-muted-foreground sm:text-base">
-            Подключение к Яндекс Такси удалённо по всей России · комиссия от
-            1,9% · {CONTACTS.hours}
+          <h1 className="mt-2 font-display text-2xl font-semibold tracking-tight text-foreground text-balance sm:text-3xl lg:text-4xl">
+            Подключение к Яндекс Такси на выгодных условиях
+          </h1>
+          <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground sm:text-base">
+            Удалённо по всей России · комиссия от 1,9% · активация 1,5–2 часа ·{" "}
+            {CONTACTS.hours}
           </p>
           <p className="mt-3 text-sm text-foreground/80">
-            3 500+ водителей · активация 1,5–2 часа · 7+ лет на рынке · 98%
-            одобрения заявок
+            3 500+ водителей · 7+ лет на рынке · 98% одобрения заявок
           </p>
         </motion.div>
 
@@ -67,66 +61,61 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.18 }}
-          className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+          className="flex flex-col items-stretch justify-center gap-3"
         >
-          <Button asChild size="lg" shine className="shadow-glow sm:min-w-[200px]">
-            <Link href="/#quiz">Подобрать тариф</Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="secondary"
-            shine
-            className="sm:min-w-[200px]"
-          >
-            <a
-              href={CONTACTS.fgisCheck}
-              target="_blank"
-              rel="noopener noreferrer"
+          <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <Button
+              asChild
+              size="lg"
+              shine
+              className="shadow-glow sm:min-w-[240px]"
             >
-              Проверить ФГИС Такси
-            </a>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            shine
-            className="sm:min-w-[200px]"
-          >
-            <a href={CONTACTS.phoneHref}>
-              <Phone className="h-4 w-4" aria-hidden />
-              {CONTACTS.phoneDisplay}
-            </a>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            shine
-            className="sm:min-w-[200px]"
-          >
-            <Link
-              href={CONTACTS.telegram}
-              target="_blank"
-              rel="noopener noreferrer"
+              <Link href="/#quiz">Подобрать тариф за 1 минуту</Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="secondary"
+              shine
+              className="sm:min-w-[220px]"
             >
-              <Send className="h-4 w-4" aria-hidden />
-              Telegram
-            </Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="emerald"
-            shine
-            className="sm:min-w-[200px]"
-          >
-            <Link href={CONTACTS.max} target="_blank" rel="noopener noreferrer">
-              <MessageCircle className="h-4 w-4" aria-hidden />
-              MAX
-            </Link>
-          </Button>
+              <a href={CONTACTS.phoneHref}>
+                <Phone className="h-4 w-4" aria-hidden />
+                Позвонить {CONTACTS.phoneDisplay}
+              </a>
+            </Button>
+          </div>
+          <div className="flex flex-col items-stretch justify-center gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+            <Button asChild size="default" variant="outline">
+              <Link
+                href={CONTACTS.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Send className="h-4 w-4" aria-hidden />
+                Telegram
+              </Link>
+            </Button>
+            <Button asChild size="default" variant="emerald">
+              <Link
+                href={CONTACTS.max}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle className="h-4 w-4" aria-hidden />
+                MAX
+              </Link>
+            </Button>
+            <Button asChild size="default" variant="ghost">
+              <a
+                href={CONTACTS.fgisCheck}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Проверить ФГИС Такси
+              </a>
+            </Button>
+          </div>
         </motion.div>
       </div>
 

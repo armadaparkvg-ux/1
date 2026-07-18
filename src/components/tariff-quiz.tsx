@@ -65,8 +65,21 @@ export function TariffQuiz() {
   const result = useMemo(() => resolveQuizResult(answers), [answers]);
   const needsFormat =
     answers.goal === "connect" || answers.goal === "unsure";
-  const maxSteps = needsFormat ? 4 : 2;
-  const progressStep = step === 4 && !needsFormat ? 2 : Math.min(step, maxSteps);
+  const maxSteps = !answers.goal
+    ? 3
+    : needsFormat
+      ? answers.format === "labor" || answers.format === "help"
+        ? 4
+        : 3
+      : 2;
+  const progressStep =
+    step === 1
+      ? 1
+      : step === 4 && !needsFormat
+        ? 2
+        : step === 4 && needsFormat && (answers.format === "self" || answers.format === "ip")
+          ? 3
+          : Math.min(step, maxSteps);
 
   const reset = () => {
     setAnswers({});
@@ -130,7 +143,7 @@ export function TariffQuiz() {
           <div className="rounded-2xl border border-border bg-[#0f1724]/80 p-5 sm:p-8">
             <div className="mb-6 flex items-center justify-between gap-3">
               <p className="text-sm text-muted-foreground">
-                Шаг {progressStep} из {step === 1 ? 3 : maxSteps}
+                Шаг {progressStep} из {maxSteps}
               </p>
               {step !== 1 ? (
                 <button
@@ -151,7 +164,7 @@ export function TariffQuiz() {
               <div
                 className="h-full rounded-full bg-accent transition-all duration-300"
                 style={{
-                  width: `${(progressStep / (step === 1 ? 3 : maxSteps)) * 100}%`,
+                  width: `${(progressStep / maxSteps) * 100}%`,
                 }}
               />
             </div>
