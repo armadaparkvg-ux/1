@@ -2,13 +2,15 @@
 Options -Indexes
 DirectoryIndex index.html
 
+# IMPORTANT:
+# Do NOT force HTTPS here on Reg.ru.
+# SSL terminates on nginx in front of Apache; %{HTTPS} is often "off"
+# even for https:// requests → endless 301 loop (site unavailable).
+# HTTP→HTTPS is already handled by Reg.ru hosting panel / nginx.
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
-
-  # Force HTTPS
-  RewriteCond %{HTTPS} off
-  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
   # Keep real files/folders
   RewriteCond %{REQUEST_FILENAME} -f [OR]
