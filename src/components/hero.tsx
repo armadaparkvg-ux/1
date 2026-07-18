@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { MessageCircle, Phone, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FgisCheckButton } from "@/components/fgis-check-button";
 import { CONTACTS, SITE } from "@/lib/constants";
 
 export function Hero() {
@@ -72,6 +73,7 @@ export function Hero() {
             >
               <Link href="/#quiz">Подобрать тариф за 1 минуту</Link>
             </Button>
+            <FgisCheckButton size="lg" className="sm:min-w-[240px]" />
             <Button
               asChild
               size="lg"
@@ -105,15 +107,6 @@ export function Hero() {
                 <MessageCircle className="h-4 w-4" aria-hidden />
                 MAX
               </Link>
-            </Button>
-            <Button asChild size="default" variant="ghost">
-              <a
-                href={CONTACTS.fgisCheck}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Проверить ФГИС Такси
-              </a>
             </Button>
           </div>
         </motion.div>

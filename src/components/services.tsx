@@ -6,6 +6,7 @@ import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-
 import { Button } from "@/components/ui/button";
 import { ApplyButton } from "@/components/messenger-apply";
 import { ContactButtons } from "@/components/contact-buttons";
+import { FgisCheckButton } from "@/components/fgis-check-button";
 import type { ApplyTopic } from "@/lib/apply";
 import { CONTACTS } from "@/lib/constants";
 
@@ -104,15 +105,7 @@ export function Services() {
                       {service.cta}
                     </ApplyButton>
                     {service.externalLink ? (
-                      <Button asChild variant="secondary" className="w-full">
-                        <a
-                          href={service.externalLink.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {service.externalLink.label}
-                        </a>
-                      </Button>
+                      <FgisCheckButton className="w-full" />
                     ) : null}
                   </div>
                   <div className="mt-3">

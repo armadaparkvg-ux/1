@@ -57,9 +57,29 @@ const config: Config = {
           "0%": { transform: "translateX(-120%) skewX(-16deg)" },
           "100%": { transform: "translateX(220%) skewX(-16deg)" },
         },
+        "shine-loop": {
+          "0%": { transform: "translateX(-140%) skewX(-16deg)" },
+          "100%": { transform: "translateX(220%) skewX(-16deg)" },
+        },
         "pulse-soft": {
           "0%, 100%": { transform: "scale(1)", opacity: "1" },
           "50%": { transform: "scale(1.08)", opacity: "0.85" },
+        },
+        "fgis-glow": {
+          "0%, 100%": {
+            boxShadow:
+              "0 0 0 0 rgba(245, 158, 11, 0.55), 0 0 28px -4px rgba(251, 191, 36, 0.65)",
+            filter: "brightness(1)",
+          },
+          "50%": {
+            boxShadow:
+              "0 0 0 10px rgba(245, 158, 11, 0), 0 0 44px -2px rgba(252, 211, 77, 0.95)",
+            filter: "brightness(1.12)",
+          },
+        },
+        "fgis-gradient": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
         },
         float: {
           "0%, 100%": { transform: "translateY(0)" },
@@ -76,7 +96,12 @@ const config: Config = {
       },
       animation: {
         shine: "shine 0.75s ease-out",
+        "shine-loop": "shine-loop 2.2s ease-in-out infinite",
         "pulse-soft": "pulse-soft 2.4s ease-in-out infinite",
+        "fgis-glow": "fgis-glow 1.6s ease-in-out infinite",
+        "fgis-gradient": "fgis-gradient 2.8s ease infinite",
+        "fgis-attention":
+          "fgis-gradient 2.8s ease infinite, fgis-glow 1.6s ease-in-out infinite",
         float: "float 6s ease-in-out infinite",
         "accordion-down": "accordion-down 0.25s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",

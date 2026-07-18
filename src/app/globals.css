@@ -119,4 +119,15 @@ body {
       transparent
     );
   }
+
+  .btn-fgis {
+    isolation: isolate;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-fgis,
+  .btn-fgis span {
+    animation: none !important;
+  }
 }
