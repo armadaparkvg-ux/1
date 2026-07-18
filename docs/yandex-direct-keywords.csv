@@ -9,27 +9,41 @@ campaign,ad_group,keyword,intent,landing
 П1_Поиск_Подключение,Подключение Яндекс Такси,стать водителем яндекс такси,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
 П1_Поиск_Подключение,Подключение Яндекс Такси,работа в яндекс такси на своем авто,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
 П1_Поиск_Подключение,Подключение Яндекс Такси,яндекс такси подключение парк,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
+П1_Поиск_Подключение,Подключение Яндекс Такси,удалённое подключение яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
+П1_Поиск_Подключение,Подключение Яндекс Такси,подключить яндекс такси онлайн,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
 П1_Поиск_Подключение,Таксопарк,таксопарк для яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
 П1_Поиск_Подключение,Таксопарк,таксопарк яндекс такси подключить,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
 П1_Поиск_Подключение,Таксопарк,партнер яндекс такси для водителей,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
 П1_Поиск_Подключение,Таксопарк,подключиться к яндекс такси через парк,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
-П2_Поиск_Самозанятый,Парковый самозанятый,парковый самозанятый,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariff-self
-П2_Поиск_Самозанятый,Парковый самозанятый,парковый самозанятый яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariff-self
-П2_Поиск_Самозанятый,Парковый самозанятый,самозанятый яндекс такси парк,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariff-self
-П2_Поиск_Самозанятый,Парковый самозанятый,стать парковым самозанятым,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariff-self
-П2_Поиск_Самозанятый,Парковый самозанятый,комиссия парка самозанятый,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariff-self
-П2_Поиск_Самозанятый,Парковый самозанятый,подключение самозанятый яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariff-self
-П2_Поиск_Самозанятый,Парковый самозанятый,работа такси самозанятый парк,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariff-self
-П2_Поиск_Самозанятый,Парковый самозанятый,яндекс такси самозанятый оформление,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariff-self
-П2_Поиск_Самозанятый,Парковый самозанятый,парк для самозанятых водителей,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariff-self
-П2_Поиск_Самозанятый,Парковый самозанятый,низкая комиссия таксопарк самозанятый,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariff-self
-П3_Поиск_ИП,Парковый ИП,парковый ип яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariff-ip
-П3_Поиск_ИП,Парковый ИП,ип яндекс такси парк,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariff-ip
-П3_Поиск_ИП,Парковый ИП,подключение ип к яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariff-ip
-П3_Поиск_ИП,Парковый ИП,моментальный вывод яндекс такси,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariff-ip
-П3_Поиск_ИП,Парковый ИП,работа такси ип комиссия,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariff-ip
-П3_Поиск_ИП,Парковый ИП,переход с самозанятого на ип такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariff-ip
-П3_Поиск_ИП,Парковый ИП,яндекс про парковый ип,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariff-ip
+П1_Поиск_Подключение,Таксопарк,лучший таксопарк яндекс такси,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#compare
+П1_Поиск_Подключение,Комиссия парка,комиссия таксопарка яндекс,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
+П1_Поиск_Подключение,Комиссия парка,низкая комиссия таксопарк,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
+П1_Поиск_Подключение,Комиссия парка,таксопарк комиссия 1.9,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
+П1_Поиск_Подключение,Комиссия парка,комиссия парка 1.9 процента,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
+П1_Поиск_Подключение,Комиссия парка,сменить таксопарк яндекс,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
+П1_Поиск_Подключение,Комиссия парка,перейти в другой парк яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
+П1_Поиск_Подключение,Комиссия парка,какой таксопарк выбрать яндекс,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#compare
+П2_Поиск_Самозанятый,Парковый самозанятый,парковый самозанятый,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariffs
+П2_Поиск_Самозанятый,Парковый самозанятый,парковый самозанятый яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariffs
+П2_Поиск_Самозанятый,Парковый самозанятый,самозанятый яндекс такси парк,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariffs
+П2_Поиск_Самозанятый,Парковый самозанятый,стать парковым самозанятым,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariffs
+П2_Поиск_Самозанятый,Парковый самозанятый,комиссия парка самозанятый,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariffs
+П2_Поиск_Самозанятый,Парковый самозанятый,подключение самозанятый яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariffs
+П2_Поиск_Самозанятый,Парковый самозанятый,работа такси самозанятый парк,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariffs
+П2_Поиск_Самозанятый,Парковый самозанятый,яндекс такси самозанятый оформление,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariffs
+П2_Поиск_Самозанятый,Парковый самозанятый,парк для самозанятых водителей,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariffs
+П2_Поиск_Самозанятый,Парковый самозанятый,низкая комиссия таксопарк самозанятый,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariffs
+П2_Поиск_Самозанятый,Парковый самозанятый,самозанятый водитель такси подключить,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariffs
+П2_Поиск_Самозанятый,Парковый самозанятый,моментальный вывод самозанятый такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#compare
+П3_Поиск_ИП,Парковый ИП,парковый ип яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariffs
+П3_Поиск_ИП,Парковый ИП,ип яндекс такси парк,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariffs
+П3_Поиск_ИП,Парковый ИП,подключение ип к яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariffs
+П3_Поиск_ИП,Парковый ИП,моментальный вывод яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#compare
+П3_Поиск_ИП,Парковый ИП,работа такси ип комиссия,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariffs
+П3_Поиск_ИП,Парковый ИП,переход с самозанятого на ип такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#compare
+П3_Поиск_ИП,Парковый ИП,яндекс про парковый ип,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariffs
+П3_Поиск_ИП,Парковый ИП,ип в таксопарке яндекс,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariffs
+П3_Поиск_ИП,Парковый ИП,вывод денег яндекс такси ип,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#compare
 П4_Поиск_Трудовой,Трудовой договор,трудовой договор яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
 П4_Поиск_Трудовой,Трудовой договор,трудовой договор такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
 П4_Поиск_Трудовой,Трудовой договор,официальное трудоустройство такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
@@ -38,19 +52,19 @@ campaign,ad_group,keyword,intent,landing
 П4_Поиск_Трудовой,Трудовой договор,подключение к яндекс такси трудовой договор,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
 П4_Поиск_Трудовой,Трудовой договор,работа такси с трудоустройством,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
 П4_Поиск_Трудовой,Трудовой договор,2ндфл такси,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
-П4_Поиск_Трудовой,Трудовой договор,такси при банкротстве трудовой договор,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
-П1_Поиск_Подключение,Комиссия парка,комиссия таксопарка яндекс,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
-П1_Поиск_Подключение,Комиссия парка,низкая комиссия таксопарк,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
-П1_Поиск_Подключение,Комиссия парка,таксопарк комиссия 1.9,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
-П1_Поиск_Подключение,Комиссия парка,сменить таксопарк яндекс,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
-П1_Поиск_Подключение,Комиссия парка,перейти в другой парк яндекс такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
+П4_Поиск_Трудовой,Трудовой договор,такси при банкротстве трудовой договор,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
+П4_Поиск_Трудовой,Трудовой договор,работа такси на пособии,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
+П4_Поиск_Трудовой,Трудовой договор,превышен лимит ип такси трудовой,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#compare
+П4_Поиск_Трудовой,Трудовой договор,яндекс такси оформление по тк,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
 П5_Поиск_ФГИС,Лицензия ФГИС,лицензия такси фгис,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
 П5_Поиск_ФГИС,Лицензия ФГИС,внести авто в реестр такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
 П5_Поиск_ФГИС,Лицензия ФГИС,реестр такси фгис,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
 П5_Поиск_ФГИС,Лицензия ФГИС,лицензия на такси стоимость,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
 П5_Поиск_ФГИС,Лицензия ФГИС,оформить лицензию такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
-П5_Поиск_ФГИС,Лицензия ФГИС,проверка фгис такси,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
+П5_Поиск_ФГИС,Лицензия ФГИС,проверка фгис такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
+П5_Поиск_ФГИС,Лицензия ФГИС,проверить авто фгис такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
 П5_Поиск_ФГИС,Лицензия ФГИС,постановка авто в реестр такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
+П5_Поиск_ФГИС,Лицензия ФГИС,фгис такси 3500,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
 П5_Поиск_ФГИС,ОСГОП,осгоп такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
 П5_Поиск_ФГИС,ОСГОП,осгоп для такси стоимость,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
 П5_Поиск_ФГИС,ОСГОП,оформить осгоп такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
@@ -59,4 +73,26 @@ campaign,ad_group,keyword,intent,landing
 П6_Поиск_Бренд,Бренд Армада,таксопарк армада,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p6_brand&utm_content={ad_id}&utm_term={keyword}
 П6_Поиск_Бренд,Бренд Армада,армада такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p6_brand&utm_content={ad_id}&utm_term={keyword}
 П6_Поиск_Бренд,Бренд Армада,парк армада яндекс,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p6_brand&utm_content={ad_id}&utm_term={keyword}
-П6_Поиск_Бренд,Бренд Армада,армада таксопарк отзывы,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p6_brand&utm_content={ad_id}&utm_term={keyword}
+П6_Поиск_Бренд,Бренд Армада,армада таксопарк отзывы,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p6_brand&utm_content={ad_id}&utm_term={keyword}#reviews
+П6_Поиск_Бренд,Бренд Армада,park armada такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p6_brand&utm_content={ad_id}&utm_term={keyword}
+П6_Поиск_Бренд,Бренд Армада,армада драйвер такси,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p6_brand&utm_content={ad_id}&utm_term={keyword}
+П7_Поиск_Квиз,Подобрать тариф,какой тариф яндекс такси выбрать,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p7_quiz&utm_content={ad_id}&utm_term={keyword}#quiz
+П7_Поиск_Квиз,Подобрать тариф,самозанятый или ип такси что выбрать,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p7_quiz&utm_content={ad_id}&utm_term={keyword}#quiz
+П7_Поиск_Квиз,Подобрать тариф,какую форму работы выбрать в такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p7_quiz&utm_content={ad_id}&utm_term={keyword}#quiz
+П7_Поиск_Квиз,Подобрать тариф,подобрать тариф таксопарк,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p7_quiz&utm_content={ad_id}&utm_term={keyword}#quiz
+П7_Поиск_Квиз,Подобрать тариф,сравнение тарифов таксопарка,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p7_quiz&utm_content={ad_id}&utm_term={keyword}#compare
+П7_Поиск_Квиз,Подобрать тариф,самозанятый ип или трудовой договор такси,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p7_quiz&utm_content={ad_id}&utm_term={keyword}#compare
+П8_Поиск_Лимит_НПД,Лимит самозанятого,лимит самозанятого 2.4 млн такси,H,https://park-armada.ru/blog/limit-npd-2-4-mln/?utm_source=yandex&utm_medium=cpc&utm_campaign=p8_limit_npd&utm_content={ad_id}&utm_term={keyword}
+П8_Поиск_Лимит_НПД,Лимит самозанятого,превышен лимит нпд такси что делать,H,https://park-armada.ru/blog/limit-npd-2-4-mln/?utm_source=yandex&utm_medium=cpc&utm_campaign=p8_limit_npd&utm_content={ad_id}&utm_term={keyword}
+П8_Поиск_Лимит_НПД,Лимит самозанятого,что делать если превысил лимит самозанятого такси,H,https://park-armada.ru/blog/limit-npd-2-4-mln/?utm_source=yandex&utm_medium=cpc&utm_campaign=p8_limit_npd&utm_content={ad_id}&utm_term={keyword}
+П8_Поиск_Лимит_НПД,Лимит самозанятого,переход с нпд на ип яндекс такси,H,https://park-armada.ru/blog/limit-npd-2-4-mln/?utm_source=yandex&utm_medium=cpc&utm_campaign=p8_limit_npd&utm_content={ad_id}&utm_term={keyword}
+П8_Поиск_Лимит_НПД,Лимит самозанятого,лимит самозанятого водитель такси,H,https://park-armada.ru/blog/limit-npd-2-4-mln/?utm_source=yandex&utm_medium=cpc&utm_campaign=p8_limit_npd&utm_content={ad_id}&utm_term={keyword}
+П9_Поиск_Статьи,Статья подключение,как подключиться к яндекс такси 2026,M,https://park-armada.ru/blog/kak-podklyuchitsya-k-yandex-taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p9_blog&utm_content={ad_id}&utm_term={keyword}
+П9_Поиск_Статьи,Статья подключение,документы для подключения яндекс такси,M,https://park-armada.ru/blog/kak-podklyuchitsya-k-yandex-taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p9_blog&utm_content={ad_id}&utm_term={keyword}
+П9_Поиск_Статьи,Статья форматы,самозанятый ип трудовой договор такси сравнение,M,https://park-armada.ru/blog/samozanyatyj-ip-trudovoj/?utm_source=yandex&utm_medium=cpc&utm_campaign=p9_blog&utm_content={ad_id}&utm_term={keyword}
+П9_Поиск_Статьи,Статья ФГИС,документы для лицензии такси фгис,M,https://park-armada.ru/blog/licenziya-fgis-cheklist/?utm_source=yandex&utm_medium=cpc&utm_campaign=p9_blog&utm_content={ad_id}&utm_term={keyword}
+П9_Поиск_Статьи,Статья ФГИС,чеклист фгис такси,M,https://park-armada.ru/blog/licenziya-fgis-cheklist/?utm_source=yandex&utm_medium=cpc&utm_campaign=p9_blog&utm_content={ad_id}&utm_term={keyword}
+Р1_РСЯ,РСЯ общие,подключение яндекс такси,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=r1_rsya&utm_content={ad_id}&utm_term={keyword}#quiz
+Р1_РСЯ,РСЯ общие,работа водителем такси свой авто,L,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=r1_rsya&utm_content={ad_id}&utm_term={keyword}#quiz
+Р1_РСЯ,РСЯ общие,таксопарк с низкой комиссией,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=r1_rsya&utm_content={ad_id}&utm_term={keyword}#tariffs
+Р2_Ретаргет,Ретаргет сайт,ретаргет посетители сайта,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=r2_retarget&utm_content={ad_id}&utm_term={keyword}#apply
