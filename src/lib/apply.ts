@@ -1,4 +1,5 @@
 import { CONTACTS } from "@/lib/constants";
+import { appendUtmBlock } from "@/lib/utm";
 
 export type ApplyTopic =
   | "3% + 300₽"
@@ -58,7 +59,7 @@ const TOPIC_DETAILS: Record<ApplyTopic, { title: string; conditions: string }> =
 
 export function buildApplyMessage(topic: ApplyTopic = "общая заявка"): string {
   const details = TOPIC_DETAILS[topic] ?? TOPIC_DETAILS["общая заявка"];
-  return [
+  const message = [
     "Здравствуйте! Заявка с сайта park-armada.ru",
     "",
     `Тариф / услуга: ${details.title}`,
@@ -66,6 +67,7 @@ export function buildApplyMessage(topic: ApplyTopic = "общая заявка")
     "",
     "Прошу связаться со мной для оформления.",
   ].join("\n");
+  return appendUtmBlock(message);
 }
 
 export function telegramApplyUrl(message: string): string {

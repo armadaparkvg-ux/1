@@ -1,4 +1,5 @@
 import type { ApplyTopic } from "@/lib/apply";
+import { appendUtmBlock } from "@/lib/utm";
 
 export type QuizGoal = "connect" | "fgis" | "osgop" | "unsure";
 export type QuizFormat = "self" | "ip" | "labor" | "help";
@@ -226,7 +227,7 @@ export function buildQuizApplyMessage(
     QUIZ_PRIORITIES.find((p) => p.id === answers.priority)?.label ??
     "не указано";
 
-  return [
+  const message = [
     "Здравствуйте! Заявка с квиза park-armada.ru",
     "",
     `Рекомендация: ${result.title}`,
@@ -238,4 +239,5 @@ export function buildQuizApplyMessage(
     "",
     "Прошу связаться со мной для оформления.",
   ].join("\n");
+  return appendUtmBlock(message);
 }

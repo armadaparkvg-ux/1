@@ -1,0 +1,10 @@
+campaign,utm_campaign,landing_url
+П1_Поиск_Подключение,p1_podklyuchenie,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#tariffs
+П2_Поиск_Самозанятый,p2_samozanyatyj,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#tariff-self
+П3_Поиск_ИП,p3_ip,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#tariff-ip
+П4_Поиск_Трудовой,p4_trudovoj,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
+П5_Поиск_ФГИС,p5_fgis,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}#services
+П6_Поиск_Бренд,p6_brand,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p6_brand&utm_content={ad_id}&utm_term={keyword}
+Р1_РСЯ,r1_rsya,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=r1_rsya&utm_content={ad_id}&utm_term={keyword}#quiz
+Р2_Ретаргет,r2_retarget,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=r2_retarget&utm_content={ad_id}&utm_term={keyword}#apply
+Квиз,quiz,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=quiz&utm_content={ad_id}&utm_term={keyword}#quiz
