@@ -37,22 +37,22 @@ export const FORMS = {
 export const NAV_LINKS = [
   { href: "/#about", label: "О парке" },
   { href: "/#directions", label: "Направления" },
-  { href: "/#yandex-tariffs", label: "Классы" },
-  { href: "/#tariffs", label: "Оформление" },
-  { href: "/courier/", label: "Курьеры" },
-  { href: "/#quiz", label: "Квиз" },
-  { href: "/#apply", label: "Заявка" },
+  { href: "/taxi/", label: "Такси" },
+  { href: "/delivery/", label: "Доставка" },
+  { href: "/license/", label: "Лицензия" },
+  { href: "/osgop/", label: "ОСГОП" },
+  { href: "/#max-channel", label: "Акции" },
   { href: "/#contacts", label: "Контакты" },
 ] as const;
 
 export const FOOTER_LINKS = [
   { href: "/#about", label: "О парке" },
-  { href: "/#directions", label: "Такси или доставка" },
-  { href: "/#tariffs", label: "Оформление в парке" },
-  { href: "/courier/", label: "Курьеры Яндекс Доставка" },
-  { href: "/#quiz", label: "Подобрать тариф" },
-  { href: "/#apply", label: "Оставить заявку" },
-  { href: "/#services", label: "Лицензия такси и ОСГОП" },
+  { href: "/taxi/", label: "Подключение к Яндекс Такси" },
+  { href: "/delivery/", label: "Курьеры Яндекс Доставка" },
+  { href: "/license/", label: "Лицензия такси ФГИС" },
+  { href: "/osgop/", label: "ОСГОП для такси" },
+  { href: "/#max-channel", label: "Акции и бонусы в MAX" },
+  { href: "/#contacts", label: "Контакты" },
 ] as const;
 
 export const LABOR_OPTIONS = [

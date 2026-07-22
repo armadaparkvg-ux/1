@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Bike,
@@ -106,13 +107,21 @@ function CourierCard({ tariff }: { tariff: CourierTariff }) {
 export function CourierLanding() {
   return (
     <div className="pb-20">
-      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-[#121a28] to-background pt-28 pb-14">
+      <section className="relative isolate overflow-hidden border-b border-border bg-[#080b11] pt-28 pb-14">
+        <Image
+          src="/images/delivery-premium-hero.webp"
+          alt="Курьер и транспорт для работы в Яндекс Доставке"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-60"
+        />
         <div
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            backgroundImage:
-              "radial-gradient(ellipse at 30% 0%, rgba(245,158,11,0.22), transparent 55%), radial-gradient(ellipse at 80% 40%, rgba(16,185,129,0.12), transparent 45%)",
-          }}
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#07090d] via-[#07090d]/88 to-[#07090d]/25"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07090d] via-transparent to-[#07090d]/35"
           aria-hidden
         />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

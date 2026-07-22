@@ -25,10 +25,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SITE.url}/courier/`,
+      url: `${SITE.url}/taxi/`,
       lastModified: new Date("2026-07-22"),
       changeFrequency: "weekly",
       priority: 0.85,
+    },
+    {
+      url: `${SITE.url}/delivery/`,
+      lastModified: new Date("2026-07-22"),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE.url}/license/`,
+      lastModified: new Date("2026-07-22"),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE.url}/osgop/`,
+      lastModified: new Date("2026-07-22"),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE.url}/courier/`,
+      lastModified: new Date("2026-07-22"),
+      changeFrequency: "monthly",
+      priority: 0.45,
     },
     ...articles,
     {
