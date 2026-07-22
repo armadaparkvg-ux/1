@@ -1,7 +1,12 @@
 import type { ApplyTopic } from "@/lib/apply";
 import { appendUtmBlock } from "@/lib/utm";
 
-export type QuizGoal = "connect" | "fgis" | "osgop" | "unsure";
+export type QuizGoal =
+  | "connect"
+  | "delivery"
+  | "fgis"
+  | "osgop"
+  | "unsure";
 export type QuizFormat = "self" | "ip" | "labor" | "help";
 export type QuizPriority =
   | "low_fee"
@@ -20,6 +25,9 @@ export type QuizResult = {
   title: string;
   summary: string;
   why: string[];
+  /** Optional deep-link after quiz (e.g. courier landing) */
+  nextHref?: string;
+  nextLabel?: string;
 };
 
 export const QUIZ_GOALS: {
@@ -30,7 +38,12 @@ export const QUIZ_GOALS: {
   {
     id: "connect",
     label: "Подключиться к Яндекс Такси",
-    hint: "Самозанятый, ИП или трудовой договор",
+    hint: "Пассажирские заказы: самозанятый, ИП или трудовой",
+  },
+  {
+    id: "delivery",
+    label: "Подключиться курьером",
+    hint: "Пеший, авто, мото или грузовой — Яндекс Доставка",
   },
   {
     id: "fgis",
@@ -45,7 +58,7 @@ export const QUIZ_GOALS: {
   {
     id: "unsure",
     label: "Пока не уверен",
-    hint: "Подберём вариант за 1–2 минуты",
+    hint: "Подберём направление и тариф",
   },
 ];
 
@@ -172,6 +185,22 @@ function selfResult(): QuizResult {
 }
 
 export function resolveQuizResult(answers: QuizAnswers): QuizResult {
+  if (answers.goal === "delivery") {
+    return {
+      topic: "курьер доставка",
+      title: "Курьер Яндекс Доставка",
+      summary:
+        "Пеший, авто, мото или грузовой — оформите авторегистрацию на странице курьеров или напишите в чат.",
+      why: [
+        "Отдельные формы авторегистрации по типам курьера",
+        "Парковый самозанятый и выплаты через «Армаду»",
+        "Поддержка 8:00–21:00 Мск",
+      ],
+      nextHref: "/courier/",
+      nextLabel: "Открыть тарифы курьеров",
+    };
+  }
+
   if (answers.goal === "fgis") {
     return {
       topic: "лицензия ФГИС",

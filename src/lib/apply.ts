@@ -10,7 +10,8 @@ export type ApplyTopic =
   | "лицензия ФГИС"
   | "ОСГОП"
   | "реестр перевозчиков"
-  | "общая заявка";
+  | "общая заявка"
+  | "курьер доставка";
 
 const TOPIC_DETAILS: Record<ApplyTopic, { title: string; conditions: string }> =
   {
@@ -54,6 +55,11 @@ const TOPIC_DETAILS: Record<ApplyTopic, { title: string; conditions: string }> =
     "общая заявка": {
       title: "Подключение к Яндекс Такси",
       conditions: "Нужна консультация по тарифам и оформлению в таксопарке «Армада».",
+    },
+    "курьер доставка": {
+      title: "Курьер Яндекс Доставка",
+      conditions:
+        "Пеший / авто / мото / грузовой — подключение через парк «Армада».",
     },
   };
 

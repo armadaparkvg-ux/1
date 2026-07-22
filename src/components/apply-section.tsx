@@ -21,7 +21,7 @@ export function ApplySection() {
             id="apply-heading"
             eyebrow="Финал · Заявка"
             title="Оставить заявку: мессенджер или звонок"
-            description="Без длинных анкет: Telegram, MAX или телефон. Можно сначала пройти квиз — текст с тарифом подставится сам."
+            description="Сначала выберите направление (такси или доставка), затем тариф. Или сразу напишите — подскажем за минуту."
           />
         </FadeIn>
 
@@ -32,9 +32,15 @@ export function ApplySection() {
             </p>
             <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Button asChild size="lg" shine>
-                <Link href="/#quiz">Подобрать тариф в квизе</Link>
+                <Link href="/#directions">Выбрать направление</Link>
               </Button>
-              <ApplyButton topic="общая заявка" size="lg" variant="outline">
+              <Button asChild size="lg" variant="emerald" shine>
+                <Link href="/courier/">Курьеры / доставка</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link href="/#quiz">Квиз тарифа</Link>
+              </Button>
+              <ApplyButton topic="общая заявка" size="lg" variant="secondary">
                 Сразу в мессенджер
               </ApplyButton>
               <Button asChild size="lg" variant="secondary">

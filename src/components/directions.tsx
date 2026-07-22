@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Car, Package } from "lucide-react";
 import { FadeIn, SectionHeading } from "@/components/fade-in";
 import { Button } from "@/components/ui/button";
+import { trackGoal } from "@/lib/metrika";
 
 const DIRECTIONS = [
   {
@@ -15,6 +16,7 @@ const DIRECTIONS = [
     text: "Пассажирские заказы: от Эконома и Комфорта до Бизнеса, Ultima, Premier и Элит. Дальше — класс авто и оформление в парке.",
     cta: "Смотреть классы такси",
     accent: "accent" as const,
+    goal: "directions_taxi" as const,
   },
   {
     key: "delivery",
@@ -25,6 +27,7 @@ const DIRECTIONS = [
     text: "Пеший, авто, мото и грузовой курьер. Авторегистрация и поддержка парка «Армада».",
     cta: "Перейти к курьерам",
     accent: "emerald" as const,
+    goal: "directions_delivery" as const,
   },
 ] as const;
 
@@ -95,7 +98,10 @@ export function Directions() {
                       }
                       className="w-full sm:w-auto"
                     >
-                      <Link href={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={() => trackGoal(item.goal)}
+                      >
                         {item.cta}
                         <ArrowRight className="h-4 w-4" aria-hidden />
                       </Link>

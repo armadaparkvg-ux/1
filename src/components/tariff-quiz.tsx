@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { Check, Phone, RotateCcw } from "lucide-react";
 import { FadeIn, SectionHeading } from "@/components/fade-in";
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ import {
   openMessenger,
   telegramApplyUrl,
 } from "@/lib/apply";
+import { trackGoal } from "@/lib/metrika";
 import { cn } from "@/lib/utils";
 
 type Step = 1 | 2 | 3 | 4;
@@ -67,11 +69,15 @@ export function TariffQuiz() {
     answers.goal === "connect" || answers.goal === "unsure";
   const maxSteps = !answers.goal
     ? 3
-    : needsFormat
-      ? answers.format === "labor" || answers.format === "help"
-        ? 4
-        : 3
-      : 2;
+    : answers.goal === "delivery" ||
+        answers.goal === "fgis" ||
+        answers.goal === "osgop"
+      ? 2
+      : needsFormat
+        ? answers.format === "labor" || answers.format === "help"
+          ? 4
+          : 3
+        : 2;
   const progressStep =
     step === 1
       ? 1
@@ -89,7 +95,12 @@ export function TariffQuiz() {
 
   const chooseGoal = (goal: QuizGoal) => {
     setAnswers({ goal });
-    if (goal === "fgis" || goal === "osgop") {
+    trackGoal("quiz_goal", { goal });
+    if (
+      goal === "fgis" ||
+      goal === "osgop" ||
+      goal === "delivery"
+    ) {
       setStep(4);
     } else {
       setStep(2);
@@ -134,8 +145,8 @@ export function TariffQuiz() {
           <SectionHeading
             id="quiz-heading"
             eyebrow="Шаг 5 · Если сомневаетесь"
-            title="Квиз: какой формат вам подходит"
-            description="Ответьте на 2–3 вопроса — подберём самозанятого, ИП, трудовой договор, лицензию ФГИС или ОСГОП и сразу отправим заявку в мессенджер."
+            title="Квиз: такси, доставка или услуга"
+            description="Сначала направление или услуга — затем формат парка. Подберём тариф и отправим заявку в мессенджер."
           />
         </FadeIn>
 
@@ -267,6 +278,19 @@ export function TariffQuiz() {
                     </li>
                   ))}
                 </ul>
+
+                {result.nextHref ? (
+                  <div className="mt-6">
+                    <Button asChild size="lg" shine className="w-full">
+                      <Link
+                        href={result.nextHref}
+                        onClick={() => trackGoal("quiz_to_courier")}
+                      >
+                        {result.nextLabel ?? "Продолжить"}
+                      </Link>
+                    </Button>
+                  </div>
+                ) : null}
 
                 {copied ? (
                   <p className="mt-4 text-sm text-emerald-400" role="status">
