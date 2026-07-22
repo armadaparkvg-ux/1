@@ -96,8 +96,8 @@ export function Header() {
             ))}
             <div className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
               <Button asChild shine className="w-full">
-                <Link href="/#tariffs" onClick={() => setOpen(false)}>
-                  Подключиться
+                <Link href="/#directions" onClick={() => setOpen(false)}>
+                  Выбрать направление
                 </Link>
               </Button>
               <a
