@@ -9,6 +9,12 @@ import { FgisCheckButton } from "@/components/fgis-check-button";
 import { PromoBanner } from "@/components/promo-banner";
 import { CONTACTS, SITE } from "@/lib/constants";
 
+const HERO_METRICS = [
+  { value: "1,9%", label: "комиссия парка" },
+  { value: "1,5–2 ч", label: "обычная активация" },
+  { value: "8:00–21:00", label: "поддержка ежедневно" },
+] as const;
+
 export function Hero() {
   const reduce = useReducedMotion();
 
@@ -73,7 +79,28 @@ export function Hero() {
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.18 }}
+          transition={{ duration: 0.5, delay: 0.16 }}
+          className="relative z-10 mx-auto mb-4 grid max-w-4xl grid-cols-1 gap-2 sm:grid-cols-3"
+        >
+          {HERO_METRICS.map((metric) => (
+            <div
+              key={metric.label}
+              className="metric-tile rounded-xl px-4 py-3 text-center sm:px-5"
+            >
+              <p className="font-display text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+                {metric.value}
+              </p>
+              <p className="mt-0.5 text-xs font-medium text-muted-foreground">
+                {metric.label}
+              </p>
+            </div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.22 }}
           className="relative z-10 mx-auto flex max-w-4xl flex-col items-stretch justify-center gap-3 rounded-2xl border border-border/90 bg-[#0d1420]/82 p-3 shadow-[0_24px_60px_-38px_rgba(0,0,0,1)] backdrop-blur-xl sm:p-4"
         >
           <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
