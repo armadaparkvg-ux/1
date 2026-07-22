@@ -3,11 +3,18 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
+import {
+  Bike,
+  Car,
+  ExternalLink,
+  Package,
+  PersonStanding,
+} from "lucide-react";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { Button } from "@/components/ui/button";
 import { ContactButtons } from "@/components/contact-buttons";
 import { FORMS } from "@/lib/constants";
+import { COURIER_TARIFFS } from "@/lib/courier";
 
 const TARIFFS = [
   {
@@ -184,7 +191,7 @@ export function Tariffs() {
             id="tariffs-heading"
             eyebrow="Тарифы"
             title="Подключение к Яндекс Такси: тарифы таксопарка"
-            description="Три формата работы с парком «Армада» — удалённо по всей России: парковый самозанятый, парковый ИП и трудовой договор. Комиссия от 1,9%. Не уверены? Пройдите квиз."
+            description="Форматы работы с парком «Армада» — удалённо по всей России: парковый самозанятый, парковый ИП, трудовой договор и курьеры Яндекс Доставки. Комиссия такси от 1,9%."
           />
         </FadeIn>
 
@@ -201,7 +208,72 @@ export function Tariffs() {
             </StaggerItem>
           ))}
         </Stagger>
+
+        <FadeIn delay={0.1} className="mt-12">
+          <CourierTeaser />
+        </FadeIn>
       </div>
     </section>
+  );
+}
+
+const COURIER_ICONS = {
+  foot: PersonStanding,
+  auto: Car,
+  moto: Bike,
+  cargo: Package,
+} as const;
+
+function CourierTeaser() {
+  return (
+    <aside
+      id="tariff-courier"
+      className="section-anchor relative overflow-hidden rounded-2xl border border-accent/25 bg-gradient-to-br from-surface-elevated/90 via-surface/80 to-[#0c121c] p-6 sm:p-8"
+      aria-labelledby="courier-teaser-heading"
+    >
+      <div
+        className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/10 blur-3xl"
+        aria-hidden
+      />
+      <div className="relative">
+        <p className="text-sm font-medium text-accent">Яндекс Доставка</p>
+        <h3
+          id="courier-teaser-heading"
+          className="mt-2 font-display text-2xl font-semibold text-foreground sm:text-3xl"
+        >
+          Курьер
+        </h3>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Подключаем курьеров к Яндекс Доставке через парк «Армада»: пеший,
+          авто, мото и грузовой. Парковый самозанятый, авторегистрация и
+          поддержка в чате.
+        </p>
+
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {COURIER_TARIFFS.map((item) => {
+            const Icon = COURIER_ICONS[item.id];
+            return (
+              <li
+                key={item.id}
+                className="flex items-center gap-3 rounded-xl border border-border/80 bg-background/30 px-3 py-3"
+              >
+                <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent">
+                  <Icon className="h-4 w-4" aria-hidden />
+                </span>
+                <span className="text-sm font-medium text-foreground">
+                  {item.title}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+
+        <div className="mt-8">
+          <Button asChild shine size="lg" className="w-full sm:w-auto sm:min-w-[220px]">
+            <Link href="/courier/">Подробнее</Link>
+          </Button>
+        </div>
+      </div>
+    </aside>
   );
 }

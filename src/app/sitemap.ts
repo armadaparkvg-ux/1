@@ -24,6 +24,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    {
+      url: `${SITE.url}/courier/`,
+      lastModified: new Date("2026-07-22"),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
     ...articles,
     {
       url: `${SITE.url}/privacy/`,

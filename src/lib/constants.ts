@@ -37,6 +37,7 @@ export const FORMS = {
 export const NAV_LINKS = [
   { href: "/#quiz", label: "Квиз" },
   { href: "/#tariffs", label: "Тарифы" },
+  { href: "/courier/", label: "Курьеры" },
   { href: "/#services", label: "Доп. услуги" },
   { href: "/blog/", label: "Статьи" },
   { href: "/#reviews", label: "Отзывы" },
@@ -47,6 +48,7 @@ export const NAV_LINKS = [
 export const FOOTER_LINKS = [
   { href: "/#quiz", label: "Подобрать тариф" },
   { href: "/#tariffs", label: "Подключение к Яндекс Такси" },
+  { href: "/courier/", label: "Курьеры Яндекс Доставка" },
   { href: "/blog/", label: "Полезные статьи" },
   { href: "/#services", label: "Лицензия такси и ОСГОП" },
   { href: "/#reviews", label: "Отзывы" },
