@@ -9,7 +9,18 @@ export const CONTACTS = {
   maxChannel: "https://max.ru/id235208280463_biz",
   /** Проверка авто в ФГИС Такси */
   fgisCheck: "https://sicmt.ru/fgis-taksi?type=car",
+  /** Классификатор авто по тарифам Яндекс Такси */
+  autoClassifier:
+    "https://pro.yandex.ru/ru-ru/moskva/knowledge-base/taxi/tariffs/auto-list",
   hours: "8:00–21:00 Мск, ежедневно",
+} as const;
+
+/** Акция на главной */
+export const PROMO = {
+  daysFree: 3,
+  text: "3 дня без комиссии парка — жми «Подключиться»!",
+  ctaLabel: "Подключиться",
+  href: "/#apply",
 } as const;
 
 export const FORMS = {

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/hero";
 import { Trust } from "@/components/trust";
 import { Tariffs } from "@/components/tariffs";
+import { YandexRideTariffs } from "@/components/yandex-ride-tariffs";
 import { LaborContract } from "@/components/labor-contract";
 import { MaxChannel } from "@/components/max-channel";
 import { Services } from "@/components/services";
@@ -48,6 +49,7 @@ export default function HomePage() {
       <TariffQuiz />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <Tariffs />
+      <YandexRideTariffs />
       <TariffCompare />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <LaborContract />

@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { MessageCircle, Phone, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FgisCheckButton } from "@/components/fgis-check-button";
+import { PromoBanner } from "@/components/promo-banner";
 import { CONTACTS, SITE } from "@/lib/constants";
 
 export function Hero() {
@@ -13,6 +14,7 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-[#07090d] pt-[72px]">
+      <PromoBanner />
       <div className="relative mx-auto w-full max-w-[1600px] bg-[#0a0a0a]">
         <motion.div
           initial={reduce ? false : { opacity: 0, scale: 1.02 }}
