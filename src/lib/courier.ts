@@ -1,5 +1,3 @@
-import { CONTACTS } from "@/lib/constants";
-
 export type CourierTariff = {
   id: "foot" | "auto" | "moto" | "cargo";
   title: string;
@@ -7,23 +5,21 @@ export type CourierTariff = {
   eyebrow: string;
   description: string;
   points: string[];
-  formUrl: string | null;
-  formIframe: string | null;
+  formUrl: string;
+  formIframe: string;
   cta: string;
 };
 
 /** Авторегистрация курьеров Яндекс Доставка через парк «Армада» */
 export const COURIER_FORMS = {
-  /** Пеший — ссылка на форму не передана; заявка через чат */
-  foot: null as string | null,
+  foot: "https://forms.fleet.yandex.ru/forms?ref_id=ef123188b1c54fea990b98ffa6042239",
   auto: "https://forms.fleet.yandex.ru/forms?ref_id=e93e6ce5f13146f59237826776d4bb99",
   moto: "https://forms.fleet.yandex.ru/forms?ref_id=b6bf266d480c4735a5a5f51a50cae478",
   cargo:
     "https://forms.fleet.yandex.ru/forms?ref_id=64925036a57f4e48941b3a25304f87da",
 } as const;
 
-function iframeOf(url: string | null): string | null {
-  if (!url) return null;
+function iframeOf(url: string): string {
   return `${url}${url.includes("?") ? "&" : "?"}iframe=true&lang=ru`;
 }
 
@@ -42,7 +38,7 @@ export const COURIER_TARIFFS: CourierTariff[] = [
     ],
     formUrl: COURIER_FORMS.foot,
     formIframe: iframeOf(COURIER_FORMS.foot),
-    cta: "Написать менеджеру",
+    cta: "Авторегистрация",
   },
   {
     id: "auto",
@@ -137,18 +133,3 @@ export const COURIER_KB = {
   parkSmz:
     "https://pro.yandex.ru/ru-ru/moskva/knowledge-base/delivery-auto/partners/delivery-reg",
 } as const;
-
-export function courierFootApplyMessage(): string {
-  return [
-    "Здравствуйте! Заявка с сайта park-armada.ru",
-    "",
-    "Тариф / услуга: Пеший курьер (парковый самозанятый)",
-    "Условия: Подключение к Яндекс Доставке через парк «Армада».",
-    "",
-    "Прошу связаться со мной для оформления.",
-  ].join("\n");
-}
-
-export function courierTelegramUrl(message: string): string {
-  return `${CONTACTS.telegram}?text=${encodeURIComponent(message)}`;
-}

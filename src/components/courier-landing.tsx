@@ -17,12 +17,9 @@ import {
   COURIER_KB,
   COURIER_STEPS,
   COURIER_TARIFFS,
-  courierFootApplyMessage,
-  courierTelegramUrl,
   type CourierTariff,
 } from "@/lib/courier";
 import { CONTACTS, SITE } from "@/lib/constants";
-import { openMessenger } from "@/lib/apply";
 
 const ICONS = {
   foot: PersonStanding,
@@ -34,10 +31,6 @@ const ICONS = {
 function CourierCard({ tariff }: { tariff: CourierTariff }) {
   const [showForm, setShowForm] = useState(false);
   const Icon = ICONS[tariff.id];
-
-  const onFootApply = () => {
-    openMessenger(courierTelegramUrl(courierFootApplyMessage()));
-  };
 
   return (
     <article
@@ -74,59 +67,38 @@ function CourierCard({ tariff }: { tariff: CourierTariff }) {
         ))}
       </ul>
 
-      {tariff.formUrl ? (
-        <>
-          <Button asChild shine className="mt-6 w-full" size="lg">
-            <Link
-              href={tariff.formUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {tariff.cta}
-              <ExternalLink className="h-4 w-4" aria-hidden />
-            </Link>
-          </Button>
-          {tariff.formIframe ? (
-            <div className="mt-3">
-              {showForm ? (
-                <div className="overflow-hidden rounded-xl border border-border bg-background/40">
-                  <iframe
-                    title={`Форма: ${tariff.title}`}
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                    src={tariff.formIframe}
-                    className="h-[420px] w-full max-w-full sm:h-[500px]"
-                    loading="lazy"
-                  />
-                </div>
-              ) : (
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="w-full"
-                  onClick={() => setShowForm(true)}
-                >
-                  Открыть форму на сайте
-                </Button>
-              )}
-            </div>
-          ) : null}
-        </>
-      ) : (
-        <>
+      <Button asChild shine className="mt-6 w-full" size="lg">
+        <Link
+          href={tariff.formUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {tariff.cta}
+          <ExternalLink className="h-4 w-4" aria-hidden />
+        </Link>
+      </Button>
+      <div className="mt-3">
+        {showForm ? (
+          <div className="overflow-hidden rounded-xl border border-border bg-background/40">
+            <iframe
+              title={`Форма: ${tariff.title}`}
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+              src={tariff.formIframe}
+              className="h-[420px] w-full max-w-full sm:h-[500px]"
+              loading="lazy"
+            />
+          </div>
+        ) : (
           <Button
             type="button"
-            shine
-            className="mt-6 w-full"
-            size="lg"
-            onClick={onFootApply}
+            variant="outline"
+            className="w-full"
+            onClick={() => setShowForm(true)}
           >
-            {tariff.cta}
+            Открыть форму на сайте
           </Button>
-          <div className="mt-3">
-            <ContactButtons showLabels size="sm" />
-          </div>
-        </>
-      )}
+        )}
+      </div>
     </article>
   );
 }
@@ -219,7 +191,7 @@ export function CourierLanding() {
               id="courier-tariffs-heading"
               eyebrow="Тарифы"
               title="Выберите формат курьера"
-              description="Авторегистрация для авто, мото и грузового. Пеший курьер — заявка менеджеру (парковый самозанятый)."
+              description="Авторегистрация онлайн для пешего, авто, мото и грузового курьера."
             />
           </FadeIn>
 
