@@ -55,7 +55,7 @@ const TARIFFS = [
     price: "3 варианта",
     text: "Для водителей, которым важно официальное трудоустройство по ТК РФ: стабильность, пособия, больничные, защита прав.",
     cta: "Узнать подробнее",
-    href: "/#labor-contract",
+    href: "/taxi/#labor-contract",
     iframe: null as string | null,
     iframeTitle: "",
     featured: false,

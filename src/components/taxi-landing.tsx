@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Car, CheckCircle2, ExternalLink, Landmark, Sparkles } from "lucide-react";
 import { DestinationHero } from "@/components/destination-hero";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
+import { LaborContract } from "@/components/labor-contract";
 import { Button } from "@/components/ui/button";
 import { ContactButtons } from "@/components/contact-buttons";
 import { FORMS, CONTACTS } from "@/lib/constants";
@@ -43,7 +44,7 @@ const FORMATS = [
     title: "Трудовой договор",
     value: "3 формата",
     text: "Официальное оформление, налоги платит парк.",
-    href: "/#labor-contract",
+    href: "#labor-contract",
   },
 ] as const;
 
@@ -138,7 +139,9 @@ export function TaxiLanding() {
                       target={format.href.startsWith("http") ? "_blank" : undefined}
                       rel={format.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     >
-                      {format.href.startsWith("http") ? "Авторегистрация" : "Узнать условия"}
+                      {format.href.startsWith("http")
+                        ? "Авторегистрация"
+                        : "Узнать подробнее"}
                     </Link>
                   </Button>
                 </article>
@@ -150,6 +153,8 @@ export function TaxiLanding() {
           </div>
         </div>
       </section>
+
+      <LaborContract />
     </div>
   );
 }

@@ -41,7 +41,7 @@ export const DIRECT_LANDINGS = [
   },
   {
     campaign: "П4_Поиск_Трудовой",
-    path: "/#labor-contract",
+    path: "/taxi/#labor-contract",
     utm_campaign: "p4_trudovoj",
   },
   {

@@ -277,7 +277,7 @@ export function buildJsonLd() {
             name: "Трудовой договор",
             description:
               "Официальное трудоустройство по ТК РФ для работы в Яндекс Такси. Три варианта комиссии.",
-            url: `${SITE.url}/#labor-contract`,
+            url: `${SITE.url}/taxi/#labor-contract`,
           },
           {
             "@type": "Offer",

@@ -78,7 +78,7 @@ export function LaborContract() {
             <StaggerItem key={opt.id}>
               <article
                 id={opt.id}
-                className="glass flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
+                className="premium-card flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="relative aspect-[16/10] w-full overflow-hidden">
                   <Image
