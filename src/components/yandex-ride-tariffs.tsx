@@ -10,23 +10,26 @@ const YANDEX_TARIFF_GROUPS = [
   {
     key: "economy",
     icon: Car,
-    title: "Эконом",
-    subtitle: "Базовые тарифы для повседневных заказов",
+    title: "Эконом и Комфорт",
+    subtitle: "Старт для большинства водителей на линии",
     items: ["Эконом", "Комфорт"],
+    href: "/#tariffs" as string | null,
   },
   {
     key: "premium",
     icon: Sparkles,
-    title: "Премиальные тарифы",
-    subtitle: "Бизнес-класс и премиум-сегмент",
+    title: "Премиальные",
+    subtitle: "Выше чек — бизнес и премиум-сегмент",
     items: ["Бизнес", "Ultima", "Premier", "Элит"],
+    href: "/#tariffs" as string | null,
   },
   {
     key: "delivery",
     icon: Package,
-    title: "Доставка и грузовой",
-    subtitle: "Перевозка вещей и грузов",
-    items: ["Доставка", "Грузовой"],
+    title: "Доставка и курьер",
+    subtitle: "Пеший, авто, мото, грузовой — отдельное направление",
+    items: ["Доставка", "Курьер", "Грузовой"],
+    href: "/courier/" as string | null,
   },
 ] as const;
 
@@ -41,9 +44,9 @@ export function YandexRideTariffs() {
         <FadeIn>
           <SectionHeading
             id="yandex-tariffs-heading"
-            eyebrow="Тарифы Яндекс Такси"
-            title="На каких тарифах можно работать"
-            description="После подключения к парку «Армада» выходите на линию в доступных классах Яндекс Такси. Проверьте авто в официальном классификаторе."
+            eyebrow="Шаг 3 · Классы заказов"
+            title="От Эконома до доставки и курьера"
+            description="Выберите класс работы. Для такси — проверьте авто в классификаторе, затем оформите тариф парка. Для доставки — перейдите на страницу курьеров."
           />
         </FadeIn>
 
@@ -52,7 +55,7 @@ export function YandexRideTariffs() {
             const Icon = group.icon;
             return (
               <StaggerItem key={group.key}>
-                <div className="h-full border-l-2 border-accent/50 pl-5">
+                <div className="flex h-full flex-col border-l-2 border-accent/50 pl-5">
                   <div className="flex items-center gap-2 text-accent">
                     <Icon className="h-5 w-5 shrink-0" aria-hidden />
                     <h3 className="font-display text-xl font-semibold text-foreground">
@@ -72,6 +75,16 @@ export function YandexRideTariffs() {
                       </li>
                     ))}
                   </ul>
+                  {group.href ? (
+                    <Link
+                      href={group.href}
+                      className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
+                    >
+                      {group.key === "delivery"
+                        ? "К тарифам курьера →"
+                        : "К оформлению в парке →"}
+                    </Link>
+                  ) : null}
                 </div>
               </StaggerItem>
             );
@@ -83,7 +96,7 @@ export function YandexRideTariffs() {
             asChild
             shine
             size="lg"
-            className="h-14 w-full max-w-3xl mx-auto flex text-base sm:text-lg shadow-glow"
+            className="mx-auto flex h-14 w-full max-w-3xl text-base shadow-glow sm:text-lg"
           >
             <Link
               href={CONTACTS.autoClassifier}
@@ -95,8 +108,13 @@ export function YandexRideTariffs() {
             </Link>
           </Button>
           <p className="mt-3 text-center text-xs text-muted-foreground">
-            Официальный список моделей Яндекс Про
+            Официальный список моделей Яндекс Про · затем оформите тариф ниже
           </p>
+          <div className="mt-6 flex justify-center">
+            <Button asChild variant="outline" size="lg">
+              <Link href="/#tariffs">Перейти к оформлению в парке</Link>
+            </Button>
+          </div>
         </FadeIn>
       </div>
     </section>

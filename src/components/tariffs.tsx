@@ -189,9 +189,9 @@ export function Tariffs() {
         <FadeIn>
           <SectionHeading
             id="tariffs-heading"
-            eyebrow="Тарифы"
-            title="Подключение к Яндекс Такси: тарифы таксопарка"
-            description="Форматы работы с парком «Армада» — удалённо по всей России: парковый самозанятый, парковый ИП, трудовой договор и курьеры Яндекс Доставки. Комиссия такси от 1,9%."
+            eyebrow="Шаг 4 · Оформление в парке"
+            title="Выберите формат подключения"
+            description="Самозанятый, ИП или трудовой договор — затем авторегистрация или заявка. Курьерам — отдельный блок и страница /courier/."
           />
         </FadeIn>
 
@@ -236,7 +236,9 @@ function CourierTeaser() {
         aria-hidden
       />
       <div className="relative">
-        <p className="text-sm font-medium text-accent">Яндекс Доставка</p>
+        <p className="text-sm font-medium text-accent">
+          Шаг 4b · Если выбрали доставку
+        </p>
         <h3
           id="courier-teaser-heading"
           className="mt-2 font-display text-2xl font-semibold text-foreground sm:text-3xl"
@@ -244,9 +246,8 @@ function CourierTeaser() {
           Курьер
         </h3>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-          Подключаем курьеров к Яндекс Доставке через парк «Армада»: пеший,
-          авто, мото и грузовой. Парковый самозанятый, авторегистрация и
-          поддержка в чате.
+          Пеший, авто, мото и грузовой — отдельная страница с тарифами и
+          авторегистрацией. Сначала направление «Доставка», затем регистрация.
         </p>
 
         <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

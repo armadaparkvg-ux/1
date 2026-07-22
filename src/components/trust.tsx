@@ -33,7 +33,11 @@ const FACTS = [
 
 export function Trust() {
   return (
-    <section className="relative py-20 sm:py-24" aria-labelledby="trust-heading">
+    <section
+      id="about"
+      className="section-anchor relative py-20 sm:py-24"
+      aria-labelledby="trust-heading"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="relative mb-12 overflow-hidden rounded-3xl border border-border">
@@ -49,13 +53,13 @@ export function Trust() {
               <div className="absolute inset-0 flex items-end p-6 sm:p-10">
                 <div className="max-w-xl">
                   <p className="text-sm font-medium uppercase tracking-wide text-accent">
-                    Почему Армада
+                    Шаг 1 · О парке
                   </p>
                   <h2
                     id="trust-heading"
                     className="mt-2 font-display text-2xl font-semibold text-foreground sm:text-3xl text-balance"
                   >
-                    Таксопарк «Армада» — цифры, которым доверяют водители
+                    Знакомство с таксопарком «Армада»
                   </h2>
                 </div>
               </div>
@@ -65,8 +69,16 @@ export function Trust() {
 
         <FadeIn delay={0.05}>
           <p className="mx-auto max-w-3xl text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Прозрачные условия подключения к Яндекс Такси, быстрая активация и
-            поддержка на каждом этапе.
+            Подключаем к{" "}
+            <strong className="font-medium text-foreground/90">
+              Яндекс Такси
+            </strong>{" "}
+            и{" "}
+            <strong className="font-medium text-foreground/90">
+              Яндекс Доставке
+            </strong>
+            : прозрачные условия, быстрая активация и поддержка на каждом шаге
+            до регистрации.
           </p>
         </FadeIn>
 

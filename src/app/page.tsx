@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/hero";
 import { Trust } from "@/components/trust";
-import { Tariffs } from "@/components/tariffs";
+import { HowItWorks } from "@/components/how-it-works";
+import { Directions } from "@/components/directions";
 import { YandexRideTariffs } from "@/components/yandex-ride-tariffs";
+import { Tariffs } from "@/components/tariffs";
+import { TariffCompare } from "@/components/tariff-compare";
+import { TariffQuiz } from "@/components/tariff-quiz";
 import { LaborContract } from "@/components/labor-contract";
-import { MaxChannel } from "@/components/max-channel";
+import { Requirements } from "@/components/requirements";
 import { Services } from "@/components/services";
 import { Taxes } from "@/components/taxes";
-import { Requirements } from "@/components/requirements";
-import { HowItWorks } from "@/components/how-it-works";
-import { TariffQuiz } from "@/components/tariff-quiz";
-import { TariffCompare } from "@/components/tariff-compare";
 import { Reviews } from "@/components/reviews";
+import { MaxChannel } from "@/components/max-channel";
 import { FunnyVideo } from "@/components/funny-video";
 import { Faq } from "@/components/faq";
 import { ApplySection } from "@/components/apply-section";
@@ -36,6 +37,11 @@ export const metadata: Metadata = {
 
 const jsonLd = buildJsonLd();
 
+/**
+ * Воронка главной (см. docs/ux-funnel-audit.md):
+ * О парке → Как подключиться → Направления → Классы → Оформление →
+ * Сравнение/квиз → детали → отзывы → заявка.
+ */
 export default function HomePage() {
   return (
     <>
@@ -46,22 +52,24 @@ export default function HomePage() {
       <Hero />
       <Trust />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
-      <TariffQuiz />
+      <HowItWorks />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
-      <Tariffs />
+      <Directions />
+      <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <YandexRideTariffs />
+      <Tariffs />
       <TariffCompare />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
+      <TariffQuiz />
+      <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <LaborContract />
-      <MaxChannel />
+      <Requirements />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <Services />
       <Taxes />
-      <Requirements />
-      <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
-      <HowItWorks />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <Reviews />
+      <MaxChannel />
       <FunnyVideo />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <Faq />

@@ -19,7 +19,7 @@ export function ApplySection() {
         <FadeIn>
           <SectionHeading
             id="apply-heading"
-            eyebrow="Связь"
+            eyebrow="Финал · Заявка"
             title="Оставить заявку: мессенджер или звонок"
             description="Без длинных анкет: Telegram, MAX или телефон. Можно сначала пройти квиз — текст с тарифом подставится сам."
           />

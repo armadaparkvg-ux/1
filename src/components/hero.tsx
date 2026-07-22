@@ -49,7 +49,7 @@ export function Hero() {
             {SITE.fullName}
           </p>
           <h1 className="mt-2 font-display text-2xl font-semibold tracking-tight text-foreground text-balance sm:text-3xl lg:text-4xl">
-            Подключение к Яндекс Такси на выгодных условиях
+            Подключение к Яндекс Такси и Доставке
           </h1>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground sm:text-base">
             Удалённо по всей России · комиссия от 1,9% · активация 1,5–2 часа ·{" "}
@@ -73,13 +73,21 @@ export function Hero() {
               shine
               className="shadow-glow sm:min-w-[240px]"
             >
-              <Link href="/#quiz">Подобрать тариф за 1 минуту</Link>
+              <Link href="/#directions">Выбрать направление</Link>
             </Button>
-            <FgisCheckButton size="lg" className="sm:min-w-[240px]" />
             <Button
               asChild
               size="lg"
               variant="secondary"
+              shine
+              className="sm:min-w-[220px]"
+            >
+              <Link href="/#about">Узнать о парке</Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
               shine
               className="sm:min-w-[220px]"
             >
@@ -90,6 +98,7 @@ export function Hero() {
             </Button>
           </div>
           <div className="flex flex-col items-stretch justify-center gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+            <FgisCheckButton size="default" className="sm:min-w-[200px]" />
             <Button asChild size="default" variant="outline">
               <Link
                 href={CONTACTS.telegram}

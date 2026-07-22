@@ -48,7 +48,7 @@ export function TariffCompare() {
         <FadeIn>
           <SectionHeading
             id="compare-heading"
-            eyebrow="Сравнение"
+            eyebrow="После шага 4 · Сравнение"
             title="Какой тариф выбрать"
             description="Коротко: у всех форматов моментальный вывод; самозанятый и ИП — комиссия 1,9%; трудовой — официально, налоги платит парк."
           />

@@ -20,7 +20,7 @@ export const PROMO = {
   daysFree: 3,
   text: "3 дня без комиссии парка — жми «Подключиться»!",
   ctaLabel: "Подключиться",
-  href: "/#apply",
+  href: "/#directions",
 } as const;
 
 export const FORMS = {
@@ -35,24 +35,24 @@ export const FORMS = {
 
 /** Absolute hash links so they work from /privacy, /offer, etc. */
 export const NAV_LINKS = [
-  { href: "/#quiz", label: "Квиз" },
-  { href: "/#tariffs", label: "Тарифы" },
+  { href: "/#about", label: "О парке" },
+  { href: "/#directions", label: "Направления" },
+  { href: "/#yandex-tariffs", label: "Классы" },
+  { href: "/#tariffs", label: "Оформление" },
   { href: "/courier/", label: "Курьеры" },
-  { href: "/#services", label: "Доп. услуги" },
-  { href: "/blog/", label: "Статьи" },
-  { href: "/#reviews", label: "Отзывы" },
-  { href: "/#faq", label: "FAQ" },
+  { href: "/#quiz", label: "Квиз" },
+  { href: "/#apply", label: "Заявка" },
   { href: "/#contacts", label: "Контакты" },
 ] as const;
 
 export const FOOTER_LINKS = [
-  { href: "/#quiz", label: "Подобрать тариф" },
-  { href: "/#tariffs", label: "Подключение к Яндекс Такси" },
+  { href: "/#about", label: "О парке" },
+  { href: "/#directions", label: "Такси или доставка" },
+  { href: "/#tariffs", label: "Оформление в парке" },
   { href: "/courier/", label: "Курьеры Яндекс Доставка" },
-  { href: "/blog/", label: "Полезные статьи" },
-  { href: "/#services", label: "Лицензия такси и ОСГОП" },
-  { href: "/#reviews", label: "Отзывы" },
+  { href: "/#quiz", label: "Подобрать тариф" },
   { href: "/#apply", label: "Оставить заявку" },
+  { href: "/#services", label: "Лицензия такси и ОСГОП" },
 ] as const;
 
 export const LABOR_OPTIONS = [
@@ -80,9 +80,9 @@ export const SITE = {
   name: "Армада",
   fullName: "Таксопарк «Армада»",
   domain: "park-armada.ru",
-  title: "Подключение к Яндекс Такси — таксопарк «Армада»",
+  title: "Подключение к Яндекс Такси и Доставке — таксопарк «Армада»",
   description:
-    "Подключение к Яндекс Такси удалённо по всей России. Самозанятый и ИП от 1,9%, трудовой договор, лицензия ФГИС, ОСГОП. Активация 1,5–2 часа.",
+    "Такси и доставка через парк «Армада»: от Эконома до курьера. Самозанятый и ИП от 1,9%, трудовой договор, авторегистрация. Удалённо по России.",
   url: "https://park-armada.ru",
 } as const;
 

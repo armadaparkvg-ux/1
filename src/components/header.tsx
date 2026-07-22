@@ -62,7 +62,7 @@ export function Header() {
           <div className="hidden items-center gap-2 sm:flex">
             <IconContactLinks />
             <Button asChild shine size="sm" className="hidden lg:inline-flex">
-              <Link href="/#quiz">Подобрать тариф</Link>
+              <Link href="/#directions">Выбрать направление</Link>
             </Button>
           </div>
 
