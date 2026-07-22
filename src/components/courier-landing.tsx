@@ -1,18 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import {
   Bike,
   Car,
-  ExternalLink,
   Package,
   PersonStanding,
 } from "lucide-react";
+import Link from "next/link";
+import { DestinationHero } from "@/components/destination-hero";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
-import { Button } from "@/components/ui/button";
+import { DualPathActions } from "@/components/funnel-actions";
 import { ContactButtons } from "@/components/contact-buttons";
+import { Button } from "@/components/ui/button";
 import {
   COURIER_BENEFITS,
   COURIER_KB,
@@ -20,7 +19,7 @@ import {
   COURIER_TARIFFS,
   type CourierTariff,
 } from "@/lib/courier";
-import { CONTACTS, SITE } from "@/lib/constants";
+import { CONTACTS } from "@/lib/constants";
 
 const ICONS = {
   foot: PersonStanding,
@@ -30,7 +29,6 @@ const ICONS = {
 } as const;
 
 function CourierCard({ tariff }: { tariff: CourierTariff }) {
-  const [showForm, setShowForm] = useState(false);
   const Icon = ICONS[tariff.id];
 
   return (
@@ -58,48 +56,19 @@ function CourierCard({ tariff }: { tariff: CourierTariff }) {
 
       <ul className="mt-4 flex-1 space-y-2">
         {tariff.points.map((point) => (
-          <li
-            key={point}
-            className="flex gap-2 text-sm text-foreground/85"
-          >
+          <li key={point} className="flex gap-2 text-sm text-foreground/85">
             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
             {point}
           </li>
         ))}
       </ul>
 
-      <Button asChild shine className="mt-6 w-full" size="lg">
-        <Link
-          href={tariff.formUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {tariff.cta}
-          <ExternalLink className="h-4 w-4" aria-hidden />
-        </Link>
-      </Button>
-      <div className="mt-3">
-        {showForm ? (
-          <div className="overflow-hidden rounded-xl border border-border bg-background/40">
-            <iframe
-              title={`Форма: ${tariff.title}`}
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-              src={tariff.formIframe}
-              className="h-[420px] w-full max-w-full sm:h-[500px]"
-              loading="lazy"
-            />
-          </div>
-        ) : (
-          <Button
-            type="button"
-            variant="outline"
-            className="w-full"
-            onClick={() => setShowForm(true)}
-          >
-            Открыть форму на сайте
-          </Button>
-        )}
-      </div>
+      <DualPathActions
+        registerHref={tariff.formUrl}
+        registerLabel={tariff.cta}
+        iframeSrc={tariff.formIframe}
+        iframeTitle={`Форма: ${tariff.title}`}
+      />
     </article>
   );
 }
@@ -107,60 +76,29 @@ function CourierCard({ tariff }: { tariff: CourierTariff }) {
 export function CourierLanding() {
   return (
     <div className="pb-20">
-      <section className="relative isolate overflow-hidden border-b border-border bg-[#080b11] pt-28 pb-14">
-        <Image
-          src="/images/delivery-premium-hero.webp"
-          alt="Курьер и транспорт для работы в Яндекс Доставке"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-60"
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#07090d] via-[#07090d]/88 to-[#07090d]/25"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07090d] via-transparent to-[#07090d]/35"
-          aria-hidden
-        />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-sm font-medium uppercase tracking-wide text-accent">
-            {SITE.fullName} · Яндекс Доставка
-          </p>
-          <h1 className="mt-3 max-w-3xl font-display text-3xl font-semibold tracking-tight text-foreground text-balance sm:text-4xl lg:text-5xl">
-            Подключение курьеров к Яндекс Доставке
-          </h1>
-          <p className="mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Пеший, авто, мото и грузовой — удалённо через парк «Армада».
-            Парковый самозанятый, авторегистрация и поддержка{" "}
-            {CONTACTS.hours}.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Button asChild shine size="lg">
-              <Link href="#courier-tariffs">Выбрать тариф</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link
-                href={CONTACTS.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
+      <DestinationHero
+        eyebrow="Яндекс Доставка · парк «Армада»"
+        title="Подключение курьеров к Яндекс Доставке"
+        description="Последовательность: как подключиться → выбрать тариф → авторегистрация или поддержка парка. Пеший, авто, мото и грузовой — удалённо."
+        image="/images/delivery-premium-hero.webp"
+        imageAlt="Курьер и транспорт для работы в Яндекс Доставке"
+        primaryHref="#courier-steps"
+        primaryLabel="Начать: как подключиться"
+        accent="emerald"
+      >
+        <ol className="grid gap-2 sm:grid-cols-3">
+          {["1. 4 шага", "2. Тариф курьера", "3. Регистрация или чат"].map(
+            (item) => (
+              <li
+                key={item}
+                className="inline-flex items-center gap-2 rounded-xl border border-border bg-[#0b111c]/75 px-3 py-2 text-sm font-medium text-foreground/90 backdrop-blur"
               >
-                Написать в Telegram
-              </Link>
-            </Button>
-            <Button asChild variant="emerald" size="lg">
-              <Link
-                href={CONTACTS.max}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Сообщение в MAX
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+                {item}
+              </li>
+            )
+          )}
+        </ol>
+      </DestinationHero>
 
       <section className="py-16 sm:py-20" aria-labelledby="courier-benefits">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -172,7 +110,10 @@ export function CourierLanding() {
               description="По официальной базе знаний Яндекс Про: приоритет, официальный доход и выплаты через парк."
             />
           </FadeIn>
-          <Stagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
+          <Stagger
+            className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+            stagger={0.08}
+          >
             {COURIER_BENEFITS.map((item) => (
               <StaggerItem key={item.title}>
                 <div className="h-full border-l-2 border-accent/50 pl-4">
@@ -190,17 +131,52 @@ export function CourierLanding() {
       </section>
 
       <section
-        id="courier-tariffs"
+        id="courier-steps"
         className="section-anchor py-16 sm:py-20"
+        aria-labelledby="courier-steps-heading"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <SectionHeading
+              id="courier-steps-heading"
+              eyebrow="Шаг 1 · Как подключиться"
+              title="4 шага до заказов"
+              description="Сначала поймите путь, затем выберите тариф и пройдите авторегистрацию."
+            />
+          </FadeIn>
+          <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {COURIER_STEPS.map((step, i) => (
+              <li key={step.title} className="premium-card rounded-2xl p-5">
+                <p className="font-display text-3xl font-bold text-accent/80">
+                  {i + 1}
+                </p>
+                <h3 className="mt-2 font-display text-lg font-semibold text-foreground">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-sm text-muted-foreground">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-8 flex justify-center">
+            <Button asChild shine size="lg">
+              <Link href="#courier-tariffs">Далее: выбрать тариф →</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="courier-tariffs"
+        className="section-anchor premium-grid relative overflow-hidden py-16 sm:py-20"
         aria-labelledby="courier-tariffs-heading"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <SectionHeading
               id="courier-tariffs-heading"
-              eyebrow="Тарифы"
+              eyebrow="Шаг 2 · Тариф"
               title="Выберите формат курьера"
-              description="Авторегистрация онлайн для пешего, авто, мото и грузового курьера."
+              description="Шаг 3 — авторегистрация онлайн или поддержка парка в чате."
             />
           </FadeIn>
 
@@ -214,32 +190,6 @@ export function CourierLanding() {
               </StaggerItem>
             ))}
           </Stagger>
-        </div>
-      </section>
-
-      <section className="py-16 sm:py-20" aria-labelledby="courier-steps">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <FadeIn>
-            <SectionHeading
-              id="courier-steps"
-              eyebrow="Как подключиться"
-              title="4 шага до заказов"
-              description="Короткий путь от заявки до линии в Яндекс Про."
-            />
-          </FadeIn>
-          <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {COURIER_STEPS.map((step, i) => (
-              <li key={step.title} className="relative">
-                <p className="font-display text-3xl font-bold text-accent/80">
-                  {i + 1}
-                </p>
-                <h3 className="mt-2 font-display text-lg font-semibold text-foreground">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">{step.text}</p>
-              </li>
-            ))}
-          </ol>
         </div>
       </section>
 
@@ -280,8 +230,8 @@ export function CourierLanding() {
               </Link>
             </p>
             <p className="mt-6">
-              <Link href="/#tariffs" className="text-sm text-accent hover:underline">
-                ← К тарифам такси на главной
+              <Link href="/taxi/" className="text-sm text-accent hover:underline">
+                ← К подключению в Яндекс Такси
               </Link>
             </p>
           </FadeIn>

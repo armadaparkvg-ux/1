@@ -54,7 +54,7 @@ export function Contacts() {
               </div>
 
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg" variant="outline" shine className="flex-1">
+                <Button asChild size="lg" variant="outline" pulse className="flex-1">
                   <Link
                     href={CONTACTS.telegram}
                     target="_blank"
@@ -64,7 +64,7 @@ export function Contacts() {
                     Написать в Telegram
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="emerald" shine className="flex-1">
+                <Button asChild size="lg" variant="emerald" pulse className="flex-1">
                   <Link
                     href={CONTACTS.max}
                     target="_blank"

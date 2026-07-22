@@ -138,7 +138,7 @@ export function ApplyProvider({ children }: { children: ReactNode }) {
                 type="button"
                 size="lg"
                 variant="outline"
-                shine
+                pulse
                 className="w-full justify-center"
                 onClick={openTelegram}
               >
@@ -149,7 +149,7 @@ export function ApplyProvider({ children }: { children: ReactNode }) {
                 type="button"
                 size="lg"
                 variant="emerald"
-                shine
+                pulse
                 className="w-full justify-center"
                 onClick={openMax}
               >

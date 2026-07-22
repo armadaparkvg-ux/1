@@ -13,6 +13,7 @@ type ContactButtonsProps = {
   compact?: boolean;
 };
 
+/** Premium pulsing chat / contact CTAs (distinct from shimmer registration). */
 export function ContactButtons({
   className,
   size = "default",
@@ -61,7 +62,7 @@ export function ContactButtons({
             asChild
             variant={item.variant}
             size={compact ? "sm" : size}
-            shine
+            pulse
           >
             <Link
               href={item.href}
@@ -85,18 +86,21 @@ export function IconContactLinks({ className }: { className?: string }) {
       href: CONTACTS.phoneHref,
       label: `Позвонить ${CONTACTS.phoneDisplay}`,
       icon: Phone,
+      pulse: "animate-chat-pulse-amber",
     },
     {
       href: CONTACTS.telegram,
       label: "Telegram",
       icon: Send,
       external: true,
+      pulse: "animate-chat-pulse-outline",
     },
     {
       href: CONTACTS.max,
       label: "MAX",
       icon: MessageCircle,
       external: true,
+      pulse: "animate-chat-pulse",
     },
   ];
 
@@ -111,7 +115,10 @@ export function IconContactLinks({ className }: { className?: string }) {
             target={item.external ? "_blank" : undefined}
             rel={item.external ? "noopener noreferrer" : undefined}
             aria-label={item.label}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-accent"
+            className={cn(
+              "inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-accent",
+              item.pulse
+            )}
           >
             <Icon className="h-4 w-4" />
           </Link>

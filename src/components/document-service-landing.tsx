@@ -2,8 +2,7 @@ import Link from "next/link";
 import { CheckCircle2, FileCheck2, ShieldCheck } from "lucide-react";
 import { DestinationHero } from "@/components/destination-hero";
 import { FadeIn, SectionHeading } from "@/components/fade-in";
-import { ApplyButton } from "@/components/messenger-apply";
-import { ContactButtons } from "@/components/contact-buttons";
+import { DualPathActions } from "@/components/funnel-actions";
 import { FgisCheckButton } from "@/components/fgis-check-button";
 import { CONTACTS } from "@/lib/constants";
 
@@ -14,7 +13,7 @@ const CONTENT = {
     eyebrow: "Документы · ФГИС",
     title: "Лицензия такси и реестр ФГИС",
     description:
-      "Поможем внести автомобиль в реестр такси для легальной работы. Оформление удалённо, оплата по факту выполненной работы.",
+      "Понятный путь: что входит → заявка через поддержку парка. Оформление удалённо, оплата по факту выполненной работы.",
     price: "3 500 ₽",
     priceHint: "на 5 лет",
     icon: FileCheck2,
@@ -29,7 +28,7 @@ const CONTENT = {
     eyebrow: "Документы · страхование",
     title: "ОСГОП для работы в такси",
     description:
-      "Оформляем обязательное страхование ОСГОП. Подскажем по документам и ведём оформление через парк «Армада».",
+      "Понятный путь: что входит → заявка через поддержку парка. Подскажем по документам и проведём оформление.",
     price: "3 400 ₽",
     priceHint: "на 1 год",
     icon: ShieldCheck,
@@ -55,12 +54,15 @@ export function DocumentServiceLanding({ type }: { type: ServiceType }) {
         image="/images/legal-documents-hero.webp"
         imageAlt="Документы и автомобиль для оформления услуг таксопарка"
         primaryHref="#apply-service"
-        primaryLabel="Оставить заявку"
+        primaryLabel="Перейти к заявке"
       >
         <div className="inline-flex items-center gap-3 rounded-2xl border border-accent/25 bg-[#0b111c]/75 px-4 py-3 backdrop-blur">
           <Icon className="h-5 w-5 text-accent" aria-hidden />
           <p className="font-display text-xl font-semibold text-foreground">
-            {content.price} <span className="text-sm font-medium text-muted-foreground">{content.priceHint}</span>
+            {content.price}{" "}
+            <span className="text-sm font-medium text-muted-foreground">
+              {content.priceHint}
+            </span>
           </p>
         </div>
       </DestinationHero>
@@ -69,9 +71,9 @@ export function DocumentServiceLanding({ type }: { type: ServiceType }) {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <SectionHeading
-              eyebrow="Что входит"
+              eyebrow="Шаг 1 · Что входит"
               title="Понятный путь к оформлению"
-              description="Соберите документы, оставьте заявку — менеджер уточнит детали и проведёт по следующим шагам."
+              description="Соберите документы, затем оставьте заявку через поддержку парка — менеджер уточнит детали."
             />
           </FadeIn>
           <FadeIn delay={0.08} className="mt-12">
@@ -80,12 +82,22 @@ export function DocumentServiceLanding({ type }: { type: ServiceType }) {
                 <Icon className="h-7 w-7" aria-hidden />
               </span>
               <div>
-                <p className="font-display text-3xl font-semibold text-foreground">{content.price}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{content.priceHint}</p>
+                <p className="font-display text-3xl font-semibold text-foreground">
+                  {content.price}
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {content.priceHint}
+                </p>
                 <ul className="mt-6 space-y-3">
                   {content.points.map((point) => (
-                    <li key={point} className="flex items-center gap-3 text-sm text-foreground/90">
-                      <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-glow" aria-hidden />
+                    <li
+                      key={point}
+                      className="flex items-center gap-3 text-sm text-foreground/90"
+                    >
+                      <CheckCircle2
+                        className="h-4 w-4 shrink-0 text-emerald-glow"
+                        aria-hidden
+                      />
                       {point}
                     </li>
                   ))}
@@ -96,26 +108,34 @@ export function DocumentServiceLanding({ type }: { type: ServiceType }) {
         </div>
       </section>
 
-      <section id="apply-service" className="section-anchor premium-grid relative overflow-hidden py-20 sm:py-24">
+      <section
+        id="apply-service"
+        className="section-anchor premium-grid relative overflow-hidden py-20 sm:py-24"
+      >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div className="premium-card rounded-3xl p-6 text-center sm:p-10">
-              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-accent">Заявка на услугу</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-accent">
+                Шаг 2 · Заявка через парк
+              </p>
               <h2 className="mt-3 font-display text-3xl font-semibold text-foreground">
-                Оформим через парк «Армада»
+                Оформим через поддержку «Армады»
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-                Напишите в удобный чат или позвоните. Консультация {CONTACTS.hours}.
+                Оставьте заявку — текст с выбранной услугой подготовим автоматически.
+                Или сразу напишите в чат / позвоните. {CONTACTS.hours}.
               </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <ApplyButton topic={content.topic} size="lg">
-                  Оставить заявку
-                </ApplyButton>
-                {type === "license" ? <FgisCheckButton size="lg" /> : null}
+              <div className="mx-auto mt-8 max-w-md text-left">
+                <DualPathActions
+                  applyTopic={content.topic}
+                  applyLabel="Оставить заявку через поддержку"
+                />
               </div>
-              <div className="mt-5 flex justify-center">
-                <ContactButtons showLabels size="sm" />
-              </div>
+              {type === "license" ? (
+                <div className="mt-6 flex justify-center">
+                  <FgisCheckButton size="lg" />
+                </div>
+              ) : null}
               <p className="mt-6 text-sm">
                 <Link href="/taxi/" className="text-accent hover:underline">
                   ← Перейти к подключению в такси

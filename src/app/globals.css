@@ -182,4 +182,12 @@ body {
   .btn-fgis span {
     animation: none !important;
   }
+
+  .animate-shine-loop,
+  .animate-chat-pulse,
+  .animate-chat-pulse-amber,
+  .animate-chat-pulse-outline,
+  .before\:animate-shine-loop {
+    animation: none !important;
+  }
 }

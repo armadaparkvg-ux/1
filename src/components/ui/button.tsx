@@ -38,21 +38,40 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  /** Premium continuous shimmer — for registration / primary funnel CTAs */
   shine?: boolean;
+  /** Premium soft pulse — for chat / messenger CTAs */
+  pulse?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { className, variant, size, asChild = false, shine = false, ...props },
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      shine = false,
+      pulse = false,
+      ...props
+    },
     ref
   ) => {
     const Comp = asChild ? Slot : "button";
+    const pulseClass =
+      variant === "emerald"
+        ? "animate-chat-pulse"
+        : variant === "outline"
+          ? "animate-chat-pulse-outline"
+          : "animate-chat-pulse-amber";
+
     return (
       <Comp
         className={cn(
           buttonVariants({ variant, size }),
           shine &&
-            "before:pointer-events-none before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/35 before:to-transparent before:opacity-0 before:content-[''] hover:before:animate-shine hover:before:opacity-100 focus-visible:before:animate-shine focus-visible:before:opacity-100",
+            "before:pointer-events-none before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/40 before:to-transparent before:opacity-100 before:content-[''] before:animate-shine-loop",
+          pulse && pulseClass,
           className
         )}
         ref={ref}

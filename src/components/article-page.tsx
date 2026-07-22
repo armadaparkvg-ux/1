@@ -45,7 +45,7 @@ export function ArticlePage({ article }: { article: Article }) {
             <Link href={article.ctaHref}>{article.ctaLabel ?? "На главную"}</Link>
           </Button>
         ) : null}
-        <Button asChild variant="outline">
+        <Button asChild variant="outline" pulse>
           <a href={CONTACTS.phoneHref}>Позвонить {CONTACTS.phoneDisplay}</a>
         </Button>
         <Button asChild variant="ghost">

@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
-import { ApplyButton } from "@/components/messenger-apply";
-import { ContactButtons } from "@/components/contact-buttons";
+import { DualPathActions } from "@/components/funnel-actions";
 import { LABOR_OPTIONS } from "@/lib/constants";
 import type { ApplyTopic } from "@/lib/apply";
 
@@ -67,9 +66,9 @@ export function LaborContract() {
         <FadeIn>
           <SectionHeading
             id="labor-heading"
-            eyebrow="Трудовой договор"
-            title="Трудовой договор в Яндекс Такси — три варианта"
-            description="Официальное оформление по ТК РФ для работы в Яндекс Такси. Условия парка стандартны — меняется процент комиссии и схема списаний на налоги."
+            eyebrow="Шаг 3 · Трудовой договор"
+            title="Выберите один из трёх форматов"
+            description="Авторегистрации для трудового договора нет — оформление только через поддержку парка. Выберите вариант и отправьте заявку в чат."
           />
         </FadeIn>
 
@@ -109,12 +108,11 @@ export function LaborContract() {
                       </p>
                     ))}
                   </div>
-                  <ApplyButton topic={opt.topic} className="mt-6 w-full">
-                    Оформить заявку на этот вариант
-                  </ApplyButton>
-                  <div className="mt-4">
-                    <ContactButtons showLabels size="sm" />
-                  </div>
+                  <DualPathActions
+                    applyTopic={opt.topic}
+                    applyLabel="Оформить через поддержку парка"
+                    chats={false}
+                  />
                 </div>
               </article>
             </StaggerItem>

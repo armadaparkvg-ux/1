@@ -121,22 +121,16 @@ export function Hero() {
             >
               <Link href="/#about">Узнать о парке</Link>
             </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              shine
-              className="sm:min-w-[220px]"
-            >
-              <a href={CONTACTS.phoneHref}>
-                <Phone className="h-4 w-4" aria-hidden />
-                Позвонить {CONTACTS.phoneDisplay}
-              </a>
-            </Button>
           </div>
           <div className="flex flex-col items-stretch justify-center gap-2 sm:flex-row sm:flex-wrap sm:items-center">
             <FgisCheckButton size="default" className="sm:min-w-[200px]" />
-            <Button asChild size="default" variant="outline">
+            <Button asChild size="default" variant="secondary" pulse>
+              <a href={CONTACTS.phoneHref}>
+                <Phone className="h-4 w-4" aria-hidden />
+                Позвонить
+              </a>
+            </Button>
+            <Button asChild size="default" variant="outline" pulse>
               <Link
                 href={CONTACTS.telegram}
                 target="_blank"
@@ -146,7 +140,7 @@ export function Hero() {
                 Telegram
               </Link>
             </Button>
-            <Button asChild size="default" variant="emerald">
+            <Button asChild size="default" variant="emerald" pulse>
               <Link
                 href={CONTACTS.max}
                 target="_blank"

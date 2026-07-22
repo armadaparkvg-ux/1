@@ -65,6 +65,34 @@ const config: Config = {
           "0%, 100%": { transform: "scale(1)", opacity: "1" },
           "50%": { transform: "scale(1.08)", opacity: "0.85" },
         },
+        "chat-pulse": {
+          "0%, 100%": {
+            boxShadow:
+              "0 0 0 0 rgba(16, 185, 129, 0.45), 0 0 18px -6px rgba(16, 185, 129, 0.35)",
+          },
+          "50%": {
+            boxShadow:
+              "0 0 0 8px rgba(16, 185, 129, 0), 0 0 28px -4px rgba(16, 185, 129, 0.55)",
+          },
+        },
+        "chat-pulse-amber": {
+          "0%, 100%": {
+            boxShadow:
+              "0 0 0 0 rgba(245, 158, 11, 0.4), 0 0 18px -6px rgba(245, 158, 11, 0.3)",
+          },
+          "50%": {
+            boxShadow:
+              "0 0 0 8px rgba(245, 158, 11, 0), 0 0 28px -4px rgba(245, 158, 11, 0.5)",
+          },
+        },
+        "chat-pulse-outline": {
+          "0%, 100%": {
+            boxShadow: "0 0 0 0 rgba(245, 158, 11, 0.35)",
+          },
+          "50%": {
+            boxShadow: "0 0 0 7px rgba(245, 158, 11, 0)",
+          },
+        },
         "fgis-glow": {
           "0%, 100%": {
             boxShadow:
@@ -98,6 +126,9 @@ const config: Config = {
         shine: "shine 0.75s ease-out",
         "shine-loop": "shine-loop 2.2s ease-in-out infinite",
         "pulse-soft": "pulse-soft 2.4s ease-in-out infinite",
+        "chat-pulse": "chat-pulse 2.2s ease-in-out infinite",
+        "chat-pulse-amber": "chat-pulse-amber 2.2s ease-in-out infinite",
+        "chat-pulse-outline": "chat-pulse-outline 2.2s ease-in-out infinite",
         "fgis-glow": "fgis-glow 1.6s ease-in-out infinite",
         "fgis-gradient": "fgis-gradient 2.8s ease infinite",
         "fgis-attention":
