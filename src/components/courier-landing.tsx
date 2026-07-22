@@ -35,10 +35,10 @@ function CourierCard({ tariff }: { tariff: CourierTariff }) {
   return (
     <article
       id={`courier-${tariff.id}`}
-      className="glass flex h-full flex-col rounded-2xl p-6 sm:p-7"
+      className="premium-card flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 sm:p-7"
     >
       <div className="flex items-center gap-3">
-        <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent/15 text-accent">
+        <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/20 bg-accent/15 text-accent">
           <Icon className="h-5 w-5" aria-hidden />
         </span>
         <div>

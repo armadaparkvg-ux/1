@@ -40,8 +40,8 @@ export function Trust() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
-          <div className="relative mb-12 overflow-hidden rounded-3xl border border-border">
-            <div className="relative aspect-[21/9] min-h-[180px] w-full sm:min-h-[220px]">
+          <div className="premium-card relative mb-12 overflow-hidden rounded-3xl">
+            <div className="relative aspect-[21/9] min-h-[210px] w-full sm:min-h-[270px]">
               <Image
                 src="/images/trust-city.jpg"
                 alt="Ночной город и работа такси"
@@ -49,15 +49,16 @@ export function Trust() {
                 sizes="100vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0b0f14]/90 via-[#0b0f14]/55 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#06080d]/95 via-[#0b0f14]/65 to-[#0b0f14]/10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f14]/60 to-transparent" />
               <div className="absolute inset-0 flex items-end p-6 sm:p-10">
                 <div className="max-w-xl">
-                  <p className="text-sm font-medium uppercase tracking-wide text-accent">
+                  <p className="inline-flex rounded-full border border-accent/30 bg-background/55 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-accent backdrop-blur">
                     Шаг 1 · О парке
                   </p>
                   <h2
                     id="trust-heading"
-                    className="mt-2 font-display text-2xl font-semibold text-foreground sm:text-3xl text-balance"
+                    className="mt-3 font-display text-3xl font-semibold text-foreground sm:text-4xl text-balance"
                   >
                     Знакомство с таксопарком «Армада»
                   </h2>
@@ -87,8 +88,8 @@ export function Trust() {
             const Icon = fact.icon;
             return (
               <StaggerItem key={fact.label}>
-                <article className="glass group h-full rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
-                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                <article className="premium-card group h-full rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1">
+                  <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
                     <Icon className="h-5 w-5" aria-hidden />
                   </div>
                   <p className="font-display text-3xl font-semibold text-foreground">

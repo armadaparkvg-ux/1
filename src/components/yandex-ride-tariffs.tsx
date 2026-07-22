@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Car, ExternalLink, Package, Sparkles } from "lucide-react";
+import { ArrowUpRight, Car, ExternalLink, Package, Sparkles } from "lucide-react";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { Button } from "@/components/ui/button";
 import { CONTACTS } from "@/lib/constants";
@@ -37,7 +37,7 @@ export function YandexRideTariffs() {
   return (
     <section
       id="yandex-tariffs"
-      className="section-anchor relative py-16 sm:py-20"
+      className="section-anchor relative py-20 sm:py-24"
       aria-labelledby="yandex-tariffs-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -55,9 +55,11 @@ export function YandexRideTariffs() {
             const Icon = group.icon;
             return (
               <StaggerItem key={group.key}>
-                <div className="flex h-full flex-col border-l-2 border-accent/50 pl-5">
+                <div className="premium-card group flex h-full flex-col rounded-2xl border-t-2 border-accent/60 p-6 transition-all duration-300">
                   <div className="flex items-center gap-2 text-accent">
-                    <Icon className="h-5 w-5 shrink-0" aria-hidden />
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10">
+                      <Icon className="h-5 w-5 shrink-0" aria-hidden />
+                    </span>
                     <h3 className="font-display text-xl font-semibold text-foreground">
                       {group.title}
                     </h3>
@@ -78,11 +80,12 @@ export function YandexRideTariffs() {
                   {group.href ? (
                     <Link
                       href={group.href}
-                      className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
+                      className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-accent transition-transform group-hover:translate-x-1"
                     >
                       {group.key === "delivery"
                         ? "К тарифам курьера →"
                         : "К оформлению в парке →"}
+                      <ArrowUpRight className="h-4 w-4" aria-hidden />
                     </Link>
                   ) : null}
                 </div>

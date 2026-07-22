@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Car, Package } from "lucide-react";
+import { ArrowRight, Car, CheckCircle2, Package } from "lucide-react";
 import { FadeIn, SectionHeading } from "@/components/fade-in";
 import { Button } from "@/components/ui/button";
 import { trackGoal } from "@/lib/metrika";
@@ -35,7 +35,7 @@ export function Directions() {
   return (
     <section
       id="directions"
-      className="section-anchor relative py-16 sm:py-20"
+      className="section-anchor premium-grid relative overflow-hidden py-20 sm:py-24"
       aria-labelledby="directions-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -48,24 +48,30 @@ export function Directions() {
           />
         </FadeIn>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
           {DIRECTIONS.map((item) => {
             const Icon = item.icon;
             return (
               <FadeIn key={item.key} delay={item.key === "delivery" ? 0.08 : 0}>
                 <article
-                  className={`relative flex h-full flex-col overflow-hidden border-l-2 pl-6 ${
+                  className={`premium-card relative flex h-full flex-col overflow-hidden rounded-3xl border-l-2 p-6 transition-all duration-300 sm:p-8 ${
                     item.accent === "emerald"
                       ? "border-emerald-glow"
                       : "border-accent"
                   }`}
                 >
+                  <div
+                    className={`pointer-events-none absolute -right-14 -top-14 h-48 w-48 rounded-full blur-3xl ${
+                      item.accent === "emerald" ? "bg-emerald-glow/15" : "bg-accent/15"
+                    }`}
+                    aria-hidden
+                  />
                   <div className="flex items-center gap-3">
                     <span
-                      className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${
+                      className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl border ${
                         item.accent === "emerald"
-                          ? "bg-emerald-glow/15 text-emerald-glow"
-                          : "bg-accent/15 text-accent"
+                          ? "border-emerald-glow/30 bg-emerald-glow/15 text-emerald-glow"
+                          : "border-accent/30 bg-accent/15 text-accent"
                       }`}
                     >
                       <Icon className="h-5 w-5" aria-hidden />
@@ -85,8 +91,15 @@ export function Directions() {
                       </h3>
                     </div>
                   </div>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  <p className="relative mt-5 flex-1 text-sm leading-relaxed text-muted-foreground sm:text-base">
                     {item.text}
+                  </p>
+                  <p className="relative mt-5 inline-flex items-center gap-2 text-xs font-medium text-foreground/80">
+                    <CheckCircle2
+                      className={`h-4 w-4 ${item.accent === "emerald" ? "text-emerald-glow" : "text-accent"}`}
+                      aria-hidden
+                    />
+                    Онлайн-подключение через парк «Армада»
                   </p>
                   <div className="mt-6">
                     <Button

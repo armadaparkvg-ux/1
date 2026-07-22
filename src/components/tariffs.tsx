@@ -73,12 +73,12 @@ function TariffCard({
   return (
     <article
       id={`tariff-${tariff.key}`}
-      className={`section-anchor glass relative flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
-        tariff.featured ? "ring-1 ring-accent/30" : ""
+      className={`section-anchor premium-card relative flex h-full flex-col overflow-hidden rounded-3xl transition-all duration-300 hover:-translate-y-1 ${
+        tariff.featured ? "ring-1 ring-accent/40 shadow-[0_0_45px_-28px_rgba(245,158,11,0.8)]" : ""
       }`}
     >
       {"badge" in tariff && tariff.badge ? (
-        <span className="absolute right-4 top-4 z-10 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
+        <span className="absolute right-4 top-4 z-10 rounded-full border border-white/20 bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground shadow-lg">
           {tariff.badge}
         </span>
       ) : null}
@@ -91,7 +91,7 @@ function TariffCard({
           sizes="(max-width: 1024px) 100vw, 33vw"
           className="object-cover transition-transform duration-500 hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0f1724] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0d1420] via-[#0d1420]/10 to-transparent" />
       </div>
 
       <div className="flex flex-1 flex-col p-6 sm:p-8">
@@ -104,7 +104,7 @@ function TariffCard({
         >
           {tariff.eyebrow}
         </p>
-        <h3 className="mt-2 font-display text-2xl font-semibold text-foreground">
+        <h3 className="mt-2 font-display text-2xl font-semibold tracking-tight text-foreground">
           {tariff.title}
         </h3>
         <p
