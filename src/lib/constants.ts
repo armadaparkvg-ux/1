@@ -15,12 +15,12 @@ export const CONTACTS = {
   hours: "8:00–21:00 Мск, ежедневно",
 } as const;
 
-/** Акция на главной */
+/** Баннер на главной — канал MAX */
 export const PROMO = {
-  daysFree: 3,
-  text: "3 дня без комиссии парка — жми «Подключиться»!",
-  ctaLabel: "Подключиться",
-  href: "/#directions",
+  text: "Подпишись на наш канал в MAX — акции и бонусы для водителей",
+  ctaLabel: "Подписаться",
+  href: CONTACTS.maxChannel,
+  external: true,
 } as const;
 
 export const FORMS = {
