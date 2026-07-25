@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Gift } from "lucide-react";
 import { FadeIn } from "@/components/fade-in";
+import { PromoActionsBanner } from "@/components/promo-actions-banner";
 import { Button } from "@/components/ui/button";
 import { CONTACTS } from "@/lib/constants";
 
@@ -15,9 +15,9 @@ export function MaxChannel() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
-          <div className="relative overflow-hidden rounded-3xl border border-emerald-500/25 bg-gradient-to-br from-emerald-950/80 via-surface to-surface-elevated px-6 py-12 sm:px-12 sm:py-16">
+          <div className="relative overflow-hidden rounded-3xl border border-accent/25 bg-gradient-to-br from-[#1a1408] via-surface to-surface-elevated px-4 py-10 sm:px-10 sm:py-14 lg:px-12">
             <div
-              className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-emerald-400/20 blur-3xl"
+              className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-accent/20 blur-3xl"
               aria-hidden
             />
             <div
@@ -25,39 +25,61 @@ export function MaxChannel() {
               aria-hidden
             />
 
-            <div className="relative flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
-              <div className="max-w-2xl">
-                <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/20 text-emerald-400 animate-pulse-soft">
-                  <Gift className="h-7 w-7" aria-hidden />
-                </div>
+            <div className="relative grid items-center gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12">
+              <div className="order-2 lg:order-1">
+                <p className="text-sm font-semibold uppercase tracking-[0.14em] text-accent">
+                  Акции и бонусы
+                </p>
                 <h2
                   id="max-heading"
-                  className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl text-balance"
+                  className="mt-3 font-display text-3xl font-semibold tracking-tight text-foreground text-balance sm:text-4xl"
                 >
-                  Канал в MAX — акции и бонусы для водителей Яндекс Такси
+                  Регулярные розыгрыши и акции парка «Армада»
                 </h2>
-                <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                  В нашем канале мы регулярно проводим акции и разыгрываем бонусы
-                  для водителей. Подпишитесь, чтобы не пропустить выгодные
-                  предложения.
+                <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                  Подключайтесь к парку, участвуйте в розыгрышах и получайте
+                  бонусы. Анонсы публикуем в канале MAX — подпишитесь, чтобы не
+                  пропустить.
                 </p>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="emerald"
+                    shine
+                    className="w-full shadow-[0_0_40px_-8px_rgba(16,185,129,0.55)] sm:w-auto"
+                  >
+                    <Link
+                      href={CONTACTS.maxChannel}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Подписаться в MAX
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="secondary"
+                    shine
+                    className="w-full sm:w-auto"
+                  >
+                    <Link href="/#directions">Подключиться к парку</Link>
+                  </Button>
+                </div>
               </div>
 
-              <Button
-                asChild
-                size="lg"
-                variant="emerald"
-                shine
-                className="w-full shrink-0 text-base shadow-[0_0_40px_-8px_rgba(16,185,129,0.55)] md:w-auto"
-              >
+              <div className="order-1 mx-auto w-full max-w-[520px] lg:order-2 lg:max-w-none">
                 <Link
                   href={CONTACTS.maxChannel}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="block transition-transform duration-300 hover:scale-[1.015] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  aria-label="Открыть канал MAX — акции и бонусы"
                 >
-                  Подписаться на канал в MAX
+                  <PromoActionsBanner />
                 </Link>
-              </Button>
+              </div>
             </div>
           </div>
         </FadeIn>
