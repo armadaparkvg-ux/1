@@ -21,6 +21,14 @@ export const metadata: Metadata = {
     description:
       "Официальное оформление в Яндекс Такси через парк «Армада»: три тарифа, документы онлайн, поддержка ежедневно.",
     url: `${SITE.url}/trudovoj-dogovor/`,
+    images: [
+      {
+        url: `${SITE.url}/images/labor-limit-hero.jpg`,
+        width: 1280,
+        height: 1280,
+        alt: "Превысил лимит по самозанятости — подключайся в парк Армада по ТК РФ",
+      },
+    ],
   },
 };
 
