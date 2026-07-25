@@ -7,7 +7,7 @@ type FgisCheckButtonProps = {
   size?: "default" | "lg";
 };
 
-/** Яркая CTA-кнопка проверки ФГИС с переливом и мерцанием. */
+/** Premium FGIS CTA — same calm gleam language as primary buttons. */
 export function FgisCheckButton({
   className,
   size = "default",
@@ -18,16 +18,16 @@ export function FgisCheckButton({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "btn-fgis group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl font-semibold text-accent-foreground",
-        "bg-[length:200%_200%] bg-gradient-to-r from-amber-400 via-yellow-300 to-orange-400",
-        "animate-fgis-attention",
-        "transition-transform duration-300 hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl font-semibold text-accent-foreground",
+        "bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400",
+        "shadow-[0_8px_28px_-10px_rgba(245,158,11,0.55)]",
+        "transition-transform duration-300 hover:scale-[1.02] hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         size === "lg" ? "h-12 px-7 text-base" : "h-11 px-5 text-sm",
         className
       )}
     >
       <span
-        className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent animate-shine-loop"
+        className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/22 to-transparent animate-shine-soft"
         aria-hidden
       />
       <Search className="relative z-10 h-4 w-4 shrink-0" aria-hidden />

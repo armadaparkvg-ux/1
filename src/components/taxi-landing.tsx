@@ -133,7 +133,7 @@ export function TaxiLanding() {
                 <ExternalLink className="h-4 w-4" aria-hidden />
               </Link>
             </Button>
-            <Button asChild shine size="lg" variant="secondary">
+            <Button asChild size="lg" variant="secondary">
               <Link href="#formats">Далее: выбрать формат →</Link>
             </Button>
           </div>

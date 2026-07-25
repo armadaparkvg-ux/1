@@ -132,7 +132,7 @@ export function CourierLanding() {
             <Button asChild shine size="lg" variant="emerald">
               <Link href="#courier-tariffs">Выбрать тариф курьера</Link>
             </Button>
-            <Button asChild shine size="lg" variant="secondary">
+            <Button asChild size="lg" variant="secondary">
               <Link href="#courier-steps">Как подключиться</Link>
             </Button>
           </div>

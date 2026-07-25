@@ -116,7 +116,6 @@ export function Hero() {
               asChild
               size="lg"
               variant="secondary"
-              shine
               className="sm:min-w-[220px]"
             >
               <Link href="/#about">Узнать о парке</Link>

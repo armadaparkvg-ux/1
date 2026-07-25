@@ -4,6 +4,7 @@ import { Trust } from "@/components/trust";
 import { HomeDestinations } from "@/components/home-destinations";
 import { MaxChannel } from "@/components/max-channel";
 import { Contacts } from "@/components/contacts";
+import { LegacyHashRedirect } from "@/components/legacy-hash-redirect";
 import { SITE } from "@/lib/constants";
 import { buildJsonLd } from "@/lib/seo";
 
@@ -35,6 +36,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <LegacyHashRedirect />
       <Hero />
       <Trust />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />

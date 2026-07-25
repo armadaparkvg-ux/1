@@ -196,7 +196,7 @@ export function resolveQuizResult(answers: QuizAnswers): QuizResult {
         "Парковый самозанятый и выплаты через «Армаду»",
         "Поддержка 8:00–21:00 Мск",
       ],
-      nextHref: "/courier/",
+      nextHref: "/delivery/",
       nextLabel: "Открыть тарифы курьеров",
     };
   }

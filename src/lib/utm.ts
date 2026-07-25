@@ -26,17 +26,17 @@ export const UTM_DIRECT = {
 export const DIRECT_LANDINGS = [
   {
     campaign: "П1_Поиск_Подключение",
-    path: "/#tariffs",
+    path: "/taxi/#formats",
     utm_campaign: "p1_podklyuchenie",
   },
   {
     campaign: "П2_Поиск_Самозанятый",
-    path: "/#tariff-self",
+    path: "/taxi/#formats",
     utm_campaign: "p2_samozanyatyj",
   },
   {
     campaign: "П3_Поиск_ИП",
-    path: "/#tariff-ip",
+    path: "/taxi/#formats",
     utm_campaign: "p3_ip",
   },
   {
@@ -46,7 +46,7 @@ export const DIRECT_LANDINGS = [
   },
   {
     campaign: "П5_Поиск_ФГИС",
-    path: "/#services",
+    path: "/license/",
     utm_campaign: "p5_fgis",
   },
   {
@@ -56,18 +56,18 @@ export const DIRECT_LANDINGS = [
   },
   {
     campaign: "Р1_РСЯ",
-    path: "/#quiz",
+    path: "/taxi/",
     utm_campaign: "r1_rsya",
   },
   {
     campaign: "Р2_Ретаргет",
-    path: "/#apply",
+    path: "/taxi/#formats",
     utm_campaign: "r2_retarget",
   },
   {
-    campaign: "Квиз",
-    path: "/#quiz",
-    utm_campaign: "quiz",
+    campaign: "Доставка_Курьер",
+    path: "/delivery/#courier-tariffs",
+    utm_campaign: "delivery_courier",
   },
 ] as const;
 
@@ -149,7 +149,7 @@ export function appendUtmBlock(message: string, utm?: UtmParams): string {
 
 /**
  * Build a landing URL with UTM for Direct.
- * Hash anchors go after the query: https://site/?utm_...#quiz
+ * Preserves path + hash: https://site/taxi/?utm_...#formats
  */
 export function buildTrackedLanding(
   pathWithHash: string,
@@ -162,8 +162,13 @@ export function buildTrackedLanding(
 ): string {
   const base = (opts.baseUrl ?? "https://park-armada.ru").replace(/\/$/, "");
   const hashIndex = pathWithHash.indexOf("#");
+  const rawPath =
+    hashIndex >= 0 ? pathWithHash.slice(0, hashIndex) : pathWithHash;
   const hash = hashIndex >= 0 ? pathWithHash.slice(hashIndex) : "";
-  // Keep {ad_id}/{keyword} literal for Yandex Direct templates (do not URL-encode braces).
+  let path = rawPath.trim() || "/";
+  if (!path.startsWith("/")) path = `/${path}`;
+  if (path !== "/" && !path.endsWith("/")) path = `${path}/`;
+
   const content = opts.utm_content ?? "{ad_id}";
   const term = opts.utm_term ?? "{keyword}";
   const query =
@@ -172,7 +177,7 @@ export function buildTrackedLanding(
     `&utm_campaign=${encodeURIComponent(opts.utm_campaign)}` +
     `&utm_content=${content}` +
     `&utm_term=${term}`;
-  return `${base}/?${query}${hash}`;
+  return `${base}${path}?${query}${hash}`;
 }
 
 /** Convenience: all ready Direct URLs for copy-paste into campaigns. */

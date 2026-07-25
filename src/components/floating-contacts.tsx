@@ -12,14 +12,14 @@ export function FloatingContacts() {
       label: "Звонок",
       icon: Phone,
       className:
-        "bg-accent text-accent-foreground shadow-glow-sm animate-chat-pulse-amber",
+        "bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-accent-foreground shadow-[0_8px_24px_-10px_rgba(245,158,11,0.55)]",
     },
     {
       href: CONTACTS.telegram,
       label: "Telegram",
       icon: Send,
       className:
-        "bg-surface-elevated text-foreground border border-accent/40 animate-chat-pulse-outline",
+        "bg-surface-elevated text-foreground border border-amber-400/35 shadow-[0_0_18px_-10px_rgba(245,158,11,0.35)]",
       external: true,
     },
     {
@@ -27,7 +27,7 @@ export function FloatingContacts() {
       label: "MAX",
       icon: MessageCircle,
       className:
-        "bg-emerald-glow text-white shadow-[0_0_20px_-6px_rgba(16,185,129,0.5)] animate-chat-pulse",
+        "bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-400 text-white shadow-[0_8px_24px_-10px_rgba(16,185,129,0.45)]",
       external: true,
     },
   ];

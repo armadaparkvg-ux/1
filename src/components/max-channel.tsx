@@ -61,7 +61,6 @@ export function MaxChannel() {
                     asChild
                     size="lg"
                     variant="secondary"
-                    shine
                     className="w-full sm:w-auto"
                   >
                     <Link href="/#directions">Подключиться к парку</Link>

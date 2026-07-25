@@ -186,11 +186,13 @@ body {
   }
 
   .animate-shine-loop,
+  .animate-shine-soft,
   .animate-chat-pulse,
   .animate-chat-pulse-amber,
   .animate-chat-pulse-outline,
   .animate-promo-glow,
-  .before\:animate-shine-loop {
+  .before\:animate-shine-loop,
+  .before\:animate-shine-soft {
     animation: none !important;
   }
 }
