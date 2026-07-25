@@ -179,7 +179,9 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .btn-fgis,
-  .btn-fgis span {
+  .btn-fgis span,
+  .promo-banner,
+  .promo-banner * {
     animation: none !important;
   }
 
@@ -187,6 +189,7 @@ body {
   .animate-chat-pulse,
   .animate-chat-pulse-amber,
   .animate-chat-pulse-outline,
+  .animate-promo-glow,
   .before\:animate-shine-loop {
     animation: none !important;
   }

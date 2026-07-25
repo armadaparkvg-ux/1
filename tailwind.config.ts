@@ -105,6 +105,10 @@ const config: Config = {
             filter: "brightness(1.12)",
           },
         },
+        "promo-glow": {
+          "0%, 100%": { opacity: "0.55" },
+          "50%": { opacity: "1" },
+        },
         "fgis-gradient": {
           "0%, 100%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
@@ -130,6 +134,7 @@ const config: Config = {
         "chat-pulse-amber": "chat-pulse-amber 2.2s ease-in-out infinite",
         "chat-pulse-outline": "chat-pulse-outline 2.2s ease-in-out infinite",
         "fgis-glow": "fgis-glow 1.6s ease-in-out infinite",
+        "promo-glow": "promo-glow 2.8s ease-in-out infinite",
         "fgis-gradient": "fgis-gradient 2.8s ease infinite",
         "fgis-attention":
           "fgis-gradient 2.8s ease infinite, fgis-glow 1.6s ease-in-out infinite",
