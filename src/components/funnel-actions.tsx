@@ -68,8 +68,9 @@ export function DualPathActions({
         <Button asChild shine size="lg" className="w-full">
           <a
             href={goHref}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() => {
+              if (fleetTrack) track("link");
+            }}
           >
             {registerLabel}
             <ExternalLink className="h-4 w-4" aria-hidden />

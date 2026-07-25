@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Car, FileCheck2, Package, ShieldCheck } from "lucide-react";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { Button } from "@/components/ui/button";
+import { trackGoal } from "@/lib/metrika";
 
 const DESTINATIONS = [
   {
@@ -16,6 +19,7 @@ const DESTINATIONS = [
     tone: "accent" as const,
     highlightCta: true,
     imageAlt: "Подключение к Яндекс Такси через парк Армада",
+    goal: "directions_taxi" as const,
   },
   {
     href: "/delivery/",
@@ -28,6 +32,7 @@ const DESTINATIONS = [
     tone: "emerald" as const,
     highlightCta: true,
     imageAlt: "Подключение курьеров к Яндекс Доставке через парк Армада",
+    goal: "directions_delivery" as const,
   },
   {
     href: "/license/",
@@ -40,6 +45,7 @@ const DESTINATIONS = [
     tone: "accent" as const,
     highlightCta: false,
     imageAlt: "Лицензия такси ФГИС через парк Армада",
+    goal: null,
   },
   {
     href: "/osgop/",
@@ -52,6 +58,7 @@ const DESTINATIONS = [
     tone: "emerald" as const,
     highlightCta: false,
     imageAlt: "ОСГОП для такси через парк Армада",
+    goal: null,
   },
 ] as const;
 
@@ -121,7 +128,12 @@ export function HomeDestinations() {
                           variant="secondary"
                           className="flex-1"
                         >
-                          <Link href={item.href}>
+                          <Link
+                            href={item.href}
+                            onClick={() =>
+                              item.goal ? trackGoal(item.goal) : undefined
+                            }
+                          >
                             Подробнее
                             <ArrowUpRight className="h-4 w-4" aria-hidden />
                           </Link>
@@ -132,7 +144,12 @@ export function HomeDestinations() {
                           variant={isEmerald ? "emerald" : "default"}
                           className="flex-1"
                         >
-                          <Link href={item.registerHref}>
+                          <Link
+                            href={item.registerHref}
+                            onClick={() =>
+                              item.goal ? trackGoal(item.goal) : undefined
+                            }
+                          >
                             Регистрация
                             <ArrowUpRight className="h-4 w-4" aria-hidden />
                           </Link>

@@ -59,7 +59,7 @@
 
 1. Залейте hosting ZIP в `public_html`.
 2. Жёсткое обновление страницы (Ctrl+F5).
-3. Инкогнито → `/delivery/#courier-tariffs` → «Авторегистрация».
-4. В адресной строке на мгновение должен мелькнуть `/go/fleet/?channel=courier…`.
+3. Инкогнито → `/delivery/#courier-tariffs` → «Авторегистрация» (в той же вкладке).
+4. Экран «Переходим к авторегистрации…», URL `/go/fleet/?channel=courier…`.
 5. Метрика → Онлайн: страница `/go/fleet/`.
 6. Проверка цели `visit_fleet_go`.

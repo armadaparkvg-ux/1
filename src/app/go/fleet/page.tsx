@@ -4,6 +4,7 @@ import { FleetGoClient } from "@/components/fleet-go-client";
 export const metadata: Metadata = {
   title: "Переход к авторегистрации",
   robots: { index: false, follow: false },
+  alternates: { canonical: "/go/fleet/" },
 };
 
 /**

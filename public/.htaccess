@@ -12,6 +12,10 @@ DirectoryIndex index.html
   RewriteEngine On
   RewriteBase /
 
+  # Legacy courier URL → delivery
+  RewriteRule ^courier/?$ /delivery/ [R=301,L]
+  RewriteRule ^courier/(.*)$ /delivery/$1 [R=301,L]
+
   # Keep real files/folders
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d

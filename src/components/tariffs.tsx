@@ -142,8 +142,13 @@ function TariffCard({
             <Button asChild shine className="mt-6 w-full" size="lg">
               <a
                 href={fleetGoPath("taxi", tariff.key)}
-                target="_blank"
-                rel="noopener noreferrer"
+                onClick={() =>
+                  trackFleetRegistration({
+                    channel: "taxi",
+                    type: tariff.key,
+                    action: "link",
+                  })
+                }
               >
                 {tariff.cta}
                 <ExternalLink className="h-4 w-4" aria-hidden />
@@ -280,7 +285,7 @@ function CourierTeaser() {
 
         <div className="mt-8">
           <Button asChild shine size="lg" className="w-full sm:w-auto sm:min-w-[220px]">
-            <Link href="/courier/">Подробнее</Link>
+            <Link href="/delivery/">Подробнее</Link>
           </Button>
         </div>
       </div>
