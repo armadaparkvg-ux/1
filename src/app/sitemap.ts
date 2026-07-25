@@ -31,6 +31,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${SITE.url}/trudovoj-dogovor/`,
+      lastModified: new Date("2026-07-25"),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${SITE.url}/delivery/`,
       lastModified: new Date("2026-07-25"),
       changeFrequency: "weekly",

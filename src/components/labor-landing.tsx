@@ -1,0 +1,425 @@
+"use client";
+
+import Link from "next/link";
+import {
+  AlertTriangle,
+  BadgeCheck,
+  CheckCircle2,
+  Clock3,
+  FileText,
+  IdCard,
+  Phone,
+  Scale,
+  ShieldCheck,
+  UserX,
+} from "lucide-react";
+import { DestinationHero } from "@/components/destination-hero";
+import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
+import { DualPathActions } from "@/components/funnel-actions";
+import { LaborContract } from "@/components/labor-contract";
+import { ContactButtons } from "@/components/contact-buttons";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { CONTACTS } from "@/lib/constants";
+
+const AUDIENCE = [
+  {
+    icon: UserX,
+    title: "Не можете работать как самозанятый",
+    text: "Упёрлись в лимит дохода, слетел статус СМЗ или не хотите дальше работать через «Мой налог» — подключим через трудовой договор с парком.",
+  },
+  {
+    icon: AlertTriangle,
+    title: "Деприоритет −15 и «тип занятости не подтверждён»",
+    text: "Трудовые отношения с парком подтверждаются официально. Это помогает убрать деприоритет по типу занятости в Яндекс Pro.",
+  },
+  {
+    icon: Scale,
+    title: "Ограничения по счетам, блокировки, взыскания",
+    text: "Когда формат СМЗ или ИП неудобен или недоступен — трудовой договор даёт понятный легальный путь к заказам.",
+  },
+  {
+    icon: FileText,
+    title: "Не хотите открывать ИП",
+    text: "Без самостоятельной беготни с регистрацией ИП, налогами и отчётностью. Налоги по трудовому договору платит парк.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Нужна понятная работа в федеральном парке",
+    text: "Три прозрачных тарифа «Армады»: 3% + 300₽, 5% + 100₽ или 6% без ежедневных списаний. Без скрытых «входов» в парк.",
+  },
+  {
+    icon: Clock3,
+    title: "Нужно быстро приступить к работе",
+    text: "К парку подключаем удалённо. После проверки документов аккаунт обычно активируется за 1,5–2 часа — можно выходить на линию.",
+  },
+] as const;
+
+const DOCS = [
+  {
+    icon: IdCard,
+    title: "Паспорт РФ",
+    text: "1–2 страница и страница с регистрацией.",
+  },
+  {
+    icon: FileText,
+    title: "ИНН и СНИЛС",
+    text: "Фото или скрин, в том числе из Госуслуг.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Водительское удостоверение",
+    text: "Фото с двух сторон.",
+  },
+  {
+    icon: Phone,
+    title: "Номер телефона",
+    text: "Тот, с которым будете работать в Яндекс Такси.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "СТС на автомобиль",
+    text: "Фото с двух сторон — если работаете на своём авто.",
+  },
+] as const;
+
+const BENEFITS = [
+  {
+    title: "Официально через парк",
+    text: "Трудовой договор с ООО «АРМАДА ДРАЙВЕР» — без СМЗ и без ИП.",
+  },
+  {
+    title: "Три схемы комиссии",
+    text: "3% + 300₽ · 5% + 100₽ · 6% без ежедневных списаний.",
+  },
+  {
+    title: "2‑НДФЛ и договор",
+    text: "По запросу парк предоставляет справку и сам договор.",
+  },
+  {
+    title: "Удалённо по России",
+    text: `Документы онлайн, поддержка ${CONTACTS.hours}.`,
+  },
+] as const;
+
+const FAQ = [
+  {
+    q: "Можно ли работать через «Армаду» без самозанятости и ИП?",
+    a: "Да. Для этого оформляем трудовой договор с парком. Налоги платит парк — в зависимости от выбранного тарифа удерживаются комиссия и ежедневные списания либо только комиссия 6%.",
+  },
+  {
+    q: "Вы убираете «Тип занятости не подтверждён» и деприоритет −15?",
+    a: "Трудовые отношения с парком подтверждают тип занятости в аккаунте. Это как раз тот формат, который нужен, когда Яндекс снимает приоритет из‑за неподтверждённой занятости. Сроки подтверждения зависят от документов — менеджер подскажет по вашей ситуации.",
+  },
+  {
+    q: "Какая комиссия парка по трудовому договору?",
+    a: "Три варианта: 3% + 300₽ ежедневные списания, 5% + 100₽ ежедневные списания или 6% без ежедневных списаний. Комиссия Яндекс Такси начисляется отдельно по правилам сервиса.",
+  },
+  {
+    q: "Есть ли ещё какие-то списания?",
+    a: "Скрытой платы за «вход» в парк нет. Отдельно по желанию оформляются доп. услуги: лицензия ФГИС 3 500 ₽ на 5 лет и ОСГОП 3 400 ₽ на 1 год — оплата по факту.",
+  },
+  {
+    q: "Сколько займёт оформление?",
+    a: "Документы принимаем онлайн. После проверки аккаунт обычно активируется за 1,5–2 часа. Официальное кадровое оформление по выбранному тарифу согласуем с менеджером.",
+  },
+  {
+    q: "Какие документы нужны?",
+    a: "Паспорт РФ, ИНН, СНИЛС, водительское удостоверение, номер телефона для Яндекс Pro. Для работы на своём авто — СТС. Если чего-то не хватает, подскажем, чем заменить.",
+  },
+  {
+    q: "Можно ли отправить документы онлайн?",
+    a: "Да, полностью удалённо — через Telegram или MAX. Офиса нет, работаем по всей России.",
+  },
+  {
+    q: "Можно ли получить справку 2‑НДФЛ?",
+    a: "Да, по запросу. Также можем предоставить сам трудовой договор.",
+  },
+  {
+    q: "Подходит ли трудовой договор при банкротстве?",
+    a: "Да — это один из основных сценариев, когда выбирают трудовой договор вместо СМЗ или ИП.",
+  },
+  {
+    q: "Что делать, если нет лицензии на авто?",
+    a: "Поможем внести автомобиль в реестр такси ФГИС — 3 500 ₽ на 5 лет, обычно 1–3 дня. Нужны фото СТС и авто с 4 сторон.",
+  },
+  {
+    q: "Как выбрать между 3%, 5% и 6%?",
+    a: "3% + 300₽ — популярный вариант с официальным оформлением и 2‑НДФЛ. 5% + 100₽ — ниже ежедневная часть. 6% без списаний — без ежедневных удержаний, договор для подтверждения занятости. Если сомневаетесь — напишите в чат, подскажем.",
+  },
+  {
+    q: "Есть ли авторегистрация для трудового договора?",
+    a: "Нет. Формат оформляется только через поддержку парка: выберите тариф ниже и отправьте заявку в Telegram или MAX.",
+  },
+] as const;
+
+export function LaborLanding() {
+  return (
+    <div className="pb-20">
+      <DestinationHero
+        eyebrow="Таксопарк «Армада» · трудовой договор"
+        title="Работа в Яндекс Такси без самозанятости и ИП"
+        description="Официальное оформление в парке «Армада»: убираем деприоритет по типу занятости, три прозрачных тарифа, документы онлайн по всей России."
+        image="/images/taxi-premium-hero.webp"
+        imageAlt="Водитель такси выходит на линию после официального оформления в парке"
+        primaryHref="#labor-tariffs"
+        primaryLabel="Выбрать тариф и оформить"
+        accent="emerald"
+      >
+        <ul className="grid gap-2 sm:grid-cols-3">
+          {[
+            "Без СМЗ и без ИП",
+            "Официально через парк",
+            "Заявка в Telegram / MAX",
+          ].map((item) => (
+            <li
+              key={item}
+              className="inline-flex items-center gap-2 rounded-xl border border-border bg-[#0b111c]/75 px-3 py-2 text-sm font-medium text-foreground/90 backdrop-blur"
+            >
+              <CheckCircle2
+                className="h-4 w-4 shrink-0 text-emerald-glow"
+                aria-hidden
+              />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </DestinationHero>
+
+      <section className="border-b border-border py-14 sm:py-16" aria-label="Преимущества">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
+            {BENEFITS.map((item) => (
+              <StaggerItem key={item.title}>
+                <div>
+                  <p className="font-display text-lg font-semibold text-foreground">
+                    {item.title}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {item.text}
+                  </p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      <section
+        id="for-whom"
+        className="section-anchor py-20 sm:py-24"
+        aria-labelledby="labor-audience-heading"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <SectionHeading
+              id="labor-audience-heading"
+              eyebrow="Кому подходит"
+              title="Для кого трудовой договор в «Армаде»"
+              description="Если самозанятость или ИП больше не вариант — подключаем официально через парк."
+            />
+          </FadeIn>
+          <Stagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
+            {AUDIENCE.map((item) => {
+              const Icon = item.icon;
+              return (
+                <StaggerItem key={item.title}>
+                  <article className="h-full rounded-2xl border border-border/80 bg-[#0b111c]/40 p-6 transition-colors hover:border-emerald-glow/25">
+                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-glow/25 bg-emerald-glow/10 text-emerald-glow">
+                      <Icon className="h-5 w-5" aria-hidden />
+                    </span>
+                    <h3 className="mt-4 font-display text-lg font-semibold text-foreground text-balance">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {item.text}
+                    </p>
+                  </article>
+                </StaggerItem>
+              );
+            })}
+          </Stagger>
+          <FadeIn delay={0.1} className="mt-10 flex justify-center">
+            <DualPathActions
+              applyTopic="3% + 300₽"
+              applyLabel="Оставить заявку в поддержку парка"
+              chats
+              className="w-full max-w-md"
+            />
+          </FadeIn>
+        </div>
+      </section>
+
+      <div id="labor-tariffs" className="section-anchor">
+        <LaborContract
+          eyebrow="Условия · три тарифа «Армады»"
+          title="Простые условия без скрытых списаний"
+          description="Выберите схему комиссии. Авторегистрации для трудового договора нет — оформление только через поддержку парка в Telegram или MAX."
+        />
+      </div>
+
+      <section
+        id="documents"
+        className="section-anchor border-t border-border py-20 sm:py-24"
+        aria-labelledby="labor-docs-heading"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <SectionHeading
+              id="labor-docs-heading"
+              eyebrow="Документы"
+              title="Что нужно для подключения"
+              description="Отправляете онлайн. Если всё в порядке — оформление запускаем сразу."
+            />
+          </FadeIn>
+          <Stagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+            {DOCS.map((doc) => {
+              const Icon = doc.icon;
+              return (
+                <StaggerItem key={doc.title}>
+                  <div className="flex h-full gap-4 rounded-2xl border border-border/70 bg-[#0b111c]/35 p-5">
+                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
+                      <Icon className="h-5 w-5" aria-hidden />
+                    </span>
+                    <div>
+                      <p className="font-display text-base font-semibold text-foreground">
+                        {doc.title}
+                      </p>
+                      <p className="mt-1 text-sm text-muted-foreground">{doc.text}</p>
+                    </div>
+                  </div>
+                </StaggerItem>
+              );
+            })}
+          </Stagger>
+          <p className="mt-8 max-w-2xl text-sm text-muted-foreground">
+            Важно: если по документу есть вопрос — сразу подскажем, что исправить или
+            чем заменить, чтобы не терять время.
+          </p>
+        </div>
+      </section>
+
+      <section
+        id="extras"
+        className="section-anchor py-20 sm:py-24"
+        aria-labelledby="labor-extras-heading"
+      >
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <SectionHeading
+              id="labor-extras-heading"
+              eyebrow="Дополнительно"
+              title="Лицензия и ОСГОП — если нужно под ключ"
+              description="Подключение по трудовому договору отдельно; документы на авто оформляем по запросу."
+            />
+          </FadeIn>
+          <FadeIn delay={0.08} className="mt-12 grid gap-5 sm:grid-cols-2">
+            <Link
+              href="/license/"
+              className="group rounded-2xl border border-border/80 bg-[#0b111c]/40 p-6 transition-colors hover:border-accent/35"
+            >
+              <p className="text-sm font-medium text-accent">ФГИС · реестр такси</p>
+              <p className="mt-2 font-display text-2xl font-semibold text-foreground">
+                3 500 ₽{" "}
+                <span className="text-sm font-medium text-muted-foreground">
+                  на 5 лет
+                </span>
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Внесение автомобиля в реестр такси. Обычно 1–3 дня. Нужны фото СТС и
+                авто с 4 сторон.
+              </p>
+              <p className="mt-4 text-sm font-medium text-foreground group-hover:text-accent">
+                Подробнее о лицензии →
+              </p>
+            </Link>
+            <Link
+              href="/osgop/"
+              className="group rounded-2xl border border-border/80 bg-[#0b111c]/40 p-6 transition-colors hover:border-accent/35"
+            >
+              <p className="text-sm font-medium text-accent">Страхование</p>
+              <p className="mt-2 font-display text-2xl font-semibold text-foreground">
+                3 400 ₽{" "}
+                <span className="text-sm font-medium text-muted-foreground">
+                  на 1 год
+                </span>
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                ОСГОП для легальной работы в такси. Консультация по документам перед
+                оформлением.
+              </p>
+              <p className="mt-4 text-sm font-medium text-foreground group-hover:text-accent">
+                Подробнее об ОСГОП →
+              </p>
+            </Link>
+          </FadeIn>
+        </div>
+      </section>
+
+      <section
+        id="faq"
+        className="section-anchor border-t border-border py-20 sm:py-24"
+        aria-labelledby="labor-faq-heading"
+      >
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <SectionHeading
+              id="labor-faq-heading"
+              eyebrow="FAQ"
+              title="Ответы на вопросы о трудовом договоре"
+              description="Без самозанятости и ИП: комиссия «Армады», документы, сроки и 2‑НДФЛ."
+            />
+          </FadeIn>
+          <FadeIn delay={0.1} className="mt-10">
+            <Accordion type="single" collapsible className="w-full">
+              {FAQ.map((item, i) => (
+                <AccordionItem key={item.q} value={`labor-faq-${i}`}>
+                  <AccordionTrigger>{item.q}</AccordionTrigger>
+                  <AccordionContent>{item.a}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </FadeIn>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20" aria-labelledby="labor-final-cta">
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+          <FadeIn>
+            <h2
+              id="labor-final-cta"
+              className="font-display text-2xl font-semibold text-foreground sm:text-3xl"
+            >
+              Готовы оформить трудовой договор в «Армаде»?
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              Выберите тариф выше или напишите в чат — подскажем по документам и
+              подключению. {CONTACTS.hours}. Работает{" "}
+              <span className="text-foreground/90">ООО «АРМАДА ДРАЙВЕР»</span>.
+            </p>
+            <div className="mt-8 flex flex-col items-center gap-6">
+              <DualPathActions
+                applyTopic="3% + 300₽"
+                applyLabel="Оформить через поддержку парка"
+                chats={false}
+                className="w-full max-w-md"
+              />
+              <ContactButtons showLabels size="lg" />
+              <p className="text-sm text-muted-foreground">
+                Также смотрите{" "}
+                <Link href="/taxi/" className="text-accent hover:underline">
+                  все форматы на странице такси
+                </Link>{" "}
+                — самозанятый и ИП от 1,9%.
+              </p>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+    </div>
+  );
+}

@@ -10,7 +10,7 @@ const HASH_REDIRECTS: Record<string, string> = {
   "#tariffs": "/taxi/#formats",
   "#tariff-self": "/taxi/#formats",
   "#tariff-ip": "/taxi/#formats",
-  "#labor-contract": "/taxi/#labor-contract",
+  "#labor-contract": "/trudovoj-dogovor/",
   "#services": "/license/",
   "#compare": "/taxi/#formats",
   "#quiz": "/taxi/",

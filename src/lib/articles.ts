@@ -50,8 +50,8 @@ export const ARTICLES: Article[] = [
       "Нужны договор и 2‑НДФЛ → трудовой",
       "Не уверены → напишите в поддержку парка",
     ],
-    ctaLabel: "Выбрать формат на странице такси",
-    ctaHref: "/taxi/#formats",
+    ctaLabel: "Страница трудового договора",
+    ctaHref: "/trudovoj-dogovor/",
   },
   {
     slug: "licenziya-fgis-cheklist",

@@ -51,7 +51,17 @@ const OPTIONS: {
   },
 ];
 
-export function LaborContract() {
+type LaborContractProps = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+};
+
+export function LaborContract({
+  eyebrow = "Шаг 3 · Трудовой договор",
+  title = "Выберите один из трёх форматов",
+  description = "Авторегистрации для трудового договора нет — оформление только через поддержку парка. Выберите вариант и отправьте заявку в чат.",
+}: LaborContractProps = {}) {
   return (
     <section
       id="labor-contract"
@@ -66,9 +76,9 @@ export function LaborContract() {
         <FadeIn>
           <SectionHeading
             id="labor-heading"
-            eyebrow="Шаг 3 · Трудовой договор"
-            title="Выберите один из трёх форматов"
-            description="Авторегистрации для трудового договора нет — оформление только через поддержку парка. Выберите вариант и отправьте заявку в чат."
+            eyebrow={eyebrow}
+            title={title}
+            description={description}
           />
         </FadeIn>
 

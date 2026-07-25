@@ -174,12 +174,17 @@ export function TaxiLanding() {
                     <div className="mt-5 flex flex-1 flex-col gap-4">
                       <LaborContractBanner />
                       <Button asChild shine size="lg" className="mt-auto w-full">
+                        <Link href="/trudovoj-dogovor/">
+                          Страница трудового договора
+                        </Link>
+                      </Button>
+                      <Button asChild variant="outline" size="lg" className="w-full">
                         <Link href="#labor-contract">
-                          Узнать подробнее · 3 формата
+                          Выбрать тариф на этой странице
                         </Link>
                       </Button>
                       <p className="text-center text-xs text-muted-foreground">
-                        Дальше выберите вариант и оформите через поддержку парка
+                        Без СМЗ и ИП · оформление через поддержку парка
                       </p>
                     </div>
                   ) : (

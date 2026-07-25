@@ -38,6 +38,7 @@ export const NAV_LINKS = [
   { href: "/#about", label: "О парке" },
   { href: "/#directions", label: "Направления" },
   { href: "/taxi/", label: "Такси" },
+  { href: "/trudovoj-dogovor/", label: "Трудовой" },
   { href: "/delivery/", label: "Доставка" },
   { href: "/license/", label: "Лицензия" },
   { href: "/osgop/", label: "ОСГОП" },
@@ -48,6 +49,7 @@ export const NAV_LINKS = [
 export const FOOTER_LINKS = [
   { href: "/#about", label: "О парке" },
   { href: "/taxi/", label: "Подключение к Яндекс Такси" },
+  { href: "/trudovoj-dogovor/", label: "Трудовой договор без СМЗ и ИП" },
   { href: "/delivery/", label: "Курьеры Яндекс Доставка" },
   { href: "/license/", label: "Лицензия такси ФГИС" },
   { href: "/osgop/", label: "ОСГОП для такси" },

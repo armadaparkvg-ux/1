@@ -128,6 +128,8 @@ function laborResult(priority?: QuizPriority): QuizResult {
         "Налоги платит парк",
         "По запросу — 2‑НДФЛ и договор",
       ],
+      nextHref: "/trudovoj-dogovor/",
+      nextLabel: "Страница трудового договора",
     };
   }
   if (priority === "low_fee") {
@@ -141,6 +143,8 @@ function laborResult(priority?: QuizPriority): QuizResult {
         "Оформление по ТК РФ",
         "Подходит для подтверждения занятости",
       ],
+      nextHref: "/trudovoj-dogovor/",
+      nextLabel: "Страница трудового договора",
     };
   }
   return {
@@ -153,6 +157,8 @@ function laborResult(priority?: QuizPriority): QuizResult {
       "Ниже фиксированная часть, чем у 3%+300₽",
       "Три схемы на выбор — уточним в чате",
     ],
+    nextHref: "/trudovoj-dogovor/",
+    nextLabel: "Страница трудового договора",
   };
 }
 
