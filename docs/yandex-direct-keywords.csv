@@ -44,18 +44,18 @@ campaign,ad_group,keyword,intent,landing
 П3_Поиск_ИП,Парковый ИП,яндекс про парковый ип,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#formats
 П3_Поиск_ИП,Парковый ИП,ип в таксопарке яндекс,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#formats
 П3_Поиск_ИП,Парковый ИП,вывод денег яндекс такси ип,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#formats
-П4_Поиск_Трудовой,Трудовой договор,трудовой договор яндекс такси,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
-П4_Поиск_Трудовой,Трудовой договор,трудовой договор такси,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
-П4_Поиск_Трудовой,Трудовой договор,официальное трудоустройство такси,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
-П4_Поиск_Трудовой,Трудовой договор,работа в такси по трудовому договору,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
-П4_Поиск_Трудовой,Трудовой договор,такси трудовой договор налог платит парк,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
-П4_Поиск_Трудовой,Трудовой договор,подключение к яндекс такси трудовой договор,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
-П4_Поиск_Трудовой,Трудовой договор,работа такси с трудоустройством,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
-П4_Поиск_Трудовой,Трудовой договор,2ндфл такси,M,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
-П4_Поиск_Трудовой,Трудовой договор,такси при банкротстве трудовой договор,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
-П4_Поиск_Трудовой,Трудовой договор,работа такси на пособии,M,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
-П4_Поиск_Трудовой,Трудовой договор,превышен лимит ип такси трудовой,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#formats
-П4_Поиск_Трудовой,Трудовой договор,яндекс такси оформление по тк,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract
+П4_Поиск_Трудовой,Трудовой договор,трудовой договор яндекс такси,H,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}
+П4_Поиск_Трудовой,Трудовой договор,трудовой договор такси,H,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}
+П4_Поиск_Трудовой,Трудовой договор,официальное трудоустройство такси,H,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}
+П4_Поиск_Трудовой,Трудовой договор,работа в такси по трудовому договору,H,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}
+П4_Поиск_Трудовой,Трудовой договор,такси трудовой договор налог платит парк,H,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}
+П4_Поиск_Трудовой,Трудовой договор,подключение к яндекс такси трудовой договор,H,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}
+П4_Поиск_Трудовой,Трудовой договор,работа такси с трудоустройством,H,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}
+П4_Поиск_Трудовой,Трудовой договор,2ндфл такси,M,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}
+П4_Поиск_Трудовой,Трудовой договор,такси при банкротстве трудовой договор,H,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}
+П4_Поиск_Трудовой,Трудовой договор,работа такси на пособии,M,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}
+П4_Поиск_Трудовой,Трудовой договор,превышен лимит ип такси трудовой,H,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}
+П4_Поиск_Трудовой,Трудовой договор,яндекс такси оформление по тк,H,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}
 П5_Поиск_ФГИС,Лицензия ФГИС,лицензия такси фгис,H,https://park-armada.ru/license/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}
 П5_Поиск_ФГИС,Лицензия ФГИС,внести авто в реестр такси,H,https://park-armada.ru/license/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}
 П5_Поиск_ФГИС,Лицензия ФГИС,реестр такси фгис,H,https://park-armada.ru/license/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword}

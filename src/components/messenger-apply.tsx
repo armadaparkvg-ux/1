@@ -19,7 +19,21 @@ import {
   openMessenger,
   telegramApplyUrl,
 } from "@/lib/apply";
+import { trackGoal } from "@/lib/metrika";
 import { cn } from "@/lib/utils";
+
+const LABOR_TOPICS = new Set<ApplyTopic>([
+  "3% + 300₽",
+  "5% + 100₽",
+  "6% без списаний",
+]);
+
+function trackApplyLead(topic: ApplyTopic, channel: "telegram" | "max") {
+  trackGoal("lead_messenger", { channel, topic });
+  if (LABOR_TOPICS.has(topic)) {
+    trackGoal("click_labor_apply", { channel, topic });
+  }
+}
 
 type ApplyContextValue = {
   openApply: (topic?: ApplyTopic) => void;
@@ -62,12 +76,14 @@ export function ApplyProvider({ children }: { children: ReactNode }) {
   }, [open]);
 
   const openTelegram = async () => {
+    trackApplyLead(topic, "telegram");
     await copyText(message);
     openMessenger(telegramApplyUrl(message));
     setOpen(false);
   };
 
   const openMax = async () => {
+    trackApplyLead(topic, "max");
     const ok = await copyText(message);
     setCopied(ok);
     openMessenger(maxApplyUrl());

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LaborLanding } from "@/components/labor-landing";
 import { SITE } from "@/lib/constants";
+import { buildLaborJsonLd } from "@/lib/labor-faq";
 
 export const metadata: Metadata = {
   title: "Трудовой договор без самозанятости и ИП",
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
     "официальное трудоустройство такси",
     "2ндфл такси",
     "таксопарк Армада трудовой договор",
+    "превышен лимит самозанятого такси",
+    "работа в яндекс такси по тк",
   ],
   alternates: { canonical: `${SITE.url}/trudovoj-dogovor/` },
   openGraph: {
@@ -33,5 +36,15 @@ export const metadata: Metadata = {
 };
 
 export default function TrudovojDogovorPage() {
-  return <LaborLanding />;
+  const jsonLd = buildLaborJsonLd(SITE.url);
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <LaborLanding />
+    </>
+  );
 }

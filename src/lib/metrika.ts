@@ -30,6 +30,10 @@ export const METRIKA_GOALS = {
   click_fleet_courier: "click_fleet_courier",
   /** Alias для обратной совместимости */
   click_courier_form: "click_courier_form",
+  /** Заявка по трудовому договору (Telegram/MAX) */
+  click_labor_apply: "click_labor_apply",
+  /** Посещение посадочной /trudovoj-dogovor/ — создайте цель URL в кабинете */
+  visit_trudovoj: "visit_trudovoj",
 } as const;
 
 export type MetrikaGoal = keyof typeof METRIKA_GOALS | string;
