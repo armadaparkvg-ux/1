@@ -6,6 +6,7 @@ import { DestinationHero } from "@/components/destination-hero";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { DualPathActions } from "@/components/funnel-actions";
 import { LaborContract } from "@/components/labor-contract";
+import { LaborContractBanner } from "@/components/labor-contract-banner";
 import { Button } from "@/components/ui/button";
 import { ContactButtons } from "@/components/contact-buttons";
 import { FORMS, CONTACTS } from "@/lib/constants";
@@ -170,8 +171,9 @@ export function TaxiLanding() {
                   </p>
 
                   {format.id === "labor" ? (
-                    <div className="mt-7 flex flex-col gap-3">
-                      <Button asChild shine size="lg" className="w-full">
+                    <div className="mt-5 flex flex-1 flex-col gap-4">
+                      <LaborContractBanner />
+                      <Button asChild shine size="lg" className="mt-auto w-full">
                         <Link href="#labor-contract">
                           Узнать подробнее · 3 формата
                         </Link>
