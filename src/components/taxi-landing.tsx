@@ -187,6 +187,7 @@ export function TaxiLanding() {
                       registerHref={format.registerHref!}
                       iframeSrc={format.iframeSrc!}
                       iframeTitle={`Регистрация: ${format.title}`}
+                      fleetTrack={{ channel: "taxi", type: format.id }}
                     />
                   )}
                 </article>

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ContactButtons } from "@/components/contact-buttons";
 import { ApplyButton } from "@/components/messenger-apply";
 import type { ApplyTopic } from "@/lib/apply";
+import { trackFleetRegistration } from "@/lib/metrika";
 import { cn } from "@/lib/utils";
 
 type DualPathProps = {
@@ -16,6 +17,11 @@ type DualPathProps = {
   /** Optional iframe form for on-page registration */
   iframeSrc?: string;
   iframeTitle?: string;
+  /** Metrika: taxi | courier + type (smz, ip, foot…) */
+  fleetTrack?: {
+    channel: "taxi" | "courier";
+    type: string;
+  };
   /** Topic for park-support apply modal (labor / services) */
   applyTopic?: ApplyTopic;
   applyLabel?: string;
@@ -32,12 +38,22 @@ export function DualPathActions({
   registerLabel = "Авторегистрация",
   iframeSrc,
   iframeTitle = "Форма регистрации",
+  fleetTrack,
   applyTopic,
   applyLabel = "Оформить через поддержку парка",
   className,
   chats = true,
 }: DualPathProps) {
   const [showForm, setShowForm] = useState(false);
+
+  const track = (action: "link" | "iframe") => {
+    if (!fleetTrack) return;
+    trackFleetRegistration({
+      channel: fleetTrack.channel,
+      type: fleetTrack.type,
+      action,
+    });
+  };
 
   return (
     <div className={cn("mt-6 flex flex-col gap-3", className)}>
@@ -47,6 +63,7 @@ export function DualPathActions({
             href={registerHref}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track("link")}
           >
             {registerLabel}
             <ExternalLink className="h-4 w-4" aria-hidden />
@@ -72,7 +89,10 @@ export function DualPathActions({
             shine
             size="lg"
             className="w-full"
-            onClick={() => setShowForm(true)}
+            onClick={() => {
+              track("iframe");
+              setShowForm(true);
+            }}
           >
             Открыть форму на сайте
           </Button>

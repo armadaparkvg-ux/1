@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { ContactButtons } from "@/components/contact-buttons";
 import { FORMS } from "@/lib/constants";
 import { COURIER_TARIFFS } from "@/lib/courier";
+import { trackFleetRegistration } from "@/lib/metrika";
 
 const TARIFFS = [
   {
@@ -142,6 +143,13 @@ function TariffCard({
                 href={tariff.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackFleetRegistration({
+                    channel: "taxi",
+                    type: tariff.key,
+                    action: "link",
+                  })
+                }
               >
                 {tariff.cta}
                 <ExternalLink className="h-4 w-4" aria-hidden />
@@ -164,7 +172,14 @@ function TariffCard({
                     type="button"
                     variant="outline"
                     className="w-full"
-                    onClick={() => setShowForm(true)}
+                    onClick={() => {
+                      trackFleetRegistration({
+                        channel: "taxi",
+                        type: tariff.key,
+                        action: "iframe",
+                      });
+                      setShowForm(true);
+                    }}
                   >
                     Открыть форму на сайте
                   </Button>

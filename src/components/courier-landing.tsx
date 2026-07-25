@@ -84,6 +84,7 @@ function CourierCard({ tariff }: { tariff: CourierTariff }) {
         registerLabel={tariff.cta}
         iframeSrc={tariff.formIframe}
         iframeTitle={`Форма: ${tariff.title}`}
+        fleetTrack={{ channel: "courier", type: tariff.id }}
       />
     </article>
   );
