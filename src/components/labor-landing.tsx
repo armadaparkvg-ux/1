@@ -13,11 +13,13 @@ import {
   ShieldCheck,
   UserX,
 } from "lucide-react";
-import { DestinationHero } from "@/components/destination-hero";
+import { ArrowLeft } from "lucide-react";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { DualPathActions } from "@/components/funnel-actions";
 import { LaborContract } from "@/components/labor-contract";
+import { LaborLimitHeroBanner } from "@/components/labor-limit-hero-banner";
 import { ContactButtons } from "@/components/contact-buttons";
+import { Button } from "@/components/ui/button";
 import {
   Accordion,
   AccordionContent,
@@ -160,35 +162,64 @@ const FAQ = [
 export function LaborLanding() {
   return (
     <div className="pb-20">
-      <DestinationHero
-        eyebrow="Таксопарк «Армада» · трудовой договор"
-        title="Работа в Яндекс Такси без самозанятости и ИП"
-        description="Официальное оформление в парке «Армада»: убираем деприоритет по типу занятости, три прозрачных тарифа, документы онлайн по всей России."
-        image="/images/taxi-premium-hero.webp"
-        imageAlt="Водитель такси выходит на линию после официального оформления в парке"
-        primaryHref="#labor-tariffs"
-        primaryLabel="Выбрать тариф и оформить"
-        accent="emerald"
-      >
-        <ul className="grid gap-2 sm:grid-cols-3">
-          {[
-            "Без СМЗ и без ИП",
-            "Официально через парк",
-            "Заявка в Telegram / MAX",
-          ].map((item) => (
-            <li
-              key={item}
-              className="inline-flex items-center gap-2 rounded-xl border border-border bg-[#0b111c]/75 px-3 py-2 text-sm font-medium text-foreground/90 backdrop-blur"
-            >
-              <CheckCircle2
-                className="h-4 w-4 shrink-0 text-emerald-glow"
-                aria-hidden
-              />
-              {item}
-            </li>
-          ))}
-        </ul>
-      </DestinationHero>
+      <section className="relative overflow-hidden border-b border-border bg-[#07090d] pt-[72px]">
+        <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden />
+            На главную
+          </Link>
+        </div>
+
+        <div className="relative mx-auto w-full max-w-[960px] bg-[#0a0a0a] px-0 sm:px-4">
+          <div className="relative w-full">
+            <LaborLimitHeroBanner />
+            <div
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#07090d] via-[#07090d]/40 to-transparent sm:h-14"
+              aria-hidden
+            />
+          </div>
+        </div>
+
+        <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-4 sm:px-6 sm:pb-16 lg:px-8">
+          <p className="text-sm font-medium uppercase tracking-wide text-emerald-glow">
+            Таксопарк «Армада» · трудовой договор
+          </p>
+          <h1 className="mt-3 max-w-3xl font-display text-3xl font-semibold tracking-tight text-foreground text-balance sm:text-4xl lg:text-5xl">
+            Работа в Яндекс Такси без самозанятости и ИП
+          </h1>
+          <p className="mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
+            Превысили лимит СМЗ и не хотите открывать ИП — оформите трудовой
+            договор с парком «Армада». Три тарифа, документы онлайн, поддержка по
+            всей России.
+          </p>
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <Button asChild shine size="lg" variant="emerald">
+              <Link href="#labor-tariffs">Выбрать тариф и оформить</Link>
+            </Button>
+            <ul className="flex flex-wrap gap-2">
+              {[
+                "Без СМЗ и без ИП",
+                "По ТК РФ",
+                "Заявка в Telegram / MAX",
+              ].map((item) => (
+                <li
+                  key={item}
+                  className="inline-flex items-center gap-2 rounded-xl border border-border bg-[#0b111c]/75 px-3 py-2 text-sm font-medium text-foreground/90"
+                >
+                  <CheckCircle2
+                    className="h-4 w-4 shrink-0 text-emerald-glow"
+                    aria-hidden
+                  />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
 
       <section className="border-b border-border py-14 sm:py-16" aria-label="Преимущества">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
