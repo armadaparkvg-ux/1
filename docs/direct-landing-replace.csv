@@ -1,0 +1,14 @@
+﻿кампания,utm_campaign,было_(старая_посадка),стало_URL_полная,что_сделать_в_Директе
+П1_Поиск_Подключение,p1_podklyuchenie,/#tariffs,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#formats,заменить ссылку объявления
+П2_Поиск_Самозанятый,p2_samozanyatyj,/#tariffs или /#tariff-self,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#formats,заменить ссылку объявления
+П3_Поиск_ИП,p3_ip,/#tariffs или /#tariff-ip,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p3_ip&utm_content={ad_id}&utm_term={keyword}#formats,заменить ссылку объявления
+П4_Поиск_Трудовой,p4_trudovoj,/#labor-contract,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword}#labor-contract,заменить ссылку объявления
+П5_Поиск_ФГИС,p5_fgis,/#services,https://park-armada.ru/license/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_fgis&utm_content={ad_id}&utm_term={keyword},заменить ссылку объявления
+П5b_Поиск_ОСГОП,p5_osgop,/#services,https://park-armada.ru/osgop/?utm_source=yandex&utm_medium=cpc&utm_campaign=p5_osgop&utm_content={ad_id}&utm_term={keyword},выделить ОСГОП в отдельную группу
+П6_Поиск_Бренд,p6_brand,/,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p6_brand&utm_content={ad_id}&utm_term={keyword},оставить главную
+П7_Поиск_Квиз,p7_quiz,/#quiz /#compare,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p7_quiz&utm_content={ad_id}&utm_term={keyword}#formats,квиза нет — вести на форматы
+П8_Поиск_Лимит_НПД,p8_limit_npd,/blog/limit-npd…,https://park-armada.ru/blog/limit-npd-2-4-mln/?utm_source=yandex&utm_medium=cpc&utm_campaign=p8_limit_npd&utm_content={ad_id}&utm_term={keyword},оставить статью
+П9_Поиск_Статьи,p9_blog,/blog/…,https://park-armada.ru/blog/?utm_source=yandex&utm_medium=cpc&utm_campaign=p9_blog&utm_content={ad_id}&utm_term={keyword},статьи ок; сверить URL статей
+Р1_РСЯ,r1_rsya,/#quiz,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=r1_rsya&utm_content={ad_id}&utm_term={keyword},заменить на /taxi/
+Р2_Ретаргет,r2_retarget,/#apply,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=r2_retarget&utm_content={ad_id}&utm_term={keyword}#formats,заменить + обновить условие аудитории
+Доставка_Курьер,delivery_courier,(не было),https://park-armada.ru/delivery/?utm_source=yandex&utm_medium=cpc&utm_campaign=delivery_courier&utm_content={ad_id}&utm_term={keyword}#courier-tariffs,создать кампанию/группу

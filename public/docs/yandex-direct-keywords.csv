@@ -76,7 +76,7 @@ campaign,ad_group,keyword,intent,landing
 П6_Поиск_Бренд,Бренд Армада,армада таксопарк отзывы,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p6_brand&utm_content={ad_id}&utm_term={keyword}
 П6_Поиск_Бренд,Бренд Армада,park armada такси,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p6_brand&utm_content={ad_id}&utm_term={keyword}
 П6_Поиск_Бренд,Бренд Армада,армада драйвер такси,M,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p6_brand&utm_content={ad_id}&utm_term={keyword}
-П7_Поиск_Квиз,Подобрать тариф,какой тариф яндекс такси выбрать,H,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p7_quiz&utm_content={ad_id}&utm_term={keyword}
+П7_Поиск_Квиз,Подобрать тариф,какой тариф яндекс такси выбрать,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p7_quiz&utm_content={ad_id}&utm_term={keyword}#formats
 П7_Поиск_Квиз,Подобрать тариф,самозанятый или ип такси что выбрать,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p7_quiz&utm_content={ad_id}&utm_term={keyword}
 П7_Поиск_Квиз,Подобрать тариф,какую форму работы выбрать в такси,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p7_quiz&utm_content={ad_id}&utm_term={keyword}
 П7_Поиск_Квиз,Подобрать тариф,подобрать тариф таксопарк,H,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p7_quiz&utm_content={ad_id}&utm_term={keyword}
