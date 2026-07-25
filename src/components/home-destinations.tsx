@@ -2,45 +2,92 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Car, FileCheck2, Package, ShieldCheck } from "lucide-react";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
+import { cn } from "@/lib/utils";
 
 const DESTINATIONS = [
   {
     href: "/taxi/",
+    registerHref: "/taxi/#formats",
     image: "/images/taxi-premium-hero.webp",
     icon: Car,
     eyebrow: "Направление 01",
     title: "Такси",
     text: "Классы от Эконома до Элит, выбор формата работы и авторегистрация.",
-    tone: "accent",
+    tone: "accent" as const,
+    highlightCta: true,
   },
   {
     href: "/delivery/",
+    registerHref: "/delivery/#courier-tariffs",
     image: "/images/delivery-premium-hero.webp",
     icon: Package,
     eyebrow: "Направление 02",
     title: "Доставка",
     text: "Пеший, авто, мото и грузовой курьер — отдельные тарифы и формы.",
-    tone: "emerald",
+    tone: "emerald" as const,
+    highlightCta: true,
   },
   {
     href: "/license/",
+    registerHref: "/license/#apply-service",
     image: "/images/legal-documents-hero.webp",
     icon: FileCheck2,
     eyebrow: "Документы",
     title: "Лицензия ФГИС",
     text: "Реестр такси: 3 500 ₽ на 5 лет, обычно 1–3 дня.",
-    tone: "accent",
+    tone: "accent" as const,
+    highlightCta: false,
   },
   {
     href: "/osgop/",
+    registerHref: "/osgop/#apply-service",
     image: "/images/legal-documents-hero.webp",
     icon: ShieldCheck,
     eyebrow: "Документы",
     title: "ОСГОП",
     text: "Страхование для легальной работы в такси — 3 400 ₽ на 1 год.",
-    tone: "emerald",
+    tone: "emerald" as const,
+    highlightCta: false,
   },
 ] as const;
+
+function PremiumCta({
+  href,
+  label,
+  tone,
+  variant,
+}: {
+  href: string;
+  label: string;
+  tone: "accent" | "emerald";
+  variant: "details" | "register";
+}) {
+  const isEmerald = tone === "emerald";
+  const isRegister = variant === "register";
+
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "btn-fgis group/cta relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-xl px-4 py-3 text-sm font-semibold transition-transform duration-300 hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-5",
+        isRegister
+          ? isEmerald
+            ? "bg-[length:200%_200%] bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500 text-[#04140f] animate-fgis-attention focus-visible:ring-emerald-glow"
+            : "bg-[length:200%_200%] bg-gradient-to-r from-amber-400 via-yellow-300 to-orange-400 text-accent-foreground animate-fgis-attention focus-visible:ring-accent"
+          : isEmerald
+            ? "border border-emerald-glow/50 bg-emerald-glow/15 text-emerald-glow focus-visible:ring-emerald-glow"
+            : "border border-accent/50 bg-accent/15 text-accent focus-visible:ring-accent"
+      )}
+    >
+      <span
+        className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent animate-shine-loop"
+        aria-hidden
+      />
+      <span className="relative z-10">{label}</span>
+      <ArrowUpRight className="relative z-10 h-4 w-4 shrink-0" aria-hidden />
+    </Link>
+  );
+}
 
 export function HomeDestinations() {
   return (
@@ -65,10 +112,7 @@ export function HomeDestinations() {
             const isEmerald = item.tone === "emerald";
             return (
               <StaggerItem key={item.href}>
-                <Link
-                  href={item.href}
-                  className="premium-card group relative block min-h-[280px] overflow-hidden rounded-3xl p-6 sm:min-h-[320px] sm:p-8"
-                >
+                <article className="premium-card group relative flex min-h-[280px] flex-col overflow-hidden rounded-3xl p-6 sm:min-h-[320px] sm:p-8">
                   <Image
                     src={item.image}
                     alt=""
@@ -77,7 +121,7 @@ export function HomeDestinations() {
                     className="object-cover opacity-55 transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-[#080b11] via-[#080b11]/85 to-[#080b11]/25" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080b11]/75 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080b11]/85 to-transparent" />
 
                   <div className="relative flex h-full flex-col">
                     <span
@@ -102,15 +146,36 @@ export function HomeDestinations() {
                     <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground sm:text-base">
                       {item.text}
                     </p>
-                    <span className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-foreground transition-transform group-hover:translate-x-1">
-                      Подробнее и регистрация
-                      <ArrowUpRight
-                        className={`h-4 w-4 ${isEmerald ? "text-emerald-glow" : "text-accent"}`}
-                        aria-hidden
-                      />
-                    </span>
+
+                    {item.highlightCta ? (
+                      <div className="mt-auto flex flex-col gap-2.5 pt-8 sm:flex-row">
+                        <PremiumCta
+                          href={item.href}
+                          label="Подробнее"
+                          tone={item.tone}
+                          variant="details"
+                        />
+                        <PremiumCta
+                          href={item.registerHref}
+                          label="Регистрация"
+                          tone={item.tone}
+                          variant="register"
+                        />
+                      </div>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-foreground transition-transform hover:translate-x-1"
+                      >
+                        Подробнее и регистрация
+                        <ArrowUpRight
+                          className={`h-4 w-4 ${isEmerald ? "text-emerald-glow" : "text-accent"}`}
+                          aria-hidden
+                        />
+                      </Link>
+                    )}
                   </div>
-                </Link>
+                </article>
               </StaggerItem>
             );
           })}
