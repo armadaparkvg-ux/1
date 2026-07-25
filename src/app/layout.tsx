@@ -4,6 +4,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { FloatingContacts } from "@/components/floating-contacts";
 import { YandexMetrika } from "@/components/yandex-metrika";
+import { YandexVarioqub } from "@/components/yandex-varioqub";
 import { Providers } from "@/components/providers";
 import { SITE } from "@/lib/constants";
 import { SEO_KEYWORDS } from "@/lib/seo";
@@ -93,6 +94,8 @@ export default function RootLayout({
         <a href="#main" className="skip-link">
           Перейти к содержимому
         </a>
+        {/* Вариокуб — до Метрики; данные экспериментов идут в счётчик 110811547 */}
+        <YandexVarioqub />
         <YandexMetrika />
         <Providers>
           <Header />
