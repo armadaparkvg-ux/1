@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -9,6 +8,7 @@ import {
   Package,
   PersonStanding,
 } from "lucide-react";
+import { DeliveryHeroBanner } from "@/components/delivery-hero-banner";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { DualPathActions } from "@/components/funnel-actions";
 import { ContactButtons } from "@/components/contact-buttons";
@@ -105,21 +105,13 @@ export function CourierLanding() {
 
         <div className="relative mx-auto w-full max-w-[1600px] bg-[#0a0a0a]">
           <div className="relative w-full">
-            <Image
-              src="/images/delivery-hero-banner.jpg"
-              alt="Подключение к Яндекс Доставке — парк Армада: пеший, авто, мото и грузовой курьер, гибкий график, официальный доход, быстрая регистрация по всей России"
-              width={1536}
-              height={1024}
-              priority
-              sizes="(max-width: 640px) 100vw, (max-width: 1280px) 100vw, 1600px"
-              className="mx-auto h-auto w-full max-w-full object-contain"
-            />
+            <DeliveryHeroBanner />
             <div
-              className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(7,9,13,0.15),transparent_55%,rgba(7,9,13,0.3))]"
+              className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(7,9,13,0.12),transparent_50%,rgba(7,9,13,0.22))]"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#07090d] via-[#07090d]/65 to-transparent sm:h-28"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#07090d] via-[#07090d]/55 to-transparent sm:h-24"
               aria-hidden
             />
           </div>

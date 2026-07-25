@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         url: "/images/delivery-hero-banner.jpg",
         width: 1536,
         height: 1024,
-        alt: "Подключение к Яндекс Доставке — парк Армада",
+        alt: "Армада — партнёр Яндекс Доставки",
       },
     ],
   },
