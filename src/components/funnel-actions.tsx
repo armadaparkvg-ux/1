@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContactButtons } from "@/components/contact-buttons";
 import { ApplyButton } from "@/components/messenger-apply";
 import type { ApplyTopic } from "@/lib/apply";
+import { fleetGoPath } from "@/lib/fleet-forms";
 import { trackFleetRegistration } from "@/lib/metrika";
 import { cn } from "@/lib/utils";
 
@@ -32,6 +32,7 @@ type DualPathProps = {
 
 /**
  * Unified funnel ending: авторегистрация (shimmer) или поддержка парка (pulse chats).
+ * Register CTA goes via `/go/fleet/` so Metrika URL goals can verify the hit.
  */
 export function DualPathActions({
   registerHref,
@@ -55,19 +56,24 @@ export function DualPathActions({
     });
   };
 
+  /** Prefer same-site /go/fleet/ for Metrika page goals */
+  const goHref =
+    fleetTrack != null
+      ? fleetGoPath(fleetTrack.channel, fleetTrack.type)
+      : registerHref;
+
   return (
     <div className={cn("mt-6 flex flex-col gap-3", className)}>
-      {registerHref ? (
+      {goHref ? (
         <Button asChild shine size="lg" className="w-full">
-          <Link
-            href={registerHref}
+          <a
+            href={goHref}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => track("link")}
           >
             {registerLabel}
             <ExternalLink className="h-4 w-4" aria-hidden />
-          </Link>
+          </a>
         </Button>
       ) : null}
 

@@ -51,8 +51,22 @@ export function trackGoal(
     typeof goal === "string" && goal in METRIKA_GOALS
       ? METRIKA_GOALS[goal as keyof typeof METRIKA_GOALS]
       : String(goal);
+
+  // Ensure queue stub exists if tag.js not loaded yet
+  type YmFn = ((...args: unknown[]) => void) & { a?: unknown[]; l?: number };
+  const w = window as Window & { ym?: YmFn };
+  if (typeof w.ym !== "function") {
+    const queue: YmFn = (...args: unknown[]) => {
+      queue.a = queue.a || [];
+      queue.a.push(args);
+    };
+    queue.a = [];
+    queue.l = Date.now();
+    w.ym = queue;
+  }
+
   try {
-    window.ym?.(METRIKA_ID, "reachGoal", name, params);
+    w.ym?.(METRIKA_ID, "reachGoal", name, params);
   } catch {
     /* ignore */
   }

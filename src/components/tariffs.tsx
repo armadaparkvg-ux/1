@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { ContactButtons } from "@/components/contact-buttons";
 import { FORMS } from "@/lib/constants";
 import { COURIER_TARIFFS } from "@/lib/courier";
+import { fleetGoPath } from "@/lib/fleet-forms";
 import { trackFleetRegistration } from "@/lib/metrika";
 
 const TARIFFS = [
@@ -139,21 +140,14 @@ function TariffCard({
         ) : (
           <>
             <Button asChild shine className="mt-6 w-full" size="lg">
-              <Link
-                href={tariff.href}
+              <a
+                href={fleetGoPath("taxi", tariff.key)}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() =>
-                  trackFleetRegistration({
-                    channel: "taxi",
-                    type: tariff.key,
-                    action: "link",
-                  })
-                }
               >
                 {tariff.cta}
                 <ExternalLink className="h-4 w-4" aria-hidden />
-              </Link>
+              </a>
             </Button>
             {tariff.iframe ? (
               <div className="mt-4">
