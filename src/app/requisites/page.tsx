@@ -85,7 +85,13 @@ export default function RequisitesPage() {
             </dd>
           </div>
         </dl>
-        <p>
+        <p className="flex flex-wrap gap-4">
+          <Link href="/offer/" className="text-accent hover:underline">
+            Агентское соглашение (оферта)
+          </Link>
+          <Link href="/privacy/" className="text-accent hover:underline">
+            Политика конфиденциальности
+          </Link>
           <Link href="/" className="text-accent hover:underline">
             ← На главную
           </Link>

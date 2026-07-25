@@ -48,7 +48,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/offer/" className="hover:text-accent transition-colors">
-                  Публичная оферта
+                  Агентское соглашение (оферта)
                 </Link>
               </li>
               <li>

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ContactButtons } from "@/components/contact-buttons";
 import { ApplyButton } from "@/components/messenger-apply";
 import type { ApplyTopic } from "@/lib/apply";
+import { LegalAcceptanceNote } from "@/components/legal-acceptance-note";
 import { fleetGoPath } from "@/lib/fleet-forms";
 import { trackFleetRegistration } from "@/lib/metrika";
 import { cn } from "@/lib/utils";
@@ -121,6 +122,10 @@ export function DualPathActions({
           </p>
           <ContactButtons showLabels size="sm" className="justify-center" />
         </div>
+      ) : null}
+
+      {goHref || applyTopic || chats ? (
+        <LegalAcceptanceNote className="pt-1" />
       ) : null}
     </div>
   );
