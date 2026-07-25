@@ -1,13 +1,14 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import {
+  ArrowLeft,
   Bike,
   Car,
   Package,
   PersonStanding,
 } from "lucide-react";
-import Link from "next/link";
-import { DestinationHero } from "@/components/destination-hero";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { DualPathActions } from "@/components/funnel-actions";
 import { ContactButtons } from "@/components/contact-buttons";
@@ -27,6 +28,21 @@ const ICONS = {
   moto: Bike,
   cargo: Package,
 } as const;
+
+const RELATED_ARTICLES = [
+  {
+    href: "/blog/rabota-kurerom-yandex-dohod/",
+    title: "Работа курьером и доходы",
+  },
+  {
+    href: "/blog/vidy-sotrudnichestva-kurer/",
+    title: "Виды сотрудничества курьера",
+  },
+  {
+    href: "/blog/vidy-dostavki-peshiy-avto-gruzovoy/",
+    title: "Пеший, авто и грузовой",
+  },
+] as const;
 
 function CourierCard({ tariff }: { tariff: CourierTariff }) {
   const Icon = ICONS[tariff.id];
@@ -76,29 +92,74 @@ function CourierCard({ tariff }: { tariff: CourierTariff }) {
 export function CourierLanding() {
   return (
     <div className="pb-20">
-      <DestinationHero
-        eyebrow="Яндекс Доставка · парк «Армада»"
-        title="Подключение курьеров к Яндекс Доставке"
-        description="Последовательность: как подключиться → выбрать тариф → авторегистрация или поддержка парка. Пеший, авто, мото и грузовой — удалённо."
-        image="/images/delivery-premium-hero.webp"
-        imageAlt="Курьер и транспорт для работы в Яндекс Доставке"
-        primaryHref="#courier-steps"
-        primaryLabel="Начать: как подключиться"
-        accent="emerald"
-      >
-        <ol className="grid gap-2 sm:grid-cols-3">
-          {["1. 4 шага", "2. Тариф курьера", "3. Регистрация или чат"].map(
-            (item) => (
+      <section className="relative overflow-hidden border-b border-border bg-[#07090d] pt-[72px]">
+        <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden />
+            На главную
+          </Link>
+        </div>
+
+        <div className="relative mx-auto w-full max-w-[1600px] bg-[#0a0a0a]">
+          <div className="relative w-full">
+            <Image
+              src="/images/delivery-hero-banner.jpg"
+              alt="Подключение к Яндекс Доставке — парк Армада: пеший, авто, мото и грузовой курьер, гибкий график, официальный доход, быстрая регистрация по всей России"
+              width={1536}
+              height={1024}
+              priority
+              sizes="(max-width: 640px) 100vw, (max-width: 1280px) 100vw, 1600px"
+              className="mx-auto h-auto w-full max-w-full object-contain"
+            />
+            <div
+              className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(7,9,13,0.15),transparent_55%,rgba(7,9,13,0.3))]"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#07090d] via-[#07090d]/65 to-transparent sm:h-28"
+              aria-hidden
+            />
+          </div>
+        </div>
+
+        <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-2 sm:px-6 sm:pb-16 lg:px-8">
+          <p className="text-sm font-medium uppercase tracking-wide text-emerald-glow">
+            Яндекс Доставка · парк «Армада»
+          </p>
+          <h1 className="mt-3 max-w-3xl font-display text-3xl font-semibold tracking-tight text-foreground text-balance sm:text-4xl lg:text-5xl">
+            Подключение курьеров к Яндекс Доставке
+          </h1>
+          <p className="mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
+            Вакансия курьера Яндекс: пеший, авто, мото и грузовой. По шагам —
+            тариф → авторегистрация или поддержка парка. Удалённо по России.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Button asChild shine size="lg" variant="emerald">
+              <Link href="#courier-tariffs">Выбрать тариф курьера</Link>
+            </Button>
+            <Button asChild shine size="lg" variant="secondary">
+              <Link href="#courier-steps">Как подключиться</Link>
+            </Button>
+          </div>
+          <ol className="mt-8 grid gap-2 sm:grid-cols-3">
+            {[
+              "1. Как подключиться",
+              "2. Тариф курьера",
+              "3. Регистрация или чат",
+            ].map((item) => (
               <li
                 key={item}
                 className="inline-flex items-center gap-2 rounded-xl border border-border bg-[#0b111c]/75 px-3 py-2 text-sm font-medium text-foreground/90 backdrop-blur"
               >
                 {item}
               </li>
-            )
-          )}
-        </ol>
-      </DestinationHero>
+            ))}
+          </ol>
+        </div>
+      </section>
 
       <section className="py-16 sm:py-20" aria-labelledby="courier-benefits">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -176,7 +237,7 @@ export function CourierLanding() {
               id="courier-tariffs-heading"
               eyebrow="Шаг 2 · Тариф"
               title="Выберите формат курьера"
-              description="Шаг 3 — авторегистрация онлайн или поддержка парка в чате."
+              description="Пеший, легковой авто, мото или грузовой — затем авторегистрация или поддержка парка в чате."
             />
           </FadeIn>
 
@@ -190,6 +251,34 @@ export function CourierLanding() {
               </StaggerItem>
             ))}
           </Stagger>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20" aria-labelledby="courier-guides">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <SectionHeading
+              id="courier-guides"
+              eyebrow="Полезные статьи"
+              title="Доходы, оформление и виды доставки"
+              description="Короткие гайды под запросы «работа курьером», «сколько зарабатывает курьер» и выбор формата."
+            />
+          </FadeIn>
+          <ul className="mt-10 grid gap-4 sm:grid-cols-3">
+            {RELATED_ARTICLES.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="premium-card block rounded-2xl p-5 transition-colors hover:border-accent/40"
+                >
+                  <p className="font-display text-lg font-semibold text-foreground">
+                    {item.title}
+                  </p>
+                  <p className="mt-2 text-sm text-accent">Читать →</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

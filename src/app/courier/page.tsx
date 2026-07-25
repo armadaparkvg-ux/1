@@ -3,18 +3,14 @@ import { CourierLanding } from "@/components/courier-landing";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Подключение курьеров к Яндекс Доставке",
+  title: "Курьер Яндекс Доставка",
   description:
-    "Пеший, авто, мото и грузовой курьер через таксопарк «Армада». Парковый самозанятый, авторегистрация, Telegram и MAX.",
-  alternates: { canonical: `${SITE.url}/courier/` },
-  openGraph: {
-    title: "Курьеры Яндекс Доставка — парк «Армада»",
-    description:
-      "Подключение пешего, авто, мото и грузового курьера. Авторегистрация и поддержка в мессенджерах.",
-    url: `${SITE.url}/courier/`,
-  },
+    "Подключение курьеров к Яндекс Доставке через парк «Армада». Актуальная страница: /delivery/.",
+  alternates: { canonical: `${SITE.url}/delivery/` },
+  robots: { index: false, follow: true },
 };
 
+/** Legacy URL — same UI as /delivery/, canonical points to /delivery/. */
 export default function CourierPage() {
   return <CourierLanding />;
 }

@@ -14,27 +14,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: `${SITE.url}/`,
-      lastModified: new Date("2026-07-18"),
+      lastModified: new Date("2026-07-25"),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${SITE.url}/blog/`,
-      lastModified: new Date("2026-07-18"),
+      lastModified: new Date("2026-07-25"),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: `${SITE.url}/taxi/`,
-      lastModified: new Date("2026-07-22"),
+      lastModified: new Date("2026-07-25"),
       changeFrequency: "weekly",
-      priority: 0.85,
+      priority: 0.9,
     },
     {
       url: `${SITE.url}/delivery/`,
-      lastModified: new Date("2026-07-22"),
+      lastModified: new Date("2026-07-25"),
       changeFrequency: "weekly",
-      priority: 0.85,
+      priority: 0.9,
     },
     {
       url: `${SITE.url}/license/`,
@@ -50,9 +50,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE.url}/courier/`,
-      lastModified: new Date("2026-07-22"),
+      lastModified: new Date("2026-07-25"),
       changeFrequency: "monthly",
-      priority: 0.45,
+      priority: 0.3,
     },
     ...articles,
     {

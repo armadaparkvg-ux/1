@@ -4,24 +4,35 @@ import { ARTICLES } from "@/lib/articles";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Статьи о подключении к Яндекс Такси",
+  title: "Статьи: Яндекс Такси и Доставка",
   description:
-    "Короткие гайды таксопарка «Армада»: как подключиться, какой тариф выбрать, лицензия ФГИС и лимит самозанятого.",
+    "Гайды парка «Армада»: подключение к такси, тарифы, ФГИС, работа курьером Яндекс Доставка, доходы и виды доставки.",
+  keywords: [
+    "работа курьером яндекс",
+    "сколько зарабатывает курьер яндекс",
+    "подключение к яндекс такси",
+    "виды доставки курьер",
+  ],
   alternates: { canonical: `${SITE.url}/blog/` },
 };
 
 export default function BlogIndexPage() {
+  const articles = [...ARTICLES].sort((a, b) =>
+    a.date < b.date ? 1 : a.date > b.date ? -1 : 0
+  );
+
   return (
     <div className="mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
       <h1 className="font-display text-3xl font-semibold text-foreground sm:text-4xl">
         Полезные статьи
       </h1>
       <p className="mt-3 text-muted-foreground">
-        Короткие материалы для водителей — без перегруза главной страницы.
+        Такси и доставка: подключение, доходы курьера, форматы сотрудничества и
+        виды доставки.
       </p>
 
       <ul className="mt-10 space-y-4">
-        {ARTICLES.map((article) => (
+        {articles.map((article) => (
           <li key={article.slug}>
             <Link
               href={`/blog/${article.slug}/`}
@@ -41,7 +52,13 @@ export default function BlogIndexPage() {
         ))}
       </ul>
 
-      <p className="mt-10">
+      <p className="mt-10 flex flex-wrap gap-4">
+        <Link href="/delivery/" className="text-accent hover:underline">
+          Доставка →
+        </Link>
+        <Link href="/taxi/" className="text-accent hover:underline">
+          Такси →
+        </Link>
         <Link href="/" className="text-accent hover:underline">
           ← На главную
         </Link>
