@@ -1,4 +1,4 @@
-/* Content Factory — редактор календаря, медиа, ссылки, API */
+/* Дмитрий Шеф пельмешь — редактор календаря, медиа, ссылки, API */
 (function () {
   const STORAGE_POSTS = "cf_posts_v2";
   const STORAGE_API = "cf_api_v2";
@@ -295,7 +295,7 @@
     const phone = document.querySelector(".preview-phone");
     if (!cap || !phone) return;
     const text = post
-      ? `${escapeHtml(post.caption || post.title)}${post.link ? `<br/><span style="opacity:.85;text-decoration:underline">${escapeHtml(post.link)}</span>` : ""}<br/><span style="opacity:.7">#contentfactory</span>`
+      ? `${escapeHtml(post.caption || post.title)}${post.link ? `<br/><span style="opacity:.85;text-decoration:underline">${escapeHtml(post.link)}</span>` : ""}<br/><span style="opacity:.7">#шефпельмешь</span>`
       : "Выберите пост в календаре";
     cap.innerHTML = text;
 
@@ -561,7 +561,7 @@
     const vk = apiConfig.vk || {};
     const tt = apiConfig.tiktok || {};
     const text = [
-      "# Переменные для Make Content Factory",
+      "# Переменные для Make — Дмитрий Шеф пельмешь",
       `ig_user_id=${ig.userId || ""}`,
       `ig_access_token=${ig.accessToken || ""}`,
       `vk_group_id=${vk.groupId || ""}`,
