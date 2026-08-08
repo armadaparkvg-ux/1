@@ -1,0 +1,156 @@
+{
+  "name": "CF-02 Instagram Comment → Private Reply Lead Magnet",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "version": 1,
+      "parameters": {},
+      "mapper": {},
+      "metadata": {
+        "designer": { "x": 0, "y": 0, "name": "Meta Webhook (comments)" }
+      }
+    },
+    {
+      "id": 2,
+      "module": "json:ParseJSON",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "json": "{{1.value}}"
+      },
+      "metadata": {
+        "designer": { "x": 300, "y": 0, "name": "Parse webhook payload" }
+      }
+    },
+    {
+      "id": 3,
+      "module": "builtin:BasicFeeder",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "array": "{{2.entry[].changes[]}}"
+      },
+      "metadata": {
+        "designer": { "x": 600, "y": 0, "name": "Iterate comment changes" }
+      }
+    },
+    {
+      "id": 4,
+      "module": "util:SetVariable2",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "name": "comment_text",
+        "scope": "roundtrip",
+        "value": "{{lower(trim(3.value.text))}}"
+      },
+      "filter": {
+        "name": "Is comment field",
+        "conditions": [
+          [
+            { "a": "{{3.field}}", "o": "text:equal", "b": "comments" }
+          ]
+        ]
+      },
+      "metadata": {
+        "designer": { "x": 900, "y": 0, "name": "Normalize comment text" }
+      }
+    },
+    {
+      "id": 5,
+      "module": "google-sheets:filterRows",
+      "version": 2,
+      "parameters": {},
+      "mapper": {
+        "filter": [
+          {
+            "a": "cta_keyword",
+            "o": "text:equal:ci",
+            "b": "{{4.comment_text}}"
+          },
+          {
+            "a": "status",
+            "o": "text:equal:ci",
+            "b": "published"
+          }
+        ]
+      },
+      "metadata": {
+        "designer": { "x": 1200, "y": 0, "name": "Find CTA keyword in plan" }
+      }
+    },
+    {
+      "id": 6,
+      "module": "http:ActionSendData",
+      "version": 3,
+      "parameters": { "handleErrors": true },
+      "mapper": {
+        "url": "https://graph.facebook.com/v21.0/{{var.ig_user_id}}/messages",
+        "method": "post",
+        "parseResponse": true,
+        "bodyType": "raw",
+        "headers": [
+          { "name": "Content-Type", "value": "application/json" }
+        ],
+        "qs": [
+          { "name": "access_token", "value": "{{var.ig_access_token}}" }
+        ],
+        "body": "{\n  \"recipient\": { \"comment_id\": \"{{3.value.id}}\" },\n  \"message\": { \"text\": \"Лови материал 👉 {{5.array[1].lead_magnet_url}}\" }\n}"
+      },
+      "filter": {
+        "name": "Keyword matched + has magnet",
+        "conditions": [
+          [
+            { "a": "{{5.array[].lead_magnet_url}}", "o": "text:isnotempty" }
+          ]
+        ]
+      },
+      "metadata": {
+        "designer": { "x": 1500, "y": 0, "name": "Private Reply DM" }
+      }
+    },
+    {
+      "id": 7,
+      "module": "http:ActionSendData",
+      "version": 3,
+      "parameters": { "handleErrors": true },
+      "mapper": {
+        "url": "https://graph.facebook.com/v21.0/{{3.value.id}}/replies",
+        "method": "post",
+        "parseResponse": true,
+        "bodyType": "application/x-www-form-urlencoded",
+        "body": [
+          { "name": "message", "value": "Отправила в Директ ✉️" },
+          { "name": "access_token", "value": "{{var.ig_access_token}}" }
+        ]
+      },
+      "metadata": {
+        "designer": { "x": 1800, "y": 0, "name": "Public reply under comment" }
+      }
+    },
+    {
+      "id": 8,
+      "module": "telegram:SendMessage",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "text": "🧲 Lead magnet sent\nComment: {{3.value.text}}\nMedia: {{3.value.media.id}}"
+      },
+      "metadata": {
+        "designer": { "x": 2100, "y": 0, "name": "Ops alert" }
+      }
+    }
+  ],
+  "metadata": {
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "sequential": false,
+      "dlq": true
+    },
+    "notes": "1) В Meta App настроить Webhooks → Instagram → comments 2) Verify token на Custom Webhook 3) Private Reply: 1 сообщение / 7 дней 4) Для Live — отдельный live_comments 5) Добавьте Data Store дедупликации comment_id"
+  }
+}

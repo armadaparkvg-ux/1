@@ -1,0 +1,81 @@
+{
+  "name": "CF-04 TikTok Token Refresh (every 12h)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "datastore:GetRecord",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "key": "tiktok_main"
+      },
+      "metadata": {
+        "designer": { "x": 0, "y": 0, "name": "Get refresh_token" }
+      }
+    },
+    {
+      "id": 2,
+      "module": "http:ActionSendData",
+      "version": 3,
+      "parameters": { "handleErrors": true },
+      "mapper": {
+        "url": "https://open.tiktokapis.com/v2/oauth/token/",
+        "method": "post",
+        "parseResponse": true,
+        "bodyType": "application/x-www-form-urlencoded",
+        "headers": [
+          { "name": "Content-Type", "value": "application/x-www-form-urlencoded" }
+        ],
+        "body": [
+          { "name": "client_key", "value": "{{var.tt_client_key}}" },
+          { "name": "client_secret", "value": "{{var.tt_client_secret}}" },
+          { "name": "grant_type", "value": "refresh_token" },
+          { "name": "refresh_token", "value": "{{1.refresh_token}}" }
+        ]
+      },
+      "metadata": {
+        "designer": { "x": 300, "y": 0, "name": "Refresh access_token" }
+      }
+    },
+    {
+      "id": 3,
+      "module": "datastore:AddRecord",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "key": "tiktok_main",
+        "data": {
+          "access_token": "{{2.data.access_token}}",
+          "refresh_token": "{{ifempty(2.data.refresh_token; 1.refresh_token)}}",
+          "expires_at": "{{addSeconds(now; 2.data.expires_in)}}",
+          "updated_at": "{{now}}"
+        }
+      },
+      "metadata": {
+        "designer": { "x": 600, "y": 0, "name": "Store new tokens" }
+      }
+    },
+    {
+      "id": 4,
+      "module": "telegram:SendMessage",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "text": "🔐 TikTok token refreshed\nexpires_in: {{2.data.expires_in}}s"
+      },
+      "metadata": {
+        "designer": { "x": 900, "y": 0, "name": "Confirm refresh" }
+      }
+    }
+  ],
+  "metadata": {
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 2,
+      "autoCommit": true,
+      "dlq": true
+    },
+    "notes": "Schedule every 12 hours. Access token TikTok = 24h. В Publisher Core берите tt_access_token из Data Store, не из Variables. Первый refresh_token положите вручную после OAuth."
+  }
+}

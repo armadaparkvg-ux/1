@@ -1,0 +1,129 @@
+{
+  "name": "CF-06 Approvals Gate (Planable / Hootsuite-style)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "google-sheets:watchRows",
+      "version": 2,
+      "parameters": { "limit": 10 },
+      "mapper": {},
+      "filter": {
+        "name": "Needs review",
+        "conditions": [
+          [
+            { "a": "{{1.status}}", "o": "text:equal:ci", "b": "review" }
+          ]
+        ]
+      },
+      "metadata": {
+        "designer": { "x": 0, "y": 0, "name": "Watch review queue" }
+      }
+    },
+    {
+      "id": 2,
+      "module": "telegram:SendMessage",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "text": "🛡 Approval needed\nID: {{1.id}}\nPlatforms: {{1.platforms}}\nIG: {{1.caption_ig}}\n\nReply:\n/approve {{1.id}}\n/reject {{1.id}} причина"
+      },
+      "metadata": {
+        "designer": { "x": 300, "y": 0, "name": "Ping approver" }
+      }
+    },
+    {
+      "id": 3,
+      "module": "telegram:WatchUpdates",
+      "version": 1,
+      "parameters": {},
+      "mapper": {},
+      "metadata": {
+        "designer": { "x": 600, "y": 0, "name": "Watch approve/reject" }
+      }
+    },
+    {
+      "id": 4,
+      "module": "builtin:BasicRouter",
+      "version": 1,
+      "mapper": null,
+      "metadata": {
+        "designer": { "x": 900, "y": 150, "name": "Approve vs Reject" }
+      },
+      "routes": [
+        {
+          "flow": [
+            {
+              "id": 5,
+              "module": "google-sheets:updateRow",
+              "version": 2,
+              "parameters": {},
+              "mapper": {
+                "values": {
+                  "status": "approved",
+                  "approval_by": "{{3.from.username}}",
+                  "approval_note": "approved via telegram"
+                }
+              },
+              "filter": {
+                "name": "Approve command",
+                "conditions": [
+                  [
+                    { "a": "{{3.text}}", "o": "text:contain:ci", "b": "/approve" }
+                  ]
+                ]
+              },
+              "metadata": {
+                "designer": { "x": 1200, "y": 0, "name": "Mark approved" }
+              }
+            },
+            {
+              "id": 6,
+              "module": "google-sheets:updateRow",
+              "version": 2,
+              "parameters": {},
+              "mapper": {
+                "values": {
+                  "status": "ready"
+                }
+              },
+              "metadata": {
+                "designer": { "x": 1500, "y": 0, "name": "Promote to ready" }
+              }
+            }
+          ]
+        },
+        {
+          "flow": [
+            {
+              "id": 7,
+              "module": "google-sheets:updateRow",
+              "version": 2,
+              "parameters": {},
+              "mapper": {
+                "values": {
+                  "status": "draft",
+                  "approval_note": "{{3.text}}"
+                }
+              },
+              "filter": {
+                "name": "Reject command",
+                "conditions": [
+                  [
+                    { "a": "{{3.text}}", "o": "text:contain:ci", "b": "/reject" }
+                  ]
+                ]
+              },
+              "metadata": {
+                "designer": { "x": 1200, "y": 300, "name": "Back to draft" }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "version": 1,
+    "notes": "Упрощённый approvals gate. В проде лучше разделить: Scenario A шлёт запросы, Scenario B слушает команды и матчит id через Data Store. Для клиентских approvals — дублировать в email/Slack."
+  }
+}
