@@ -3,53 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Make Content Factory — веб-процесс автопостинга</title>
+  <title>Content Factory — платформа автопостинга</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./platform.css" />
   <style>
-    :root {
-      --ink: #0b1210;
-      --panel: #121c18;
-      --line: rgba(180, 255, 214, 0.14);
-      --mint: #8dffb5;
-      --mint-dim: #3d8f5f;
-      --sand: #e8f0ea;
-      --mute: #8aa396;
-      --warn: #ffb86b;
-      --danger: #ff6b7a;
-      --ig: #f77737;
-      --vk: #4a76a8;
-      --yt: #ff4d4d;
-      --tt: #25f4ee;
-      --radius: 18px;
-      --max: 1120px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: "DM Sans", sans-serif;
-      color: var(--sand);
-      background:
-        radial-gradient(1200px 600px at 80% -10%, rgba(141, 255, 181, 0.16), transparent 55%),
-        radial-gradient(900px 500px at 0% 20%, rgba(37, 244, 238, 0.08), transparent 50%),
-        linear-gradient(180deg, #07100d 0%, var(--ink) 40%, #0e1713 100%);
-      min-height: 100vh;
-    }
-
-    a { color: var(--mint); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    .wrap { width: min(var(--max), calc(100% - 2rem)); margin: 0 auto; }
-
-    /* HERO */
+    .landing { display: block; }
+    .landing.off { display: none; }
     .hero {
       min-height: 100vh;
       display: grid;
       align-content: end;
-      padding: 2rem 0 4rem;
+      padding: 2rem 1rem 4rem;
       position: relative;
       overflow: hidden;
     }
@@ -60,707 +26,505 @@
       background:
         linear-gradient(90deg, rgba(141,255,181,0.04) 1px, transparent 1px) 0 0 / 72px 72px,
         linear-gradient(rgba(141,255,181,0.04) 1px, transparent 1px) 0 0 / 72px 72px;
-      mask-image: linear-gradient(180deg, #000 30%, transparent 90%);
-      pointer-events: none;
+      mask-image: linear-gradient(180deg, #000 35%, transparent 92%);
       animation: gridDrift 28s linear infinite;
+      pointer-events: none;
     }
-    @keyframes gridDrift {
-      from { transform: translateY(0); }
-      to { transform: translateY(72px); }
-    }
-
+    @keyframes gridDrift { to { transform: translateY(72px); } }
+    .wrap { width: min(var(--max), calc(100% - 2rem)); margin: 0 auto; position: relative; z-index: 2; }
     .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: clamp(4rem, 18vh, 9rem);
-      position: relative;
-      z-index: 2;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: clamp(3rem, 14vh, 8rem);
     }
-    .nav-brand {
-      font-family: Syne, sans-serif;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      font-size: 0.95rem;
-    }
-    .nav-links { display: flex; gap: 1.25rem; font-size: 0.92rem; color: var(--mute); }
-    .nav-links a { color: inherit; }
-    .nav-links a:hover { color: var(--mint); text-decoration: none; }
-
+    .nav-brand { font-family: Syne, sans-serif; font-weight: 800; letter-spacing: 0.04em; font-size: 0.92rem; }
     .hero-brand {
-      font-family: Syne, sans-serif;
-      font-weight: 800;
-      font-size: clamp(3.2rem, 10vw, 7.2rem);
-      line-height: 0.9;
-      letter-spacing: -0.04em;
-      margin: 0 0 1.25rem;
-      position: relative;
-      z-index: 2;
-      animation: rise 0.9s ease both;
+      font-family: Syne, sans-serif; font-weight: 800;
+      font-size: clamp(3rem, 9vw, 6.5rem); line-height: 0.9; letter-spacing: -0.04em;
+      margin: 0 0 1.1rem; animation: rise 0.85s ease both;
     }
-    .hero-brand span {
-      display: block;
-      color: var(--mint);
-      text-shadow: 0 0 40px rgba(141, 255, 181, 0.25);
-    }
+    .hero-brand span { display: block; color: var(--mint); text-shadow: 0 0 40px rgba(141,255,181,0.25); }
     .hero-lead {
-      max-width: 34rem;
-      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
-      color: var(--mute);
-      line-height: 1.5;
-      margin: 0 0 2rem;
-      position: relative;
-      z-index: 2;
-      animation: rise 0.9s ease 0.12s both;
+      max-width: 36rem; color: var(--mute); font-size: clamp(1.05rem, 2vw, 1.25rem);
+      line-height: 1.5; margin: 0 0 1.75rem; animation: rise 0.85s ease 0.1s both;
     }
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      position: relative;
-      z-index: 2;
-      animation: rise 0.9s ease 0.22s both;
+    .cta-row { display: flex; flex-wrap: wrap; gap: 0.7rem; animation: rise 0.85s ease 0.18s both; }
+    .section { padding: 4.5rem 0; }
+    .kicker {
+      color: var(--mint-dim); text-transform: uppercase; letter-spacing: 0.16em;
+      font-size: 0.72rem; font-weight: 700; margin: 0 0 0.6rem;
     }
-    .btn {
-      border: 1px solid var(--mint);
-      background: var(--mint);
-      color: #062016;
-      font-weight: 700;
-      padding: 0.9rem 1.25rem;
-      border-radius: 999px;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: transform .2s ease, background .2s ease;
+    .section h2 {
+      font-family: Syne, sans-serif; font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      letter-spacing: -0.03em; margin: 0 0 0.6rem; line-height: 1.1;
     }
-    .btn:hover { transform: translateY(-2px); text-decoration: none; }
-    .btn.ghost {
-      background: transparent;
-      color: var(--sand);
-      border-color: var(--line);
+    .section-lead { color: var(--mute); max-width: 40rem; margin: 0 0 1.75rem; line-height: 1.5; }
+    .feature-rail {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;
     }
-
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: none; }
+    .feature {
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 1.15rem;
+      background: var(--panel); min-height: 140px;
     }
-
-    section { padding: 5rem 0; }
-    .section-kicker {
-      color: var(--mint-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.75rem;
-      margin: 0 0 0.75rem;
-      font-weight: 700;
-    }
-    h2 {
-      font-family: Syne, sans-serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      letter-spacing: -0.03em;
-      margin: 0 0 0.75rem;
-      line-height: 1.1;
-    }
-    .section-lead {
-      color: var(--mute);
-      max-width: 40rem;
-      margin: 0 0 2.5rem;
-      line-height: 1.55;
-    }
-
-    /* PIPELINE */
-    .pipeline {
-      display: grid;
-      gap: 0.75rem;
-    }
-    .pipe-step {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 1rem;
-      align-items: start;
-      padding: 1.15rem 1.25rem;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(135deg, rgba(141,255,181,0.05), transparent 55%), var(--panel);
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity .5s ease, transform .5s ease, border-color .2s;
-    }
-    .pipe-step.in { opacity: 1; transform: none; }
-    .pipe-step:hover { border-color: rgba(141,255,181,0.35); }
-    .pipe-num {
-      font-family: Syne, sans-serif;
-      font-weight: 800;
-      color: var(--mint);
-      font-size: 1.2rem;
-      min-width: 2rem;
-    }
-    .pipe-step h3 { margin: 0 0 0.35rem; font-size: 1.05rem; }
-    .pipe-step p { margin: 0; color: var(--mute); font-size: 0.95rem; line-height: 1.45; }
-
-    /* SCENARIOS */
-    .scenario-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-    @media (max-width: 800px) {
-      .scenario-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-    }
-    .scenario {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 1.35rem;
-      background: var(--panel);
-      cursor: pointer;
-      transition: border-color .2s, transform .2s;
-    }
-    .scenario:hover, .scenario.active {
-      border-color: rgba(141,255,181,0.45);
-      transform: translateY(-2px);
-    }
-    .scenario .tag {
-      display: inline-block;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #062016;
-      background: var(--mint);
-      padding: 0.25rem 0.55rem;
-      border-radius: 999px;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-    .scenario h3 {
-      font-family: Syne, sans-serif;
-      margin: 0 0 0.5rem;
-      font-size: 1.25rem;
-    }
-    .scenario p { margin: 0; color: var(--mute); font-size: 0.95rem; line-height: 1.45; }
-    .scenario .meta {
-      margin-top: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-    .chip {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 0.25rem 0.6rem;
-      font-size: 0.78rem;
-      color: var(--mute);
-    }
-
-    .detail {
-      margin-top: 1rem;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 1.35rem;
-      background: rgba(8, 16, 13, 0.75);
-      display: none;
-    }
-    .detail.open { display: block; animation: rise .35s ease both; }
-    .detail h4 {
-      font-family: Syne, sans-serif;
-      margin: 0 0 0.75rem;
-      font-size: 1.1rem;
-    }
-    .detail ol { margin: 0; padding-left: 1.2rem; color: var(--mute); line-height: 1.6; }
-    .detail code {
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 0.85em;
-      color: var(--mint);
-    }
-
-    /* PLATFORMS */
-    .platforms {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.75rem;
-    }
-    @media (max-width: 900px) { .platforms { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 520px) { .platforms { grid-template-columns: 1fr; } }
-    .plat {
-      border-radius: var(--radius);
-      padding: 1.2rem;
-      border: 1px solid var(--line);
-      background: var(--panel);
-      min-height: 180px;
-    }
-    .plat h3 { margin: 0 0 0.5rem; font-family: Syne, sans-serif; font-size: 1.15rem; }
-    .plat ul { margin: 0; padding-left: 1.1rem; color: var(--mute); font-size: 0.9rem; line-height: 1.5; }
-    .plat.ig { box-shadow: inset 3px 0 0 var(--ig); }
-    .plat.vk { box-shadow: inset 3px 0 0 var(--vk); }
-    .plat.yt { box-shadow: inset 3px 0 0 var(--yt); }
-    .plat.tt { box-shadow: inset 3px 0 0 var(--tt); }
-
-    /* CHECKLIST */
-    .check-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
-    .check-list li {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.75rem;
-      align-items: start;
-      padding: 0.85rem 1rem;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(18, 28, 24, 0.8);
-    }
-    .check-list input {
-      appearance: none;
-      width: 1.15rem;
-      height: 1.15rem;
-      border: 1.5px solid var(--mint-dim);
-      border-radius: 4px;
-      margin-top: 0.15rem;
-      cursor: pointer;
-      position: relative;
-      background: transparent;
-    }
-    .check-list input:checked {
-      background: var(--mint);
-      border-color: var(--mint);
-    }
-    .check-list input:checked::after {
-      content: "";
-      position: absolute;
-      left: 0.28rem;
-      top: 0.05rem;
-      width: 0.28rem;
-      height: 0.55rem;
-      border: solid #062016;
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
-    }
-    .check-list label { cursor: pointer; line-height: 1.4; }
-    .check-list .done label { color: var(--mute); text-decoration: line-through; }
-
-    .progress {
-      margin: 0 0 1.25rem;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(141,255,181,0.1);
-      overflow: hidden;
-    }
-    .progress > i {
-      display: block;
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--mint-dim), var(--mint));
-      transition: width .35s ease;
-    }
-    .progress-label { color: var(--mute); font-size: 0.9rem; margin-bottom: 0.5rem; }
-
-    /* FILES */
-    .files {
-      display: grid;
-      gap: 0.6rem;
-    }
-    .file {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: center;
-      padding: 1rem 1.15rem;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--panel);
-    }
-    .file strong { display: block; margin-bottom: 0.2rem; }
-    .file span { color: var(--mute); font-size: 0.9rem; }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 2rem 0 3rem;
-      color: var(--mute);
-      font-size: 0.9rem;
-    }
-
-    .flow-ascii {
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      white-space: pre;
-      overflow-x: auto;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      background: #070e0b;
-      color: var(--mint);
-      font-size: 0.78rem;
-      line-height: 1.45;
-    }
+    .feature h3 { font-family: Syne, sans-serif; margin: 0 0 0.4rem; font-size: 1.05rem; }
+    .feature p { margin: 0; color: var(--mute); font-size: 0.92rem; line-height: 1.45; }
+    .feature .src { display: inline-block; margin-top: 0.7rem; font-size: 0.72rem; color: var(--mint-dim); }
+    @media (max-width: 800px) { .feature-rail { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="wrap">
-      <nav class="nav">
-        <div class="nav-brand">MAKE · CONTENT FACTORY</div>
-        <div class="nav-links">
-          <a href="#pipeline">Процесс</a>
-          <a href="#scenarios">Сценарии</a>
-          <a href="#platforms">Площадки</a>
-          <a href="#checklist">Чеклист</a>
-          <a href="#files">Файлы</a>
+  <!-- LANDING -->
+  <div class="landing" id="landing">
+    <header class="hero">
+      <div class="wrap">
+        <nav class="nav">
+          <div class="nav-brand">CONTENT FACTORY</div>
+          <button class="ghost sm" type="button" onclick="enterApp('calendar')">Открыть платформу</button>
+        </nav>
+        <h1 class="hero-brand">CONTENT<br /><span>FACTORY</span></h1>
+        <p class="hero-lead">Операционная система контент-завода: лучшее из Buffer, Later, Hootsuite, SMMplanner и Postmypost — плюс Make-native публикация в Instagram, VK, YouTube и TikTok.</p>
+        <div class="cta-row">
+          <button type="button" onclick="enterApp('calendar')">Запустить платформу</button>
+          <a class="btn ghost" href="#analysis">Смотреть анализ</a>
         </div>
-      </nav>
-
-      <h1 class="hero-brand">MAKE<br /><span>FACTORY</span></h1>
-      <p class="hero-lead">Полный веб-процесс автопостинга видео: Google Sheets → Make → Instagram · VK · YouTube · TikTok, плюс лид-магнит из комментариев и дневная аналитика.</p>
-      <div class="cta-row">
-        <a class="btn" href="#scenarios">Открыть сценарии</a>
-        <a class="btn ghost" href="#checklist">Что нужно подключить</a>
       </div>
+    </header>
+
+    <section class="section" id="adopted">
+      <div class="wrap">
+        <p class="kicker">Adopted from leaders</p>
+        <h2>Ключевые технологии, которые мы внедрили</h2>
+        <p class="section-lead">Не клон одного сервиса — сборка сильных сторон рынка под видео-автопостинг и RU-площадки.</p>
+        <div class="feature-rail">
+          <article class="feature">
+            <h3>Visual Calendar + 9:16 preview</h3>
+            <p>Планирование как в Later: сетка недели и превью вертикального ролика до публикации.</p>
+            <span class="src">← Later</span>
+          </article>
+          <article class="feature">
+            <h3>Queue + best-time slots</h3>
+            <p>Очередь публикаций и пиковые окна morning/midday/evening — дисциплина Buffer.</p>
+            <span class="src">← Buffer</span>
+          </article>
+          <article class="feature">
+            <h3>Approvals gate</h3>
+            <p>draft → review → approved → ready. Согласование в Telegram до выкладки.</p>
+            <span class="src">← Hootsuite / Planable / Postmypost</span>
+          </article>
+          <article class="feature">
+            <h3>AI adapt per platform</h3>
+            <p>Один смысл — четыре captions (IG/VK/TT/YT), не копипаст.</p>
+            <span class="src">← Buffer / Postmypost</span>
+          </article>
+          <article class="feature">
+            <h3>Bulk Sheets + RSS ingest</h3>
+            <p>Массовый план из CSV/Sheets и черновики из RSS с AI.</p>
+            <span class="src">← Publer / SMMplanner</span>
+          </article>
+          <article class="feature">
+            <h3>Evergreen recycle</h3>
+            <p>Категории + повтор сильных роликов через N дней с rewrite.</p>
+            <span class="src">← SocialBee</span>
+          </article>
+          <article class="feature">
+            <h3>Cross analytics</h3>
+            <p>Единая доска охватов/views по площадкам и алерты.</p>
+            <span class="src">← Metricool / Sprout</span>
+          </article>
+          <article class="feature">
+            <h3>Comment → DM</h3>
+            <p>Лид-магнит из комментария — наш дифференциатор поверх планировщиков.</p>
+            <span class="src">← Instagram Private Reply</span>
+          </article>
+          <article class="feature">
+            <h3>Make-native publish</h3>
+            <p>Официальные API IG/VK/YT/TT, token vault, partial failure handling.</p>
+            <span class="src">← Postmypost API idea + наш CF-01…08</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="analysis">
+      <div class="wrap">
+        <p class="kicker">Competitive analysis</p>
+        <h2>Сильные и слабые стороны лидеров</h2>
+        <p class="section-lead">Полный разбор — в <a href="./COMPETITIVE-ANALYSIS.md">COMPETITIVE-ANALYSIS.md</a>. Ниже — сжатая матрица.</p>
+        <div class="panel" style="overflow-x:auto">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>Возможность</th>
+                <th>Buffer</th>
+                <th>Later</th>
+                <th>Hootsuite</th>
+                <th>SMMplanner</th>
+                <th>Postmypost</th>
+                <th>Factory</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Queue / best time</td><td class="yes">●</td><td class="mid">◐</td><td class="yes">●</td><td class="yes">●</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>Visual calendar / grid</td><td class="mid">◐</td><td class="yes">●</td><td class="mid">◐</td><td class="yes">●</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>Approvals</td><td class="mid">◐</td><td class="mid">◐</td><td class="yes">●</td><td class="mid">◐</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>AI per-platform adapt</td><td class="yes">●</td><td class="yes">●</td><td class="yes">●</td><td class="mid">◐</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>VK / RU first-class</td><td class="no">○</td><td class="no">○</td><td class="no">○</td><td class="yes">●</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>RSS ingest</td><td class="no">○</td><td class="no">○</td><td class="mid">◐</td><td class="yes">●</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>Evergreen recycle</td><td class="mid">◐</td><td class="no">○</td><td class="mid">◐</td><td class="mid">◐</td><td class="mid">◐</td><td class="yes">●</td></tr>
+              <tr><td>Comment → DM funnel</td><td class="no">○</td><td class="no">○</td><td class="mid">◐</td><td class="no">○</td><td class="mid">◐</td><td class="yes">●</td></tr>
+              <tr><td>Make/n8n native</td><td class="mid">◐</td><td class="mid">◐</td><td class="mid">◐</td><td class="mid">◐</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>Цена / простота входа</td><td class="yes">●</td><td class="mid">◐</td><td class="no">○</td><td class="mid">◐</td><td class="mid">◐</td><td class="yes">●</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- APP -->
+  <div class="app-shell" id="app">
+    <aside class="sidebar">
+      <div class="side-brand">CONTENT <span>FACTORY</span></div>
+      <button class="nav-btn active" data-view="calendar" type="button">Calendar</button>
+      <button class="nav-btn" data-view="queue" type="button">Queue</button>
+      <button class="nav-btn" data-view="ai" type="button">AI Studio</button>
+      <button class="nav-btn" data-view="approvals" type="button">Approvals</button>
+      <button class="nav-btn" data-view="analytics" type="button">Analytics</button>
+      <button class="nav-btn" data-view="media" type="button">Media</button>
+      <button class="nav-btn" data-view="integrations" type="button">Integrations</button>
+      <button class="nav-btn" data-view="compete" type="button">Why us</button>
+      <div style="margin-top:1rem">
+        <button class="ghost sm" type="button" onclick="exitApp()">← Landing</button>
+      </div>
+    </aside>
+
+    <div class="main">
+      <!-- CALENDAR -->
+      <section class="view on" id="view-calendar">
+        <div class="topbar">
+          <div>
+            <h1>Visual Calendar</h1>
+            <p>Later-style сетка + превью Reels/Shorts/Clips</p>
+          </div>
+          <button type="button" onclick="toast('Слот добавлен в очередь peak_evening')">+ В слот</button>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi"><span>На неделе</span><b>12</b></div>
+          <div class="kpi"><span>Ready</span><b>4</b></div>
+          <div class="kpi"><span>На review</span><b>2</b></div>
+          <div class="kpi"><span>Площадки</span><b>4</b></div>
+        </div>
+        <div class="split">
+          <div class="panel">
+            <div class="calendar-grid" id="calGrid"></div>
+          </div>
+          <div class="panel">
+            <div class="preview-phone">
+              <div class="brand-tag">FACTORY · REELS</div>
+              <div class="cap" id="previewCap">Смонтируй так — и охваты вырастут 🔥<br /><span style="opacity:.7">#reels #smm</span></div>
+            </div>
+            <div class="chips" style="margin-top:1rem;justify-content:center">
+              <span class="chip on">IG</span><span class="chip on">VK</span><span class="chip on">YT</span><span class="chip on">TT</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUEUE -->
+      <section class="view" id="view-queue">
+        <div class="topbar">
+          <div>
+            <h1>Publishing Queue</h1>
+            <p>Buffer-style очередь + best-time окна</p>
+          </div>
+          <button class="ghost" type="button" onclick="toast('Best-time пересчитан по Analytics')">Recalc best time</button>
+        </div>
+        <div class="panel">
+          <table class="table" id="queueTable">
+            <thead>
+              <tr><th>ID</th><th>Slot</th><th>Platforms</th><th>Status</th><th>UTM</th><th></th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- AI -->
+      <section class="view" id="view-ai">
+        <div class="topbar">
+          <div>
+            <h1>AI Studio</h1>
+            <p>Адаптация captions под каждую площадку (Buffer / Postmypost)</p>
+          </div>
+          <button type="button" id="aiRun">Адаптировать</button>
+        </div>
+        <div class="split">
+          <div class="panel form-grid">
+            <label>Исходный смысл / черновик
+              <textarea id="aiSource">Один ролик — четыре площадки. Показываем автопостинг без копипаста.</textarea>
+            </label>
+            <label>Tone of voice
+              <select id="aiTone">
+                <option>дерзкий эксперт</option>
+                <option>спокойный наставник</option>
+                <option>коротко и по делу</option>
+              </select>
+            </label>
+            <label>CTA keyword
+              <input id="aiCta" value="гайд" />
+            </label>
+          </div>
+          <div class="panel form-grid" id="aiOut">
+            <label>Instagram<textarea readonly id="outIg"></textarea></label>
+            <label>VK<textarea readonly id="outVk"></textarea></label>
+            <label>TikTok<textarea readonly id="outTt"></textarea></label>
+            <label>YouTube<textarea readonly id="outYt"></textarea></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- APPROVALS -->
+      <section class="view" id="view-approvals">
+        <div class="topbar">
+          <div>
+            <h1>Approvals</h1>
+            <p>Hootsuite / Planable gate перед CF-01</p>
+          </div>
+        </div>
+        <div class="list-rows" id="approvalList"></div>
+      </section>
+
+      <!-- ANALYTICS -->
+      <section class="view" id="view-analytics">
+        <div class="topbar">
+          <div>
+            <h1>Analytics</h1>
+            <p>Сводная доска Metricool-style + сигналы для recycle</p>
+          </div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi"><span>IG reach</span><b>48.2k</b><div class="bar-track"><i style="width:72%"></i></div></div>
+          <div class="kpi"><span>VK reach</span><b>31.0k</b><div class="bar-track"><i style="width:55%"></i></div></div>
+          <div class="kpi"><span>YT views</span><b>19.4k</b><div class="bar-track"><i style="width:40%"></i></div></div>
+          <div class="kpi"><span>TT plays</span><b>62.7k</b><div class="bar-track"><i style="width:88%"></i></div></div>
+        </div>
+        <div class="panel">
+          <table class="table">
+            <thead><tr><th>Content</th><th>Winner?</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>CF-001 · хуки монтажа</td>
+                <td><span class="badge">top 10%</span></td>
+                <td><button class="sm" type="button" onclick="toast('Отправлено в Evergreen recycle')">Recycle</button></td>
+              </tr>
+              <tr>
+                <td>CF-003 · long guide</td>
+                <td><span class="badge warn">avg</span></td>
+                <td><button class="sm ghost" type="button" onclick="toast('A/B title предложен')">Rewrite title</button></td>
+              </tr>
+              <tr>
+                <td>CF-002 · хук 3 сек</td>
+                <td><span class="badge danger">low</span></td>
+                <td><button class="sm ghost" type="button" onclick="toast('Помечено: не recycle')">Skip</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- MEDIA -->
+      <section class="view" id="view-media">
+        <div class="topbar">
+          <div>
+            <h1>Media Library</h1>
+            <p>Drive-папка + спеки 9:16 H.264 (Later media-first)</p>
+          </div>
+          <button class="ghost" type="button" onclick="toast('Сканирование Drive…')">Sync Drive</button>
+        </div>
+        <div class="list-rows">
+          <div class="list-row">
+            <div>
+              <h3>hooks_montage_v3.mp4</h3>
+              <p>1080×1920 · 24s · H.264 · ready for IG/VK/YT/TT</p>
+            </div>
+            <span class="badge">OK</span>
+          </div>
+          <div class="list-row">
+            <div>
+              <h3>rss_draft_needs_edit.mov</h3>
+              <p>HEVC · нужно перекодировать в H.264</p>
+            </div>
+            <span class="badge warn">transcode</span>
+          </div>
+          <div class="list-row">
+            <div>
+              <h3>cover_hooks.png</h3>
+              <p>1080×1920 · cover for Shorts/Reels</p>
+            </div>
+            <span class="badge">OK</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTEGRATIONS -->
+      <section class="view" id="view-integrations">
+        <div class="topbar">
+          <div>
+            <h1>Integrations & Scenarios</h1>
+            <p>Make blueprints CF-01…CF-07</p>
+          </div>
+          <a class="btn ghost" href="./blueprints/">Blueprints</a>
+        </div>
+        <div class="list-rows">
+          <div class="list-row"><div><h3>CF-01 Publisher Core</h3><p>Sheets → Router → IG/VK/YT/TT</p></div><span class="badge">core</span></div>
+          <div class="list-row"><div><h3>CF-02 Lead Magnet</h3><p>Comment → Private Reply DM</p></div><span class="badge">growth</span></div>
+          <div class="list-row"><div><h3>CF-03 Analytics Daily</h3><p>Сбор метрик в Analytics sheet</p></div><span class="badge">reports</span></div>
+          <div class="list-row"><div><h3>CF-04 TikTok Token</h3><p>Refresh каждые 12ч</p></div><span class="badge">infra</span></div>
+          <div class="list-row"><div><h3>CF-05 RSS Ingest</h3><p>SMMplanner-style → draft rows</p></div><span class="badge">new</span></div>
+          <div class="list-row"><div><h3>CF-06 Approvals Gate</h3><p>Telegram approve/reject</p></div><span class="badge">new</span></div>
+          <div class="list-row"><div><h3>CF-07 Evergreen Recycle</h3><p>SocialBee-style повтор</p></div><span class="badge">new</span></div>
+        </div>
+      </section>
+
+      <!-- COMPETE -->
+      <section class="view" id="view-compete">
+        <div class="topbar">
+          <div>
+            <h1>Почему Factory, а не «ещё Buffer»</h1>
+            <p>Берём сильное, отбрасываем слабое</p>
+          </div>
+        </div>
+        <div class="split">
+          <div class="panel">
+            <h3 style="margin-top:0;font-family:Syne,sans-serif">Взяли</h3>
+            <ul style="color:var(--mute);line-height:1.6;margin:0;padding-left:1.1rem">
+              <li>Простоту очереди Buffer</li>
+              <li>Visual-first Later</li>
+              <li>Approvals Hootsuite/Planable</li>
+              <li>VK/RSS из SMMplanner</li>
+              <li>Bulk + API-мышление Postmypost</li>
+              <li>Recycle SocialBee</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3 style="margin-top:0;font-family:Syne,sans-serif">Не копируем</h3>
+            <ul style="color:var(--mute);line-height:1.6;margin:0;padding-left:1.1rem">
+              <li>Серые multi-account / proxy</li>
+              <li>Один текст на все сети</li>
+              <li>Тяжёлый enterprise listening</li>
+              <li>Прямой репост ссылок в VK (убивает охват)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel" style="margin-top:0.85rem">
+          <p style="margin:0;color:var(--mute);line-height:1.55">
+            Документы: <a href="./COMPETITIVE-ANALYSIS.md">анализ</a> ·
+            <a href="./PRODUCT.md">продукт</a> ·
+            <a href="./ARCHITECTURE.md">архитектура</a> ·
+            <a href="./CHECKLIST.md">чеклист запуска</a>
+          </p>
+        </div>
+      </section>
     </div>
-  </header>
+  </div>
 
-  <main>
-    <section id="pipeline">
-      <div class="wrap">
-        <p class="section-kicker">Pipeline</p>
-        <h2>Один конвейер, четыре площадки</h2>
-        <p class="section-lead">Контент живёт в таблице. Make забирает только строки `ready` с наступившим `publish_at`, адаптирует подписи и раскладывает по роутеру.</p>
-
-        <div class="pipeline" id="pipeSteps">
-          <article class="pipe-step">
-            <div class="pipe-num">01</div>
-            <div>
-              <h3>Контент-план в Google Sheets</h3>
-              <p>Статусы idea → draft → ready → queued → publishing → published/partial/error. Видео и обложки — ссылки Drive.</p>
-            </div>
-          </article>
-          <article class="pipe-step">
-            <div class="pipe-num">02</div>
-            <div>
-              <h3>CF-01 Publisher Core</h3>
-              <p>Watch Rows каждые 15 мин → lock строки → download/public URL → AI captions → Router.</p>
-            </div>
-          </article>
-          <article class="pipe-step">
-            <div class="pipe-num">03</div>
-            <div>
-              <h3>Публикация по платформам</h3>
-              <p>IG Reels container, VK video+wall, YouTube upload+publishAt, TikTok Direct Post PULL_FROM_URL.</p>
-            </div>
-          </article>
-          <article class="pipe-step">
-            <div class="pipe-num">04</div>
-            <div>
-              <h3>Вовлечение и аналитика</h3>
-              <p>CF-02: коммент с ключевым словом → Private Reply. CF-03: ежедневный сбор метрик. CF-04: refresh TikTok token.</p>
-            </div>
-          </article>
-        </div>
-
-        <div style="margin-top:2rem" class="flow-ascii">Sheets (ready)
-   │
-   ▼
-CF-01 Publisher ──Router──┬── Instagram Reels
-                          ├── VK video + wall.post
-                          ├── YouTube Shorts/long
-                          └── TikTok Direct Post
-   │
-   ├─ CF-02 Comment → DM lead magnet
-   ├─ CF-03 Daily analytics
-   └─ CF-04 TikTok token refresh</div>
-      </div>
-    </section>
-
-    <section id="scenarios">
-      <div class="wrap">
-        <p class="section-kicker">Make scenarios</p>
-        <h2>4 сценария для импорта</h2>
-        <p class="section-lead">Нажмите сценарий — увидите модули и порядок настройки. Blueprint JSON лежат в папке <code>blueprints/</code>.</p>
-
-        <div class="scenario-grid" id="scenarioGrid">
-          <article class="scenario active" data-id="cf01">
-            <div class="tag">Core</div>
-            <h3>CF-01 Publisher</h3>
-            <p>Главный автопостинг из таблицы на 4 площадки.</p>
-            <div class="meta">
-              <span class="chip">Sheets Watch</span>
-              <span class="chip">Router</span>
-              <span class="chip">HTTP / YouTube</span>
-            </div>
-          </article>
-          <article class="scenario" data-id="cf02">
-            <div class="tag">Growth</div>
-            <h3>CF-02 Lead Magnet</h3>
-            <p>Комментарий с CTA → авто-DM с ссылкой.</p>
-            <div class="meta">
-              <span class="chip">Webhook</span>
-              <span class="chip">Private Reply</span>
-            </div>
-          </article>
-          <article class="scenario" data-id="cf03">
-            <div class="tag">Reports</div>
-            <h3>CF-03 Analytics</h3>
-            <p>Раз в день тянет охваты/просмотры в лист Analytics.</p>
-            <div class="meta">
-              <span class="chip">Daily 09:00</span>
-              <span class="chip">Insights</span>
-            </div>
-          </article>
-          <article class="scenario" data-id="cf04">
-            <div class="tag">Infra</div>
-            <h3>CF-04 Token Refresh</h3>
-            <p>Обновляет TikTok access_token каждые 12 часов.</p>
-            <div class="meta">
-              <span class="chip">Data Store</span>
-              <span class="chip">OAuth</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="detail open" id="detail">
-          <h4 id="detailTitle">CF-01 Publisher Core</h4>
-          <ol id="detailSteps"></ol>
-        </div>
-      </div>
-    </section>
-
-    <section id="platforms">
-      <div class="wrap">
-        <p class="section-kicker">Platforms</p>
-        <h2>Что делает каждая ветка</h2>
-        <p class="section-lead">В роутере фильтр по колонке <code>platforms</code>: instagram,vk,youtube,tiktok.</p>
-        <div class="platforms">
-          <article class="plat ig">
-            <h3>Instagram</h3>
-            <ul>
-              <li>POST /media (REELS)</li>
-              <li>Sleep / poll FINISHED</li>
-              <li>POST /media_publish</li>
-              <li>Лимит ~100/сутки</li>
-            </ul>
-          </article>
-          <article class="plat vk">
-            <h3>VK</h3>
-            <ul>
-              <li>video.save → upload_url</li>
-              <li>multipart upload файла</li>
-              <li>wall.post + publish_date</li>
-              <li>Только нативный файл</li>
-            </ul>
-          </article>
-          <article class="plat yt">
-            <h3>YouTube</h3>
-            <ul>
-              <li>videos.insert resumable</li>
-              <li>private + publishAt</li>
-              <li>Shorts = 9:16 short</li>
-              <li>Квота ~6 upload/день</li>
-            </ul>
-          </article>
-          <article class="plat tt">
-            <h3>TikTok</h3>
-            <ul>
-              <li>creator_info/query</li>
-              <li>video/init PULL_FROM_URL</li>
-              <li>status/fetch</li>
-              <li>Нужен App Audit</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="checklist">
-      <div class="wrap">
-        <p class="section-kicker">Setup</p>
-        <h2>Что нужно до запуска</h2>
-        <p class="section-lead">Отмечайте пункты — прогресс сохранится в этом браузере. Полный список — в <code>CHECKLIST.md</code>.</p>
-
-        <div class="progress-label"><span id="progressText">0 / 0</span> готово</div>
-        <div class="progress"><i id="progressBar"></i></div>
-
-        <ul class="check-list" id="checks">
-          <li><input type="checkbox" id="c1" /><label for="c1">Make аккаунт (Core/Pro) + понимание лимита operations</label></li>
-          <li><input type="checkbox" id="c2" /><label for="c2">Google Sheets контент-план (импорт sheets/content-plan.csv)</label></li>
-          <li><input type="checkbox" id="c3" /><label for="c3">Google Drive папка с видео + прямые ссылки</label></li>
-          <li><input type="checkbox" id="c4" /><label for="c4">Instagram Professional + Facebook Page + Meta App publish scopes</label></li>
-          <li><input type="checkbox" id="c5" /><label for="c5">VK сообщество + токен (wall, video, photos)</label></li>
-          <li><input type="checkbox" id="c6" /><label for="c6">YouTube Data API + OAuth youtube.upload + проверка квоты</label></li>
-          <li><input type="checkbox" id="c7" /><label for="c7">TikTok Content Posting API + Direct Post + App Audit</label></li>
-          <li><input type="checkbox" id="c8" /><label for="c8">Data Store cf_tokens для TikTok refresh</label></li>
-          <li><input type="checkbox" id="c9" /><label for="c9">Telegram-бот для алертов успеха/ошибок</label></li>
-          <li><input type="checkbox" id="c10" /><label for="c10">Импорт blueprints CF-01…CF-04 и reconnect connections</label></li>
-          <li><input type="checkbox" id="c11" /><label for="c11">Тест: 1 ролик сначала в VK, потом YT private, потом IG/TT</label></li>
-          <li><input type="checkbox" id="c12" /><label for="c12">Включить расписание CF-01 (15 мин) и CF-04 (12ч)</label></li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="files">
-      <div class="wrap">
-        <p class="section-kicker">Deliverables</p>
-        <h2>Файлы проекта</h2>
-        <p class="section-lead">Скачайте / откройте из репозитория и импортируйте в Make.</p>
-        <div class="files">
-          <div class="file">
-            <div>
-              <strong>ARCHITECTURE.md</strong>
-              <span>Карта сценариев, переменные, обработка ошибок</span>
-            </div>
-            <a href="./ARCHITECTURE.md">открыть</a>
-          </div>
-          <div class="file">
-            <div>
-              <strong>CHECKLIST.md</strong>
-              <span>Полный чеклист аккаунтов, прав API и спеков видео</span>
-            </div>
-            <a href="./CHECKLIST.md">открыть</a>
-          </div>
-          <div class="file">
-            <div>
-              <strong>blueprints/01-publisher-core.json</strong>
-              <span>Импорт: Scenario → ⋯ → Import Blueprint</span>
-            </div>
-            <a href="./blueprints/01-publisher-core.json">JSON</a>
-          </div>
-          <div class="file">
-            <div>
-              <strong>blueprints/02-ig-comment-leadmagnet.json</strong>
-              <span>Webhook комментариев → Private Reply</span>
-            </div>
-            <a href="./blueprints/02-ig-comment-leadmagnet.json">JSON</a>
-          </div>
-          <div class="file">
-            <div>
-              <strong>blueprints/03-analytics-daily.json</strong>
-              <span>Ежедневный сбор метрик</span>
-            </div>
-            <a href="./blueprints/03-analytics-daily.json">JSON</a>
-          </div>
-          <div class="file">
-            <div>
-              <strong>blueprints/04-tiktok-token-refresh.json</strong>
-              <span>Обновление TikTok token из Data Store</span>
-            </div>
-            <a href="./blueprints/04-tiktok-token-refresh.json">JSON</a>
-          </div>
-          <div class="file">
-            <div>
-              <strong>sheets/content-plan.csv</strong>
-              <span>Шаблон контент-плана для Google Sheets</span>
-            </div>
-            <a href="./sheets/content-plan.csv">CSV</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap">
-      Make Content Factory · blueprint’ы — каркас: после импорта подключите Connections и Variables. Модули YouTube/Sheets могут отличаться версией в вашем аккаунте Make.
-    </div>
-  </footer>
+  <div id="toast" style="position:fixed;bottom:1.25rem;right:1.25rem;background:var(--mint);color:#062016;padding:0.7rem 1rem;border-radius:999px;font-weight:700;font-size:0.85rem;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;z-index:50"></div>
 
   <script>
-    const details = {
-      cf01: {
-        title: "CF-01 Publisher Core",
-        steps: [
-          "Импортируйте <code>01-publisher-core.json</code>.",
-          "Подключите Google Sheets к листу Content Plan, колонка статусов = <code>status</code>.",
-          "Добавьте Filter: <code>status = ready</code> и <code>publish_at ≤ now</code>.",
-          "Создайте Variables: <code>ig_user_id</code>, <code>ig_access_token</code>, <code>vk_group_id</code>, <code>vk_access_token</code>.",
-          "TikTok token берите из Data Store <code>cf_tokens</code> (после CF-04).",
-          "Для Instagram замените фиксированный Sleep на цикл: GET container → пока не FINISHED.",
-          "Прогон: одна строка, platforms = <code>vk</code> → затем расширяйте."
-        ]
-      },
-      cf02: {
-        title: "CF-02 Instagram Lead Magnet",
-        steps: [
-          "Импортируйте <code>02-ig-comment-leadmagnet.json</code>.",
-          "Создайте Custom Webhook и пропишите Verify Token в Meta App.",
-          "Подписка Webhooks → Instagram field <code>comments</code>.",
-          "В таблице заполните <code>cta_keyword</code> и <code>lead_magnet_url</code>.",
-          "Добавьте Data Store дедупа по <code>comment_id</code>.",
-          "Помните: 1 Private Reply на комментарий, окно 7 дней."
-        ]
-      },
-      cf03: {
-        title: "CF-03 Daily Analytics",
-        steps: [
-          "Импортируйте <code>03-analytics-daily.json</code>.",
-          "Создайте лист <code>Analytics</code> с колонками date, content_id, ig_reach, vk_reach, yt_views, yt_likes.",
-          "Schedule: каждый день 09:00.",
-          "Убедитесь, что в Content Plan заполнены published_*_id.",
-          "TikTok метрики подключайте отдельным HTTP после доступа к Research/Business API."
-        ]
-      },
-      cf04: {
-        title: "CF-04 TikTok Token Refresh",
-        steps: [
-          "Пройдите OAuth TikTok один раз вручную, сохраните refresh_token.",
-          "Положите запись в Data Store <code>cf_tokens</code> ключ <code>tiktok_main</code>.",
-          "Импортируйте <code>04-tiktok-token-refresh.json</code>.",
-          "Variables: <code>tt_client_key</code>, <code>tt_client_secret</code>.",
-          "Schedule каждые 12 часов — access token живёт 24ч.",
-          "CF-01 должен читать access_token из Data Store, не из статичной Variable."
-        ]
-      }
-    };
+    const posts = [
+      { id: "CF-001", day: 1, title: "Хуки монтажа", platforms: ["ig","vk","yt","tt"], status: "ready", slot: "peak_morning", utm: "cf_hooks_aug", caption: "Смонтируй так — и охваты вырастут 🔥" },
+      { id: "CF-002", day: 2, title: "Хук 3 сек", platforms: ["ig","vk"], status: "review", slot: "peak_evening", utm: "cf_hooks_aug", caption: "Хук за 3 секунды — формула. Пиши «гайд»." },
+      { id: "CF-003", day: 3, title: "Long guide", platforms: ["yt"], status: "approved", slot: "peak_midday", utm: "cf_guides", caption: "Полный гайд по автопостингу 2026" },
+      { id: "CF-004", day: 4, title: "1→4 площадки", platforms: ["ig","tt"], status: "draft", slot: "peak_morning", utm: "cf_tips", caption: "Один ролик — четыре площадки" }
+    ];
 
-    const detail = document.getElementById("detail");
-    const detailTitle = document.getElementById("detailTitle");
-    const detailSteps = document.getElementById("detailSteps");
-    const cards = document.querySelectorAll(".scenario");
-
-    function renderDetail(id) {
-      const data = details[id];
-      detailTitle.textContent = data.title;
-      detailSteps.innerHTML = data.steps.map((s) => `<li>${s}</li>`).join("");
-      detail.classList.add("open");
-      cards.forEach((c) => c.classList.toggle("active", c.dataset.id === id));
+    function enterApp(view) {
+      document.getElementById("landing").classList.add("off");
+      document.getElementById("app").classList.add("on");
+      showView(view || "calendar");
     }
-    cards.forEach((c) => c.addEventListener("click", () => renderDetail(c.dataset.id)));
-    renderDetail("cf01");
+    function exitApp() {
+      document.getElementById("app").classList.remove("on");
+      document.getElementById("landing").classList.remove("off");
+      window.scrollTo(0, 0);
+    }
+    function showView(name) {
+      document.querySelectorAll(".view").forEach((v) => v.classList.toggle("on", v.id === "view-" + name));
+      document.querySelectorAll(".nav-btn").forEach((b) => b.classList.toggle("active", b.dataset.view === name));
+    }
+    document.querySelectorAll(".nav-btn").forEach((b) => b.addEventListener("click", () => showView(b.dataset.view)));
 
-    // reveal pipeline
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("in"); });
-    }, { threshold: 0.2 });
-    document.querySelectorAll(".pipe-step").forEach((el, i) => {
-      el.style.transitionDelay = `${i * 0.08}s`;
-      io.observe(el);
+    function toast(msg) {
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.style.opacity = "1";
+      el.style.transform = "none";
+      clearTimeout(window.__t);
+      window.__t = setTimeout(() => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(8px)";
+      }, 2200);
+    }
+
+    // Calendar
+    const days = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
+    const grid = document.getElementById("calGrid");
+    grid.innerHTML = days.map((d) => `<div class="cal-head">${d}</div>`).join("");
+    for (let i = 1; i <= 7; i++) {
+      const cellPosts = posts.filter((p) => p.day === i);
+      grid.innerHTML += `<div class="cal-cell"><strong>${i + 7} авг</strong>${
+        cellPosts.map((p) => `<div class="post-pill ${p.platforms[0]}" data-cap="${p.caption}">${p.id} · ${p.title}</div>`).join("")
+      }</div>`;
+    }
+    grid.addEventListener("click", (e) => {
+      const pill = e.target.closest(".post-pill");
+      if (!pill) return;
+      document.getElementById("previewCap").innerHTML = pill.dataset.cap + "<br /><span style='opacity:.7'>#contentfactory</span>";
     });
 
-    // checklist persistence
-    const checks = [...document.querySelectorAll("#checks input")];
-    const bar = document.getElementById("progressBar");
-    const progressText = document.getElementById("progressText");
-    const KEY = "make-factory-checklist-v1";
+    // Queue table
+    const tb = document.querySelector("#queueTable tbody");
+    tb.innerHTML = posts.map((p) => {
+      const st = p.status === "ready" ? "badge" : p.status === "review" ? "badge warn" : p.status === "draft" ? "badge mute" : "badge";
+      return `<tr>
+        <td><strong>${p.id}</strong><br /><span style="color:var(--mute);font-size:0.8rem">${p.title}</span></td>
+        <td>${p.slot}</td>
+        <td>${p.platforms.join(", ").toUpperCase()}</td>
+        <td><span class="${st}">${p.status}</span></td>
+        <td>${p.utm}</td>
+        <td><button class="sm ghost" type="button" onclick="toast('CF-01 заберёт ${p.id} в слот ${p.slot}')">Publish</button></td>
+      </tr>`;
+    }).join("");
 
-    function load() {
-      try {
-        const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
-        checks.forEach((input) => {
-          input.checked = !!saved[input.id];
-          input.closest("li").classList.toggle("done", input.checked);
-        });
-      } catch (_) {}
-      updateProgress();
+    // Approvals
+    document.getElementById("approvalList").innerHTML = posts
+      .filter((p) => p.status === "review" || p.status === "approved")
+      .map((p) => `<div class="list-row">
+        <div>
+          <h3>${p.id} · ${p.title}</h3>
+          <p>${p.caption}</p>
+        </div>
+        <div style="display:flex;gap:0.4rem">
+          <button class="sm" type="button" onclick="toast('${p.id} → approved → ready')">Approve</button>
+          <button class="sm ghost" type="button" onclick="toast('${p.id} → draft')">Reject</button>
+        </div>
+      </div>`).join("");
+
+    // AI adapt (local demo — mirrors Make OpenAI step)
+    document.getElementById("aiRun").addEventListener("click", () => {
+      const src = document.getElementById("aiSource").value.trim();
+      const tone = document.getElementById("aiTone").value;
+      const cta = document.getElementById("aiCta").value.trim() || "гайд";
+      document.getElementById("outIg").value = `${src} ${tone === "дерзкий эксперт" ? "🔥" : ""}\nПиши «${cta}» в комменты — пришлю файл.`;
+      document.getElementById("outVk").value = `${src}\n\nСохраняй, чтобы не потерять. Подробности — по слову «${cta}» в комментариях.`;
+      document.getElementById("outTt").value = `${src.split(".")[0]}. #fyp #контент\n«${cta}» в комменты 👇`;
+      document.getElementById("outYt").value = `${src}\n\nТаймкоды и шаблон Make — в описании. #Shorts`;
+      toast("Captions адаптированы под 4 площадки");
+    });
+
+    // Deep link ?app=1
+    if (location.hash === "#app" || new URLSearchParams(location.search).get("app") === "1") {
+      enterApp("calendar");
     }
-    function save() {
-      const data = {};
-      checks.forEach((input) => { data[input.id] = input.checked; });
-      localStorage.setItem(KEY, JSON.stringify(data));
-      updateProgress();
-    }
-    function updateProgress() {
-      const total = checks.length;
-      const done = checks.filter((c) => c.checked).length;
-      bar.style.width = `${(done / total) * 100}%`;
-      progressText.textContent = `${done} / ${total}`;
-    }
-    checks.forEach((input) => input.addEventListener("change", () => {
-      input.closest("li").classList.toggle("done", input.checked);
-      save();
-    }));
-    load();
   </script>
 </body>
 </html>

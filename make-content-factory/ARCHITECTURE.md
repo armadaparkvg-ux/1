@@ -1,107 +1,70 @@
-# Make Content Factory — полная архитектура
+# Make Content Factory — архитектура v2
 
-Конвейер автопостинга видео в **Instagram · VK · YouTube · TikTok** на Make.com.
+Платформа автопостинга = UI Content Factory + Google Sheets + Make scenarios CF-01…CF-07.
 
 ## Карта сценариев
 
-| # | Сценарий | Триггер | Роль |
+| # | Сценарий | Триггер | Источник идеи |
 |---|---|---|---|
-| CF-01 | Publisher Core | Sheets Watch / каждые 15 мин | Забирает `ready` → публикует |
-| CF-02 | IG Lead Magnet | Meta Webhook comments | Коммент с CTA → Private Reply |
-| CF-03 | Analytics Daily | Daily 09:00 | Сбор метрик в лист Analytics |
-| CF-04 | TikTok Token Refresh | Every 12h | Обновление access_token |
+| CF-01 | Publisher Core | Sheets `ready` / 15 мин | Postmypost / Buffer publish |
+| CF-02 | IG Lead Magnet | Meta comments webhook | Instagram Private Reply |
+| CF-03 | Analytics Daily | Daily 09:00 | Metricool / Sprout |
+| CF-04 | TikTok Token Refresh | Every 12h | TikTok OAuth reality |
+| CF-05 | RSS Ingest → draft | RSS new item | SMMplanner RSS |
+| CF-06 | Approvals Gate | `review` + Telegram | Planable / Hootsuite |
+| CF-07 | Evergreen Recycle | Daily | SocialBee categories |
 
-Опционально:
-- **CF-05** VK Callback бот (аналог lead magnet)
-- **CF-06** Error DLQ → Telegram + статус `error`/`partial`
-- **CF-07** Boost winner (если views > порога → Ads API)
-
-## Поток данных
+## Поток
 
 ```
-Google Sheets (контент-план)
-        │ status=ready && publish_at<=now
-        ▼
-   CF-01 Publisher
-        ├─ Lock → queued
-        ├─ Drive download / public URL
-        ├─ AI captions (optional)
-        ├─ status → publishing
-        └─ Router
-             ├─ Instagram Reels (container → wait → publish)
-             ├─ VK (video.save → upload → wall.post)
-             ├─ YouTube (upload private + publishAt)
-             └─ TikTok (creator_info → init PULL_FROM_URL → status)
-        ▼
-   status=published + IDs + Telegram alert
-        │
-        ├─ CF-02: комментарии → лид-магнит
-        └─ CF-03: ежедневная аналитика
+RSS / Bulk CSV / Manual
+        ↓
+   draft  →  AI Studio adapt
+        ↓
+   review →  CF-06 Approvals
+        ↓
+ approved → ready
+        ↓
+   Queue (best-time slots)
+        ↓
+   CF-01 Publisher Router
+        ├─ Instagram Reels
+        ├─ VK native video
+        ├─ YouTube + publishAt
+        └─ TikTok Direct Post
+        ↓
+   published IDs
+        ├─ CF-02 Comment → DM
+        ├─ CF-03 Analytics
+        └─ CF-07 Recycle winners
 ```
 
-## Почему не один гигантский сценарий
+## UI модули платформы (`index.html`)
 
-1. **Лимиты operations** — проще масштабировать по частям  
-2. **Разные SLA** — постинг ≠ вебхуки ≠ аналитика  
-3. **Ошибки** — падение TikTok не должно ронять VK  
-4. **Токены** — TikTok refresh живёт отдельно  
+| View | Аналог рынка | Функция |
+|---|---|---|
+| Calendar | Later | Недельная сетка + 9:16 preview |
+| Queue | Buffer | Слоты peak_* + UTM + publish |
+| AI Studio | Buffer / Postmypost | Per-platform captions |
+| Approvals | Planable | Approve / Reject |
+| Analytics | Metricool | KPI + recycle signals |
+| Media | Later | Drive library + codec checks |
+| Integrations | Postmypost API | Список CF blueprints |
+
+## Статусы
+
+`idea → draft → review → approved → ready → queued → publishing → published|partial|error`  
+`published → ready` (через CF-07 recycle)
 
 ## Переменные / Data Stores
 
-### Scenario Variables
-- `ig_user_id`, `ig_access_token`
-- `vk_group_id`, `vk_access_token`
-- `tt_client_key`, `tt_client_secret` (для CF-04)
+- Variables: `ig_user_id`, `ig_access_token`, `vk_group_id`, `vk_access_token`, `tt_client_key`, `tt_client_secret`
+- Data Store `cf_tokens`: TikTok access/refresh
+- Data Store `cf_dedupe`: comment_id / publish_id
 
-### Data Store `cf_tokens`
-```json
-{
-  "tiktok_main": {
-    "access_token": "...",
-    "refresh_token": "...",
-    "expires_at": "..."
-  }
-}
-```
+## Импорт
 
-### Data Store `cf_dedupe`
-- ключ = `comment_id` / `publish_id` — защита от двойных DM и репостов
-
-## Фильтры CF-01 (обязательно добавить)
-
-После Watch Rows:
-1. `status` = `ready`
-2. `publish_at` ≤ `now`
-3. `video_url` не пустой
-4. (опционально) дневной лимит не превышен
-
-## Обработка ошибок (паттерн)
-
-На каждой publish-ветке:
-```
-HTTP module
-  └─ onerror
-       ├─ Telegram alert
-       ├─ Sheets: status=partial / error_log+=platform
-       └─ Break / Resume
-```
-
-После роутера — агрегирующая логика:
-- все ок → `published`
-- часть ок → `partial`
-- ничего → `error`
-
-## Импорт в Make
-
-1. Scenario → ⋯ → **Import Blueprint**  
-2. Выбрать JSON из `blueprints/`  
-3. Reconnect connections  
-4. Прописать Sheet ID / Variables  
-5. Прогнать 1 тестовый bundle  
-
-> Модули YouTube/Sheets могут отличаться версией в вашем аккаунте.  
-> Если импорт ругается на `module` — замените модуль одноимённым из панели Make, маппинг полей сохраните.
-
-## Веб-схема процесса
-
-Откройте [`index.html`](./index.html) в браузере — интерактивная карта сценариев, чеклист и порядок запуска.
+1. Открыть `index.html` → «Запустить платформу»  
+2. Импорт `sheets/content-plan.csv`  
+3. Make → Import Blueprint `blueprints/0*.json`  
+4. Порядок ON: CF-04 → CF-06 → CF-01 → CF-02 → CF-05 → CF-07 → CF-03  

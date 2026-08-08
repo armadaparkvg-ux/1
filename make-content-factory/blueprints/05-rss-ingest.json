@@ -1,0 +1,82 @@
+{
+  "name": "CF-05 RSS / Source Ingest → Draft Rows (SMMplanner-style)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "rss:TriggerNewItem",
+      "version": 1,
+      "parameters": {},
+      "mapper": {},
+      "metadata": {
+        "designer": { "x": 0, "y": 0, "name": "Watch RSS / blog feed" }
+      }
+    },
+    {
+      "id": 2,
+      "module": "openai-gpt-3:CreateCompletion",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "model": "gpt-4o-mini",
+        "role": "user",
+        "message": "Сделай черновик короткого видео-поста из статьи. Верни JSON: title_yt, caption_ig, caption_vk, caption_tt, caption_yt, hashtags, cta_keyword. Статья: {{1.title}} {{1.description}} {{1.url}}"
+      },
+      "metadata": {
+        "designer": { "x": 300, "y": 0, "name": "AI draft from RSS" }
+      }
+    },
+    {
+      "id": 3,
+      "module": "json:ParseJSON",
+      "version": 1,
+      "parameters": {},
+      "mapper": { "json": "{{2.result}}" },
+      "metadata": {
+        "designer": { "x": 600, "y": 0, "name": "Parse draft JSON" }
+      }
+    },
+    {
+      "id": 4,
+      "module": "google-sheets:addRow",
+      "version": 2,
+      "parameters": {},
+      "mapper": {
+        "values": {
+          "id": "RSS-{{formatDate(now; X)}}",
+          "status": "draft",
+          "platforms": "instagram,vk,tiktok",
+          "content_type": "short_video",
+          "category": "rss_ingest",
+          "title_yt": "{{3.title_yt}}",
+          "caption_ig": "{{3.caption_ig}}",
+          "caption_vk": "{{3.caption_vk}}",
+          "caption_tt": "{{3.caption_tt}}",
+          "caption_yt": "{{3.caption_yt}}",
+          "hashtags": "{{3.hashtags}}",
+          "cta_keyword": "{{3.cta_keyword}}",
+          "utm_campaign": "rss_auto",
+          "notes": "Source: {{1.url}}"
+        }
+      },
+      "metadata": {
+        "designer": { "x": 900, "y": 0, "name": "Add draft to Content Plan" }
+      }
+    },
+    {
+      "id": 5,
+      "module": "telegram:SendMessage",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "text": "📰 RSS → draft {{4.id}}\n{{1.title}}\nНужно видео + approval"
+      },
+      "metadata": {
+        "designer": { "x": 1200, "y": 0, "name": "Notify editors" }
+      }
+    }
+  ],
+  "metadata": {
+    "version": 1,
+    "notes": "Взято у SMMplanner RSS-репостера, но с AI-адаптацией и статусом draft (не прямая публикация ссылок — для видео нужна нативная загрузка)."
+  }
+}
