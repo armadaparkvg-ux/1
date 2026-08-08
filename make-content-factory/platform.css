@@ -66,10 +66,12 @@ button.sm { padding: 0.4rem 0.75rem; font-size: 0.8rem; }
 .side-brand {
   font-family: Syne, sans-serif;
   font-weight: 800;
-  letter-spacing: 0.04em;
-  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  font-size: 0.78rem;
+  line-height: 1.25;
   margin-bottom: 1.5rem;
   padding: 0 0.4rem;
+  text-transform: uppercase;
 }
 .side-brand span { color: var(--mint); }
 .nav-btn {
