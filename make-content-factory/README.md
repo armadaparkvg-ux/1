@@ -6,7 +6,7 @@
 
 Публичный демо-URL (Cloudflare Tunnel, пока агент/сервер онлайн):
 
-**https://drives-speeds-phd-twisted.trycloudflare.com/**
+**https://raised-football-phys-sas.trycloudflare.com/**
 
 После включения GitHub Pages (Actions workflow `deploy-pages.yml`) постоянный адрес будет:
 
