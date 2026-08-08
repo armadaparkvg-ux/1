@@ -101,15 +101,15 @@
 
 ## 5. Порядок запуска
 
-1. Импортировать CSV в Google Sheets  
-2. Заполнить `CHECKLIST` галочки доступов  
-3. В Make: Import Blueprint из `blueprints/`  
-4. Подключить Connections + указать Sheet ID  
-5. Прогнать **1 тестовый ролик** только в VK (самый простой)  
-6. Затем YouTube (private) → Instagram → TikTok  
-7. Включить Scenario A по расписанию (каждые 15 мин)  
-8. Подключить Scenario B (коммент → DM) после стабильного постинга  
-9. Scenario C аналитики — через неделю накопления данных  
+1. Открыть `index.html` → изучить платформу (Calendar / Queue / AI / Approvals)  
+2. Импортировать CSV в Google Sheets (новые колонки: best_time_slot, category, approval_*, recycle_*, utm_campaign)  
+3. Заполнить галочки доступов выше  
+4. В Make: Import Blueprint из `blueprints/` (CF-01…CF-07)  
+5. Подключить Connections + Sheet ID + Data Stores  
+6. Прогнать **1 тестовый ролик** только в VK  
+7. Затем YouTube (private) → Instagram → TikTok  
+8. Включить: CF-04 (токены) → CF-06 (approvals) → CF-01 (publish)  
+9. Потом CF-02 (DM), CF-05 (RSS), CF-07 (recycle), CF-03 (analytics)  
 
 ---
 
