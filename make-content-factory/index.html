@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Дмитрий Шеф пельмешь — платформа автопостинга</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./platform.css" />
+  <style>
+    .landing { display: block; }
+    .landing.off { display: none; }
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-content: end;
+      padding: 2rem 1rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(141,255,181,0.04) 1px, transparent 1px) 0 0 / 72px 72px,
+        linear-gradient(rgba(141,255,181,0.04) 1px, transparent 1px) 0 0 / 72px 72px;
+      mask-image: linear-gradient(180deg, #000 35%, transparent 92%);
+      animation: gridDrift 28s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes gridDrift { to { transform: translateY(72px); } }
+    .wrap { width: min(var(--max), calc(100% - 2rem)); margin: 0 auto; position: relative; z-index: 2; }
+    .nav {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: clamp(3rem, 14vh, 8rem);
+    }
+    .nav-brand { font-family: Syne, sans-serif; font-weight: 800; letter-spacing: 0.03em; font-size: 0.82rem; }
+    .hero-brand {
+      font-family: Syne, sans-serif; font-weight: 800;
+      font-size: clamp(2.4rem, 7.5vw, 5.4rem); line-height: 0.92; letter-spacing: -0.03em;
+      margin: 0 0 1.1rem; animation: rise 0.85s ease both;
+      text-transform: uppercase;
+    }
+    .hero-brand span { display: block; color: var(--mint); text-shadow: 0 0 40px rgba(141,255,181,0.25); }
+    .hero-lead {
+      max-width: 36rem; color: var(--mute); font-size: clamp(1.05rem, 2vw, 1.25rem);
+      line-height: 1.5; margin: 0 0 1.75rem; animation: rise 0.85s ease 0.1s both;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 0.7rem; animation: rise 0.85s ease 0.18s both; }
+    .section { padding: 4.5rem 0; }
+    .kicker {
+      color: var(--mint-dim); text-transform: uppercase; letter-spacing: 0.16em;
+      font-size: 0.72rem; font-weight: 700; margin: 0 0 0.6rem;
+    }
+    .section h2 {
+      font-family: Syne, sans-serif; font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      letter-spacing: -0.03em; margin: 0 0 0.6rem; line-height: 1.1;
+    }
+    .section-lead { color: var(--mute); max-width: 40rem; margin: 0 0 1.75rem; line-height: 1.5; }
+    .feature-rail {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;
+    }
+    .feature {
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 1.15rem;
+      background: var(--panel); min-height: 140px;
+    }
+    .feature h3 { font-family: Syne, sans-serif; margin: 0 0 0.4rem; font-size: 1.05rem; }
+    .feature p { margin: 0; color: var(--mute); font-size: 0.92rem; line-height: 1.45; }
+    .feature .src { display: inline-block; margin-top: 0.7rem; font-size: 0.72rem; color: var(--mint-dim); }
+    @media (max-width: 800px) { .feature-rail { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <!-- LANDING -->
+  <div class="landing" id="landing">
+    <header class="hero">
+      <div class="wrap">
+        <nav class="nav">
+          <div class="nav-brand">ДМИТРИЙ ШЕФ ПЕЛЬМЕШЬ</div>
+          <button class="ghost sm" type="button" onclick="enterApp('calendar')">Открыть платформу</button>
+        </nav>
+        <h1 class="hero-brand">ДМИТРИЙ ШЕФ<br /><span>ПЕЛЬМЕШЬ</span></h1>
+        <p class="hero-lead">Платформа автопостинга «Дмитрий Шеф пельмешь»: лучшее из Buffer, Later, Hootsuite, SMMplanner и Postmypost — плюс автопубликация через Make в Instagram, VK, YouTube и TikTok.</p>
+        <div class="cta-row">
+          <button type="button" onclick="enterApp('calendar')">Запустить платформу</button>
+          <a class="btn ghost" href="#analysis">Смотреть анализ</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" id="adopted">
+      <div class="wrap">
+        <p class="kicker">Взято у лидеров рынка</p>
+        <h2>Ключевые технологии, которые мы внедрили</h2>
+        <p class="section-lead">Не клон одного сервиса — сборка сильных сторон рынка под видео-автопостинг и российские площадки.</p>
+        <div class="feature-rail">
+          <article class="feature">
+            <h3>Визуальный календарь + превью 9:16</h3>
+            <p>Планирование как в Later: сетка недели и превью вертикального ролика до публикации.</p>
+            <span class="src">← Later</span>
+          </article>
+          <article class="feature">
+            <h3>Очередь + лучшее время</h3>
+            <p>Очередь публикаций и пиковые окна утро / день / вечер — дисциплина Buffer.</p>
+            <span class="src">← Buffer</span>
+          </article>
+          <article class="feature">
+            <h3>Согласование контента</h3>
+            <p>черновик → на проверке → одобрено → готово. Согласование в Telegram до выкладки.</p>
+            <span class="src">← Hootsuite / Planable / Postmypost</span>
+          </article>
+          <article class="feature">
+            <h3>ИИ-адаптация под площадки</h3>
+            <p>Один смысл — четыре текста (Instagram / VK / TikTok / YouTube), не копипаст.</p>
+            <span class="src">← Buffer / Postmypost</span>
+          </article>
+          <article class="feature">
+            <h3>Массовый импорт + RSS</h3>
+            <p>Массовый план из CSV/Sheets и черновики из RSS с помощью ИИ.</p>
+            <span class="src">← Publer / SMMplanner</span>
+          </article>
+          <article class="feature">
+            <h3>Повтор evergreen-роликов</h3>
+            <p>Категории + повтор сильных роликов через N дней с переписыванием текста.</p>
+            <span class="src">← SocialBee</span>
+          </article>
+          <article class="feature">
+            <h3>Сквозная аналитика</h3>
+            <p>Единая доска охватов и просмотров по площадкам + алерты.</p>
+            <span class="src">← Metricool / Sprout</span>
+          </article>
+          <article class="feature">
+            <h3>Коммент → личное сообщение</h3>
+            <p>Лид-магнит из комментария — наше отличие поверх обычных планировщиков.</p>
+            <span class="src">← Instagram Private Reply</span>
+          </article>
+          <article class="feature">
+            <h3>Публикация через Make</h3>
+            <p>Официальные API Instagram / VK / YouTube / TikTok, хранилище токенов, обработка частичных сбоев.</p>
+            <span class="src">← идея Postmypost API + наши CF-01…07</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="analysis">
+      <div class="wrap">
+        <p class="kicker">Конкурентный анализ</p>
+        <h2>Сильные и слабые стороны лидеров</h2>
+        <p class="section-lead">Полный разбор — в <a href="./COMPETITIVE-ANALYSIS.md">файле анализа</a>. Ниже — сжатая матрица.</p>
+        <div class="panel" style="overflow-x:auto">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>Возможность</th>
+                <th>Buffer</th>
+                <th>Later</th>
+                <th>Hootsuite</th>
+                <th>SMMplanner</th>
+                <th>Postmypost</th>
+                <th>Пельмешь</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Очередь / лучшее время</td><td class="yes">●</td><td class="mid">◐</td><td class="yes">●</td><td class="yes">●</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>Визуальный календарь</td><td class="mid">◐</td><td class="yes">●</td><td class="mid">◐</td><td class="yes">●</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>Согласования</td><td class="mid">◐</td><td class="mid">◐</td><td class="yes">●</td><td class="mid">◐</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>ИИ-адаптация под площадки</td><td class="yes">●</td><td class="yes">●</td><td class="yes">●</td><td class="mid">◐</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>VK / РФ как приоритет</td><td class="no">○</td><td class="no">○</td><td class="no">○</td><td class="yes">●</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>Загрузка из RSS</td><td class="no">○</td><td class="no">○</td><td class="mid">◐</td><td class="yes">●</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>Повтор evergreen</td><td class="mid">◐</td><td class="no">○</td><td class="mid">◐</td><td class="mid">◐</td><td class="mid">◐</td><td class="yes">●</td></tr>
+              <tr><td>Коммент → лид в сообщения</td><td class="no">○</td><td class="no">○</td><td class="mid">◐</td><td class="no">○</td><td class="mid">◐</td><td class="yes">●</td></tr>
+              <tr><td>Связка с Make / n8n</td><td class="mid">◐</td><td class="mid">◐</td><td class="mid">◐</td><td class="mid">◐</td><td class="yes">●</td><td class="yes">●</td></tr>
+              <tr><td>Цена / простота входа</td><td class="yes">●</td><td class="mid">◐</td><td class="no">○</td><td class="mid">◐</td><td class="mid">◐</td><td class="yes">●</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- APP -->
+  <div class="app-shell" id="app">
+    <aside class="sidebar">
+      <div class="side-brand">ДМИТРИЙ ШЕФ <span>ПЕЛЬМЕШЬ</span></div>
+      <button class="nav-btn active" data-view="calendar" type="button">Календарь</button>
+      <button class="nav-btn" data-view="queue" type="button">Очередь</button>
+      <button class="nav-btn" data-view="ai" type="button">ИИ-студия</button>
+      <button class="nav-btn" data-view="approvals" type="button">Согласование</button>
+      <button class="nav-btn" data-view="analytics" type="button">Аналитика</button>
+      <button class="nav-btn" data-view="media" type="button">Медиа</button>
+      <button class="nav-btn" data-view="integrations" type="button">Интеграции</button>
+      <button class="nav-btn" data-view="api" type="button">API соцсетей</button>
+      <button class="nav-btn" data-view="compete" type="button">Почему мы</button>
+      <div style="margin-top:1rem">
+        <button class="ghost sm" type="button" onclick="exitApp()">← На главную</button>
+      </div>
+    </aside>
+
+    <div class="main">
+      <!-- CALENDAR -->
+      <section class="view on" id="view-calendar">
+        <div class="topbar">
+          <div>
+            <h1>Визуальный календарь</h1>
+            <p>Клик по дню — новый пост · клик по посту — редактирование</p>
+          </div>
+          <div class="topbar-actions">
+            <button class="ghost" type="button" id="btnResetDemo">Сбросить демо</button>
+            <button type="button" id="btnAddPost">+ Новый пост</button>
+          </div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi"><span>На неделе</span><b id="kpiWeek">0</b></div>
+          <div class="kpi"><span>Готово</span><b id="kpiReady">0</b></div>
+          <div class="kpi"><span>На проверке</span><b id="kpiReview">0</b></div>
+          <div class="kpi"><span>Площадки</span><b id="kpiPlats">0</b></div>
+        </div>
+        <div class="split">
+          <div class="panel">
+            <div class="calendar-grid" id="calGrid"></div>
+          </div>
+          <div class="panel">
+            <div class="preview-phone">
+              <div class="brand-tag">ШЕФ ПЕЛЬМЕШЬ · РИЛС</div>
+              <div class="cap" id="previewCap">Смонтируй так — и охваты вырастут 🔥<br /><span style="opacity:.7">#reels #smm</span></div>
+            </div>
+            <div class="chips" id="previewChips" style="margin-top:1rem;justify-content:center">
+              <span class="chip on">Instagram</span><span class="chip on">VK</span><span class="chip on">YouTube</span><span class="chip on">TikTok</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUEUE -->
+      <section class="view" id="view-queue">
+        <div class="topbar">
+          <div>
+            <h1>Очередь публикаций</h1>
+            <p>Очередь + окна лучшего времени (утро / день / вечер)</p>
+          </div>
+          <button class="ghost" type="button" onclick="toast('Лучшее время пересчитано по аналитике')">Пересчитать время</button>
+        </div>
+        <div class="panel">
+          <table class="table" id="queueTable">
+            <thead>
+              <tr><th>ID</th><th>Слот</th><th>Площадки</th><th>Статус</th><th>UTM</th><th></th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- AI -->
+      <section class="view" id="view-ai">
+        <div class="topbar">
+          <div>
+            <h1>ИИ-студия</h1>
+            <p>Адаптация текстов под каждую площадку</p>
+          </div>
+          <button type="button" id="aiRun">Адаптировать</button>
+        </div>
+        <div class="split">
+          <div class="panel form-grid">
+            <label>Исходный смысл / черновик
+              <textarea id="aiSource">Один ролик — четыре площадки. Показываем автопостинг без копипаста.</textarea>
+            </label>
+            <label>Тон голоса
+              <select id="aiTone">
+                <option>дерзкий эксперт</option>
+                <option>спокойный наставник</option>
+                <option>коротко и по делу</option>
+              </select>
+            </label>
+            <label>Ключевое слово для CTA
+              <input id="aiCta" value="гайд" />
+            </label>
+          </div>
+          <div class="panel form-grid" id="aiOut">
+            <label>Instagram<textarea readonly id="outIg"></textarea></label>
+            <label>ВКонтакте<textarea readonly id="outVk"></textarea></label>
+            <label>TikTok<textarea readonly id="outTt"></textarea></label>
+            <label>YouTube<textarea readonly id="outYt"></textarea></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- APPROVALS -->
+      <section class="view" id="view-approvals">
+        <div class="topbar">
+          <div>
+            <h1>Согласование</h1>
+            <p>Проверка контента перед автопубликацией (CF-01)</p>
+          </div>
+        </div>
+        <div class="list-rows" id="approvalList"></div>
+      </section>
+
+      <!-- ANALYTICS -->
+      <section class="view" id="view-analytics">
+        <div class="topbar">
+          <div>
+            <h1>Аналитика</h1>
+            <p>Сводная доска по площадкам + сигналы для повторной публикации</p>
+          </div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi"><span>Охват Instagram</span><b>48.2k</b><div class="bar-track"><i style="width:72%"></i></div></div>
+          <div class="kpi"><span>Охват VK</span><b>31.0k</b><div class="bar-track"><i style="width:55%"></i></div></div>
+          <div class="kpi"><span>Просмотры YouTube</span><b>19.4k</b><div class="bar-track"><i style="width:40%"></i></div></div>
+          <div class="kpi"><span>Просмотры TikTok</span><b>62.7k</b><div class="bar-track"><i style="width:88%"></i></div></div>
+        </div>
+        <div class="panel">
+          <table class="table">
+            <thead><tr><th>Контент</th><th>Результат</th><th>Действие</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>CF-001 · хуки монтажа</td>
+                <td><span class="badge">топ 10%</span></td>
+                <td><button class="sm" type="button" onclick="toast('Отправлено в очередь повторной публикации')">Повторить</button></td>
+              </tr>
+              <tr>
+                <td>CF-003 · длинный гайд</td>
+                <td><span class="badge warn">средне</span></td>
+                <td><button class="sm ghost" type="button" onclick="toast('Предложен новый заголовок для A/B')">Переписать заголовок</button></td>
+              </tr>
+              <tr>
+                <td>CF-002 · хук 3 сек</td>
+                <td><span class="badge danger">слабо</span></td>
+                <td><button class="sm ghost" type="button" onclick="toast('Помечено: не повторять')">Пропустить</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- MEDIA -->
+      <section class="view" id="view-media">
+        <div class="topbar">
+          <div>
+            <h1>Медиатека</h1>
+            <p>Папка Google Drive + требования 9:16 и H.264</p>
+          </div>
+          <button class="ghost" type="button" id="btnAddPostMedia" onclick="document.getElementById('btnAddPost').click()">+ Добавить медиа</button>
+        </div>
+        <div class="list-rows" id="mediaLib"></div>
+      </section>
+
+      <!-- INTEGRATIONS -->
+      <section class="view" id="view-integrations">
+        <div class="topbar">
+          <div>
+            <h1>Интеграции и сценарии</h1>
+            <p>Шаблоны Make CF-01…CF-07</p>
+          </div>
+          <a class="btn ghost" href="./blueprints/">Шаблоны</a>
+        </div>
+        <div class="list-rows">
+          <div class="list-row"><div><h3>CF-01 Ядро публикации</h3><p>Таблица → Роутер → Instagram / VK / YouTube / TikTok</p></div><span class="badge">ядро</span></div>
+          <div class="list-row"><div><h3>CF-02 Лид-магнит</h3><p>Комментарий → личное сообщение</p></div><span class="badge">рост</span></div>
+          <div class="list-row"><div><h3>CF-03 Ежедневная аналитика</h3><p>Сбор метрик в лист «Аналитика»</p></div><span class="badge">отчёты</span></div>
+          <div class="list-row"><div><h3>CF-04 Токен TikTok</h3><p>Обновление каждые 12 часов</p></div><span class="badge">инфра</span></div>
+          <div class="list-row"><div><h3>CF-05 Загрузка из RSS</h3><p>Новости → черновики в таблице</p></div><span class="badge">новое</span></div>
+          <div class="list-row"><div><h3>CF-06 Шлюз согласования</h3><p>Одобрить / отклонить в Telegram</p></div><span class="badge">новое</span></div>
+          <div class="list-row"><div><h3>CF-07 Повтор сильных роликов</h3><p>Повтор через N дней с новым текстом</p></div><span class="badge">новое</span></div>
+        </div>
+      </section>
+
+      <!-- API -->
+      <section class="view" id="view-api">
+        <div class="topbar">
+          <div>
+            <h1>API соцсетей</h1>
+            <p>Ключи хранятся локально в браузере · можно выгрузить в Make</p>
+          </div>
+          <div class="topbar-actions">
+            <button class="ghost" type="button" id="btnExportApi">Скачать для Make</button>
+            <button type="button" id="btnSaveApi">Сохранить API</button>
+          </div>
+        </div>
+        <div class="api-grid" id="apiGrid"></div>
+        <div class="panel" style="margin-top:0.85rem">
+          <p style="margin:0;color:var(--mute);line-height:1.55;font-size:0.92rem">
+            Instagram Graph API · VK API · YouTube Data API v3 · TikTok Content Posting API.
+            После сохранения нажмите «Скачать для Make» — получите файл переменных для сценариев CF-01…CF-07.
+            Токены не уходят на сервер: только <code>localStorage</code> этого браузера.
+          </p>
+        </div>
+      </section>
+
+      <!-- COMPETE -->
+      <section class="view" id="view-compete">
+        <div class="topbar">
+          <div>
+            <h1>Почему «Дмитрий Шеф пельмешь», а не «ещё Buffer»</h1>
+            <p>Берём сильное, отбрасываем слабое</p>
+          </div>
+        </div>
+        <div class="split">
+          <div class="panel">
+            <h3 style="margin-top:0;font-family:Syne,sans-serif">Взяли</h3>
+            <ul style="color:var(--mute);line-height:1.6;margin:0;padding-left:1.1rem">
+              <li>Простоту очереди у Buffer</li>
+              <li>Визуальное планирование у Later</li>
+              <li>Согласования у Hootsuite / Planable</li>
+              <li>VK и RSS у SMMplanner</li>
+              <li>Массовый импорт и API-мышление у Postmypost</li>
+              <li>Повтор контента у SocialBee</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3 style="margin-top:0;font-family:Syne,sans-serif">Не копируем</h3>
+            <ul style="color:var(--mute);line-height:1.6;margin:0;padding-left:1.1rem">
+              <li>Серые мультиаккаунты и прокси</li>
+              <li>Один текст на все сети</li>
+              <li>Тяжёлый корпоративный listening</li>
+              <li>Прямой репост ссылок в VK (убивает охват)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel" style="margin-top:0.85rem">
+          <p style="margin:0;color:var(--mute);line-height:1.55">
+            Документы: <a href="./COMPETITIVE-ANALYSIS.md">анализ</a> ·
+            <a href="./PRODUCT.md">продукт</a> ·
+            <a href="./ARCHITECTURE.md">архитектура</a> ·
+            <a href="./CHECKLIST.md">чеклист запуска</a>
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EDITOR MODAL -->
+  <div class="modal-backdrop" id="editorModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <h2 id="modalTitle">Новый пост</h2>
+          <p style="margin:0.35rem 0 0;color:var(--mute);font-size:0.9rem">Фото / видео, описание, ссылка и площадки</p>
+        </div>
+        <button class="ghost sm" type="button" id="btnCloseModal">Закрыть</button>
+      </div>
+
+      <div class="form-grid">
+        <label>Название
+          <input id="fTitle" type="text" placeholder="Хук за 3 секунды" />
+        </label>
+        <label>Короткий текст (подпись)
+          <textarea id="fCaption" placeholder="Текст для ленты / Reels"></textarea>
+        </label>
+        <label>Описание
+          <textarea id="fDescription" placeholder="Развёрнутое описание, сценарий, заметки для команды"></textarea>
+        </label>
+        <label>Ссылка
+          <input id="fLink" type="url" placeholder="https://example.com/lead-magnet" />
+        </label>
+        <label>UTM-метка
+          <input id="fUtm" type="text" placeholder="cf_hooks_aug" />
+        </label>
+
+        <div>
+          <div style="color:var(--mute);font-size:0.85rem;margin-bottom:0.35rem">Площадки</div>
+          <div class="plat-toggles" id="platToggles">
+            <label class="on"><input type="checkbox" value="ig" checked /> Instagram</label>
+            <label class="on"><input type="checkbox" value="vk" checked /> VK</label>
+            <label><input type="checkbox" value="yt" /> YouTube</label>
+            <label><input type="checkbox" value="tt" /> TikTok</label>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.7rem">
+          <label>День недели
+            <select id="fDay">
+              <option value="1">Пн</option>
+              <option value="2">Вт</option>
+              <option value="3">Ср</option>
+              <option value="4">Чт</option>
+              <option value="5">Пт</option>
+              <option value="6">Сб</option>
+              <option value="7">Вс</option>
+            </select>
+          </label>
+          <label>Слот времени
+            <select id="fSlot">
+              <option value="peak_morning">утро</option>
+              <option value="peak_midday">день</option>
+              <option value="peak_evening">вечер</option>
+            </select>
+          </label>
+          <label>Статус
+            <select id="fStatus">
+              <option value="draft">черновик</option>
+              <option value="review">на проверке</option>
+              <option value="approved">одобрено</option>
+              <option value="ready">готово</option>
+            </select>
+          </label>
+        </div>
+
+        <div>
+          <div style="color:var(--mute);font-size:0.85rem;margin-bottom:0.35rem">Фото или видео</div>
+          <div class="dropzone" id="dropzone">
+            <strong>Перетащите файл сюда</strong>
+            или нажмите, чтобы выбрать с компьютера
+            <div style="margin-top:0.45rem;font-size:0.78rem">JPG, PNG, MP4, MOV · до 12 МБ в демо</div>
+          </div>
+          <input id="fileInput" type="file" accept="image/*,video/*" hidden />
+          <div class="media-preview" id="mediaPreview"></div>
+          <p id="fMediaMeta" style="margin:0.55rem 0 0;color:var(--mute);font-size:0.82rem">Файл не выбран</p>
+          <div style="display:grid;grid-template-columns:1fr auto;gap:0.5rem;margin-top:0.65rem">
+            <input id="fMediaUrl" type="url" placeholder="или вставьте прямую ссылку на медиа" />
+            <button class="ghost sm" type="button" id="btnLoadUrl">Подключить URL</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="ghost danger-btn sm" type="button" id="btnDelete" style="display:none;margin-right:auto">Удалить</button>
+        <button class="ghost" type="button" id="btnCloseModal2" onclick="document.getElementById('btnCloseModal').click()">Отмена</button>
+        <button type="button" id="btnSavePost">Сохранить в календарь</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" style="position:fixed;bottom:1.25rem;right:1.25rem;background:var(--mint);color:#062016;padding:0.7rem 1rem;border-radius:999px;font-weight:700;font-size:0.85rem;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;z-index:50"></div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

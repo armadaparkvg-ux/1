@@ -1,0 +1,175 @@
+{
+  "name": "CF-03 Daily Analytics Collector",
+  "flow": [
+    {
+      "id": 1,
+      "module": "google-sheets:searchRows",
+      "version": 2,
+      "parameters": {},
+      "mapper": {
+        "filter": [
+          {
+            "a": "status",
+            "o": "text:equal:ci",
+            "b": "published"
+          }
+        ],
+        "limit": 50
+      },
+      "metadata": {
+        "designer": { "x": 0, "y": 0, "name": "Get published rows" }
+      }
+    },
+    {
+      "id": 2,
+      "module": "builtin:BasicFeeder",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "array": "{{1.array}}"
+      },
+      "metadata": {
+        "designer": { "x": 300, "y": 0, "name": "Iterate posts" }
+      }
+    },
+    {
+      "id": 3,
+      "module": "builtin:BasicRouter",
+      "version": 1,
+      "mapper": null,
+      "metadata": {
+        "designer": { "x": 600, "y": 300, "name": "Metrics router" }
+      },
+      "routes": [
+        {
+          "flow": [
+            {
+              "id": 4,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": { "handleErrors": true },
+              "mapper": {
+                "url": "https://graph.facebook.com/v21.0/{{2.published_ig_id}}/insights",
+                "method": "get",
+                "parseResponse": true,
+                "qs": [
+                  { "name": "metric", "value": "reach,likes,comments,shares,saved,plays" },
+                  { "name": "access_token", "value": "{{var.ig_access_token}}" }
+                ]
+              },
+              "filter": {
+                "name": "Has IG id",
+                "conditions": [
+                  [
+                    { "a": "{{2.published_ig_id}}", "o": "text:isnotempty" }
+                  ]
+                ]
+              },
+              "metadata": {
+                "designer": { "x": 900, "y": 0, "name": "IG insights" }
+              }
+            }
+          ]
+        },
+        {
+          "flow": [
+            {
+              "id": 5,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": { "handleErrors": true },
+              "mapper": {
+                "url": "https://api.vk.com/method/stats.getPostReach",
+                "method": "get",
+                "parseResponse": true,
+                "qs": [
+                  { "name": "owner_id", "value": "-{{var.vk_group_id}}" },
+                  { "name": "post_ids", "value": "{{2.published_vk_id}}" },
+                  { "name": "access_token", "value": "{{var.vk_access_token}}" },
+                  { "name": "v", "value": "5.199" }
+                ]
+              },
+              "filter": {
+                "name": "Has VK id",
+                "conditions": [
+                  [
+                    { "a": "{{2.published_vk_id}}", "o": "text:isnotempty" }
+                  ]
+                ]
+              },
+              "metadata": {
+                "designer": { "x": 900, "y": 300, "name": "VK post reach" }
+              }
+            }
+          ]
+        },
+        {
+          "flow": [
+            {
+              "id": 6,
+              "module": "youtube:listVideos",
+              "version": 1,
+              "parameters": {},
+              "mapper": {
+                "id": "{{2.published_yt_id}}",
+                "part": "statistics,snippet"
+              },
+              "filter": {
+                "name": "Has YT id",
+                "conditions": [
+                  [
+                    { "a": "{{2.published_yt_id}}", "o": "text:isnotempty" }
+                  ]
+                ]
+              },
+              "metadata": {
+                "designer": { "x": 900, "y": 600, "name": "YT statistics" }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "module": "google-sheets:addRow",
+      "version": 2,
+      "parameters": {},
+      "mapper": {
+        "values": {
+          "date": "{{formatDate(now; YYYY-MM-DD)}}",
+          "content_id": "{{2.id}}",
+          "ig_reach": "{{4.data.data}}",
+          "vk_reach": "{{5.data.response}}",
+          "yt_views": "{{6.statistics.viewCount}}",
+          "yt_likes": "{{6.statistics.likeCount}}"
+        }
+      },
+      "metadata": {
+        "designer": { "x": 1200, "y": 300, "name": "Write Analytics sheet" }
+      }
+    },
+    {
+      "id": 8,
+      "module": "telegram:SendMessage",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "text": "📊 Daily analytics updated for {{2.id}}\nYT views: {{6.statistics.viewCount}}"
+      },
+      "metadata": {
+        "designer": { "x": 1500, "y": 300, "name": "Daily digest ping" }
+      }
+    }
+  ],
+  "metadata": {
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 5,
+      "autoCommit": true,
+      "dlq": true
+    },
+    "notes": "Schedule: daily 09:00. Создайте второй лист Analytics. TikTok metrics — через Research/Business API отдельно после аудита. Для YT детальной аналитики подключите YouTube Analytics API HTTP."
+  }
+}

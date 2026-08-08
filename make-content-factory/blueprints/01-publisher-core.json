@@ -1,0 +1,418 @@
+{
+  "name": "CF-01 Publisher Core (Sheets → Router → Platforms)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "google-sheets:watchRows",
+      "version": 2,
+      "parameters": {
+        "limit": 1,
+        "sortOrder": "asc"
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": { "x": 0, "y": 0, "name": "Watch Content Plan" },
+        "restore": {
+          "parameters": {
+            "__IMTCONN__": { "label": "Google Sheets" }
+          }
+        }
+      },
+      "filter": {
+        "name": "Only ready + due",
+        "conditions": [
+          [
+            { "a": "{{1.status}}", "o": "text:equal:ci", "b": "ready" }
+          ]
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "module": "google-sheets:updateRow",
+      "version": 2,
+      "parameters": {},
+      "mapper": {
+        "rowNumber": "{{1.`__ROW_NUMBER__`}}",
+        "values": {
+          "status": "queued"
+        }
+      },
+      "metadata": {
+        "designer": { "x": 300, "y": 0, "name": "Lock row → queued" }
+      }
+    },
+    {
+      "id": 3,
+      "module": "google-drive:downloadAFile",
+      "version": 3,
+      "parameters": {},
+      "mapper": {
+        "fileId": "{{1.video_url}}"
+      },
+      "metadata": {
+        "designer": { "x": 600, "y": 0, "name": "Download video" }
+      }
+    },
+    {
+      "id": 4,
+      "module": "openai-gpt-3:CreateCompletion",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "model": "gpt-4o-mini",
+        "role": "user",
+        "message": "Адаптируй короткий caption под 4 площадки. Верни JSON: ig, vk, tt, yt. Исходник: {{1.caption_ig}}. Тема: {{1.title_yt}}. Без кавычек-ёлочек."
+      },
+      "metadata": {
+        "designer": { "x": 900, "y": 0, "name": "AI adapt captions (optional)" }
+      }
+    },
+    {
+      "id": 5,
+      "module": "json:ParseJSON",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "json": "{{4.result}}"
+      },
+      "metadata": {
+        "designer": { "x": 1200, "y": 0, "name": "Parse captions JSON" }
+      }
+    },
+    {
+      "id": 6,
+      "module": "google-sheets:updateRow",
+      "version": 2,
+      "parameters": {},
+      "mapper": {
+        "rowNumber": "{{1.`__ROW_NUMBER__`}}",
+        "values": {
+          "status": "publishing"
+        }
+      },
+      "metadata": {
+        "designer": { "x": 1500, "y": 0, "name": "Status → publishing" }
+      }
+    },
+    {
+      "id": 7,
+      "module": "builtin:BasicRouter",
+      "version": 1,
+      "mapper": null,
+      "metadata": {
+        "designer": { "x": 1800, "y": 300, "name": "Platform router" }
+      },
+      "routes": [
+        {
+          "flow": [
+            {
+              "id": 8,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": {
+                "handleErrors": true
+              },
+              "mapper": {
+                "url": "https://graph.facebook.com/v21.0/{{var.ig_user_id}}/media",
+                "method": "post",
+                "bodyType": "application/x-www-form-urlencoded",
+                "parseResponse": true,
+                "qs": [],
+                "headers": [],
+                "body": [
+                  { "name": "media_type", "value": "REELS" },
+                  { "name": "video_url", "value": "{{1.video_url}}" },
+                  { "name": "caption", "value": "{{ifempty(5.ig; 1.caption_ig)}} {{1.hashtags}}" },
+                  { "name": "share_to_feed", "value": "true" },
+                  { "name": "access_token", "value": "{{var.ig_access_token}}" }
+                ]
+              },
+              "filter": {
+                "name": "Instagram enabled",
+                "conditions": [
+                  [
+                    { "a": "{{1.platforms}}", "o": "text:contain:ci", "b": "instagram" }
+                  ]
+                ]
+              },
+              "metadata": {
+                "designer": { "x": 2100, "y": 0, "name": "IG create Reels container" }
+              }
+            },
+            {
+              "id": 9,
+              "module": "util:FunctionSleep",
+              "version": 1,
+              "parameters": {},
+              "mapper": { "duration": "45" },
+              "metadata": {
+                "designer": { "x": 2400, "y": 0, "name": "Wait IG processing" }
+              }
+            },
+            {
+              "id": 10,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": { "handleErrors": true },
+              "mapper": {
+                "url": "https://graph.facebook.com/v21.0/{{var.ig_user_id}}/media_publish",
+                "method": "post",
+                "parseResponse": true,
+                "bodyType": "application/x-www-form-urlencoded",
+                "body": [
+                  { "name": "creation_id", "value": "{{8.data.id}}" },
+                  { "name": "access_token", "value": "{{var.ig_access_token}}" }
+                ]
+              },
+              "metadata": {
+                "designer": { "x": 2700, "y": 0, "name": "IG media_publish" }
+              }
+            }
+          ]
+        },
+        {
+          "flow": [
+            {
+              "id": 11,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": { "handleErrors": true },
+              "mapper": {
+                "url": "https://api.vk.com/method/video.save",
+                "method": "get",
+                "parseResponse": true,
+                "qs": [
+                  { "name": "name", "value": "{{ifempty(1.title_yt; 1.caption_vk)}}" },
+                  { "name": "description", "value": "{{ifempty(5.vk; 1.caption_vk)}}" },
+                  { "name": "wallpost", "value": "1" },
+                  { "name": "group_id", "value": "{{var.vk_group_id}}" },
+                  { "name": "access_token", "value": "{{var.vk_access_token}}" },
+                  { "name": "v", "value": "5.199" }
+                ]
+              },
+              "filter": {
+                "name": "VK enabled",
+                "conditions": [
+                  [
+                    { "a": "{{1.platforms}}", "o": "text:contain:ci", "b": "vk" }
+                  ]
+                ]
+              },
+              "metadata": {
+                "designer": { "x": 2100, "y": 300, "name": "VK video.save" }
+              }
+            },
+            {
+              "id": 12,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": { "handleErrors": true },
+              "mapper": {
+                "url": "{{11.data.response.upload_url}}",
+                "method": "post",
+                "bodyType": "multipart/form-data",
+                "parseResponse": true,
+                "body": [
+                  {
+                    "name": "video_file",
+                    "value": "{{3.data}}",
+                    "fileName": "video.mp4",
+                    "contentType": "video/mp4",
+                    "type": "file"
+                  }
+                ]
+              },
+              "metadata": {
+                "designer": { "x": 2400, "y": 300, "name": "VK upload video file" }
+              }
+            },
+            {
+              "id": 13,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": { "handleErrors": true },
+              "mapper": {
+                "url": "https://api.vk.com/method/wall.post",
+                "method": "post",
+                "parseResponse": true,
+                "bodyType": "application/x-www-form-urlencoded",
+                "body": [
+                  { "name": "owner_id", "value": "-{{var.vk_group_id}}" },
+                  { "name": "from_group", "value": "1" },
+                  { "name": "message", "value": "{{ifempty(5.vk; 1.caption_vk)}} {{1.hashtags}}" },
+                  { "name": "attachments", "value": "video{{12.data.owner_id}}_{{12.data.video_id}}" },
+                  { "name": "publish_date", "value": "{{formatDate(parseDate(1.publish_at; YYYY-MM-DDTHH:mm:ssZ); X)}}" },
+                  { "name": "access_token", "value": "{{var.vk_access_token}}" },
+                  { "name": "v", "value": "5.199" }
+                ]
+              },
+              "metadata": {
+                "designer": { "x": 2700, "y": 300, "name": "VK wall.post" }
+              }
+            }
+          ]
+        },
+        {
+          "flow": [
+            {
+              "id": 14,
+              "module": "youtube:uploadVideo",
+              "version": 1,
+              "parameters": {},
+              "mapper": {
+                "title": "{{1.title_yt}}",
+                "description": "{{ifempty(5.yt; 1.caption_yt)}} {{1.hashtags}}",
+                "privacyStatus": "private",
+                "publishAt": "{{1.publish_at}}",
+                "categoryId": "22",
+                "selfDeclaredMadeForKids": "{{1.made_for_kids}}",
+                "data": "{{3.data}}"
+              },
+              "filter": {
+                "name": "YouTube enabled",
+                "conditions": [
+                  [
+                    { "a": "{{1.platforms}}", "o": "text:contain:ci", "b": "youtube" }
+                  ]
+                ]
+              },
+              "metadata": {
+                "designer": { "x": 2100, "y": 600, "name": "YouTube upload (+Shorts)" }
+              }
+            }
+          ]
+        },
+        {
+          "flow": [
+            {
+              "id": 15,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": { "handleErrors": true },
+              "mapper": {
+                "url": "https://open.tiktokapis.com/v2/post/publish/creator_info/query/",
+                "method": "post",
+                "parseResponse": true,
+                "headers": [
+                  { "name": "Authorization", "value": "Bearer {{var.tt_access_token}}" },
+                  { "name": "Content-Type", "value": "application/json; charset=UTF-8" }
+                ],
+                "bodyType": "raw",
+                "body": "{}"
+              },
+              "filter": {
+                "name": "TikTok enabled",
+                "conditions": [
+                  [
+                    { "a": "{{1.platforms}}", "o": "text:contain:ci", "b": "tiktok" }
+                  ]
+                ]
+              },
+              "metadata": {
+                "designer": { "x": 2100, "y": 900, "name": "TT creator_info" }
+              }
+            },
+            {
+              "id": 16,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": { "handleErrors": true },
+              "mapper": {
+                "url": "https://open.tiktokapis.com/v2/post/publish/video/init/",
+                "method": "post",
+                "parseResponse": true,
+                "headers": [
+                  { "name": "Authorization", "value": "Bearer {{var.tt_access_token}}" },
+                  { "name": "Content-Type", "value": "application/json; charset=UTF-8" }
+                ],
+                "bodyType": "raw",
+                "body": "{\n  \"post_info\": {\n    \"title\": \"{{escapeJSON(ifempty(5.tt; 1.caption_tt))}}\",\n    \"privacy_level\": \"{{ifempty(1.privacy_tt; PUBLIC_TO_EVERYONE)}}\",\n    \"disable_duet\": false,\n    \"disable_comment\": false,\n    \"disable_stitch\": false,\n    \"video_cover_timestamp_ms\": 1000\n  },\n  \"source_info\": {\n    \"source\": \"PULL_FROM_URL\",\n    \"video_url\": \"{{1.video_url}}\"\n  }\n}"
+              },
+              "metadata": {
+                "designer": { "x": 2400, "y": 900, "name": "TT Direct Post init" }
+              }
+            },
+            {
+              "id": 17,
+              "module": "util:FunctionSleep",
+              "version": 1,
+              "parameters": {},
+              "mapper": { "duration": "60" },
+              "metadata": {
+                "designer": { "x": 2700, "y": 900, "name": "Wait TT processing" }
+              }
+            },
+            {
+              "id": 18,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": { "handleErrors": true },
+              "mapper": {
+                "url": "https://open.tiktokapis.com/v2/post/publish/status/fetch/",
+                "method": "post",
+                "parseResponse": true,
+                "headers": [
+                  { "name": "Authorization", "value": "Bearer {{var.tt_access_token}}" },
+                  { "name": "Content-Type", "value": "application/json; charset=UTF-8" }
+                ],
+                "bodyType": "raw",
+                "body": "{\n  \"publish_id\": \"{{16.data.data.publish_id}}\"\n}"
+              },
+              "metadata": {
+                "designer": { "x": 3000, "y": 900, "name": "TT status fetch" }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "module": "google-sheets:updateRow",
+      "version": 2,
+      "parameters": {},
+      "mapper": {
+        "rowNumber": "{{1.`__ROW_NUMBER__`}}",
+        "values": {
+          "status": "published",
+          "published_ig_id": "{{10.data.id}}",
+          "published_vk_id": "{{13.data.response.post_id}}",
+          "published_yt_id": "{{14.id}}",
+          "published_tt_id": "{{16.data.data.publish_id}}"
+        }
+      },
+      "metadata": {
+        "designer": { "x": 3300, "y": 300, "name": "Mark published + IDs" }
+      }
+    },
+    {
+      "id": 20,
+      "module": "telegram:SendMessage",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "text": "✅ CF published {{1.id}}\nIG: {{10.data.id}}\nVK: {{13.data.response.post_id}}\nYT: {{14.id}}\nTT: {{16.data.data.publish_id}}"
+      },
+      "metadata": {
+        "designer": { "x": 3600, "y": 300, "name": "Alert success" }
+      }
+    }
+  ],
+  "metadata": {
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "sequential": true,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": true
+    },
+    "designer": {
+      "orphans": []
+    },
+    "notes": "После импорта: 1) подключить Google Sheets/Drive/YouTube/Telegram/OpenAI 2) создать Variables: ig_user_id, ig_access_token, vk_group_id, vk_access_token, tt_access_token 3) для IG лучше добавить polling статуса container до FINISHED вместо фиксированного Sleep 4) publish_at фильтр добавьте через Filter: publish_at <= now"
+  }
+}

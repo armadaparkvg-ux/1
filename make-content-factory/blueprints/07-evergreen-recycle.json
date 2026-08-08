@@ -1,0 +1,85 @@
+{
+  "name": "CF-07 Evergreen Recycle (SocialBee-style)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "google-sheets:searchRows",
+      "version": 2,
+      "parameters": {},
+      "mapper": {
+        "filter": [
+          { "a": "status", "o": "text:equal:ci", "b": "published" },
+          { "a": "recycle_after_days", "o": "numerics:greaterthan", "b": "0" }
+        ],
+        "limit": 20
+      },
+      "metadata": {
+        "designer": { "x": 0, "y": 0, "name": "Find recyclable posts" }
+      }
+    },
+    {
+      "id": 2,
+      "module": "builtin:BasicFeeder",
+      "version": 1,
+      "parameters": {},
+      "mapper": { "array": "{{1.array}}" },
+      "metadata": {
+        "designer": { "x": 300, "y": 0, "name": "Iterate candidates" }
+      }
+    },
+    {
+      "id": 3,
+      "module": "google-sheets:updateRow",
+      "version": 2,
+      "parameters": {},
+      "mapper": {
+        "values": {
+          "status": "ready",
+          "publish_at": "{{addDays(now; 1)}}",
+          "recycle_count": "{{add(2.recycle_count; 1)}}",
+          "notes": "Recycled from {{2.id}} / count {{add(2.recycle_count; 1)}}"
+        }
+      },
+      "filter": {
+        "name": "Cooldown passed (approx)",
+        "conditions": [
+          [
+            { "a": "{{2.recycle_count}}", "o": "numerics:lessequal", "b": "5" }
+          ]
+        ]
+      },
+      "metadata": {
+        "designer": { "x": 600, "y": 0, "name": "Re-queue as ready" }
+      }
+    },
+    {
+      "id": 4,
+      "module": "openai-gpt-3:CreateCompletion",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "model": "gpt-4o-mini",
+        "message": "Перепиши captions для recycle без ощущения копипаста. JSON ig,vk,tt,yt. Было IG: {{2.caption_ig}}"
+      },
+      "metadata": {
+        "designer": { "x": 900, "y": 0, "name": "Rewrite captions" }
+      }
+    },
+    {
+      "id": 5,
+      "module": "telegram:SendMessage",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "text": "♻️ Evergreen re-queued {{2.id}} (recycle #{{add(2.recycle_count; 1)}})"
+      },
+      "metadata": {
+        "designer": { "x": 1200, "y": 0, "name": "Notify recycle" }
+      }
+    }
+  ],
+  "metadata": {
+    "version": 1,
+    "notes": "SocialBee category queues → у нас category + recycle_after_days. Schedule daily. Перед репостом желательно проверить, что прошлые метрики были выше медианы (фильтр через Analytics sheet)."
+  }
+}
