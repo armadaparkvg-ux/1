@@ -191,6 +191,7 @@
       <button class="nav-btn" data-view="analytics" type="button">Аналитика</button>
       <button class="nav-btn" data-view="media" type="button">Медиа</button>
       <button class="nav-btn" data-view="integrations" type="button">Интеграции</button>
+      <button class="nav-btn" data-view="api" type="button">API соцсетей</button>
       <button class="nav-btn" data-view="compete" type="button">Почему мы</button>
       <div style="margin-top:1rem">
         <button class="ghost sm" type="button" onclick="exitApp()">← На главную</button>
@@ -203,15 +204,18 @@
         <div class="topbar">
           <div>
             <h1>Визуальный календарь</h1>
-            <p>Сетка недели + превью Reels / Shorts / Клипов</p>
+            <p>Клик по дню — новый пост · клик по посту — редактирование</p>
           </div>
-          <button type="button" onclick="toast('Слот добавлен в вечернюю очередь')">+ В слот</button>
+          <div class="topbar-actions">
+            <button class="ghost" type="button" id="btnResetDemo">Сбросить демо</button>
+            <button type="button" id="btnAddPost">+ Новый пост</button>
+          </div>
         </div>
         <div class="kpi-row">
-          <div class="kpi"><span>На неделе</span><b>12</b></div>
-          <div class="kpi"><span>Готово</span><b>4</b></div>
-          <div class="kpi"><span>На проверке</span><b>2</b></div>
-          <div class="kpi"><span>Площадки</span><b>4</b></div>
+          <div class="kpi"><span>На неделе</span><b id="kpiWeek">0</b></div>
+          <div class="kpi"><span>Готово</span><b id="kpiReady">0</b></div>
+          <div class="kpi"><span>На проверке</span><b id="kpiReview">0</b></div>
+          <div class="kpi"><span>Площадки</span><b id="kpiPlats">0</b></div>
         </div>
         <div class="split">
           <div class="panel">
@@ -222,7 +226,7 @@
               <div class="brand-tag">FACTORY · РИЛС</div>
               <div class="cap" id="previewCap">Смонтируй так — и охваты вырастут 🔥<br /><span style="opacity:.7">#reels #smm</span></div>
             </div>
-            <div class="chips" style="margin-top:1rem;justify-content:center">
+            <div class="chips" id="previewChips" style="margin-top:1rem;justify-content:center">
               <span class="chip on">Instagram</span><span class="chip on">VK</span><span class="chip on">YouTube</span><span class="chip on">TikTok</span>
             </div>
           </div>
@@ -338,31 +342,9 @@
             <h1>Медиатека</h1>
             <p>Папка Google Drive + требования 9:16 и H.264</p>
           </div>
-          <button class="ghost" type="button" onclick="toast('Сканирование Google Drive…')">Синхронизировать Drive</button>
+          <button class="ghost" type="button" id="btnAddPostMedia" onclick="document.getElementById('btnAddPost').click()">+ Добавить медиа</button>
         </div>
-        <div class="list-rows">
-          <div class="list-row">
-            <div>
-              <h3>hooks_montage_v3.mp4</h3>
-              <p>1080×1920 · 24 сек · H.264 · готово для Instagram / VK / YouTube / TikTok</p>
-            </div>
-            <span class="badge">ОК</span>
-          </div>
-          <div class="list-row">
-            <div>
-              <h3>rss_draft_needs_edit.mov</h3>
-              <p>HEVC · нужно перекодировать в H.264</p>
-            </div>
-            <span class="badge warn">перекодировать</span>
-          </div>
-          <div class="list-row">
-            <div>
-              <h3>cover_hooks.png</h3>
-              <p>1080×1920 · обложка для Shorts / Reels</p>
-            </div>
-            <span class="badge">ОК</span>
-          </div>
-        </div>
+        <div class="list-rows" id="mediaLib"></div>
       </section>
 
       <!-- INTEGRATIONS -->
@@ -382,6 +364,28 @@
           <div class="list-row"><div><h3>CF-05 Загрузка из RSS</h3><p>Новости → черновики в таблице</p></div><span class="badge">новое</span></div>
           <div class="list-row"><div><h3>CF-06 Шлюз согласования</h3><p>Одобрить / отклонить в Telegram</p></div><span class="badge">новое</span></div>
           <div class="list-row"><div><h3>CF-07 Повтор сильных роликов</h3><p>Повтор через N дней с новым текстом</p></div><span class="badge">новое</span></div>
+        </div>
+      </section>
+
+      <!-- API -->
+      <section class="view" id="view-api">
+        <div class="topbar">
+          <div>
+            <h1>API соцсетей</h1>
+            <p>Ключи хранятся локально в браузере · можно выгрузить в Make</p>
+          </div>
+          <div class="topbar-actions">
+            <button class="ghost" type="button" id="btnExportApi">Скачать для Make</button>
+            <button type="button" id="btnSaveApi">Сохранить API</button>
+          </div>
+        </div>
+        <div class="api-grid" id="apiGrid"></div>
+        <div class="panel" style="margin-top:0.85rem">
+          <p style="margin:0;color:var(--mute);line-height:1.55;font-size:0.92rem">
+            Instagram Graph API · VK API · YouTube Data API v3 · TikTok Content Posting API.
+            После сохранения нажмите «Скачать для Make» — получите файл переменных для сценариев CF-01…CF-07.
+            Токены не уходят на сервер: только <code>localStorage</code> этого браузера.
+          </p>
         </div>
       </section>
 
@@ -427,122 +431,100 @@
     </div>
   </div>
 
+  <!-- EDITOR MODAL -->
+  <div class="modal-backdrop" id="editorModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <h2 id="modalTitle">Новый пост</h2>
+          <p style="margin:0.35rem 0 0;color:var(--mute);font-size:0.9rem">Фото / видео, описание, ссылка и площадки</p>
+        </div>
+        <button class="ghost sm" type="button" id="btnCloseModal">Закрыть</button>
+      </div>
+
+      <div class="form-grid">
+        <label>Название
+          <input id="fTitle" type="text" placeholder="Хук за 3 секунды" />
+        </label>
+        <label>Короткий текст (подпись)
+          <textarea id="fCaption" placeholder="Текст для ленты / Reels"></textarea>
+        </label>
+        <label>Описание
+          <textarea id="fDescription" placeholder="Развёрнутое описание, сценарий, заметки для команды"></textarea>
+        </label>
+        <label>Ссылка
+          <input id="fLink" type="url" placeholder="https://example.com/lead-magnet" />
+        </label>
+        <label>UTM-метка
+          <input id="fUtm" type="text" placeholder="cf_hooks_aug" />
+        </label>
+
+        <div>
+          <div style="color:var(--mute);font-size:0.85rem;margin-bottom:0.35rem">Площадки</div>
+          <div class="plat-toggles" id="platToggles">
+            <label class="on"><input type="checkbox" value="ig" checked /> Instagram</label>
+            <label class="on"><input type="checkbox" value="vk" checked /> VK</label>
+            <label><input type="checkbox" value="yt" /> YouTube</label>
+            <label><input type="checkbox" value="tt" /> TikTok</label>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.7rem">
+          <label>День недели
+            <select id="fDay">
+              <option value="1">Пн</option>
+              <option value="2">Вт</option>
+              <option value="3">Ср</option>
+              <option value="4">Чт</option>
+              <option value="5">Пт</option>
+              <option value="6">Сб</option>
+              <option value="7">Вс</option>
+            </select>
+          </label>
+          <label>Слот времени
+            <select id="fSlot">
+              <option value="peak_morning">утро</option>
+              <option value="peak_midday">день</option>
+              <option value="peak_evening">вечер</option>
+            </select>
+          </label>
+          <label>Статус
+            <select id="fStatus">
+              <option value="draft">черновик</option>
+              <option value="review">на проверке</option>
+              <option value="approved">одобрено</option>
+              <option value="ready">готово</option>
+            </select>
+          </label>
+        </div>
+
+        <div>
+          <div style="color:var(--mute);font-size:0.85rem;margin-bottom:0.35rem">Фото или видео</div>
+          <div class="dropzone" id="dropzone">
+            <strong>Перетащите файл сюда</strong>
+            или нажмите, чтобы выбрать с компьютера
+            <div style="margin-top:0.45rem;font-size:0.78rem">JPG, PNG, MP4, MOV · до 12 МБ в демо</div>
+          </div>
+          <input id="fileInput" type="file" accept="image/*,video/*" hidden />
+          <div class="media-preview" id="mediaPreview"></div>
+          <p id="fMediaMeta" style="margin:0.55rem 0 0;color:var(--mute);font-size:0.82rem">Файл не выбран</p>
+          <div style="display:grid;grid-template-columns:1fr auto;gap:0.5rem;margin-top:0.65rem">
+            <input id="fMediaUrl" type="url" placeholder="или вставьте прямую ссылку на медиа" />
+            <button class="ghost sm" type="button" id="btnLoadUrl">Подключить URL</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="ghost danger-btn sm" type="button" id="btnDelete" style="display:none;margin-right:auto">Удалить</button>
+        <button class="ghost" type="button" id="btnCloseModal2" onclick="document.getElementById('btnCloseModal').click()">Отмена</button>
+        <button type="button" id="btnSavePost">Сохранить в календарь</button>
+      </div>
+    </div>
+  </div>
+
   <div id="toast" style="position:fixed;bottom:1.25rem;right:1.25rem;background:var(--mint);color:#062016;padding:0.7rem 1rem;border-radius:999px;font-weight:700;font-size:0.85rem;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;z-index:50"></div>
 
-  <script>
-    const statusRu = {
-      ready: "готово",
-      review: "на проверке",
-      approved: "одобрено",
-      draft: "черновик",
-      queued: "в очереди",
-      publishing: "публикуется",
-      published: "опубликовано"
-    };
-    const slotRu = {
-      peak_morning: "утро",
-      peak_midday: "день",
-      peak_evening: "вечер"
-    };
-    const platformRu = { ig: "Instagram", vk: "VK", yt: "YouTube", tt: "TikTok" };
-
-    const posts = [
-      { id: "CF-001", day: 1, title: "Хуки монтажа", platforms: ["ig","vk","yt","tt"], status: "ready", slot: "peak_morning", utm: "cf_hooks_aug", caption: "Смонтируй так — и охваты вырастут 🔥" },
-      { id: "CF-002", day: 2, title: "Хук 3 сек", platforms: ["ig","vk"], status: "review", slot: "peak_evening", utm: "cf_hooks_aug", caption: "Хук за 3 секунды — формула. Пиши «гайд»." },
-      { id: "CF-003", day: 3, title: "Длинный гайд", platforms: ["yt"], status: "approved", slot: "peak_midday", utm: "cf_guides", caption: "Полный гайд по автопостингу 2026" },
-      { id: "CF-004", day: 4, title: "1→4 площадки", platforms: ["ig","tt"], status: "draft", slot: "peak_morning", utm: "cf_tips", caption: "Один ролик — четыре площадки" }
-    ];
-
-    function enterApp(view) {
-      document.getElementById("landing").classList.add("off");
-      document.getElementById("app").classList.add("on");
-      showView(view || "calendar");
-    }
-    function exitApp() {
-      document.getElementById("app").classList.remove("on");
-      document.getElementById("landing").classList.remove("off");
-      window.scrollTo(0, 0);
-    }
-    function showView(name) {
-      document.querySelectorAll(".view").forEach((v) => v.classList.toggle("on", v.id === "view-" + name));
-      document.querySelectorAll(".nav-btn").forEach((b) => b.classList.toggle("active", b.dataset.view === name));
-    }
-    document.querySelectorAll(".nav-btn").forEach((b) => b.addEventListener("click", () => showView(b.dataset.view)));
-
-    function toast(msg) {
-      const el = document.getElementById("toast");
-      el.textContent = msg;
-      el.style.opacity = "1";
-      el.style.transform = "none";
-      clearTimeout(window.__t);
-      window.__t = setTimeout(() => {
-        el.style.opacity = "0";
-        el.style.transform = "translateY(8px)";
-      }, 2200);
-    }
-
-    // Calendar
-    const days = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
-    const grid = document.getElementById("calGrid");
-    grid.innerHTML = days.map((d) => `<div class="cal-head">${d}</div>`).join("");
-    for (let i = 1; i <= 7; i++) {
-      const cellPosts = posts.filter((p) => p.day === i);
-      grid.innerHTML += `<div class="cal-cell"><strong>${i + 7} авг</strong>${
-        cellPosts.map((p) => `<div class="post-pill ${p.platforms[0]}" data-cap="${p.caption}">${p.id} · ${p.title}</div>`).join("")
-      }</div>`;
-    }
-    grid.addEventListener("click", (e) => {
-      const pill = e.target.closest(".post-pill");
-      if (!pill) return;
-      document.getElementById("previewCap").innerHTML = pill.dataset.cap + "<br /><span style='opacity:.7'>#contentfactory</span>";
-    });
-
-    // Queue table
-    const tb = document.querySelector("#queueTable tbody");
-    tb.innerHTML = posts.map((p) => {
-      const st = p.status === "ready" ? "badge" : p.status === "review" ? "badge warn" : p.status === "draft" ? "badge mute" : "badge";
-      const slotLabel = slotRu[p.slot] || p.slot;
-      const platforms = p.platforms.map((x) => platformRu[x] || x).join(", ");
-      return `<tr>
-        <td><strong>${p.id}</strong><br /><span style="color:var(--mute);font-size:0.8rem">${p.title}</span></td>
-        <td>${slotLabel}</td>
-        <td>${platforms}</td>
-        <td><span class="${st}">${statusRu[p.status] || p.status}</span></td>
-        <td>${p.utm}</td>
-        <td><button class="sm ghost" type="button" onclick="toast('CF-01 заберёт ${p.id} в слот «${slotLabel}»')">Опубликовать</button></td>
-      </tr>`;
-    }).join("");
-
-    // Approvals
-    document.getElementById("approvalList").innerHTML = posts
-      .filter((p) => p.status === "review" || p.status === "approved")
-      .map((p) => `<div class="list-row">
-        <div>
-          <h3>${p.id} · ${p.title}</h3>
-          <p>${p.caption}</p>
-        </div>
-        <div style="display:flex;gap:0.4rem">
-          <button class="sm" type="button" onclick="toast('${p.id} → одобрено → готово')">Одобрить</button>
-          <button class="sm ghost" type="button" onclick="toast('${p.id} → возвращено в черновик')">Отклонить</button>
-        </div>
-      </div>`).join("");
-
-    // AI adapt (local demo — mirrors Make OpenAI step)
-    document.getElementById("aiRun").addEventListener("click", () => {
-      const src = document.getElementById("aiSource").value.trim();
-      const tone = document.getElementById("aiTone").value;
-      const cta = document.getElementById("aiCta").value.trim() || "гайд";
-      document.getElementById("outIg").value = `${src} ${tone === "дерзкий эксперт" ? "🔥" : ""}\nПиши «${cta}» в комменты — пришлю файл.`;
-      document.getElementById("outVk").value = `${src}\n\nСохраняй, чтобы не потерять. Подробности — по слову «${cta}» в комментариях.`;
-      document.getElementById("outTt").value = `${src.split(".")[0]}. #fyp #контент\n«${cta}» в комменты 👇`;
-      document.getElementById("outYt").value = `${src}\n\nТаймкоды и шаблон Make — в описании. #Shorts`;
-      toast("Тексты адаптированы под 4 площадки");
-    });
-
-    // Deep link ?app=1
-    if (location.hash === "#app" || new URLSearchParams(location.search).get("app") === "1") {
-      enterApp("calendar");
-    }
-  </script>
+  <script src="./app.js"></script>
 </body>
 </html>
