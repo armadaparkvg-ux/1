@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Make Content Factory — веб-процесс автопостинга</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0b1210;
+      --panel: #121c18;
+      --line: rgba(180, 255, 214, 0.14);
+      --mint: #8dffb5;
+      --mint-dim: #3d8f5f;
+      --sand: #e8f0ea;
+      --mute: #8aa396;
+      --warn: #ffb86b;
+      --danger: #ff6b7a;
+      --ig: #f77737;
+      --vk: #4a76a8;
+      --yt: #ff4d4d;
+      --tt: #25f4ee;
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      color: var(--sand);
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(141, 255, 181, 0.16), transparent 55%),
+        radial-gradient(900px 500px at 0% 20%, rgba(37, 244, 238, 0.08), transparent 50%),
+        linear-gradient(180deg, #07100d 0%, var(--ink) 40%, #0e1713 100%);
+      min-height: 100vh;
+    }
+
+    a { color: var(--mint); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { width: min(var(--max), calc(100% - 2rem)); margin: 0 auto; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-content: end;
+      padding: 2rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(141,255,181,0.04) 1px, transparent 1px) 0 0 / 72px 72px,
+        linear-gradient(rgba(141,255,181,0.04) 1px, transparent 1px) 0 0 / 72px 72px;
+      mask-image: linear-gradient(180deg, #000 30%, transparent 90%);
+      pointer-events: none;
+      animation: gridDrift 28s linear infinite;
+    }
+    @keyframes gridDrift {
+      from { transform: translateY(0); }
+      to { transform: translateY(72px); }
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: clamp(4rem, 18vh, 9rem);
+      position: relative;
+      z-index: 2;
+    }
+    .nav-brand {
+      font-family: Syne, sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      font-size: 0.95rem;
+    }
+    .nav-links { display: flex; gap: 1.25rem; font-size: 0.92rem; color: var(--mute); }
+    .nav-links a { color: inherit; }
+    .nav-links a:hover { color: var(--mint); text-decoration: none; }
+
+    .hero-brand {
+      font-family: Syne, sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.2rem, 10vw, 7.2rem);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      margin: 0 0 1.25rem;
+      position: relative;
+      z-index: 2;
+      animation: rise 0.9s ease both;
+    }
+    .hero-brand span {
+      display: block;
+      color: var(--mint);
+      text-shadow: 0 0 40px rgba(141, 255, 181, 0.25);
+    }
+    .hero-lead {
+      max-width: 34rem;
+      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+      color: var(--mute);
+      line-height: 1.5;
+      margin: 0 0 2rem;
+      position: relative;
+      z-index: 2;
+      animation: rise 0.9s ease 0.12s both;
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      position: relative;
+      z-index: 2;
+      animation: rise 0.9s ease 0.22s both;
+    }
+    .btn {
+      border: 1px solid var(--mint);
+      background: var(--mint);
+      color: #062016;
+      font-weight: 700;
+      padding: 0.9rem 1.25rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); text-decoration: none; }
+    .btn.ghost {
+      background: transparent;
+      color: var(--sand);
+      border-color: var(--line);
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    section { padding: 5rem 0; }
+    .section-kicker {
+      color: var(--mint-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.75rem;
+      margin: 0 0 0.75rem;
+      font-weight: 700;
+    }
+    h2 {
+      font-family: Syne, sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      letter-spacing: -0.03em;
+      margin: 0 0 0.75rem;
+      line-height: 1.1;
+    }
+    .section-lead {
+      color: var(--mute);
+      max-width: 40rem;
+      margin: 0 0 2.5rem;
+      line-height: 1.55;
+    }
+
+    /* PIPELINE */
+    .pipeline {
+      display: grid;
+      gap: 0.75rem;
+    }
+    .pipe-step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      align-items: start;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(141,255,181,0.05), transparent 55%), var(--panel);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .5s ease, transform .5s ease, border-color .2s;
+    }
+    .pipe-step.in { opacity: 1; transform: none; }
+    .pipe-step:hover { border-color: rgba(141,255,181,0.35); }
+    .pipe-num {
+      font-family: Syne, sans-serif;
+      font-weight: 800;
+      color: var(--mint);
+      font-size: 1.2rem;
+      min-width: 2rem;
+    }
+    .pipe-step h3 { margin: 0 0 0.35rem; font-size: 1.05rem; }
+    .pipe-step p { margin: 0; color: var(--mute); font-size: 0.95rem; line-height: 1.45; }
+
+    /* SCENARIOS */
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 800px) {
+      .scenario-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+    .scenario {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.35rem;
+      background: var(--panel);
+      cursor: pointer;
+      transition: border-color .2s, transform .2s;
+    }
+    .scenario:hover, .scenario.active {
+      border-color: rgba(141,255,181,0.45);
+      transform: translateY(-2px);
+    }
+    .scenario .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #062016;
+      background: var(--mint);
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .scenario h3 {
+      font-family: Syne, sans-serif;
+      margin: 0 0 0.5rem;
+      font-size: 1.25rem;
+    }
+    .scenario p { margin: 0; color: var(--mute); font-size: 0.95rem; line-height: 1.45; }
+    .scenario .meta {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.78rem;
+      color: var(--mute);
+    }
+
+    .detail {
+      margin-top: 1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.35rem;
+      background: rgba(8, 16, 13, 0.75);
+      display: none;
+    }
+    .detail.open { display: block; animation: rise .35s ease both; }
+    .detail h4 {
+      font-family: Syne, sans-serif;
+      margin: 0 0 0.75rem;
+      font-size: 1.1rem;
+    }
+    .detail ol { margin: 0; padding-left: 1.2rem; color: var(--mute); line-height: 1.6; }
+    .detail code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.85em;
+      color: var(--mint);
+    }
+
+    /* PLATFORMS */
+    .platforms {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+    @media (max-width: 900px) { .platforms { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .platforms { grid-template-columns: 1fr; } }
+    .plat {
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      min-height: 180px;
+    }
+    .plat h3 { margin: 0 0 0.5rem; font-family: Syne, sans-serif; font-size: 1.15rem; }
+    .plat ul { margin: 0; padding-left: 1.1rem; color: var(--mute); font-size: 0.9rem; line-height: 1.5; }
+    .plat.ig { box-shadow: inset 3px 0 0 var(--ig); }
+    .plat.vk { box-shadow: inset 3px 0 0 var(--vk); }
+    .plat.yt { box-shadow: inset 3px 0 0 var(--yt); }
+    .plat.tt { box-shadow: inset 3px 0 0 var(--tt); }
+
+    /* CHECKLIST */
+    .check-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
+    .check-list li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.75rem;
+      align-items: start;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(18, 28, 24, 0.8);
+    }
+    .check-list input {
+      appearance: none;
+      width: 1.15rem;
+      height: 1.15rem;
+      border: 1.5px solid var(--mint-dim);
+      border-radius: 4px;
+      margin-top: 0.15rem;
+      cursor: pointer;
+      position: relative;
+      background: transparent;
+    }
+    .check-list input:checked {
+      background: var(--mint);
+      border-color: var(--mint);
+    }
+    .check-list input:checked::after {
+      content: "";
+      position: absolute;
+      left: 0.28rem;
+      top: 0.05rem;
+      width: 0.28rem;
+      height: 0.55rem;
+      border: solid #062016;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    .check-list label { cursor: pointer; line-height: 1.4; }
+    .check-list .done label { color: var(--mute); text-decoration: line-through; }
+
+    .progress {
+      margin: 0 0 1.25rem;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(141,255,181,0.1);
+      overflow: hidden;
+    }
+    .progress > i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--mint-dim), var(--mint));
+      transition: width .35s ease;
+    }
+    .progress-label { color: var(--mute); font-size: 0.9rem; margin-bottom: 0.5rem; }
+
+    /* FILES */
+    .files {
+      display: grid;
+      gap: 0.6rem;
+    }
+    .file {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      padding: 1rem 1.15rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+    }
+    .file strong { display: block; margin-bottom: 0.2rem; }
+    .file span { color: var(--mute); font-size: 0.9rem; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem 0 3rem;
+      color: var(--mute);
+      font-size: 0.9rem;
+    }
+
+    .flow-ascii {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      white-space: pre;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      background: #070e0b;
+      color: var(--mint);
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <nav class="nav">
+        <div class="nav-brand">MAKE · CONTENT FACTORY</div>
+        <div class="nav-links">
+          <a href="#pipeline">Процесс</a>
+          <a href="#scenarios">Сценарии</a>
+          <a href="#platforms">Площадки</a>
+          <a href="#checklist">Чеклист</a>
+          <a href="#files">Файлы</a>
+        </div>
+      </nav>
+
+      <h1 class="hero-brand">MAKE<br /><span>FACTORY</span></h1>
+      <p class="hero-lead">Полный веб-процесс автопостинга видео: Google Sheets → Make → Instagram · VK · YouTube · TikTok, плюс лид-магнит из комментариев и дневная аналитика.</p>
+      <div class="cta-row">
+        <a class="btn" href="#scenarios">Открыть сценарии</a>
+        <a class="btn ghost" href="#checklist">Что нужно подключить</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="pipeline">
+      <div class="wrap">
+        <p class="section-kicker">Pipeline</p>
+        <h2>Один конвейер, четыре площадки</h2>
+        <p class="section-lead">Контент живёт в таблице. Make забирает только строки `ready` с наступившим `publish_at`, адаптирует подписи и раскладывает по роутеру.</p>
+
+        <div class="pipeline" id="pipeSteps">
+          <article class="pipe-step">
+            <div class="pipe-num">01</div>
+            <div>
+              <h3>Контент-план в Google Sheets</h3>
+              <p>Статусы idea → draft → ready → queued → publishing → published/partial/error. Видео и обложки — ссылки Drive.</p>
+            </div>
+          </article>
+          <article class="pipe-step">
+            <div class="pipe-num">02</div>
+            <div>
+              <h3>CF-01 Publisher Core</h3>
+              <p>Watch Rows каждые 15 мин → lock строки → download/public URL → AI captions → Router.</p>
+            </div>
+          </article>
+          <article class="pipe-step">
+            <div class="pipe-num">03</div>
+            <div>
+              <h3>Публикация по платформам</h3>
+              <p>IG Reels container, VK video+wall, YouTube upload+publishAt, TikTok Direct Post PULL_FROM_URL.</p>
+            </div>
+          </article>
+          <article class="pipe-step">
+            <div class="pipe-num">04</div>
+            <div>
+              <h3>Вовлечение и аналитика</h3>
+              <p>CF-02: коммент с ключевым словом → Private Reply. CF-03: ежедневный сбор метрик. CF-04: refresh TikTok token.</p>
+            </div>
+          </article>
+        </div>
+
+        <div style="margin-top:2rem" class="flow-ascii">Sheets (ready)
+   │
+   ▼
+CF-01 Publisher ──Router──┬── Instagram Reels
+                          ├── VK video + wall.post
+                          ├── YouTube Shorts/long
+                          └── TikTok Direct Post
+   │
+   ├─ CF-02 Comment → DM lead magnet
+   ├─ CF-03 Daily analytics
+   └─ CF-04 TikTok token refresh</div>
+      </div>
+    </section>
+
+    <section id="scenarios">
+      <div class="wrap">
+        <p class="section-kicker">Make scenarios</p>
+        <h2>4 сценария для импорта</h2>
+        <p class="section-lead">Нажмите сценарий — увидите модули и порядок настройки. Blueprint JSON лежат в папке <code>blueprints/</code>.</p>
+
+        <div class="scenario-grid" id="scenarioGrid">
+          <article class="scenario active" data-id="cf01">
+            <div class="tag">Core</div>
+            <h3>CF-01 Publisher</h3>
+            <p>Главный автопостинг из таблицы на 4 площадки.</p>
+            <div class="meta">
+              <span class="chip">Sheets Watch</span>
+              <span class="chip">Router</span>
+              <span class="chip">HTTP / YouTube</span>
+            </div>
+          </article>
+          <article class="scenario" data-id="cf02">
+            <div class="tag">Growth</div>
+            <h3>CF-02 Lead Magnet</h3>
+            <p>Комментарий с CTA → авто-DM с ссылкой.</p>
+            <div class="meta">
+              <span class="chip">Webhook</span>
+              <span class="chip">Private Reply</span>
+            </div>
+          </article>
+          <article class="scenario" data-id="cf03">
+            <div class="tag">Reports</div>
+            <h3>CF-03 Analytics</h3>
+            <p>Раз в день тянет охваты/просмотры в лист Analytics.</p>
+            <div class="meta">
+              <span class="chip">Daily 09:00</span>
+              <span class="chip">Insights</span>
+            </div>
+          </article>
+          <article class="scenario" data-id="cf04">
+            <div class="tag">Infra</div>
+            <h3>CF-04 Token Refresh</h3>
+            <p>Обновляет TikTok access_token каждые 12 часов.</p>
+            <div class="meta">
+              <span class="chip">Data Store</span>
+              <span class="chip">OAuth</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="detail open" id="detail">
+          <h4 id="detailTitle">CF-01 Publisher Core</h4>
+          <ol id="detailSteps"></ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="platforms">
+      <div class="wrap">
+        <p class="section-kicker">Platforms</p>
+        <h2>Что делает каждая ветка</h2>
+        <p class="section-lead">В роутере фильтр по колонке <code>platforms</code>: instagram,vk,youtube,tiktok.</p>
+        <div class="platforms">
+          <article class="plat ig">
+            <h3>Instagram</h3>
+            <ul>
+              <li>POST /media (REELS)</li>
+              <li>Sleep / poll FINISHED</li>
+              <li>POST /media_publish</li>
+              <li>Лимит ~100/сутки</li>
+            </ul>
+          </article>
+          <article class="plat vk">
+            <h3>VK</h3>
+            <ul>
+              <li>video.save → upload_url</li>
+              <li>multipart upload файла</li>
+              <li>wall.post + publish_date</li>
+              <li>Только нативный файл</li>
+            </ul>
+          </article>
+          <article class="plat yt">
+            <h3>YouTube</h3>
+            <ul>
+              <li>videos.insert resumable</li>
+              <li>private + publishAt</li>
+              <li>Shorts = 9:16 short</li>
+              <li>Квота ~6 upload/день</li>
+            </ul>
+          </article>
+          <article class="plat tt">
+            <h3>TikTok</h3>
+            <ul>
+              <li>creator_info/query</li>
+              <li>video/init PULL_FROM_URL</li>
+              <li>status/fetch</li>
+              <li>Нужен App Audit</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <div class="wrap">
+        <p class="section-kicker">Setup</p>
+        <h2>Что нужно до запуска</h2>
+        <p class="section-lead">Отмечайте пункты — прогресс сохранится в этом браузере. Полный список — в <code>CHECKLIST.md</code>.</p>
+
+        <div class="progress-label"><span id="progressText">0 / 0</span> готово</div>
+        <div class="progress"><i id="progressBar"></i></div>
+
+        <ul class="check-list" id="checks">
+          <li><input type="checkbox" id="c1" /><label for="c1">Make аккаунт (Core/Pro) + понимание лимита operations</label></li>
+          <li><input type="checkbox" id="c2" /><label for="c2">Google Sheets контент-план (импорт sheets/content-plan.csv)</label></li>
+          <li><input type="checkbox" id="c3" /><label for="c3">Google Drive папка с видео + прямые ссылки</label></li>
+          <li><input type="checkbox" id="c4" /><label for="c4">Instagram Professional + Facebook Page + Meta App publish scopes</label></li>
+          <li><input type="checkbox" id="c5" /><label for="c5">VK сообщество + токен (wall, video, photos)</label></li>
+          <li><input type="checkbox" id="c6" /><label for="c6">YouTube Data API + OAuth youtube.upload + проверка квоты</label></li>
+          <li><input type="checkbox" id="c7" /><label for="c7">TikTok Content Posting API + Direct Post + App Audit</label></li>
+          <li><input type="checkbox" id="c8" /><label for="c8">Data Store cf_tokens для TikTok refresh</label></li>
+          <li><input type="checkbox" id="c9" /><label for="c9">Telegram-бот для алертов успеха/ошибок</label></li>
+          <li><input type="checkbox" id="c10" /><label for="c10">Импорт blueprints CF-01…CF-04 и reconnect connections</label></li>
+          <li><input type="checkbox" id="c11" /><label for="c11">Тест: 1 ролик сначала в VK, потом YT private, потом IG/TT</label></li>
+          <li><input type="checkbox" id="c12" /><label for="c12">Включить расписание CF-01 (15 мин) и CF-04 (12ч)</label></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="files">
+      <div class="wrap">
+        <p class="section-kicker">Deliverables</p>
+        <h2>Файлы проекта</h2>
+        <p class="section-lead">Скачайте / откройте из репозитория и импортируйте в Make.</p>
+        <div class="files">
+          <div class="file">
+            <div>
+              <strong>ARCHITECTURE.md</strong>
+              <span>Карта сценариев, переменные, обработка ошибок</span>
+            </div>
+            <a href="./ARCHITECTURE.md">открыть</a>
+          </div>
+          <div class="file">
+            <div>
+              <strong>CHECKLIST.md</strong>
+              <span>Полный чеклист аккаунтов, прав API и спеков видео</span>
+            </div>
+            <a href="./CHECKLIST.md">открыть</a>
+          </div>
+          <div class="file">
+            <div>
+              <strong>blueprints/01-publisher-core.json</strong>
+              <span>Импорт: Scenario → ⋯ → Import Blueprint</span>
+            </div>
+            <a href="./blueprints/01-publisher-core.json">JSON</a>
+          </div>
+          <div class="file">
+            <div>
+              <strong>blueprints/02-ig-comment-leadmagnet.json</strong>
+              <span>Webhook комментариев → Private Reply</span>
+            </div>
+            <a href="./blueprints/02-ig-comment-leadmagnet.json">JSON</a>
+          </div>
+          <div class="file">
+            <div>
+              <strong>blueprints/03-analytics-daily.json</strong>
+              <span>Ежедневный сбор метрик</span>
+            </div>
+            <a href="./blueprints/03-analytics-daily.json">JSON</a>
+          </div>
+          <div class="file">
+            <div>
+              <strong>blueprints/04-tiktok-token-refresh.json</strong>
+              <span>Обновление TikTok token из Data Store</span>
+            </div>
+            <a href="./blueprints/04-tiktok-token-refresh.json">JSON</a>
+          </div>
+          <div class="file">
+            <div>
+              <strong>sheets/content-plan.csv</strong>
+              <span>Шаблон контент-плана для Google Sheets</span>
+            </div>
+            <a href="./sheets/content-plan.csv">CSV</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      Make Content Factory · blueprint’ы — каркас: после импорта подключите Connections и Variables. Модули YouTube/Sheets могут отличаться версией в вашем аккаунте Make.
+    </div>
+  </footer>
+
+  <script>
+    const details = {
+      cf01: {
+        title: "CF-01 Publisher Core",
+        steps: [
+          "Импортируйте <code>01-publisher-core.json</code>.",
+          "Подключите Google Sheets к листу Content Plan, колонка статусов = <code>status</code>.",
+          "Добавьте Filter: <code>status = ready</code> и <code>publish_at ≤ now</code>.",
+          "Создайте Variables: <code>ig_user_id</code>, <code>ig_access_token</code>, <code>vk_group_id</code>, <code>vk_access_token</code>.",
+          "TikTok token берите из Data Store <code>cf_tokens</code> (после CF-04).",
+          "Для Instagram замените фиксированный Sleep на цикл: GET container → пока не FINISHED.",
+          "Прогон: одна строка, platforms = <code>vk</code> → затем расширяйте."
+        ]
+      },
+      cf02: {
+        title: "CF-02 Instagram Lead Magnet",
+        steps: [
+          "Импортируйте <code>02-ig-comment-leadmagnet.json</code>.",
+          "Создайте Custom Webhook и пропишите Verify Token в Meta App.",
+          "Подписка Webhooks → Instagram field <code>comments</code>.",
+          "В таблице заполните <code>cta_keyword</code> и <code>lead_magnet_url</code>.",
+          "Добавьте Data Store дедупа по <code>comment_id</code>.",
+          "Помните: 1 Private Reply на комментарий, окно 7 дней."
+        ]
+      },
+      cf03: {
+        title: "CF-03 Daily Analytics",
+        steps: [
+          "Импортируйте <code>03-analytics-daily.json</code>.",
+          "Создайте лист <code>Analytics</code> с колонками date, content_id, ig_reach, vk_reach, yt_views, yt_likes.",
+          "Schedule: каждый день 09:00.",
+          "Убедитесь, что в Content Plan заполнены published_*_id.",
+          "TikTok метрики подключайте отдельным HTTP после доступа к Research/Business API."
+        ]
+      },
+      cf04: {
+        title: "CF-04 TikTok Token Refresh",
+        steps: [
+          "Пройдите OAuth TikTok один раз вручную, сохраните refresh_token.",
+          "Положите запись в Data Store <code>cf_tokens</code> ключ <code>tiktok_main</code>.",
+          "Импортируйте <code>04-tiktok-token-refresh.json</code>.",
+          "Variables: <code>tt_client_key</code>, <code>tt_client_secret</code>.",
+          "Schedule каждые 12 часов — access token живёт 24ч.",
+          "CF-01 должен читать access_token из Data Store, не из статичной Variable."
+        ]
+      }
+    };
+
+    const detail = document.getElementById("detail");
+    const detailTitle = document.getElementById("detailTitle");
+    const detailSteps = document.getElementById("detailSteps");
+    const cards = document.querySelectorAll(".scenario");
+
+    function renderDetail(id) {
+      const data = details[id];
+      detailTitle.textContent = data.title;
+      detailSteps.innerHTML = data.steps.map((s) => `<li>${s}</li>`).join("");
+      detail.classList.add("open");
+      cards.forEach((c) => c.classList.toggle("active", c.dataset.id === id));
+    }
+    cards.forEach((c) => c.addEventListener("click", () => renderDetail(c.dataset.id)));
+    renderDetail("cf01");
+
+    // reveal pipeline
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("in"); });
+    }, { threshold: 0.2 });
+    document.querySelectorAll(".pipe-step").forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.08}s`;
+      io.observe(el);
+    });
+
+    // checklist persistence
+    const checks = [...document.querySelectorAll("#checks input")];
+    const bar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
+    const KEY = "make-factory-checklist-v1";
+
+    function load() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+        checks.forEach((input) => {
+          input.checked = !!saved[input.id];
+          input.closest("li").classList.toggle("done", input.checked);
+        });
+      } catch (_) {}
+      updateProgress();
+    }
+    function save() {
+      const data = {};
+      checks.forEach((input) => { data[input.id] = input.checked; });
+      localStorage.setItem(KEY, JSON.stringify(data));
+      updateProgress();
+    }
+    function updateProgress() {
+      const total = checks.length;
+      const done = checks.filter((c) => c.checked).length;
+      bar.style.width = `${(done / total) * 100}%`;
+      progressText.textContent = `${done} / ${total}`;
+    }
+    checks.forEach((input) => input.addEventListener("change", () => {
+      input.closest("li").classList.toggle("done", input.checked);
+      save();
+    }));
+    load();
+  </script>
+</body>
+</html>
