@@ -2,6 +2,16 @@
 
 Платформа автопостинга видео (Instagram · VK · YouTube · TikTok), собранная из сильных сторон Buffer, Later, Hootsuite, SMMplanner, Postmypost и SocialBee — на Make.com.
 
+## Живая ссылка
+
+Публичный демо-URL (Cloudflare Tunnel, пока агент/сервер онлайн):
+
+**https://drives-speeds-phd-twisted.trycloudflare.com/**
+
+После включения GitHub Pages (Actions workflow `deploy-pages.yml`) постоянный адрес будет:
+
+`https://armadaparkvg-ux.github.io/1/`
+
 ## Открыть
 
 1. [`index.html`](./index.html) — лендинг + **платформа** (Calendar, Queue, AI, Approvals, Analytics…)  
