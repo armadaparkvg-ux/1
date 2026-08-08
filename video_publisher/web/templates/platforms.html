@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Площадки · {{ brand }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Площадки</h1>
+    <p>Статус подключений из .env. Токены хранятся только на вашем сервере.</p>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="platform-grid">
+    {% for p in platforms_meta %}
+    <div class="platform-card">
+      <h3>
+        <span class="dot {% if p.configured %}on{% else %}off{% endif %}"></span>
+        {{ p.label }}
+      </h3>
+      <p>
+        {% if p.configured %}
+          Подключено · {{ p.hint }}
+        {% else %}
+          Не настроено · заполните переменные в <code>.env</code>
+        {% endif %}
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="panel" style="margin-top:16px;padding:22px">
+  <h2 style="margin:0 0 10px;font-size:1rem">Что прописать в .env</h2>
+  <p class="muted" style="margin:0 0 12px">Скопируйте <code>.env.example</code> → <code>.env</code> и заполните:</p>
+  <ul class="muted">
+    <li><strong>VK</strong> — VK_ACCESS_TOKEN, VK_GROUP_ID</li>
+    <li><strong>YouTube</strong> — secrets/youtube_token.json (OAuth)</li>
+    <li><strong>Instagram</strong> — INSTAGRAM_ACCESS_TOKEN, INSTAGRAM_IG_USER_ID, PUBLIC_VIDEO_BASE_URL</li>
+    <li><strong>TikTok</strong> — TIKTOK_ACCESS_TOKEN (до аудита: TIKTOK_PRIVACY_LEVEL=SELF_ONLY)</li>
+    <li><strong>Кабинет</strong> — WEB_PASSWORD, WEB_SECRET_KEY</li>
+  </ul>
+</div>
+{% endblock %}

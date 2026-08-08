@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Вход · {{ brand }}{% endblock %}
+{% block auth %}
+<div class="login-wrap">
+  <div class="login-card">
+    <h1>{{ brand }}</h1>
+    <p class="lead">Личная платформа автопубликации роликов на VK, YouTube, Instagram и TikTok.</p>
+    {% if error %}
+    <p class="error">Неверный пароль. Проверьте WEB_PASSWORD в .env</p>
+    {% endif %}
+    <form method="post" action="/login" class="form-stack">
+      <label class="field">
+        <span>Пароль доступа</span>
+        <input type="password" name="password" required autofocus placeholder="••••••••" />
+      </label>
+      <button class="btn btn-primary" type="submit">Войти в кабинет</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

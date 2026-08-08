@@ -1,121 +1,84 @@
-# video-publisher
+# Armada Publish — личная платформа автопубликации
 
-Python-модуль автоматической мультиплатформенной публикации видео таксопарка  
-(акции, турниры водителей, промо-ролики) на **VK**, **YouTube Shorts**, **Instagram Reels**, **TikTok**.
+Веб-кабинет + CLI для автоматической публикации роликов таксопарка  
+на **VK**, **YouTube Shorts**, **Instagram Reels**, **TikTok**.
 
-Единый CLI/сервис принимает видеофайл + метаданные и публикует на все подключённые площадки через официальные API.
+## Что с этим делать (быстрый старт)
 
-## Возможности
+1. Установите зависимости и создайте `.env`:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate
+   pip install -e ".[dev]"
+   cp .env.example .env
+   ```
+2. В `.env` задайте пароль кабинета и токены площадок:
+   ```env
+   WEB_PASSWORD=ваш-секретный-пароль
+   WEB_SECRET_KEY=длинная-случайная-строка
+   WEB_BRAND_NAME=Armada Publish
+   VK_ACCESS_TOKEN=...
+   VK_GROUP_ID=...
+   ```
+3. Запустите личную платформу:
+   ```bash
+   video-publisher web
+   ```
+4. Откройте в браузере: [http://127.0.0.1:8080](http://127.0.0.1:8080)  
+   Войдите с `WEB_PASSWORD` → загрузите ролик → выберите площадки → опубликуйте или отложите.
 
-- Единый конфиг через `.env` (секреты не хардкодятся)
-- Retry с экспоненциальным backoff для сетевых сбоев и chunked upload
-- SQLite-таблица статусов: `pending` / `scheduled` / `uploading` / `processing` / `published` / `failed`
-- Логирование `container_id`, `publish_id`, `upload_id` на каждом шаге
-- Планировщик (APScheduler / cron) для отложенных публикаций:
-  - **YouTube** — нативный `publishAt`
-  - **VK / TikTok / Instagram** — своя очередь в БД
-- Отдельная обработка квот: YouTube `quotaExceeded`, Instagram `content_publishing_limit`, TikTok audit (`SELF_ONLY`)
+Без токенов кабинет всё равно откроется: на странице **Площадки** будет видно, что ещё не подключено.
 
-## Порядок реализации платформ
+## Возможности кабинета
 
-1. **VK** — `video.save` → multipart `video_file` (или импорт по `link`)
-2. **YouTube** — resumable upload (init → PUT чанками 5MB + `Content-Range`)
-3. **Instagram / TikTok** — общая container/init + poll модель
+- Загрузка видео drag-and-drop
+- Выбор площадок, заголовок / описание / хэштеги
+- Отложенная публикация (очередь + встроенный шедулер)
+- Трекинг статусов: `pending` / `scheduled` / `uploading` / `published` / `failed`
+- Логи `container_id`, `publish_id`, `external_id` для дебага
+- Простой пароль доступа (личная платформа, не SaaS для тысяч пользователей)
 
-## Установка
+## CLI (если нужен терминал / cron)
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -e ".[dev]"
-cp .env.example .env
-# заполните токены в .env
+video-publisher platforms
+video-publisher publish ./promo.mp4 --title "Акция" --platforms vk,youtube
+video-publisher scheduler          # фоновый шедулер
+video-publisher scheduler-once     # один прогон (cron)
+video-publisher status
+video-publisher web                # веб-кабинет
 ```
 
-## Конфигурация
-
-См. `.env.example`. Минимально:
+## Конфигурация площадок
 
 | Платформа | Переменные |
 |-----------|------------|
 | VK | `VK_ACCESS_TOKEN`, `VK_GROUP_ID` |
-| YouTube | `YOUTUBE_TOKEN_FILE` (OAuth refresh token) или `YOUTUBE_CLIENT_SECRETS_FILE` |
+| YouTube | `YOUTUBE_TOKEN_FILE` или `YOUTUBE_CLIENT_SECRETS_FILE` |
 | Instagram | `INSTAGRAM_ACCESS_TOKEN`, `INSTAGRAM_IG_USER_ID`, `PUBLIC_VIDEO_BASE_URL` |
-| TikTok | `TIKTOK_ACCESS_TOKEN` (до аудита — `TIKTOK_PRIVACY_LEVEL=SELF_ONLY`) |
+| TikTok | `TIKTOK_ACCESS_TOKEN` (до аудита: `TIKTOK_PRIVACY_LEVEL=SELF_ONLY`) |
+| Кабинет | `WEB_PASSWORD`, `WEB_SECRET_KEY`, `WEB_PORT` |
 
-> Instagram Graph API принимает только публичный HTTPS `video_url` (не локальный файл).  
-> Положите ролик на CDN/S3 и укажите `--public-video-url` или `PUBLIC_VIDEO_BASE_URL`.
-
-## CLI
-
-```bash
-# Какие платформы готовы к работе
-video-publisher platforms
-
-# Публикация сразу на все подключённые
-video-publisher publish ./promo.mp4 \
-  --title "Акция выходного дня" \
-  --description "Скидка 20% на поездки" \
-  --hashtags "такси акция промо" \
-  --public-video-url "https://cdn.example.com/promo.mp4"
-
-# Только VK и YouTube
-video-publisher publish ./promo.mp4 \
-  --title "Турнир водителей" \
-  --platforms vk,youtube
-
-# Отложенная публикация (VK/IG/TikTok → очередь; YouTube → publishAt)
-video-publisher publish ./promo.mp4 \
-  --title "Вечерний промо" \
-  --publish-at "2026-08-08T20:00:00+03:00"
-
-# Фоновый шедулер (или cron: video-publisher scheduler-once)
-video-publisher scheduler
-
-# Статусы из БД
-video-publisher status
-video-publisher status --status-filter failed
-```
-
-Эквивалент: `python -m video_publisher ...`
+> Instagram принимает только публичный HTTPS `video_url`. Положите файл на CDN/S3 и укажите URL в форме или `PUBLIC_VIDEO_BASE_URL`.
 
 ## Архитектура
 
 ```
 video_publisher/
-  cli.py              # Click CLI
-  config.py           # pydantic-settings из .env
-  models.py           # VideoMetadata, статусы, платформы
-  db.py               # SQLAlchemy: publication_jobs
-  retry.py            # tenacity + exponential backoff
-  orchestrator.py     # параллельная/последовательная публикация
-  scheduler.py        # APScheduler due-jobs
-  platforms/
-    base.py           # общий poll_until для container/init
-    vk.py
-    youtube.py
-    instagram.py
-    tiktok.py
-  utils/
-    chunked_upload.py # Content-Range PUT с retry
+  web/                 # личный кабинет (FastAPI + UI)
+  platforms/           # VK, YouTube, Instagram, TikTok
+  orchestrator.py      # параллельная публикация
+  scheduler.py         # очередь отложенных постов
+  db.py                # SQLite статусы
+  cli.py               # терминальный интерфейс
 ```
 
-### Flows
+### Flows API
 
-**VK**  
-`POST video.save` → `POST upload_url` (`video_file`)
-
-**YouTube**  
-`POST /upload/.../videos?uploadType=resumable` → `PUT` чанками 5MB  
-Квота: ~1600 units/upload, дефолт 10000/день ≈ 6 видео
-
-**Instagram Reels**  
-`POST /{ig-user-id}/media` (REELS) → poll `status_code=FINISHED` → `POST /media_publish`  
-Перед батчем: `GET /content_publishing_limit`
-
-**TikTok**  
-`POST /v2/post/publish/video/init/` → `PUT upload_url` чанками → poll `PUBLISH_COMPLETE`  
-Нет нативного шедулинга — очередь в БД + APScheduler
+- **VK** — `video.save` → multipart upload / импорт по `link`
+- **YouTube** — resumable upload (5MB chunks), нативный `publishAt`
+- **Instagram** — container → poll `FINISHED` → `media_publish` + `content_publishing_limit`
+- **TikTok** — init → chunked PUT → poll `PUBLISH_COMPLETE` (шедулинг свой)
 
 ## Тесты
 
@@ -123,11 +86,9 @@ video_publisher/
 pytest -q
 ```
 
-Тесты используют `respx` и мокают HTTP; живые токены не нужны.
-
 ## Замечания по доступам
 
-- **Instagram**: Business/Creator + Facebook Page; scopes `instagram_business_basic`, `instagram_business_content_publish` (App Review)
-- **YouTube**: OAuth scope `youtube.upload`, API key недостаточен
-- **TikTok**: до аудита приложения контент только как `SELF_ONLY`
-- **VK**: токен с правом `video`, для группы — group token / `group_id`
+- Instagram: Business/Creator + Facebook Page, App Review для publish scopes
+- YouTube: OAuth `youtube.upload` (API key недостаточно)
+- TikTok: до аудита только `SELF_ONLY`
+- VK: токен с правом `video` для группы

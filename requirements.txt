@@ -10,6 +10,11 @@ APScheduler>=3.10.4
 SQLAlchemy>=2.0.30
 click>=8.1.7
 tenacity>=8.3.0
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.0
+python-multipart>=0.0.9
+jinja2>=3.1.4
+itsdangerous>=2.2.0
 
 # Dev / tests
 pytest>=8.2.0

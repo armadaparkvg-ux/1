@@ -20,6 +20,14 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     public_video_base_url: str = ""
 
+    # Personal web platform
+    web_host: str = "0.0.0.0"
+    web_port: int = 8080
+    web_password: str = "changeme"
+    web_secret_key: str = "change-this-secret-key"
+    web_brand_name: str = "Armada Publish"
+    upload_dir: Path = Path("./uploads")
+
     # VK
     vk_access_token: str = ""
     vk_group_id: int | None = None

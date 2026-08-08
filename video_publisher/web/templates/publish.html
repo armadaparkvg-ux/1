@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}Новый ролик · {{ brand }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Новый ролик</h1>
+    <p>Один файл — публикация на все подключённые площадки. Можно отложить дату.</p>
+  </div>
+</div>
+
+<form class="panel" method="post" action="/api/publish" enctype="multipart/form-data" data-publish-form>
+  <div class="form-grid">
+    <div class="form-stack">
+      <div class="dropzone" data-dropzone>
+        <strong>Перетащите видео сюда</strong>
+        <p data-filename>MP4 / MOV · Reels / Shorts формат 9:16</p>
+        <input type="file" name="video" accept="video/*" required />
+      </div>
+
+      <label class="field">
+        <span>Заголовок</span>
+        <input type="text" name="title" required maxlength="200" placeholder="Акция выходного дня" />
+      </label>
+
+      <label class="field">
+        <span>Описание</span>
+        <textarea name="description" placeholder="Скидка 20% на поездки по городу…"></textarea>
+      </label>
+
+      <label class="field">
+        <span>Хэштеги</span>
+        <input type="text" name="hashtags" placeholder="такси акция турнир" />
+      </label>
+
+      <label class="field">
+        <span>Отложить до (необязательно)</span>
+        <input type="datetime-local" name="publish_at" />
+      </label>
+
+      <label class="field">
+        <span>Публичный URL видео (для Instagram)</span>
+        <input type="url" name="public_video_url" placeholder="https://cdn.example.com/promo.mp4" />
+      </label>
+
+      <label class="field">
+        <span>VK: импорт по ссылке вместо файла</span>
+        <input type="url" name="vk_link" placeholder="https://youtube.com/watch?v=…" />
+      </label>
+    </div>
+
+    <div class="form-stack">
+      <div>
+        <div class="muted" style="margin-bottom:10px">Площадки</div>
+        <div class="checks">
+          {% for p in platforms_meta %}
+          <label class="check {% if not p.configured %}disabled{% endif %}">
+            <input type="checkbox" name="platforms_ui" value="{{ p.id }}" {% if p.configured %}checked{% endif %} {% if not p.configured %}disabled{% endif %} />
+            <span class="meta">
+              <strong>{{ p.label }}</strong>
+              <small>{% if p.configured %}{{ p.hint }}{% else %}не настроено в .env{% endif %}</small>
+            </span>
+          </label>
+          {% endfor %}
+        </div>
+        <input type="hidden" name="platforms" id="platforms-field" value="" />
+      </div>
+
+      <label class="check">
+        <input type="checkbox" name="sequential" value="1" />
+        <span class="meta">
+          <strong>Последовательно</strong>
+          <small>Без параллельной публикации</small>
+        </span>
+      </label>
+
+      <button class="btn btn-primary" type="submit">Опубликовать</button>
+      <p class="muted" style="font-size:0.85rem;margin:0">
+        YouTube умеет нативный publishAt. VK / Instagram / TikTok уходят в очередь шедулера.
+      </p>
+    </div>
+  </div>
+</form>
+
+<script>
+  (() => {
+    const form = document.querySelector("[data-publish-form]");
+    const hidden = document.getElementById("platforms-field");
+    if (!form || !hidden) return;
+    const sync = () => {
+      const vals = [...form.querySelectorAll('input[name="platforms_ui"]:checked')].map((el) => el.value);
+      hidden.value = vals.join(",");
+    };
+    form.addEventListener("change", sync);
+    form.addEventListener("submit", (e) => {
+      sync();
+      // datetime-local → ISO
+      const dt = form.querySelector('input[name="publish_at"]');
+      if (dt && dt.value) {
+        const local = new Date(dt.value);
+        const iso = new Date(local.getTime() - local.getTimezoneOffset() * 60000).toISOString();
+        // keep as local ISO-like without converting field type; backend accepts naive ISO
+        dt.setAttribute("name", "");
+        const hiddenDt = document.createElement("input");
+        hiddenDt.type = "hidden";
+        hiddenDt.name = "publish_at";
+        hiddenDt.value = dt.value.length === 16 ? dt.value + ":00" : dt.value;
+        form.appendChild(hiddenDt);
+      }
+      if (!hidden.value) {
+        e.preventDefault();
+        alert("Выберите хотя бы одну настроенную площадку");
+      }
+    });
+    sync();
+  })();
+</script>
+{% endblock %}

@@ -11,6 +11,7 @@ dist/
 build/
 data/*.db
 data/*.db-journal
+uploads/
 secrets/
 *.log
 .DS_Store

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Обзор · {{ brand }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Обзор публикаций</h1>
+    <p>Статусы роликов по всем площадкам. Отложенные задачи подхватывает встроенный шедулер.</p>
+  </div>
+  <a class="btn btn-primary" href="/publish">Загрузить ролик</a>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="label">Всего задач</div>
+    <div class="value">{{ total }}</div>
+  </div>
+  <div class="stat">
+    <div class="label">Опубликовано</div>
+    <div class="value">{{ counts.get('published', 0) }}</div>
+  </div>
+  <div class="stat">
+    <div class="label">В очереди</div>
+    <div class="value">{{ counts.get('scheduled', 0) + counts.get('pending', 0) + counts.get('uploading', 0) }}</div>
+  </div>
+  <div class="stat">
+    <div class="label">Ошибки</div>
+    <div class="value">{{ counts.get('failed', 0) }}</div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head">
+    <h2>Последние задачи</h2>
+    <a class="btn btn-secondary" href="/jobs">Вся очередь</a>
+  </div>
+  {% if recent %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Ролик</th>
+        <th>Площадка</th>
+        <th>Статус</th>
+        <th>Когда</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for job in recent %}
+      <tr>
+        <td>
+          <strong>{{ job.title }}</strong>
+          {% if job.error %}<div class="muted">{{ job.error[:80] }}</div>{% endif %}
+        </td>
+        <td><span class="platform-pill">{{ job.platform }}</span></td>
+        <td><span class="badge {{ job.status }}">{{ job.status }}</span></td>
+        <td class="mono muted">{{ job.publish_at or job.created_at }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty">Пока пусто — загрузите первый промо-ролик.</div>
+  {% endif %}
+</div>
+{% endblock %}

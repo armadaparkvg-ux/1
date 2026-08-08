@@ -193,5 +193,27 @@ def scheduler_once_cmd(ctx: click.Context) -> None:
         sched.service.close()
 
 
+@main.command("web")
+@click.option("--host", default=None, help="Хост (по умолчанию из WEB_HOST)")
+@click.option("--port", default=None, type=int, help="Порт (по умолчанию из WEB_PORT)")
+@click.pass_context
+def web_cmd(ctx: click.Context, host: str | None, port: int | None) -> None:
+    """Запустить личную веб-платформу (кабинет + API + шедулер)."""
+    import uvicorn
+
+    settings = ctx.obj["settings"]
+    click.echo(
+        f"Откройте http://127.0.0.1:{port or settings.web_port} "
+        f"(пароль из WEB_PASSWORD)"
+    )
+    uvicorn.run(
+        "video_publisher.web.app:create_app",
+        factory=True,
+        host=host or settings.web_host,
+        port=port or settings.web_port,
+        log_level=settings.log_level.lower(),
+    )
+
+
 if __name__ == "__main__":
     main()
