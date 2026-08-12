@@ -1,0 +1,10 @@
+services:
+  armada-ai:
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./knowledge:/app/knowledge:ro
+    restart: unless-stopped
