@@ -20,13 +20,14 @@ class Settings(BaseSettings):
     knowledge_path: str = str(ROOT / "knowledge" / "intents.json")
     site_facts_path: str = str(ROOT / "knowledge" / "site_facts.md")
 
-    # OpenAI-compatible API (OpenAI, DeepSeek, Groq, local vLLM, etc.)
-    llm_api_key: str = ""
-    llm_base_url: str = "https://api.openai.com/v1"
-    llm_model: str = "gpt-4o-mini"
-    # Recommended alternatives via env:
-    # DeepSeek: LLM_BASE_URL=https://api.deepseek.com LLM_MODEL=deepseek-chat
-    # OpenAI:   LLM_MODEL=gpt-4o-mini
+    # OpenAI-compatible API (OpenAI, DeepSeek, Ollama, etc.)
+    # Default: local Ollama — works without cloud API keys
+    llm_api_key: str = "ollama"
+    llm_base_url: str = "http://127.0.0.1:11434/v1"
+    llm_model: str = "qwen2.5:3b"
+    # Alternatives via env:
+    # DeepSeek: LLM_BASE_URL=https://api.deepseek.com LLM_MODEL=deepseek-chat LLM_API_KEY=sk-...
+    # OpenAI:   LLM_BASE_URL=https://api.openai.com/v1 LLM_MODEL=gpt-4o-mini LLM_API_KEY=sk-...
     polish_with_llm: bool = False
     intent_threshold: float = 0.35
 

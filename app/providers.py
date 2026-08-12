@@ -31,10 +31,12 @@ class LLMProvider:
 
 def get_provider() -> LLMProvider:
     key = settings.llm_api_key.strip()
+    base = settings.llm_base_url.rstrip("/")
+    # Treat empty key as offline; "ollama" placeholder enables local OpenAI-compatible server
     if not key:
         return LLMProvider(name="offline-bm25", enabled=False)
-    client = OpenAI(api_key=key, base_url=settings.llm_base_url)
-    # Derive short name from base url / model
-    host = settings.llm_base_url.replace("https://", "").replace("http://", "").split("/")[0]
+    # For Ollama any non-empty key works; keep enabled when pointing at local /v1
+    client = OpenAI(api_key=key or "ollama", base_url=base)
+    host = base.replace("https://", "").replace("http://", "").split("/")[0]
     name = f"{host}:{settings.llm_model}"
     return LLMProvider(name=name, enabled=True, client=client, model=settings.llm_model)

@@ -67,4 +67,17 @@ PY
 echo "[bootstrap] knowledge check"
 python scripts/rebuild_index.py
 python scripts/eval_agent.py
+echo "[bootstrap] ollama (local LLM)"
+if ! command -v ollama >/dev/null 2>&1; then
+  sudo apt-get install -y -qq zstd >/dev/null || true
+  curl -fsSL https://ollama.com/install.sh | sh
+fi
+if command -v ollama >/dev/null 2>&1; then
+  if ! curl -sf http://127.0.0.1:11434/api/tags >/dev/null 2>&1; then
+    nohup ollama serve >/tmp/ollama.log 2>&1 &
+    sleep 2
+  fi
+  ollama pull qwen2.5:3b || true
+fi
+
 echo "[bootstrap] done"
