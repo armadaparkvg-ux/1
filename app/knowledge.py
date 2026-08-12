@@ -53,6 +53,16 @@ class KnowledgeBase:
         if not tokens:
             return []
         scores = self.bm25.get_scores(tokens)
+        # Rule boosts for frequent Russian negations / clarifiers
+        qn = query.lower().replace("ё", "е")
+        for i, item in enumerate(self.intents):
+            iid = item["id"]
+            if iid == "open_selfemployed" and re.search(r"не\s+открыт|еще\s+не|как\s+открыть|как\s+стать", qn):
+                scores[i] += 25
+            if iid == "selfemployed_ready" and re.search(r"не\s+открыт|еще\s+не|как\s+открыть", qn):
+                scores[i] -= 20
+            if iid == "withdraw_clarify" and re.search(r"\b(яндекс|yandex|drivee|драйв)", qn):
+                scores[i] -= 5
         ranked = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)[:top_k]
         out = []
         for i in ranked:
