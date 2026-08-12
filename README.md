@@ -87,6 +87,10 @@ python scripts/eval_agent.py
 - **Telegram** — webhook или polling
 - **MAX** — webhook stub `/webhook/max` (подключить middleware MAX → наш API)
 
+## Мульти-ИИ
+
+Если задача буксует — делегируем Claude/GPT субагентам Cursor или `scripts/delegate_ai.py`. См. `knowledge/MULTI_AI.md`. Результаты кладём в `data/delegations/`.
+
 ## Структура
 
 ```
