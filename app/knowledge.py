@@ -44,6 +44,11 @@ class KnowledgeBase:
 
         facts_path = Path(settings.site_facts_path)
         self.site_facts = facts_path.read_text(encoding="utf-8") if facts_path.exists() else ""
+        scraped = Path(settings.knowledge_path).parent / "site_scraped.md"
+        if scraped.exists():
+            # keep RAG context bounded
+            extra = scraped.read_text(encoding="utf-8", errors="replace")
+            self.site_facts = (self.site_facts + "\n\n" + extra[:8000]).strip()
 
     def get(self, intent_id: str) -> dict | None:
         return self._by_id.get(intent_id)
@@ -61,6 +66,16 @@ class KnowledgeBase:
                 scores[i] += 25
             if iid == "selfemployed_ready" and re.search(r"не\s+открыт|еще\s+не|как\s+открыть", qn):
                 scores[i] -= 20
+            if iid == "compare_employment" and re.search(
+                r"(самозанят|смз).{0,40}(ип|трудов)|(ип|трудов).{0,40}(самозанят|смз)|что\s+выбрать|что\s+лучше|чем\s+отлича",
+                qn,
+            ):
+                scores[i] += 30
+            if iid in {"park_ip", "park_selfemployed", "labor_contract"} and re.search(
+                r"что\s+выбрать|что\s+лучше|или\s+ип|между\s+самозанят",
+                qn,
+            ):
+                scores[i] -= 15
             if iid == "withdraw_clarify" and re.search(r"\b(яндекс|yandex|drivee|драйв)", qn):
                 scores[i] -= 5
         ranked = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)[:top_k]

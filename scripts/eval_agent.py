@@ -26,6 +26,7 @@ CASES = [
     ("А путевые листы вы делаете?", "waybills"),
     ("Как сменить карту для вывода?", "sbp_change_card"),
     ("Какие требования к авто?", "taxi_car_requirements"),
+    ("что выбрать самозанятый или ип", "compare_employment"),
 ]
 
 # Multi-turn flows: list of (session_suffix, [(q, expected), ...])
