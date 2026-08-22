@@ -63,7 +63,7 @@ export function StickyActions() {
       openRegister({ startAt: "delivery-type" });
       return;
     }
-    openRegister({ startAt: "channel" });
+    openRegister({ startAt: "direction" });
   };
 
   const registerLabel = pathname?.startsWith("/trudovoj-dogovor")
