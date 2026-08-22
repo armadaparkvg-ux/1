@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { FloatingContacts } from "@/components/floating-contacts";
+import { ScrollDepthTracker } from "@/components/scroll-depth-tracker";
+import { StickyActions } from "@/components/sticky-actions";
 import { YandexMetrika } from "@/components/yandex-metrika";
 import { YandexVarioqub } from "@/components/yandex-varioqub";
 import { Providers } from "@/components/providers";
@@ -103,7 +104,8 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <FloatingContacts />
+          <StickyActions />
+          <ScrollDepthTracker />
         </Providers>
       </body>
     </html>
