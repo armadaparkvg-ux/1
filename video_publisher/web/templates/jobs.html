@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Очередь · {{ brand }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Очередь публикаций</h1>
+    <p>Трекинг по каждой площадке: container_id, publish_id, ошибки квот.</p>
+  </div>
+  <form method="post" action="/api/scheduler/run-once" onsubmit="this.querySelector('button').textContent='…'">
+    <button class="btn btn-secondary" type="submit">Прогнать шедулер сейчас</button>
+  </form>
+</div>
+
+<div class="filters">
+  {% set filters = ['', 'scheduled', 'uploading', 'published', 'failed'] %}
+  {% for f in filters %}
+  <a href="{% if f %}/jobs?status={{ f }}{% else %}/jobs{% endif %}" class="{% if status_filter == f %}active{% endif %}">
+    {% if f %}{{ f }}{% else %}все{% endif %}
+  </a>
+  {% endfor %}
+</div>
+
+<div class="panel">
+  {% if jobs %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Ролик</th>
+        <th>Площадка</th>
+        <th>Статус</th>
+        <th>IDs</th>
+        <th>Ссылка / ошибка</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for job in jobs %}
+      <tr>
+        <td class="mono muted">{{ job.id }}</td>
+        <td>
+          <strong>{{ job.title }}</strong>
+          <div class="muted">{{ job.publish_at or job.created_at }}</div>
+        </td>
+        <td><span class="platform-pill">{{ job.platform }}</span></td>
+        <td><span class="badge {{ job.status }}">{{ job.status }}</span></td>
+        <td class="mono muted">
+          {% if job.external_id %}ext={{ job.external_id }}<br>{% endif %}
+          {% if job.container_id %}container={{ job.container_id }}<br>{% endif %}
+          {% if job.publish_id %}publish={{ job.publish_id }}{% endif %}
+          {% if not job.external_id and not job.container_id and not job.publish_id %}—{% endif %}
+        </td>
+        <td>
+          {% if job.result_url %}<a href="{{ job.result_url }}" target="_blank" rel="noopener">открыть</a>{% endif %}
+          {% if job.error %}<div class="muted">{{ job.error }}</div>{% endif %}
+          {% if not job.result_url and not job.error %}<span class="muted">—</span>{% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty">Задач нет.</div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}{{ brand }}{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/app.css" />
+</head>
+<body>
+{% if authenticated %}
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <strong>{{ brand }}</strong>
+      <span>Автопубликация таксопарка</span>
+    </div>
+    <nav class="nav">
+      <a href="/dashboard" class="{% if request.url.path == '/dashboard' %}active{% endif %}">Обзор</a>
+      <a href="/publish" class="{% if request.url.path == '/publish' %}active{% endif %}">Новый ролик</a>
+      <a href="/jobs" class="{% if request.url.path.startswith('/jobs') %}active{% endif %}">Очередь</a>
+      <a href="/platforms" class="{% if request.url.path == '/platforms' %}active{% endif %}">Площадки</a>
+    </nav>
+    <div class="sidebar-foot">
+      <form method="post" action="/logout">
+        <button class="btn-ghost" type="submit">Выйти</button>
+      </form>
+    </div>
+  </aside>
+  <main class="main">
+    {% block content %}{% endblock %}
+  </main>
+</div>
+{% else %}
+  {% block auth %}{% endblock %}
+{% endif %}
+<script src="/static/app.js"></script>
+</body>
+</html>
