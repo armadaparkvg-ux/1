@@ -1,4 +1,0 @@
-{
-  "install": "bash scripts/bootstrap.sh",
-  "start": "bash scripts/start_services.sh"
-}
