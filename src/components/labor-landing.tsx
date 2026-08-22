@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/accordion";
 import { CONTACTS } from "@/lib/constants";
 import { LABOR_FAQ } from "@/lib/labor-faq";
+import { trackGoal } from "@/lib/metrika";
 
 const AUDIENCE = [
   {
@@ -112,7 +113,10 @@ const BENEFITS = [
 export function LaborLanding() {
   return (
     <div className="pb-20">
-      <section className="relative overflow-hidden border-b border-border bg-[#07090d] pt-[72px]">
+      <section
+        data-hero
+        className="relative overflow-hidden border-b border-border bg-[#07090d] pt-[72px]"
+      >
         <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
           <Link
             href="/"
@@ -383,6 +387,21 @@ export function LaborLanding() {
               <span className="text-foreground/90">ООО «АРМАДА ДРАЙВЕР»</span>.
             </p>
             <div className="mt-8 flex flex-col items-center gap-6">
+              <Button asChild shine size="lg" className="w-full max-w-md">
+                <a
+                  href={CONTACTS.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackGoal("click_labor_apply", {
+                      place: "footer",
+                      format: "labor",
+                    })
+                  }
+                >
+                  Зарегистрироваться — трудовой договор
+                </a>
+              </Button>
               <DualPathActions
                 applyTopic="3% + 300₽"
                 applyLabel="Оформить через поддержку парка"
