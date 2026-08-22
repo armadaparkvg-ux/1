@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FadeIn } from "@/components/fade-in";
 import { PromoActionsBanner } from "@/components/promo-actions-banner";
 import { Button } from "@/components/ui/button";
-import { CONTACTS } from "@/lib/constants";
+import { CONTACTS, PROMO } from "@/lib/constants";
 
 export function MaxChannel() {
   return (
@@ -66,6 +66,9 @@ export function MaxChannel() {
                     <Link href="/#directions">Подключиться к парку</Link>
                   </Button>
                 </div>
+                <p className="mt-4 text-sm text-muted-foreground">
+                  {PROMO.text} — анонсы розыгрышей и бонусов в канале.
+                </p>
               </div>
 
               <div className="order-1 mx-auto w-full max-w-[520px] lg:order-2 lg:max-w-none">
