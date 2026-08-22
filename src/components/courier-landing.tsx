@@ -21,8 +21,7 @@ import {
   type CourierTariff,
 } from "@/lib/courier";
 import { CONTACTS } from "@/lib/constants";
-import { fleetGoPath } from "@/lib/fleet-forms";
-import { trackFleetRegistration } from "@/lib/metrika";
+import { useRegisterChooser } from "@/components/register-chooser";
 
 const ICONS = {
   foot: PersonStanding,
@@ -93,7 +92,7 @@ function CourierCard({ tariff }: { tariff: CourierTariff }) {
 }
 
 export function CourierLanding() {
-  const registerHref = fleetGoPath("courier", "smz");
+  const { openRegister } = useRegisterChooser();
 
   return (
     <div className="pb-20">
@@ -137,23 +136,17 @@ export function CourierLanding() {
             России. Выплаты через парк.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Button asChild shine size="lg" variant="emerald">
-              <Link
-                href={registerHref}
-                onClick={() =>
-                  trackFleetRegistration({
-                    channel: "courier",
-                    type: "smz",
-                    action: "link",
-                    place: "hero",
-                  })
-                }
-              >
-                Зарегистрироваться — активация 10–15 минут
-              </Link>
+            <Button
+              type="button"
+              shine
+              size="lg"
+              variant="emerald"
+              onClick={() => openRegister({ startAt: "delivery-type" })}
+            >
+              Зарегистрироваться — выбрать тариф
             </Button>
             <Button asChild size="lg" variant="secondary">
-              <Link href="#courier-tariffs">Выбрать тариф курьера</Link>
+              <Link href="#courier-tariffs">Тарифы на странице</Link>
             </Button>
           </div>
           <ol className="mt-8 grid gap-2 sm:grid-cols-3">

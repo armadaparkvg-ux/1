@@ -1,59 +1,23 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Send } from "lucide-react";
+import { MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRegisterChooser } from "@/components/register-chooser";
 import { CONTACTS } from "@/lib/constants";
-import { fleetGoPath } from "@/lib/fleet-forms";
-import { goal, trackFleetRegistration, trackGoal } from "@/lib/metrika";
+import { goal, trackGoal } from "@/lib/metrika";
 import { cn } from "@/lib/utils";
 
-type StickyActionsProps = {
-  /** Override primary register URL (otherwise derived from pathname) */
-  registerHref?: string;
-};
-
-function resolveRegister(pathname: string | null): {
-  href: string;
-  channel: "taxi" | "courier";
-  type: string;
-  label: string;
-} {
-  if (pathname?.startsWith("/delivery")) {
-    return {
-      href: fleetGoPath("courier", "smz"),
-      channel: "courier",
-      type: "smz",
-      label: "Зарегистрироваться",
-    };
-  }
-  if (pathname?.startsWith("/trudovoj-dogovor")) {
-    return {
-      href: fleetGoPath("taxi", "labor"),
-      channel: "taxi",
-      type: "labor",
-      label: "Оформить трудовой",
-    };
-  }
-  return {
-    href: fleetGoPath("taxi", "smz"),
-    channel: "taxi",
-    type: "smz",
-    label: "Зарегистрироваться",
-  };
-}
-
 /**
- * Mobile sticky CTA bar — appears after hero leaves the viewport.
+ * Mobile sticky CTA — регистрация через выбор направления/формата,
+ * MAX основной канал, Telegram запасной.
  */
-export function StickyActions({ registerHref }: StickyActionsProps) {
+export function StickyActions() {
   const pathname = usePathname();
+  const { openRegister } = useRegisterChooser();
   const [visible, setVisible] = useState(false);
   const shownTracked = useRef(false);
-  const resolved = resolveRegister(pathname);
-  const href = registerHref ?? resolved.href;
 
   useEffect(() => {
     shownTracked.current = false;
@@ -82,17 +46,29 @@ export function StickyActions({ registerHref }: StickyActionsProps) {
   }, [pathname]);
 
   const onRegister = () => {
-    if (resolved.type === "labor") {
-      trackGoal("click_labor_apply", { place: "sticky", format: "labor" });
+    if (pathname?.startsWith("/trudovoj-dogovor")) {
+      trackGoal("click_labor_apply", {
+        place: "sticky",
+        format: "labor",
+        channel: "max",
+      });
+      window.open(CONTACTS.max, "_blank", "noopener,noreferrer");
       return;
     }
-    trackFleetRegistration({
-      channel: resolved.channel,
-      type: resolved.type,
-      action: "link",
-      place: "sticky",
-    });
+    if (pathname?.startsWith("/taxi")) {
+      openRegister({ startAt: "taxi-format" });
+      return;
+    }
+    if (pathname?.startsWith("/delivery") || pathname?.startsWith("/courier")) {
+      openRegister({ startAt: "delivery-type" });
+      return;
+    }
+    openRegister({ startAt: "channel" });
   };
+
+  const registerLabel = pathname?.startsWith("/trudovoj-dogovor")
+    ? "Оформить трудовой"
+    : "Зарегистрироваться";
 
   return (
     <div
@@ -106,30 +82,55 @@ export function StickyActions({ registerHref }: StickyActionsProps) {
     >
       <div className="mx-auto flex max-w-lg gap-2">
         <Button
-          asChild
+          type="button"
           shine
           size="lg"
           className="min-h-12 flex-[3] focus-visible:ring-2 focus-visible:ring-amber-400"
+          tabIndex={visible ? 0 : -1}
+          onClick={onRegister}
         >
-          <Link href={href} tabIndex={visible ? 0 : -1} onClick={onRegister}>
-            {resolved.label}
-          </Link>
+          {registerLabel}
+        </Button>
+        <Button
+          asChild
+          size="lg"
+          variant="emerald"
+          className="min-h-12 flex-[2] focus-visible:ring-2 focus-visible:ring-amber-400"
+        >
+          <a
+            href={CONTACTS.max}
+            target="_blank"
+            rel="noopener noreferrer"
+            tabIndex={visible ? 0 : -1}
+            onClick={() =>
+              trackGoal("lead_messenger", { place: "sticky", channel: "max" })
+            }
+            aria-label="Написать в MAX"
+          >
+            <MessageCircle className="h-4 w-4" aria-hidden />
+            MAX
+          </a>
         </Button>
         <Button
           asChild
           size="lg"
           variant="outline"
-          className="min-h-12 flex-[2] focus-visible:ring-2 focus-visible:ring-amber-400"
+          className="min-h-12 flex-[2] px-3 focus-visible:ring-2 focus-visible:ring-amber-400"
         >
           <a
             href={CONTACTS.telegram}
             target="_blank"
             rel="noopener noreferrer"
             tabIndex={visible ? 0 : -1}
-            onClick={() => trackGoal("lead_messenger", { place: "sticky" })}
+            onClick={() =>
+              trackGoal("lead_messenger", {
+                place: "sticky",
+                channel: "telegram",
+              })
+            }
+            aria-label="Написать в Telegram"
           >
             <Send className="h-4 w-4" aria-hidden />
-            Telegram
           </a>
         </Button>
       </div>

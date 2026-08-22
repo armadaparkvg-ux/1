@@ -10,7 +10,7 @@ type DestinationHeroProps = {
   description: string;
   image: string;
   imageAlt: string;
-  primaryHref: string;
+  primaryHref?: string;
   primaryLabel: string;
   secondaryHref?: string;
   secondaryLabel?: string;
@@ -77,17 +77,30 @@ export function DestinationHero({
             {description}
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
-            <Button
-              asChild
-              shine
-              size="lg"
-              variant={isEmerald ? "emerald" : "default"}
-              className="w-full sm:w-auto"
-            >
-              <Link href={primaryHref} onClick={onPrimaryClick}>
+            {primaryHref ? (
+              <Button
+                asChild
+                shine
+                size="lg"
+                variant={isEmerald ? "emerald" : "default"}
+                className="w-full sm:w-auto"
+              >
+                <Link href={primaryHref} onClick={onPrimaryClick}>
+                  {primaryLabel}
+                </Link>
+              </Button>
+            ) : (
+              <Button
+                type="button"
+                shine
+                size="lg"
+                variant={isEmerald ? "emerald" : "default"}
+                className="w-full sm:w-auto"
+                onClick={onPrimaryClick}
+              >
                 {primaryLabel}
-              </Link>
-            </Button>
+              </Button>
+            )}
             {secondaryHref && secondaryLabel ? (
               <Button
                 asChild

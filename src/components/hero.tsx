@@ -1,13 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { CheckCircle2, Send } from "lucide-react";
+import { CheckCircle2, MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRegisterChooser } from "@/components/register-chooser";
 import { CONTACTS } from "@/lib/constants";
-import { fleetGoPath } from "@/lib/fleet-forms";
-import { trackFleetRegistration } from "@/lib/metrika";
+import { trackGoal } from "@/lib/metrika";
 
 const FACTS = [
   "выплаты ежедневно",
@@ -18,7 +17,7 @@ const FACTS = [
 
 export function Hero() {
   const reduce = useReducedMotion();
-  const registerHref = fleetGoPath("taxi", "smz");
+  const { openRegister } = useRegisterChooser();
 
   return (
     <section
@@ -62,37 +61,61 @@ export function Hero() {
             Удалённо по всей России, без визита в офис.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <Button asChild shine size="lg" className="w-full shadow-glow sm:w-auto">
-              <Link
-                href={registerHref}
-                onClick={() =>
-                  trackFleetRegistration({
-                    channel: "taxi",
-                    type: "smz",
-                    action: "link",
-                    place: "hero",
-                  })
-                }
-              >
-                Зарегистрироваться онлайн
-              </Link>
-            </Button>
+          <div className="mt-8 flex flex-col gap-3">
             <Button
-              asChild
+              type="button"
+              shine
               size="lg"
-              variant="outline"
-              className="w-full sm:w-auto"
+              className="w-full shadow-glow sm:w-auto"
+              onClick={() => openRegister()}
             >
-              <a
-                href={CONTACTS.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Send className="h-4 w-4" aria-hidden />
-                Написать в Telegram
-              </a>
+              Зарегистрироваться онлайн
             </Button>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <Button
+                asChild
+                size="lg"
+                variant="emerald"
+                shine
+                className="w-full sm:w-auto"
+              >
+                <a
+                  href={CONTACTS.max}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackGoal("lead_messenger", {
+                      place: "hero",
+                      channel: "max",
+                    })
+                  }
+                >
+                  <MessageCircle className="h-4 w-4" aria-hidden />
+                  Написать в MAX
+                </a>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="w-full sm:w-auto"
+              >
+                <a
+                  href={CONTACTS.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackGoal("lead_messenger", {
+                      place: "hero",
+                      channel: "telegram",
+                    })
+                  }
+                >
+                  <Send className="h-4 w-4" aria-hidden />
+                  Telegram
+                </a>
+              </Button>
+            </div>
           </div>
 
           {/* SLOT: форма «имя + телефон» — этап 2, см. раздел «Отложено» */}

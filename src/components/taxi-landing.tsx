@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { ContactButtons } from "@/components/contact-buttons";
 import { FORMS, CONTACTS } from "@/lib/constants";
 import { fleetGoPath } from "@/lib/fleet-forms";
+import { useRegisterChooser } from "@/components/register-chooser";
 import { trackFleetRegistration, trackGoal } from "@/lib/metrika";
 
 const CLASSES = [
@@ -63,6 +64,7 @@ const FORMATS = [
 
 export function TaxiLanding() {
   const registerHref = fleetGoPath("taxi", "smz");
+  const { openRegister } = useRegisterChooser();
 
   return (
     <div className="pb-20">
@@ -72,18 +74,10 @@ export function TaxiLanding() {
         description="Комиссия от 1,9%. Самозанятый, ИП или трудовой договор. Активация 10–15 минут, удалённо по всей России."
         image="/images/taxi-premium-hero.webp"
         imageAlt="Автомобиль для работы в Яндекс Такси на вечерней городской улице"
-        primaryHref={registerHref}
-        primaryLabel="Зарегистрироваться — активация 10–15 минут"
+        primaryLabel="Зарегистрироваться — выбрать формат"
         secondaryHref="#formats"
-        secondaryLabel="Выбрать формат работы"
-        onPrimaryClick={() =>
-          trackFleetRegistration({
-            channel: "taxi",
-            type: "smz",
-            action: "link",
-            place: "hero",
-          })
-        }
+        secondaryLabel="Форматы на странице"
+        onPrimaryClick={() => openRegister({ startAt: "taxi-format" })}
       >
         <ol className="grid gap-2 sm:grid-cols-3">
           {[

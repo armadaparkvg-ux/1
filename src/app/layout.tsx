@@ -100,7 +100,7 @@ export default function RootLayout({
         <YandexMetrika />
         <Providers>
           <Header />
-          <main id="main" className="pb-20 md:pb-0">
+          <main id="main" className="pb-24 md:pb-0">
             {children}
           </main>
           <Footer />
