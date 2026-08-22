@@ -35,7 +35,7 @@ export const FORMS = {
 
 /** Absolute hash links so they work from /privacy, /offer, etc. */
 export const NAV_LINKS = [
-  { href: "/#about", label: "О парке" },
+  { href: "/o-parke/", label: "О парке" },
   { href: "/#directions", label: "Направления" },
   { href: "/taxi/", label: "Такси" },
   { href: "/trudovoj-dogovor/", label: "Трудовой" },
@@ -47,7 +47,7 @@ export const NAV_LINKS = [
 ] as const;
 
 export const FOOTER_LINKS = [
-  { href: "/#about", label: "О парке" },
+  { href: "/o-parke/", label: "О парке" },
   { href: "/taxi/", label: "Подключение к Яндекс Такси" },
   { href: "/trudovoj-dogovor/", label: "Трудовой договор без СМЗ и ИП" },
   { href: "/delivery/", label: "Курьеры Яндекс Доставка" },

@@ -7,6 +7,7 @@ import { useEffect } from "react";
  * Redirects to the current destination pages while preserving UTM query.
  */
 const HASH_REDIRECTS: Record<string, string> = {
+  "#about": "/o-parke/",
   "#tariffs": "/taxi/#formats",
   "#tariff-self": "/taxi/#formats",
   "#tariff-ip": "/taxi/#formats",

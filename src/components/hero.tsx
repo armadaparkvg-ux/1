@@ -10,10 +10,10 @@ import { fleetGoPath } from "@/lib/fleet-forms";
 import { trackFleetRegistration } from "@/lib/metrika";
 
 const FACTS = [
-  "98% одобрения",
   "выплаты ежедневно",
   "комиссия от 1,9%",
   "поддержка 8:00–21:00",
+  "7+ лет на рынке",
 ] as const;
 
 export function Hero() {
@@ -52,7 +52,7 @@ export function Hero() {
           className="max-w-3xl"
         >
           <p className="inline-flex rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-accent backdrop-blur">
-            Таксопарк «Армада» · 7 лет на рынке · 3 500+ водителей
+            Таксопарк «Армада» · 7 лет на рынке · 3 800+ самозанятых
           </p>
           <h1 className="mt-5 font-display text-3xl font-semibold tracking-tight text-foreground text-balance sm:text-4xl lg:text-5xl">
             Подключение к Яндекс Такси и Доставке за 1,5–2 часа

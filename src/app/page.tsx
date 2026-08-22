@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/hero";
-import { Trust } from "@/components/trust";
 import { HomeDestinations } from "@/components/home-destinations";
 import { MaxChannel } from "@/components/max-channel";
 import { Contacts } from "@/components/contacts";
@@ -27,7 +26,7 @@ const jsonLd = buildJsonLd();
 
 /**
  * Главная — компактная витрина направлений.
- * Все условия и регистрация вынесены на отдельные страницы.
+ * «О парке» вынесено на /o-parke/.
  */
 export default function HomePage() {
   return (
@@ -38,7 +37,6 @@ export default function HomePage() {
       />
       <LegacyHashRedirect />
       <Hero />
-      <Trust />
       <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <HomeDestinations />
       <MaxChannel />

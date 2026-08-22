@@ -25,6 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${SITE.url}/o-parke/`,
+      lastModified: new Date("2026-08-22"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${SITE.url}/taxi/`,
       lastModified: new Date("2026-07-25"),
       changeFrequency: "weekly",

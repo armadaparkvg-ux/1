@@ -5,7 +5,7 @@ import { Check } from "lucide-react";
 import { trackGoal } from "@/lib/metrika";
 
 const STEPS = [
-  { href: "/#about", label: "Парк" },
+  { href: "/o-parke/", label: "Парк" },
   { href: "/#directions", label: "Направление" },
   { href: "/#yandex-tariffs", label: "Класс" },
   { href: "/#tariffs", label: "Оформление" },
