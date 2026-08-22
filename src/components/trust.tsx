@@ -43,7 +43,7 @@ export function Trust() {
           <div className="premium-card relative mb-12 overflow-hidden rounded-3xl">
             <div className="relative aspect-[21/9] min-h-[210px] w-full sm:min-h-[270px]">
               <Image
-                src="/images/trust-city.jpg"
+                src="/images/trust-city.webp"
                 alt="Ночной город и работа такси"
                 fill
                 sizes="100vw"

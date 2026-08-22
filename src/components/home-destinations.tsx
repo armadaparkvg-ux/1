@@ -11,7 +11,7 @@ const DESTINATIONS = [
   {
     href: "/taxi/",
     registerHref: "/taxi/#formats",
-    image: "/images/taxi-premium-hero.webp",
+    image: "/images/taxi-card.webp",
     icon: Car,
     eyebrow: "Направление 01",
     title: "Такси",
@@ -24,7 +24,7 @@ const DESTINATIONS = [
   {
     href: "/delivery/",
     registerHref: "/delivery/#courier-tariffs",
-    image: "/images/delivery-premium-hero.webp",
+    image: "/images/delivery-card.webp",
     icon: Package,
     eyebrow: "Направление 02",
     title: "Доставка",
@@ -37,7 +37,7 @@ const DESTINATIONS = [
   {
     href: "/license/",
     registerHref: "/license/#apply-service",
-    image: "/images/legal-documents-hero.webp",
+    image: "/images/legal-card.webp",
     icon: FileCheck2,
     eyebrow: "Документы",
     title: "Лицензия ФГИС",
@@ -50,7 +50,7 @@ const DESTINATIONS = [
   {
     href: "/osgop/",
     registerHref: "/osgop/#apply-service",
-    image: "/images/legal-documents-hero.webp",
+    image: "/images/legal-card.webp",
     icon: ShieldCheck,
     eyebrow: "Документы",
     title: "ОСГОП",
