@@ -10,6 +10,8 @@ const TAXI_TYPES = {
 } as const;
 
 const COURIER_TYPES = {
+  /** Быстрый старт СМЗ → форма пешего курьера по умолчанию */
+  smz: COURIER_FORMS.foot,
   foot: COURIER_FORMS.foot,
   auto: COURIER_FORMS.auto,
   moto: COURIER_FORMS.moto,

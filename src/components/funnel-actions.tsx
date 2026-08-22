@@ -22,6 +22,7 @@ type DualPathProps = {
   fleetTrack?: {
     channel: "taxi" | "courier";
     type: string;
+    place?: "hero" | "card" | "sticky" | "footer";
   };
   /** Topic for park-support apply modal (labor / services) */
   applyTopic?: ApplyTopic;
@@ -54,6 +55,7 @@ export function DualPathActions({
       channel: fleetTrack.channel,
       type: fleetTrack.type,
       action,
+      place: fleetTrack.place ?? "card",
     });
   };
 

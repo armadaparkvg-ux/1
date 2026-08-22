@@ -21,6 +21,8 @@ import {
   type CourierTariff,
 } from "@/lib/courier";
 import { CONTACTS } from "@/lib/constants";
+import { fleetGoPath } from "@/lib/fleet-forms";
+import { trackFleetRegistration } from "@/lib/metrika";
 
 const ICONS = {
   foot: PersonStanding,
@@ -81,23 +83,28 @@ function CourierCard({ tariff }: { tariff: CourierTariff }) {
 
       <DualPathActions
         registerHref={tariff.formUrl}
-        registerLabel={tariff.cta}
+        registerLabel="Зарегистрироваться"
         iframeSrc={tariff.formIframe}
         iframeTitle={`Форма: ${tariff.title}`}
-        fleetTrack={{ channel: "courier", type: tariff.id }}
+        fleetTrack={{ channel: "courier", type: tariff.id, place: "card" }}
       />
     </article>
   );
 }
 
 export function CourierLanding() {
+  const registerHref = fleetGoPath("courier", "smz");
+
   return (
     <div className="pb-20">
-      <section className="relative overflow-hidden border-b border-border bg-[#07090d] pt-[72px]">
+      <section
+        data-hero
+        className="relative isolate overflow-hidden border-b border-border bg-[#080b11] pt-[72px]"
+      >
         <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden />
             На главную
@@ -126,22 +133,34 @@ export function CourierLanding() {
             Подключение курьеров к Яндекс Доставке
           </h1>
           <p className="mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Вакансия курьера Яндекс: пеший, авто, мото и грузовой. По шагам —
-            тариф → авторегистрация или поддержка парка. Удалённо по России.
+            Пеший, авто, мото или грузовой. Активация 1,5–2 часа, удалённо по
+            России. Выплаты через парк.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button asChild shine size="lg" variant="emerald">
-              <Link href="#courier-tariffs">Выбрать тариф курьера</Link>
+              <Link
+                href={registerHref}
+                onClick={() =>
+                  trackFleetRegistration({
+                    channel: "courier",
+                    type: "smz",
+                    action: "link",
+                    place: "hero",
+                  })
+                }
+              >
+                Зарегистрироваться — активация 1,5–2 часа
+              </Link>
             </Button>
             <Button asChild size="lg" variant="secondary">
-              <Link href="#courier-steps">Как подключиться</Link>
+              <Link href="#courier-tariffs">Выбрать тариф курьера</Link>
             </Button>
           </div>
           <ol className="mt-8 grid gap-2 sm:grid-cols-3">
             {[
-              "1. Как подключиться",
+              "1. Регистрация",
               "2. Тариф курьера",
-              "3. Регистрация или чат",
+              "3. Первые заказы",
             ].map((item) => (
               <li
                 key={item}

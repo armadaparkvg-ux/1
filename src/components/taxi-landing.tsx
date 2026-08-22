@@ -10,6 +10,8 @@ import { LaborContractBanner } from "@/components/labor-contract-banner";
 import { Button } from "@/components/ui/button";
 import { ContactButtons } from "@/components/contact-buttons";
 import { FORMS, CONTACTS } from "@/lib/constants";
+import { fleetGoPath } from "@/lib/fleet-forms";
+import { trackFleetRegistration, trackGoal } from "@/lib/metrika";
 
 const CLASSES = [
   {
@@ -60,21 +62,33 @@ const FORMATS = [
 ] as const;
 
 export function TaxiLanding() {
+  const registerHref = fleetGoPath("taxi", "smz");
+
   return (
     <div className="pb-20">
       <DestinationHero
         eyebrow="Яндекс Такси · парк «Армада»"
         title="Подключение к Яндекс Такси"
-        description="Последовательность простая: класс авто → формат работы → авторегистрация или поддержка парка. Удалённо по России, комиссия от 1,9%."
+        description="Комиссия от 1,9%. Самозанятый, ИП или трудовой договор. Активация 1,5–2 часа, удалённо по всей России."
         image="/images/taxi-premium-hero.webp"
         imageAlt="Автомобиль для работы в Яндекс Такси на вечерней городской улице"
-        primaryHref="#step-class"
-        primaryLabel="Начать: выбрать класс"
+        primaryHref={registerHref}
+        primaryLabel="Зарегистрироваться — активация 1,5–2 часа"
+        secondaryHref="#formats"
+        secondaryLabel="Выбрать формат работы"
+        onPrimaryClick={() =>
+          trackFleetRegistration({
+            channel: "taxi",
+            type: "smz",
+            action: "link",
+            place: "hero",
+          })
+        }
       >
         <ol className="grid gap-2 sm:grid-cols-3">
           {[
-            "1. Класс авто",
-            "2. Формат работы",
+            "1. Формат работы",
+            "2. Класс авто",
             "3. Регистрация или чат",
           ].map((item) => (
             <li
@@ -89,58 +103,6 @@ export function TaxiLanding() {
       </DestinationHero>
 
       <section
-        id="step-class"
-        className="section-anchor py-20 sm:py-24"
-        aria-labelledby="taxi-class-heading"
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <FadeIn>
-            <SectionHeading
-              id="taxi-class-heading"
-              eyebrow="Шаг 1 · Класс авто"
-              title="На каких тарифах можно работать"
-              description="Проверьте автомобиль в официальном классификаторе Яндекса, затем переходите к формату оформления."
-            />
-          </FadeIn>
-          <Stagger className="mt-12 grid gap-5 md:grid-cols-3" stagger={0.08}>
-            {CLASSES.map((item) => {
-              const Icon = item.icon;
-              return (
-                <StaggerItem key={item.title}>
-                  <article className="premium-card h-full rounded-2xl p-6">
-                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
-                      <Icon className="h-5 w-5" aria-hidden />
-                    </span>
-                    <h2 className="mt-5 font-display text-xl font-semibold text-foreground">
-                      {item.title}
-                    </h2>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                      {item.text}
-                    </p>
-                  </article>
-                </StaggerItem>
-              );
-            })}
-          </Stagger>
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Button asChild shine size="lg">
-              <Link
-                href={CONTACTS.autoClassifier}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Проверить авто в классификаторе
-                <ExternalLink className="h-4 w-4" aria-hidden />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="secondary">
-              <Link href="#formats">Далее: выбрать формат →</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <section
         id="formats"
         className="section-anchor premium-grid relative overflow-hidden py-20 sm:py-24"
         aria-labelledby="taxi-formats-heading"
@@ -149,7 +111,7 @@ export function TaxiLanding() {
           <FadeIn>
             <SectionHeading
               id="taxi-formats-heading"
-              eyebrow="Шаг 2 · Формат работы"
+              eyebrow="Шаг 1 · Формат работы"
               title="Выберите оформление с парком"
               description="После выбора формата — авторегистрация онлайн или оформление через поддержку парка в чате."
             />
@@ -190,15 +152,72 @@ export function TaxiLanding() {
                   ) : (
                     <DualPathActions
                       registerHref={format.registerHref!}
+                      registerLabel="Зарегистрироваться"
                       iframeSrc={format.iframeSrc!}
                       iframeTitle={`Регистрация: ${format.title}`}
-                      fleetTrack={{ channel: "taxi", type: format.id }}
+                      fleetTrack={{
+                        channel: "taxi",
+                        type: format.id,
+                        place: "card",
+                      }}
                     />
                   )}
                 </article>
               </StaggerItem>
             ))}
           </Stagger>
+        </div>
+      </section>
+
+      <section
+        id="step-class"
+        className="section-anchor py-20 sm:py-24"
+        aria-labelledby="taxi-class-heading"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <SectionHeading
+              id="taxi-class-heading"
+              eyebrow="Шаг 2 · Класс авто"
+              title="На каких тарифах можно работать"
+              description="Проверьте автомобиль в официальном классификаторе Яндекса — открывается в новой вкладке."
+            />
+          </FadeIn>
+          <Stagger className="mt-12 grid gap-5 md:grid-cols-3" stagger={0.08}>
+            {CLASSES.map((item) => {
+              const Icon = item.icon;
+              return (
+                <StaggerItem key={item.title}>
+                  <article className="premium-card h-full rounded-2xl p-6">
+                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
+                      <Icon className="h-5 w-5" aria-hidden />
+                    </span>
+                    <h2 className="mt-5 font-display text-xl font-semibold text-foreground">
+                      {item.title}
+                    </h2>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {item.text}
+                    </p>
+                  </article>
+                </StaggerItem>
+              );
+            })}
+          </Stagger>
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <a
+              href={CONTACTS.autoClassifier}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackGoal("click_classifier", { place: "taxi" })}
+              className="text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              Проверить авто в классификаторе
+              <ExternalLink className="ml-1.5 inline h-3.5 w-3.5 align-text-bottom" aria-hidden />
+            </a>
+            <Button asChild size="lg" variant="secondary">
+              <Link href="#formats">К форматам работы →</Link>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -217,7 +236,22 @@ export function TaxiLanding() {
               Напишите в чат — подскажем по документам и подключению.{" "}
               {CONTACTS.hours}.
             </p>
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8 flex flex-col items-center gap-4">
+              <Button asChild shine size="lg">
+                <Link
+                  href={registerHref}
+                  onClick={() =>
+                    trackFleetRegistration({
+                      channel: "taxi",
+                      type: "smz",
+                      action: "link",
+                      place: "footer",
+                    })
+                  }
+                >
+                  Зарегистрироваться
+                </Link>
+              </Button>
               <ContactButtons showLabels size="lg" />
             </div>
           </FadeIn>
