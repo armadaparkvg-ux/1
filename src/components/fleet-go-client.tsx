@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { resolveFleetFormUrl } from "@/lib/fleet-forms";
-import { trackFleetRegistration } from "@/lib/metrika";
+import { goal, trackFleetRegistration } from "@/lib/metrika";
 
 type Status = "loading" | "redirecting" | "error";
 
@@ -20,11 +20,12 @@ function readParams() {
 
 /**
  * Intermediate page: Metrika sees /go/fleet/, then redirect to Yandex Fleet.
- * Default UI is "loading" so static HTML never shows a false error.
+ * visit_fleet_go must fire BEFORE redirect (callback + 1200ms timeout).
  */
 export function FleetGoClient() {
   const [status, setStatus] = useState<Status>("loading");
   const [manualUrl, setManualUrl] = useState<string | null>(null);
+  const redirected = useRef(false);
 
   useEffect(() => {
     const { channel, type } = readParams();
@@ -43,13 +44,22 @@ export function FleetGoClient() {
       channel: ch,
       type,
       action: "link",
+      place: "card",
     });
 
-    // Wait for Metrika pageview + goals to flush, then leave
-    const t = window.setTimeout(() => {
+    const go = () => {
+      if (redirected.current) return;
+      redirected.current = true;
       window.location.replace(url);
-    }, 600);
+    };
 
+    goal(
+      "visit_fleet_go",
+      { channel: ch, type, format: type === "ip" ? "ip" : "smz" },
+      go
+    );
+
+    const t = window.setTimeout(go, 1200);
     return () => window.clearTimeout(t);
   }, []);
 
@@ -78,7 +88,12 @@ export function FleetGoClient() {
         {manualUrl ? (
           <>
             Если переход не произошёл —{" "}
-            <a href={manualUrl} className="text-accent hover:underline">
+            <a
+              href={manualUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:underline"
+            >
               откройте форму вручную
             </a>
             .

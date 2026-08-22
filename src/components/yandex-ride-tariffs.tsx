@@ -5,6 +5,7 @@ import { ArrowUpRight, Car, ExternalLink, Package, Sparkles } from "lucide-react
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { Button } from "@/components/ui/button";
 import { CONTACTS } from "@/lib/constants";
+import { trackGoal } from "@/lib/metrika";
 
 const YANDEX_TARIFF_GROUPS = [
   {
@@ -105,6 +106,7 @@ export function YandexRideTariffs() {
               href={CONTACTS.autoClassifier}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackGoal("click_classifier", { place: "home" })}
             >
               Классификатор авто — проверьте, к какому тарифу подходит ваш авто
               <ExternalLink className="h-5 w-5 shrink-0" aria-hidden />
