@@ -133,7 +133,7 @@ export function CourierLanding() {
             Подключение курьеров к Яндекс Доставке
           </h1>
           <p className="mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Пеший, авто, мото или грузовой. Активация 1,5–2 часа, удалённо по
+            Пеший, авто, мото или грузовой. Активация 10–15 минут, удалённо по
             России. Выплаты через парк.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -149,7 +149,7 @@ export function CourierLanding() {
                   })
                 }
               >
-                Зарегистрироваться — активация 1,5–2 часа
+                Зарегистрироваться — активация 10–15 минут
               </Link>
             </Button>
             <Button asChild size="lg" variant="secondary">

@@ -69,11 +69,11 @@ export function TaxiLanding() {
       <DestinationHero
         eyebrow="Яндекс Такси · парк «Армада»"
         title="Подключение к Яндекс Такси"
-        description="Комиссия от 1,9%. Самозанятый, ИП или трудовой договор. Активация 1,5–2 часа, удалённо по всей России."
+        description="Комиссия от 1,9%. Самозанятый, ИП или трудовой договор. Активация 10–15 минут, удалённо по всей России."
         image="/images/taxi-premium-hero.webp"
         imageAlt="Автомобиль для работы в Яндекс Такси на вечерней городской улице"
         primaryHref={registerHref}
-        primaryLabel="Зарегистрироваться — активация 1,5–2 часа"
+        primaryLabel="Зарегистрироваться — активация 10–15 минут"
         secondaryHref="#formats"
         secondaryLabel="Выбрать формат работы"
         onPrimaryClick={() =>

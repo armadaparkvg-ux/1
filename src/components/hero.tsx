@@ -55,7 +55,7 @@ export function Hero() {
             Таксопарк «Армада» · 7 лет на рынке · 3 800+ самозанятых
           </p>
           <h1 className="mt-5 font-display text-3xl font-semibold tracking-tight text-foreground text-balance sm:text-4xl lg:text-5xl">
-            Подключение к Яндекс Такси и Доставке за 1,5–2 часа
+            Подключение к Яндекс Такси и Доставке за 10–15 минут
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
             Комиссия парка от 1,9%. Самозанятый, ИП или трудовой договор.
