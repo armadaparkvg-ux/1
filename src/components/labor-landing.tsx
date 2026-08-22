@@ -27,6 +27,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { CONTACTS } from "@/lib/constants";
+import { fleetGoPath } from "@/lib/fleet-forms";
 import { LABOR_FAQ } from "@/lib/labor-faq";
 import { trackGoal } from "@/lib/metrika";
 
@@ -388,10 +389,8 @@ export function LaborLanding() {
             </p>
             <div className="mt-8 flex flex-col items-center gap-6">
               <Button asChild shine size="lg" className="w-full max-w-md">
-                <a
-                  href={CONTACTS.telegram}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={fleetGoPath("taxi", "labor")}
                   onClick={() =>
                     trackGoal("click_labor_apply", {
                       place: "footer",
@@ -400,7 +399,7 @@ export function LaborLanding() {
                   }
                 >
                   Зарегистрироваться — трудовой договор
-                </a>
+                </Link>
               </Button>
               <DualPathActions
                 applyTopic="3% + 300₽"

@@ -17,27 +17,31 @@ type StickyActionsProps = {
 
 function resolveRegister(pathname: string | null): {
   href: string;
-  channel: "taxi" | "courier" | "labor";
+  channel: "taxi" | "courier";
   type: string;
+  label: string;
 } {
   if (pathname?.startsWith("/delivery")) {
     return {
       href: fleetGoPath("courier", "smz"),
       channel: "courier",
       type: "smz",
+      label: "Зарегистрироваться",
     };
   }
   if (pathname?.startsWith("/trudovoj-dogovor")) {
     return {
-      href: CONTACTS.telegram,
-      channel: "labor",
+      href: fleetGoPath("taxi", "labor"),
+      channel: "taxi",
       type: "labor",
+      label: "Оформить трудовой",
     };
   }
   return {
     href: fleetGoPath("taxi", "smz"),
     channel: "taxi",
     type: "smz",
+    label: "Зарегистрироваться",
   };
 }
 
@@ -52,6 +56,9 @@ export function StickyActions({ registerHref }: StickyActionsProps) {
   const href = registerHref ?? resolved.href;
 
   useEffect(() => {
+    shownTracked.current = false;
+    setVisible(false);
+
     const hero = document.querySelector("[data-hero]");
     if (!hero) {
       setVisible(true);
@@ -75,7 +82,7 @@ export function StickyActions({ registerHref }: StickyActionsProps) {
   }, [pathname]);
 
   const onRegister = () => {
-    if (resolved.channel === "labor") {
+    if (resolved.type === "labor") {
       trackGoal("click_labor_apply", { place: "sticky", format: "labor" });
       return;
     }
@@ -93,7 +100,7 @@ export function StickyActions({ registerHref }: StickyActionsProps) {
         "fixed inset-x-0 bottom-0 z-40 border-t border-border/80 bg-[#0a0a0a]/95 px-3 pt-2.5 backdrop-blur-md md:hidden",
         "pb-[max(0.625rem,env(safe-area-inset-bottom))]",
         "transition-transform duration-200 motion-reduce:transition-none",
-        visible ? "translate-y-0" : "translate-y-full pointer-events-none"
+        visible ? "translate-y-0" : "pointer-events-none translate-y-full"
       )}
       aria-hidden={!visible}
     >
@@ -104,21 +111,9 @@ export function StickyActions({ registerHref }: StickyActionsProps) {
           size="lg"
           className="min-h-12 flex-[3] focus-visible:ring-2 focus-visible:ring-amber-400"
         >
-          {resolved.channel === "labor" ? (
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              tabIndex={visible ? 0 : -1}
-              onClick={onRegister}
-            >
-              Оформить трудовой
-            </a>
-          ) : (
-            <Link href={href} tabIndex={visible ? 0 : -1} onClick={onRegister}>
-              Зарегистрироваться
-            </Link>
-          )}
+          <Link href={href} tabIndex={visible ? 0 : -1} onClick={onRegister}>
+            {resolved.label}
+          </Link>
         </Button>
         <Button
           asChild

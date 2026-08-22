@@ -7,6 +7,8 @@ const TAXI_TYPES = {
   smz: FORMS.selfEmployed,
   self: FORMS.selfEmployed,
   ip: FORMS.ip,
+  /** Трудовой: отдельной Fleet-формы нет — обрабатывается в FleetGoClient */
+  labor: "__labor__",
 } as const;
 
 const COURIER_TYPES = {

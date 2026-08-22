@@ -95,7 +95,7 @@ export default function RootLayout({
         <a href="#main" className="skip-link">
           Перейти к содержимому
         </a>
-        {/* Вариокуб — до Метрики; данные экспериментов идут в счётчик 110811547 */}
+        {/* Вариокуб — до Метрики; данные экспериментов идут в тот же счётчик */}
         <YandexVarioqub />
         <YandexMetrika />
         <Providers>

@@ -2,10 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { CONTACTS } from "@/lib/constants";
 import { resolveFleetFormUrl } from "@/lib/fleet-forms";
-import { goal, trackFleetRegistration } from "@/lib/metrika";
+import { goal, trackFleetRegistration, trackGoal } from "@/lib/metrika";
 
 type Status = "loading" | "redirecting" | "error";
+
+const LABOR_SENTINEL = "__labor__";
 
 function readParams() {
   if (typeof window === "undefined") {
@@ -21,10 +24,12 @@ function readParams() {
 /**
  * Intermediate page: Metrika sees /go/fleet/, then redirect to Yandex Fleet.
  * visit_fleet_go must fire BEFORE redirect (callback + 1200ms timeout).
+ * type=labor → Telegram (отдельной Fleet-формы нет).
  */
 export function FleetGoClient() {
   const [status, setStatus] = useState<Status>("loading");
   const [manualUrl, setManualUrl] = useState<string | null>(null);
+  const [isLabor, setIsLabor] = useState(false);
   const redirected = useRef(false);
 
   useEffect(() => {
@@ -36,28 +41,47 @@ export function FleetGoClient() {
       return;
     }
 
-    setManualUrl(url);
+    const labor = url === LABOR_SENTINEL;
+    const target = labor ? CONTACTS.telegram : url;
+    setIsLabor(labor);
+    setManualUrl(target);
     setStatus("redirecting");
-
-    const ch = channel === "taxi" ? "taxi" : "courier";
-    trackFleetRegistration({
-      channel: ch,
-      type,
-      action: "link",
-      place: "card",
-    });
 
     const go = () => {
       if (redirected.current) return;
       redirected.current = true;
-      window.location.replace(url);
+      window.location.replace(target);
     };
 
-    goal(
-      "visit_fleet_go",
-      { channel: ch, type, format: type === "ip" ? "ip" : "smz" },
-      go
-    );
+    if (labor) {
+      trackGoal("click_labor_apply", {
+        place: "fleet_go",
+        format: "labor",
+        channel: "taxi",
+      });
+      goal(
+        "visit_fleet_go",
+        { channel: "taxi", type: "labor", format: "labor" },
+        go
+      );
+    } else {
+      const ch = channel === "taxi" ? "taxi" : "courier";
+      trackFleetRegistration({
+        channel: ch,
+        type,
+        action: "link",
+        place: "card",
+      });
+      goal(
+        "visit_fleet_go",
+        {
+          channel: ch,
+          type,
+          format: type === "ip" ? "ip" : type === "labor" ? "labor" : "smz",
+        },
+        go
+      );
+    }
 
     const t = window.setTimeout(go, 1200);
     return () => window.clearTimeout(t);
@@ -75,6 +99,9 @@ export function FleetGoClient() {
         <Link href="/taxi/" className="text-accent hover:underline">
           К такси
         </Link>
+        <Link href="/trudovoj-dogovor/" className="text-accent hover:underline">
+          К трудовому договору
+        </Link>
       </div>
     );
   }
@@ -82,7 +109,9 @@ export function FleetGoClient() {
   return (
     <div className="mx-auto flex min-h-[50vh] max-w-lg flex-col items-center justify-center gap-4 px-4 text-center">
       <p className="text-lg text-foreground">
-        Переходим к авторегистрации Яндекс…
+        {isLabor
+          ? "Переходим к оформлению трудового договора…"
+          : "Переходим к авторегистрации Яндекс…"}
       </p>
       <p className="text-sm text-muted-foreground">
         {manualUrl ? (
@@ -94,7 +123,7 @@ export function FleetGoClient() {
               rel="noopener noreferrer"
               className="text-accent hover:underline"
             >
-              откройте форму вручную
+              {isLabor ? "откройте чат вручную" : "откройте форму вручную"}
             </a>
             .
           </>
