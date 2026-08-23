@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { TaxiLanding } from "@/components/taxi-landing";
+import { JsonLd } from "@/components/json-ld";
 import { SITE } from "@/lib/constants";
+import {
+  breadcrumbJsonLd,
+  graphJsonLd,
+  webpageJsonLd,
+} from "@/lib/schema";
 
 const TAXI_KEYWORDS = [
   "подключение к яндекс такси",
@@ -41,5 +47,22 @@ export const metadata: Metadata = {
 };
 
 export default function TaxiPage() {
-  return <TaxiLanding />;
+  const jsonLd = graphJsonLd([
+    webpageJsonLd({
+      path: "/taxi/",
+      name: "Подключение к Яндекс Такси — комиссия от 1,9%",
+      description:
+        "Подключение к Яндекс Такси через парк «Армада»: самозанятый и ИП от 1,9%, трудовой договор.",
+    }),
+    breadcrumbJsonLd([
+      { name: "Главная", href: "/" },
+      { name: "Такси", href: "/taxi/" },
+    ]),
+  ]);
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      <TaxiLanding />
+    </>
+  );
 }

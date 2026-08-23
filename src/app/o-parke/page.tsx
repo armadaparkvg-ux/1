@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { AboutParkLanding } from "@/components/about-park-landing";
+import { JsonLd } from "@/components/json-ld";
 import { SITE } from "@/lib/constants";
+import {
+  breadcrumbJsonLd,
+  graphJsonLd,
+  webpageJsonLd,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "О парке «Армада» — знакомство с таксопарком",
@@ -16,5 +22,22 @@ export const metadata: Metadata = {
 };
 
 export default function AboutParkPage() {
-  return <AboutParkLanding />;
+  const jsonLd = graphJsonLd([
+    webpageJsonLd({
+      path: "/o-parke/",
+      name: "О парке «Армада» — знакомство с таксопарком",
+      description:
+        "7+ лет на рынке, 3 800+ самозанятых, трудовой договор, курьеры и ФГИС.",
+    }),
+    breadcrumbJsonLd([
+      { name: "Главная", href: "/" },
+      { name: "О парке", href: "/o-parke/" },
+    ]),
+  ]);
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      <AboutParkLanding />
+    </>
+  );
 }

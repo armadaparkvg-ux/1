@@ -43,6 +43,7 @@ export const NAV_LINKS = [
   { href: "/license/", label: "Лицензия" },
   { href: "/osgop/", label: "ОСГОП" },
   { href: "/faq/", label: "FAQ" },
+  { href: "/goroda/", label: "Города" },
   { href: "/#max-channel", label: "Акции" },
   { href: "/#contacts", label: "Контакты" },
 ] as const;
@@ -55,6 +56,7 @@ export const FOOTER_LINKS = [
   { href: "/license/", label: "Лицензия такси ФГИС" },
   { href: "/osgop/", label: "ОСГОП для такси" },
   { href: "/faq/", label: "Частые вопросы (FAQ)" },
+  { href: "/goroda/", label: "Подключение по городам" },
   { href: "/#max-channel", label: "Акции и бонусы в MAX" },
   { href: "/#contacts", label: "Контакты" },
 ] as const;

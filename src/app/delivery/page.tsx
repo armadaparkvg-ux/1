@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { CourierLanding } from "@/components/courier-landing";
+import { JsonLd } from "@/components/json-ld";
 import { SITE } from "@/lib/constants";
+import {
+  breadcrumbJsonLd,
+  graphJsonLd,
+  webpageJsonLd,
+} from "@/lib/schema";
 
 const DELIVERY_KEYWORDS = [
   "курьер яндекс доставка",
@@ -48,5 +54,22 @@ export const metadata: Metadata = {
 };
 
 export default function DeliveryPage() {
-  return <CourierLanding />;
+  const jsonLd = graphJsonLd([
+    webpageJsonLd({
+      path: "/delivery/",
+      name: "Курьер Яндекс Доставка — подключение и вакансии",
+      description:
+        "Пеший, авто, мото и грузовой курьер Яндекс Доставки через парк «Армада».",
+    }),
+    breadcrumbJsonLd([
+      { name: "Главная", href: "/" },
+      { name: "Доставка", href: "/delivery/" },
+    ]),
+  ]);
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      <CourierLanding />
+    </>
+  );
 }

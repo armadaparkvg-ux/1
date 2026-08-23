@@ -56,6 +56,8 @@ export default function BlogArticlePage({
       url: SITE.url,
     },
     mainEntityOfPage: `${SITE.url}/blog/${article.slug}/`,
+    image: `${SITE.url}/og.jpg`,
+    inLanguage: "ru-RU",
   };
 
   return (

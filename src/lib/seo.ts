@@ -380,19 +380,25 @@ export function buildJsonLd() {
         name: "Как подключиться к Яндекс Такси или Доставке через таксопарк «Армада»",
         description:
           "Пять шагов: знакомство, направление, тариф, регистрация, выход на линию.",
-        totalTime: "PT2H",
+        totalTime: "PT15M",
         step: HOW_TO_STEPS.map((step, index) => ({
           "@type": "HowToStep",
           position: index + 1,
           name: step.title,
           text: step.text,
-          url: `${SITE.url}/#directions`,
+          url: [
+            `${SITE.url}/o-parke/`,
+            `${SITE.url}/#directions`,
+            `${SITE.url}/taxi/`,
+            `${SITE.url}/taxi/#formats`,
+            `${SITE.url}/taxi/`,
+          ][index],
         })),
       },
       {
         "@type": "FAQPage",
-        "@id": `${SITE.url}/#contacts`,
-        mainEntity: FAQ_ITEMS.map((item) => ({
+        "@id": `${SITE.url}/#faq`,
+        mainEntity: FAQ_ITEMS.slice(0, 10).map((item) => ({
           "@type": "Question",
           name: item.q,
           acceptedAnswer: {

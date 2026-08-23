@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { ARTICLES } from "@/lib/articles";
+import { CITIES } from "@/lib/cities";
 import { SITE } from "@/lib/constants";
 
 /** Trailing slashes match static export (`trailingSlash: true`). */
@@ -66,6 +67,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${SITE.url}/goroda/`,
+      lastModified: new Date("2026-08-23"),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    ...CITIES.map((city) => ({
+      url: `${SITE.url}/goroda/${city.slug}/`,
+      lastModified: new Date("2026-08-23"),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     ...articles,
     {
       url: `${SITE.url}/privacy/`,
