@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Manrope } from "next/font/google";
+import { Manrope } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ScrollDepthTracker } from "@/components/scroll-depth-tracker";
@@ -11,16 +11,11 @@ import { SITE } from "@/lib/constants";
 import { SEO_KEYWORDS } from "@/lib/seo";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
 const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
   variable: "--font-manrope",
   display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -30,7 +25,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
-  keywords: [...SEO_KEYWORDS],
+  keywords: SEO_KEYWORDS.slice(0, 28),
   authors: [{ name: SITE.fullName }],
   creator: SITE.fullName,
   publisher: SITE.fullName,
@@ -90,23 +85,23 @@ export default function RootLayout({
   return (
     <html lang="ru" className="dark">
       <body
-        className={`${inter.variable} ${manrope.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
+        className={`${manrope.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
       >
         <a href="#main" className="skip-link">
           Перейти к содержимому
         </a>
-        {/* Вариокуб — до Метрики; данные экспериментов идут в тот же счётчик */}
-        <YandexVarioqub />
-        <YandexMetrika />
         <Providers>
           <Header />
-          <main id="main" className="pb-20 md:pb-0">
+          <main id="main" className="pb-0">
             {children}
           </main>
           <Footer />
           <StickyActions />
           <ScrollDepthTracker />
         </Providers>
+        {/* Аналитика после контента — не блокирует первый экран */}
+        <YandexVarioqub />
+        <YandexMetrika />
       </body>
     </html>
   );

@@ -36,7 +36,7 @@ const config: Config = {
       },
       fontFamily: {
         display: ["var(--font-manrope)", "system-ui", "sans-serif"],
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        sans: ["var(--font-manrope)", "system-ui", "sans-serif"],
       },
       boxShadow: {
         glow: "0 0 40px -8px rgba(245, 158, 11, 0.45)",

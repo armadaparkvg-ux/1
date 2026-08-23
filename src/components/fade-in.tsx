@@ -1,41 +1,22 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import { type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type FadeInProps = {
   children: ReactNode;
   className?: string;
+  /** Kept for call-site compatibility; ignored (content must stay visible without JS). */
   delay?: number;
   y?: number;
   once?: boolean;
 };
 
-export function FadeIn({
-  children,
-  className,
-  delay = 0,
-  y = 24,
-  once = true,
-}: FadeInProps) {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    return <div className={className}>{children}</div>;
-  }
-
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, margin: "-60px" }}
-      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
+/**
+ * Lightweight section wrapper — no opacity:0 / framer-motion.
+ * Previous FadeIn hid SSR HTML until hydration + IntersectionObserver,
+ * which looked like empty gaps and a broken page on slow mobile.
+ */
+export function FadeIn({ children, className }: FadeInProps) {
+  return <div className={className}>{children}</div>;
 }
 
 type StaggerProps = {
@@ -44,27 +25,8 @@ type StaggerProps = {
   stagger?: number;
 };
 
-export function Stagger({ children, className, stagger = 0.1 }: StaggerProps) {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    return <div className={className}>{children}</div>;
-  }
-
-  return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-40px" }}
-      variants={{
-        hidden: {},
-        show: { transition: { staggerChildren: stagger } },
-      }}
-    >
-      {children}
-    </motion.div>
-  );
+export function Stagger({ children, className }: StaggerProps) {
+  return <div className={className}>{children}</div>;
 }
 
 export function StaggerItem({
@@ -74,21 +36,7 @@ export function StaggerItem({
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <motion.div
-      className={className}
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        show: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-        },
-      }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={className}>{children}</div>;
 }
 
 export function SectionHeading({
@@ -109,7 +57,7 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "max-w-3xl space-y-4",
+        "max-w-3xl space-y-3 sm:space-y-4",
         align === "center" && "mx-auto text-center",
         className
       )}

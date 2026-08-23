@@ -3,14 +3,13 @@ import { METRIKA_ID } from "@/lib/metrika";
 import { VarioqubSpaInit } from "@/components/varioqub-spa-init";
 
 /**
- * Яндекс Вариокуб (A/B и персонализации).
- * Счётчик Метрики уже на сайте — сюда только сниппет ymab.
- * @see https://yandex.ru/support/varioqub/ru/connect
+ * Яндекс Вариокуб — после interactive, не beforeInteractive
+ * (иначе блокирует первый paint на мобиле).
  */
 export function YandexVarioqub() {
   return (
     <>
-      <Script id="yandex-varioqub" strategy="beforeInteractive">{`
+      <Script id="yandex-varioqub" strategy="lazyOnload">{`
 (function(e, x, pe, r, i, me, nt){
   e[i]=e[i]||function(){(e[i].a=e[i].a||[]).push(arguments)};
   me=x.createElement(pe);me.async=1;me.src=r;

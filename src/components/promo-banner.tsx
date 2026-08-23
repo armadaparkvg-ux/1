@@ -1,21 +1,11 @@
-"use client";
-
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PROMO } from "@/lib/constants";
 
 export function PromoBanner() {
-  const reduce = useReducedMotion();
-
   return (
-    <motion.div
-      initial={reduce ? false : { opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="promo-banner relative overflow-hidden border-b border-amber-400/25"
-    >
+    <div className="promo-banner relative overflow-hidden border-b border-amber-400/25">
       <div
         className="absolute inset-0 bg-[linear-gradient(105deg,#0c0a07_0%,#16110a_35%,#2a1e0c_55%,#16110a_80%,#0c0a07_100%)]"
         aria-hidden
@@ -47,6 +37,6 @@ export function PromoBanner() {
           </Link>
         </Button>
       </div>
-    </motion.div>
+    </div>
   );
 }

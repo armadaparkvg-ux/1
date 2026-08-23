@@ -1,16 +1,11 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import { FadeIn, SectionHeading } from "@/components/fade-in";
 import { HOW_TO_STEPS } from "@/lib/seo";
 
 export function HowItWorks() {
-  const reduce = useReducedMotion();
-
   return (
     <section
       id="how-it-works"
-      className="section-anchor relative py-12 sm:py-20 lg:py-24"
+      className="section-anchor relative py-10 sm:py-16 lg:py-20"
       aria-labelledby="how-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -23,7 +18,7 @@ export function HowItWorks() {
           />
         </FadeIn>
 
-        <div className="relative mt-14">
+        <div className="relative mt-10 sm:mt-14">
           <div
             className="absolute left-[19px] top-4 bottom-4 w-px bg-divider-glow sm:left-1/2 sm:-translate-x-px"
             aria-hidden
@@ -32,17 +27,9 @@ export function HowItWorks() {
             {HOW_TO_STEPS.map((step, index) => {
               const isEven = index % 2 === 0;
               return (
-                <motion.li
+                <li
                   key={step.title}
-                  className="relative grid gap-4 py-6 sm:grid-cols-2 sm:gap-10 sm:py-8"
-                  initial={reduce ? false : { opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{
-                    duration: 0.45,
-                    delay: index * 0.06,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
+                  className="relative grid gap-4 py-5 sm:grid-cols-2 sm:gap-10 sm:py-8"
                 >
                   <div
                     className={`pl-12 sm:pl-0 ${
@@ -64,7 +51,7 @@ export function HowItWorks() {
                   <span className="absolute left-0 top-8 flex h-10 w-10 items-center justify-center rounded-full border border-accent/40 bg-surface text-sm font-bold text-accent shadow-glow-sm sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
                     {index + 1}
                   </span>
-                </motion.li>
+                </li>
               );
             })}
           </ol>

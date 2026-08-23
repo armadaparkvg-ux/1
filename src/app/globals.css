@@ -51,7 +51,7 @@ body {
     radial-gradient(ellipse 70% 36% at 50% -8%, rgba(53, 65, 105, 0.24), transparent 72%),
     radial-gradient(ellipse 35% 20% at 88% 26%, rgba(245, 158, 11, 0.07), transparent 75%),
     var(--background);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-manrope), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

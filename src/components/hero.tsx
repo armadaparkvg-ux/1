@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
 import { CheckCircle2, MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRegisterChooser } from "@/components/register-chooser";
@@ -16,7 +14,6 @@ const FACTS = [
 ] as const;
 
 export function Hero() {
-  const reduce = useReducedMotion();
   const { openRegister } = useRegisterChooser();
 
   return (
@@ -25,15 +22,24 @@ export function Hero() {
       data-hero
       className="relative isolate overflow-hidden border-b border-border bg-[#080b11] pt-[72px]"
     >
-      <Image
-        src="/images/hero-bg.webp"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-[70%_center] opacity-55 sm:object-right sm:opacity-65"
-        aria-hidden
-      />
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcSet="/images/hero-bg-768.webp"
+          type="image/webp"
+        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/hero-bg.webp"
+          alt=""
+          width={1600}
+          height={900}
+          decoding="async"
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover object-[70%_center] opacity-55 sm:object-right sm:opacity-65"
+          aria-hidden
+        />
+      </picture>
       <div
         className="absolute inset-0 bg-gradient-to-r from-[#07090d] via-[#07090d]/92 to-[#07090d]/55 sm:via-[#07090d]/88 sm:to-[#07090d]/35"
         aria-hidden
@@ -43,13 +49,8 @@ export function Hero() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-6 pt-5 sm:px-6 sm:pb-14 sm:pt-10 lg:px-8 lg:pb-16">
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }}
-          className="max-w-3xl"
-        >
+      <div className="relative mx-auto max-w-7xl px-4 pb-5 pt-4 sm:px-6 sm:pb-14 sm:pt-10 lg:px-8 lg:pb-16">
+        <div className="max-w-3xl">
           <p className="inline-flex rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent backdrop-blur sm:text-xs sm:tracking-[0.14em]">
             Таксопарк «Армада» · 7 лет · 3 800+ самозанятых
           </p>
@@ -118,8 +119,6 @@ export function Hero() {
             </div>
           </div>
 
-          {/* SLOT: форма «имя + телефон» — этап 2, см. раздел «Отложено» */}
-
           <ul className="mt-5 flex flex-wrap gap-x-3 gap-y-1.5 text-[11px] font-medium text-foreground/85 sm:mt-7 sm:gap-x-4 sm:gap-y-2 sm:text-sm">
             {FACTS.map((item) => (
               <li key={item} className="inline-flex items-center gap-1.5">
@@ -131,7 +130,7 @@ export function Hero() {
               </li>
             ))}
           </ul>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

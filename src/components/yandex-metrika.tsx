@@ -1,10 +1,11 @@
 import Script from "next/script";
 import { METRIKA_ID } from "@/lib/metrika";
 
+/** Метрика после загрузки страницы — не блокирует отрисовку. */
 export function YandexMetrika() {
   return (
     <>
-      <Script id="yandex-metrika" strategy="afterInteractive">{`
+      <Script id="yandex-metrika" strategy="lazyOnload">{`
 (function(m,e,t,r,i,k,a){
     m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
     m[i].l=1*new Date();
@@ -12,7 +13,7 @@ export function YandexMetrika() {
     k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
 })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=${METRIKA_ID}', 'ym');
 
-ym(${METRIKA_ID}, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+ym(${METRIKA_ID}, 'init', {ssr:true, webvisor:false, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
 `}</Script>
       <noscript>
         <div>

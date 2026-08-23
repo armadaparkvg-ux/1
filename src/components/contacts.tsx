@@ -10,7 +10,7 @@ export function Contacts() {
   return (
     <section
       id="contacts"
-      className="section-anchor relative py-12 sm:py-20 lg:py-24"
+      className="section-anchor relative py-8 sm:py-16 lg:py-20"
       aria-labelledby="contacts-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
