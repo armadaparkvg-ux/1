@@ -17,7 +17,6 @@ const HASH_REDIRECTS: Record<string, string> = {
   "#quiz": "/taxi/",
   "#apply": "/taxi/#formats",
   "#reviews": "/#max-channel",
-  "#faq": "/#contacts",
   "#yandex-tariffs": "/taxi/#step-class",
   "#how-it-works": "/#directions",
 };

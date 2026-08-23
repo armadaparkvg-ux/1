@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/hero";
 import { HomeDestinations } from "@/components/home-destinations";
 import { MaxChannel } from "@/components/max-channel";
+import { Faq } from "@/components/faq";
 import { Contacts } from "@/components/contacts";
 import { LegacyHashRedirect } from "@/components/legacy-hash-redirect";
 import { SITE } from "@/lib/constants";
@@ -39,6 +40,7 @@ export default function HomePage() {
       <Hero />
       <HomeDestinations />
       <MaxChannel />
+      <Faq previewCount={10} />
       <Contacts />
     </>
   );

@@ -42,6 +42,7 @@ export const NAV_LINKS = [
   { href: "/delivery/", label: "Доставка" },
   { href: "/license/", label: "Лицензия" },
   { href: "/osgop/", label: "ОСГОП" },
+  { href: "/faq/", label: "FAQ" },
   { href: "/#max-channel", label: "Акции" },
   { href: "/#contacts", label: "Контакты" },
 ] as const;
@@ -53,6 +54,7 @@ export const FOOTER_LINKS = [
   { href: "/delivery/", label: "Курьеры Яндекс Доставка" },
   { href: "/license/", label: "Лицензия такси ФГИС" },
   { href: "/osgop/", label: "ОСГОП для такси" },
+  { href: "/faq/", label: "Частые вопросы (FAQ)" },
   { href: "/#max-channel", label: "Акции и бонусы в MAX" },
   { href: "/#contacts", label: "Контакты" },
 ] as const;
