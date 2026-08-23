@@ -11,6 +11,9 @@ echo "==> Preparing static export..."
 rm -rf out .next "$API_BACKUP"
 mkdir -p .static-build-backup
 
+echo "==> Generating llms.txt / RSS / IndexNow key..."
+node scripts/write-public-ai-files.mjs
+
 if [ -d "$API_DIR" ]; then
   mv "$API_DIR" "$API_BACKUP"
 fi

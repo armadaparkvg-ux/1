@@ -31,6 +31,18 @@ DirectoryIndex index.html
   Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
+# Карта для ИИ-агентов и RSS — без долгого кеша, чтобы свежие статьи подтягивались
+<IfModule mod_headers.c>
+  <FilesMatch "^(llms|llms-full)\.txt$">
+    Header set Content-Type "text/plain; charset=utf-8"
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+  <Files "feed.xml">
+    Header set Content-Type "application/rss+xml; charset=utf-8"
+    Header set Cache-Control "public, max-age=3600"
+  </Files>
+</IfModule>
+
 # Cache static assets
 <IfModule mod_expires.c>
   ExpiresActive On

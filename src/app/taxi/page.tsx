@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { TaxiLanding } from "@/components/taxi-landing";
 import { JsonLd } from "@/components/json-ld";
+import { PageFaq } from "@/components/page-faq";
+import { RelatedGuides } from "@/components/related-guides";
 import { SITE } from "@/lib/constants";
+import { TAXI_FAQ } from "@/lib/page-faq";
 import {
   breadcrumbJsonLd,
+  faqJsonLd,
   graphJsonLd,
   webpageJsonLd,
 } from "@/lib/schema";
@@ -58,11 +62,18 @@ export default function TaxiPage() {
       { name: "Главная", href: "/" },
       { name: "Такси", href: "/taxi/" },
     ]),
+    faqJsonLd(TAXI_FAQ, `${SITE.url}/taxi/`),
   ]);
   return (
     <>
       <JsonLd data={jsonLd} />
       <TaxiLanding />
+      <PageFaq title="Частые вопросы про подключение к такси" items={TAXI_FAQ} />
+      <RelatedGuides
+        topic="taxi"
+        title="Гайды по подключению и комиссии"
+        excludeHref="/taxi/"
+      />
     </>
   );
 }

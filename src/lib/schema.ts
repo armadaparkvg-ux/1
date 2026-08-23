@@ -1,3 +1,4 @@
+import type { Article } from "@/lib/articles";
 import { SITE } from "@/lib/constants";
 
 export type BreadcrumbItem = {
@@ -57,4 +58,60 @@ export function graphJsonLd(nodes: unknown[]) {
     "@context": "https://schema.org",
     "@graph": nodes,
   };
+}
+
+export function articlePlainText(article: Article) {
+  return [
+    article.description,
+    ...article.paragraphs,
+    ...(article.sections?.flatMap((section) => [
+      section.heading,
+      ...section.paragraphs,
+    ]) ?? []),
+    ...(article.bullets ?? []),
+  ].join(" ");
+}
+
+export function articleJsonLd(article: Article) {
+  const path = `/blog/${article.slug}/`;
+  const url = `${SITE.url}${path}`;
+  const text = articlePlainText(article);
+  const wordCount = text.split(/\s+/).filter(Boolean).length;
+
+  return graphJsonLd([
+    webpageJsonLd({
+      path,
+      name: article.title,
+      description: article.description,
+    }),
+    breadcrumbJsonLd([
+      { name: "Главная", href: "/" },
+      { name: "Статьи", href: "/blog/" },
+      { name: article.title, href: path },
+    ]),
+    {
+      "@type": "Article",
+      "@id": `${url}#article`,
+      headline: article.title,
+      description: article.description,
+      datePublished: article.date,
+      dateModified: article.date,
+      inLanguage: "ru-RU",
+      wordCount,
+      timeRequired: `PT${article.readingMinutes}M`,
+      image: `${SITE.url}/og.jpg`,
+      author: { "@id": `${SITE.url}/#organization` },
+      publisher: { "@id": `${SITE.url}/#organization` },
+      isPartOf: { "@id": `${SITE.url}/#website` },
+      mainEntityOfPage: { "@id": `${url}#webpage` },
+      about: {
+        "@type": "Thing",
+        name: article.title,
+      },
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: [".article-summary", ".article-takeaways", "h1", "h2"],
+      },
+    },
+  ]);
 }

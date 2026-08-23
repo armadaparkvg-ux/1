@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ARTICLES } from "@/lib/articles";
 import { SITE } from "@/lib/constants";
+import {
+  TOPIC_META,
+  articlesByTopic,
+  type ContentTopic,
+} from "@/lib/topics";
 
 export const metadata: Metadata = {
   title: "Статьи: Яндекс Такси и Доставка",
@@ -18,11 +23,15 @@ export const metadata: Metadata = {
   alternates: { canonical: `${SITE.url}/blog/` },
 };
 
-export default function BlogIndexPage() {
-  const articles = [...ARTICLES].sort((a, b) =>
-    a.date < b.date ? 1 : a.date > b.date ? -1 : 0
-  );
+const TOPIC_ORDER: ContentTopic[] = [
+  "taxi",
+  "labor",
+  "delivery",
+  "docs",
+  "park",
+];
 
+export default function BlogIndexPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 pb-8 pt-24 sm:pb-12 sm:pt-28 sm:px-6 lg:px-8">
       <h1 className="font-display text-3xl font-semibold text-foreground sm:text-4xl">
@@ -33,31 +42,73 @@ export default function BlogIndexPage() {
         ФГИС, ОСГОП и работа курьером.
       </p>
 
-      <ul className="mt-10 space-y-4">
-        {articles.map((article) => (
-          <li key={article.slug}>
-            <Link
-              href={`/blog/${article.slug}/`}
-              className="block rounded-2xl border border-border bg-surface/40 p-5 transition-colors hover:border-accent/40 hover:bg-muted/30"
-            >
-              <p className="text-xs text-muted-foreground">
-                {article.date} · {article.readingMinutes} мин чтения
-              </p>
-              <h2 className="mt-2 font-display text-xl font-semibold text-foreground">
-                {article.title}
-              </h2>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {article.description}
-              </p>
-            </Link>
-          </li>
+      <nav className="mt-6 flex flex-wrap gap-2" aria-label="Темы">
+        {TOPIC_ORDER.map((topic) => (
+          <a
+            key={topic}
+            href={`#tema-${topic}`}
+            className="inline-flex rounded-full border border-border px-3 py-1 text-sm text-muted-foreground hover:border-accent/40 hover:text-accent"
+          >
+            {TOPIC_META[topic].title}
+          </a>
         ))}
-      </ul>
+      </nav>
 
-      <p className="mt-10 flex flex-wrap gap-4">
-        <Link href="/blog/" className="text-accent hover:underline">
-          Все статьи →
-        </Link>
+      {TOPIC_ORDER.map((topic) => {
+        const articles = articlesByTopic(topic);
+        if (!articles.length) return null;
+        const meta = TOPIC_META[topic];
+        return (
+          <section
+            key={topic}
+            id={`tema-${topic}`}
+            className="mt-10 scroll-mt-28"
+          >
+            <div className="flex flex-wrap items-end justify-between gap-2">
+              <div>
+                <h2 className="font-display text-2xl font-semibold text-foreground">
+                  {meta.title}
+                </h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {meta.description}
+                </p>
+              </div>
+              <Link
+                href={meta.landing}
+                className="text-sm text-accent hover:underline"
+              >
+                К разделу →
+              </Link>
+            </div>
+            <ul className="mt-5 space-y-3">
+              {articles.map((article) => (
+                <li key={article.slug}>
+                  <Link
+                    href={`/blog/${article.slug}/`}
+                    className="block rounded-2xl border border-border bg-surface/40 p-5 transition-colors hover:border-accent/40 hover:bg-muted/30"
+                  >
+                    <p className="text-xs text-muted-foreground">
+                      {article.date} · {article.readingMinutes} мин чтения
+                    </p>
+                    <h3 className="mt-2 font-display text-xl font-semibold text-foreground">
+                      {article.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      {article.description}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
+
+      <p className="mt-10 text-xs text-muted-foreground">
+        Всего материалов: {ARTICLES.length}
+      </p>
+
+      <p className="mt-6 flex flex-wrap gap-4">
         <Link href="/delivery/" className="text-accent hover:underline">
           Доставка →
         </Link>

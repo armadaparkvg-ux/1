@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, MapPin } from "lucide-react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { JsonLd } from "@/components/json-ld";
+import { RelatedGuides } from "@/components/related-guides";
 import { CITIES } from "@/lib/cities";
 import { SITE } from "@/lib/constants";
 import { breadcrumbJsonLd, graphJsonLd, webpageJsonLd } from "@/lib/schema";
@@ -110,6 +111,11 @@ export default function CitiesIndexPage() {
           </p>
         </div>
       </section>
+      <RelatedGuides
+        topic="park"
+        title="Как подключаемся по России"
+        excludeHref="/goroda/"
+      />
     </>
   );
 }

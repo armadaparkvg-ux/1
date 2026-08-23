@@ -8,7 +8,9 @@
     "build:static": "bash scripts/build-static.sh",
     "start": "next start",
     "lint": "next lint",
-    "zip:hosting": "bash scripts/zip-hosting.sh"
+    "zip:hosting": "bash scripts/zip-hosting.sh",
+    "gen:discoverability": "node scripts/write-public-ai-files.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.16",

@@ -64,6 +64,11 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  alternates: {
+    types: {
+      "application/rss+xml": `${SITE.url}/feed.xml`,
+    },
+  },
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
@@ -81,6 +86,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className="dark">
+      <head>
+        <link rel="describedby" href={`${SITE.url}/llms.txt`} />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Статьи таксопарка Армада"
+          href={`${SITE.url}/feed.xml`}
+        />
+      </head>
       <body
         className={`${manrope.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
       >

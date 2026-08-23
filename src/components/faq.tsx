@@ -2,12 +2,7 @@
 
 import Link from "next/link";
 import { FadeIn, SectionHeading } from "@/components/fade-in";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { FaqList } from "@/components/faq-list";
 import { Button } from "@/components/ui/button";
 import { FAQ_ITEMS } from "@/lib/seo";
 
@@ -40,14 +35,7 @@ export function Faq({ previewCount }: FaqProps) {
         </FadeIn>
 
         <FadeIn className="mt-8 sm:mt-10">
-          <Accordion type="single" collapsible className="w-full">
-            {items.map((item, i) => (
-              <AccordionItem key={item.q} value={`item-${i}`}>
-                <AccordionTrigger>{item.q}</AccordionTrigger>
-                <AccordionContent>{item.a}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <FaqList items={items} />
         </FadeIn>
 
         {isPreview ? (

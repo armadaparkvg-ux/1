@@ -64,6 +64,11 @@ export function Footer() {
                   Полезные статьи
                 </Link>
               </li>
+              <li>
+                <a href="/feed.xml" className="hover:text-accent transition-colors">
+                  RSS-лента статей
+                </a>
+              </li>
             </ul>
           </div>
 

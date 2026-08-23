@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { CourierLanding } from "@/components/courier-landing";
 import { JsonLd } from "@/components/json-ld";
+import { PageFaq } from "@/components/page-faq";
 import { SITE } from "@/lib/constants";
+import { DELIVERY_FAQ } from "@/lib/page-faq";
 import {
   breadcrumbJsonLd,
+  faqJsonLd,
   graphJsonLd,
   webpageJsonLd,
 } from "@/lib/schema";
@@ -65,11 +68,16 @@ export default function DeliveryPage() {
       { name: "Главная", href: "/" },
       { name: "Доставка", href: "/delivery/" },
     ]),
+    faqJsonLd(DELIVERY_FAQ, `${SITE.url}/delivery/`),
   ]);
   return (
     <>
       <JsonLd data={jsonLd} />
       <CourierLanding />
+      <PageFaq
+        title="Частые вопросы про курьера Яндекс Доставки"
+        items={DELIVERY_FAQ}
+      />
     </>
   );
 }

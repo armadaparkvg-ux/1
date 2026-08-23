@@ -237,6 +237,16 @@ export function buildJsonLd() {
           addressCountry: "RU",
         },
         sameAs: [CONTACTS.telegram, CONTACTS.max],
+        knowsAbout: [
+          "Яндекс Такси",
+          "Яндекс Доставка",
+          "Парковый самозанятый",
+          "Парковый ИП",
+          "Трудовой договор для такси",
+          "Лицензия такси ФГИС",
+          "ОСГОП",
+          "Реестр перевозчиков",
+        ],
         contactPoint: {
           "@type": "ContactPoint",
           telephone: CONTACTS.phone,

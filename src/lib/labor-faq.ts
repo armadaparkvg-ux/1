@@ -109,6 +109,7 @@ export function buildLaborJsonLd(siteUrl: string) {
       },
       {
         "@type": "FAQPage",
+        "@id": `${siteUrl}/trudovoj-dogovor/#faq`,
         mainEntity: LABOR_FAQ.map((item) => ({
           "@type": "Question",
           name: item.q,

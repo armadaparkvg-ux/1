@@ -20,12 +20,7 @@ import { LaborContract } from "@/components/labor-contract";
 import { LaborLimitHeroBanner } from "@/components/labor-limit-hero-banner";
 import { ContactButtons } from "@/components/contact-buttons";
 import { Button } from "@/components/ui/button";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { FaqList } from "@/components/faq-list";
 import { CONTACTS } from "@/lib/constants";
 import { fleetGoPath } from "@/lib/fleet-forms";
 import { LABOR_FAQ } from "@/lib/labor-faq";
@@ -361,14 +356,7 @@ export function LaborLanding() {
             />
           </FadeIn>
           <FadeIn delay={0.1} className="mt-10">
-            <Accordion type="single" collapsible className="w-full">
-              {LABOR_FAQ.map((item, i) => (
-                <AccordionItem key={item.q} value={`labor-faq-${i}`}>
-                  <AccordionTrigger>{item.q}</AccordionTrigger>
-                  <AccordionContent>{item.a}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <FaqList items={LABOR_FAQ} />
           </FadeIn>
         </div>
       </section>

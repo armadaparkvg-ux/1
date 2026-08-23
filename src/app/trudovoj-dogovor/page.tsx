@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LaborLanding } from "@/components/labor-landing";
+import { RelatedGuides } from "@/components/related-guides";
 import { SITE } from "@/lib/constants";
 import { buildLaborJsonLd } from "@/lib/labor-faq";
 
@@ -45,6 +46,11 @@ export default function TrudovojDogovorPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <LaborLanding />
+      <RelatedGuides
+        topic="labor"
+        title="Гайды про трудовой договор и 2‑НДФЛ"
+        excludeHref="/trudovoj-dogovor/"
+      />
     </>
   );
 }

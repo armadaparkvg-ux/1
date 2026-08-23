@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AboutParkLanding } from "@/components/about-park-landing";
 import { JsonLd } from "@/components/json-ld";
+import { RelatedGuides } from "@/components/related-guides";
 import { SITE } from "@/lib/constants";
 import {
   breadcrumbJsonLd,
@@ -38,6 +39,11 @@ export default function AboutParkPage() {
     <>
       <JsonLd data={jsonLd} />
       <AboutParkLanding />
+      <RelatedGuides
+        topic="park"
+        title="Как выбрать парк и подключиться удалённо"
+        excludeHref="/o-parke/"
+      />
     </>
   );
 }

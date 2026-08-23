@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { ARTICLES } from "@/lib/articles";
 import { CITIES } from "@/lib/cities";
 import { SITE } from "@/lib/constants";
+import { latestArticleDate } from "@/lib/topics";
 
 /** Trailing slashes match static export (`trailingSlash: true`). */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -11,17 +12,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
+  const contentUpdated = new Date(latestArticleDate());
+  const today = new Date("2026-08-23");
 
   return [
     {
       url: `${SITE.url}/`,
-      lastModified: new Date("2026-07-25"),
+      lastModified: today,
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${SITE.url}/blog/`,
-      lastModified: new Date("2026-07-25"),
+      lastModified: contentUpdated,
       changeFrequency: "weekly",
       priority: 0.8,
     },
@@ -33,31 +36,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE.url}/taxi/`,
-      lastModified: new Date("2026-07-25"),
+      lastModified: today,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${SITE.url}/trudovoj-dogovor/`,
-      lastModified: new Date("2026-07-25"),
+      lastModified: today,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${SITE.url}/delivery/`,
-      lastModified: new Date("2026-07-25"),
+      lastModified: today,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${SITE.url}/license/`,
-      lastModified: new Date("2026-07-22"),
+      lastModified: today,
       changeFrequency: "monthly",
       priority: 0.75,
     },
     {
       url: `${SITE.url}/osgop/`,
-      lastModified: new Date("2026-07-22"),
+      lastModified: today,
       changeFrequency: "monthly",
       priority: 0.75,
     },
