@@ -21,7 +21,7 @@ const MAIN = [
     icon: Briefcase,
     eyebrow: "Главное направление",
     title: "Трудовой договор",
-    text: "Официальное оформление без СМЗ и ИП. Тарифы 3%+300, 5%+100 и 6% — больничные, отпуск и стаж.",
+    text: "Официальное оформление без СМЗ и ИП. Тарифы 3%+300, 5%+100 и 6% — по ТК РФ с парком.",
     tone: "emerald" as const,
     goal: "click_labor_apply" as const,
     featured: true,
