@@ -78,6 +78,12 @@ cp -f "$ZIP_PATH" "${ARTIFACTS}/${ZIP_NAME}"
 cp -f "$ZIP_PATH" "${OUT_DIR}/park-armada-hosting-v61.zip"
 cp -f "$ZIP_PATH" "${ARTIFACTS}/park-armada-hosting-v61.zip"
 
+# Публичная ссылка на скачивание: GitHub raw из папки hosting-upload/
+mkdir -p "${ROOT}/hosting-upload"
+cp -f "$ZIP_PATH" "${ROOT}/hosting-upload/park-armada-hosting-v61.zip"
+cp -f "$ZIP_PATH" "${ROOT}/hosting-upload/park-armada-hosting-latest.zip"
+echo "Download: https://github.com/armadaparkvg-ux/1/raw/cursor/armada-landing-1d2d/hosting-upload/park-armada-hosting-v61.zip"
+
 ls -lh "$ZIP_PATH" "$SRC_PATH" "${OUT_DIR}/park-armada-hosting-v61.zip"
 echo "Artifacts:"
 ls -lh "${ARTIFACTS}/${ZIP_NAME}" "${ARTIFACTS}/${SRC_ZIP}" "${ARTIFACTS}/park-armada-hosting-v61.zip"
