@@ -1,5 +1,5 @@
 ﻿кампания,utm_campaign,было,стало_URL_полная,что_сделать
-П4_Поиск_Трудовой,p4_trudovoj,/taxi/#labor-contract или /#labor-contract,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword},ГЛАВНОЕ направление — только эта посадка
+П4_Поиск_Трудовой,p4_trudovoj,/taxi/#labor-contract или /#labor-contract,https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=p4_trudovoj&utm_content={ad_id}&utm_term={keyword},ГЛАВНОЕ направление — только эта посадка; FAQ сайтлинк #faq
 П2_Поиск_Самозанятый,p2_samozanyatyj,/#tariffs /#tariff-self,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p2_samozanyatyj&utm_content={ad_id}&utm_term={keyword}#formats,второе направление
 П1_Поиск_Подключение,p1_podklyuchenie,/#tariffs,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=p1_podklyuchenie&utm_content={ad_id}&utm_term={keyword}#formats,общее подключение такси не трудовой не курьер
 П10_Поиск_Доставка,delivery_courier,(не было или главная),https://park-armada.ru/delivery/?utm_source=yandex&utm_medium=cpc&utm_campaign=delivery_courier&utm_content={ad_id}&utm_term={keyword}#courier-tariffs,третье направление отдельная кампания
@@ -9,7 +9,8 @@
 П6_Поиск_Бренд,p6_brand,/,https://park-armada.ru/?utm_source=yandex&utm_medium=cpc&utm_campaign=p6_brand&utm_content={ad_id}&utm_term={keyword},только бренд
 П7_Поиск_Квиз,p7_quiz,/#quiz,ОСТАНОВИТЬ — вести остаток в П1 /taxi/#formats,квиза на главной нет
 П8_Поиск_Лимит_НПД,p8_limit_npd,/blog/limit-npd-2-4-mln/,https://park-armada.ru/blog/limit-npd-2-4-mln/?utm_source=yandex&utm_medium=cpc&utm_campaign=p8_limit_npd&utm_content={ad_id}&utm_term={keyword},статья + сайтлинк трудовой
-П9_инфо_статьи,p9_*,/blog/,См. TZ §4 — один URL статьи на группу,не лить все ключи на /blog/
+П9_инфо_статьи,p9_*,/blog/,См. TZ §4 — один URL статьи на группу (22 статьи),не лить все ключи на /blog/; хаб #tema-* только сайтлинк
 Р1_РСЯ,r1_rsya,/#quiz,Разные посадки: трудовой / taxi / delivery,не одна главная
-Р2_Ретаргет,r2_retarget,/#apply,Сегменты по URL посадок,условия аудиторий обновить
+Р2_Ретаргет,r2_retarget,/#apply,Сегменты по URL посадок и /blog/#tema-*,условия аудиторий обновить
 ГЕО_города,geo_*,/,https://park-armada.ru/goroda/{slug}/,только при отдельном бюджете
+служебное_запрет,—,/go/fleet/ /llms.txt /feed.xml /docs/,не использовать в объявлениях,hosting-v61 служебные файлы

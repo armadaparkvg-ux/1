@@ -44,20 +44,26 @@ cp -f "$SRC_PATH" "${ARTIFACTS}/${SRC_ZIP}"
 cat > out/КАК_ЗАГРУЗИТЬ.txt <<'EOF'
 Загрузка сайта таксопарка «Армада» на хостинг
 ==============================================
+Релиз: hosting-v61 (23.08.2026)
 
-1. Распакуйте этот ZIP (или загрузите файлы как есть).
-2. В файловом менеджере хостинга откройте папку сайта:
-   - обычно public_html или www
+1. Распакуйте этот ZIP.
+2. В файловом менеджере Reg.ru (server54) откройте КОРЕНЬ сайта:
+   /www/park-armada.ru/
+   (не public_html, если в панели указан именно этот путь).
 3. Загрузите ВСЕ файлы из архива В КОРЕНЬ этой папки
-   (чтобы index.html оказался в public_html/index.html).
-4. Домен park-armada.ru должен указывать A-записью на IP хостинга.
-5. Включите SSL (Let's Encrypt) в панели Reg.ru.
+   (чтобы index.html оказался в /www/park-armada.ru/index.html).
+4. Домен park-armada.ru — A-запись на IP этого сервера.
+5. SSL уже через панель Reg.ru / nginx — не включать принудительный HTTPS в .htaccess.
 6. Проверьте:
    https://park-armada.ru/
+   https://park-armada.ru/trudovoj-dogovor/
+   https://park-armada.ru/llms.txt
+   https://park-armada.ru/feed.xml
+   https://park-armada.ru/armadaidx7Kq2Nm9Px4Rt8Wv.txt
    https://park-armada.ru/yandex_618ea4dc33112d20.html
 
-Форма заявки на статическом хостинге открывает Telegram
-с готовым текстом заявки (API на shared-хостинге недоступен).
+Заявка на статике открывает MAX/Telegram с готовым текстом.
+После заливки из репозитория можно отправить IndexNow: npm run indexnow
 EOF
 
 # Rebuild zip with instructions
@@ -69,8 +75,10 @@ rm -f "$ZIP_PATH" "${ARTIFACTS}/${ZIP_NAME}"
     -x "**/.DS_Store"
 )
 cp -f "$ZIP_PATH" "${ARTIFACTS}/${ZIP_NAME}"
+cp -f "$ZIP_PATH" "${OUT_DIR}/park-armada-hosting-v61.zip"
+cp -f "$ZIP_PATH" "${ARTIFACTS}/park-armada-hosting-v61.zip"
 
-ls -lh "$ZIP_PATH" "$SRC_PATH"
+ls -lh "$ZIP_PATH" "$SRC_PATH" "${OUT_DIR}/park-armada-hosting-v61.zip"
 echo "Artifacts:"
-ls -lh "${ARTIFACTS}/${ZIP_NAME}" "${ARTIFACTS}/${SRC_ZIP}"
+ls -lh "${ARTIFACTS}/${ZIP_NAME}" "${ARTIFACTS}/${SRC_ZIP}" "${ARTIFACTS}/park-armada-hosting-v61.zip"
 echo "OK: ${ZIP_PATH}"

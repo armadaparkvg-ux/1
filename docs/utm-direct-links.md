@@ -1,9 +1,9 @@
-# UTM для Яндекс Директ (сайт 2026-08-23)
+# UTM для Яндекс Директ (сайт hosting-v61, 2026-08-23)
 
 Шаблон:
 `?utm_source=yandex&utm_medium=cpc&utm_campaign=<код>&utm_content={ad_id}&utm_term={keyword}`
 
-Полное ТЗ: `TZ-CLAUDE-CODE-YANDEX-DIRECT.md`
+Якорь **после** query. Полное ТЗ: `TZ-CLAUDE-CODE-YANDEX-DIRECT.md` v2.0
 
 | Кампания | utm_campaign | Посадка |
 |----------|--------------|---------|
@@ -16,9 +16,9 @@
 | ОСГОП | `p5_osgop` | `/osgop/` |
 | Бренд | `p6_brand` | `/` |
 | Лимит НПД | `p8_limit_npd` | `/blog/limit-npd-2-4-mln/` |
-| Статьи (по одной) | `p9_*` | конкретный slug |
+| Статьи (по одной) | `p9_*` | конкретный slug, см. CSV |
 | РСЯ | `r1_rsya` | по направлению |
 | Ретаргет | `r2_retarget` | по URL визита |
 | Города | `geo_<slug>` | `/goroda/<slug>/` |
 
-Не использовать: `/#tariffs` `/#quiz` `/#apply` `/taxi/#labor-contract`.
+Не использовать: `/#tariffs` `/#quiz` `/#apply` `/taxi/#labor-contract` `/go/fleet/` `/llms.txt` `/feed.xml`.
