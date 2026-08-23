@@ -11,4 +11,8 @@
 П9_Поиск_Статьи,p9_blog,https://park-armada.ru/blog/?utm_source=yandex&utm_medium=cpc&utm_campaign=p9_blog&utm_content={ad_id}&utm_term={keyword}
 Р1_РСЯ,r1_rsya,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=r1_rsya&utm_content={ad_id}&utm_term={keyword}
 Р2_Ретаргет,r2_retarget,https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=r2_retarget&utm_content={ad_id}&utm_term={keyword}#formats
-Доставка_Курьер,delivery_courier,https://park-armada.ru/delivery/?utm_source=yandex&utm_medium=cpc&utm_campaign=delivery_courier&utm_content={ad_id}&utm_term={keyword}#courier-tariffs
+П10_Поиск_Доставка,delivery_courier,https://park-armada.ru/delivery/?utm_source=yandex&utm_medium=cpc&utm_campaign=delivery_courier&utm_content={ad_id}&utm_term={keyword}#courier-tariffs
+П9_Смена_парка,p9_smena_parka,https://park-armada.ru/blog/smenit-taksopark-yandex/?utm_source=yandex&utm_medium=cpc&utm_campaign=p9_smena_parka&utm_content={ad_id}&utm_term={keyword}
+П9_Занятость,p9_zanyatost,https://park-armada.ru/blog/tip-zanyatosti-ne-podtverzhden/?utm_source=yandex&utm_medium=cpc&utm_campaign=p9_zanyatost&utm_content={ad_id}&utm_term={keyword}
+FAQ,sitelink_faq,https://park-armada.ru/faq/?utm_source=yandex&utm_medium=cpc&utm_campaign=sitelink_faq&utm_content={ad_id}&utm_term={keyword}
+Города,sitelink_cities,https://park-armada.ru/goroda/?utm_source=yandex&utm_medium=cpc&utm_campaign=sitelink_cities&utm_content={ad_id}&utm_term={keyword}
