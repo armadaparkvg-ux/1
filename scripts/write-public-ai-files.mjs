@@ -169,6 +169,7 @@ function buildRss(articles) {
     </item>`;
     })
     .join("\n");
+  const lastBuild = new Date(`${articles[0].date}T09:00:00+03:00`).toUTCString();
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
@@ -177,7 +178,7 @@ function buildRss(articles) {
     <link>${SITE}/blog/</link>
     <description>Гайды по подключению к Яндекс Такси и Доставке: парк, комиссия, трудовой договор, ФГИС, курьеры.</description>
     <language>ru</language>
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <lastBuildDate>${lastBuild}</lastBuildDate>
 ${items}
   </channel>
 </rss>
