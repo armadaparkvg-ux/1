@@ -37,7 +37,6 @@ export default function HomePage() {
       />
       <LegacyHashRedirect />
       <Hero />
-      <div className="divider-glow mx-auto max-w-7xl" aria-hidden />
       <HomeDestinations />
       <MaxChannel />
       <Contacts />
