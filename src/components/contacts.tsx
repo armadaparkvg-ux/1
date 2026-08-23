@@ -10,7 +10,7 @@ export function Contacts() {
   return (
     <section
       id="contacts"
-      className="section-anchor relative py-20 sm:py-24"
+      className="section-anchor relative py-12 sm:py-20 lg:py-24"
       aria-labelledby="contacts-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -23,7 +23,7 @@ export function Contacts() {
           />
         </FadeIn>
 
-        <FadeIn delay={0.1} className="mt-12">
+        <FadeIn delay={0.1} className="mt-8 sm:mt-12">
           <div className="glass mx-auto max-w-3xl rounded-2xl p-6 sm:p-10">
             <div className="flex flex-col gap-8">
               <div className="flex items-start gap-4">

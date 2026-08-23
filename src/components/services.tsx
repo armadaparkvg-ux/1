@@ -59,7 +59,7 @@ export function Services() {
   return (
     <section
       id="services"
-      className="section-anchor relative py-20 sm:py-24"
+      className="section-anchor relative py-12 sm:py-20 lg:py-24"
       aria-labelledby="services-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

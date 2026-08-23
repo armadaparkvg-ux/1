@@ -41,7 +41,7 @@ export function TariffCompare() {
   return (
     <section
       id="compare"
-      className="section-anchor relative py-16 sm:py-20"
+      className="section-anchor relative py-10 sm:py-16 lg:py-20"
       aria-labelledby="compare-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

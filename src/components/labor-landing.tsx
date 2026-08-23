@@ -113,7 +113,7 @@ const BENEFITS = [
 
 export function LaborLanding() {
   return (
-    <div className="pb-20">
+    <div>
       <section
         data-hero
         className="relative overflow-hidden border-b border-border bg-[#07090d] pt-[72px]"
@@ -138,7 +138,7 @@ export function LaborLanding() {
           </div>
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-4 sm:px-6 sm:pb-16 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-3 sm:px-6 sm:pb-16 lg:px-8">
           <p className="text-sm font-medium uppercase tracking-wide text-emerald-glow">
             Таксопарк «Армада» · трудовой договор
           </p>
@@ -176,7 +176,7 @@ export function LaborLanding() {
         </div>
       </section>
 
-      <section className="border-b border-border py-14 sm:py-16" aria-label="Преимущества">
+      <section className="border-b border-border py-10 sm:py-14 lg:py-16" aria-label="Преимущества">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
             {BENEFITS.map((item) => (
@@ -197,7 +197,7 @@ export function LaborLanding() {
 
       <section
         id="for-whom"
-        className="section-anchor py-20 sm:py-24"
+        className="section-anchor py-12 sm:py-20 lg:py-24"
         aria-labelledby="labor-audience-heading"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -209,7 +209,7 @@ export function LaborLanding() {
               description="Если самозанятость или ИП больше не вариант — подключаем официально через парк."
             />
           </FadeIn>
-          <Stagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
+          <Stagger className="mt-8 sm:mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
             {AUDIENCE.map((item) => {
               const Icon = item.icon;
               return (
@@ -250,7 +250,7 @@ export function LaborLanding() {
 
       <section
         id="documents"
-        className="section-anchor border-t border-border py-20 sm:py-24"
+        className="section-anchor border-t border-border py-12 sm:py-20 lg:py-24"
         aria-labelledby="labor-docs-heading"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -262,7 +262,7 @@ export function LaborLanding() {
               description="Отправляете онлайн. Если всё в порядке — оформление запускаем сразу."
             />
           </FadeIn>
-          <Stagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+          <Stagger className="mt-8 sm:mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
             {DOCS.map((doc) => {
               const Icon = doc.icon;
               return (
@@ -291,7 +291,7 @@ export function LaborLanding() {
 
       <section
         id="extras"
-        className="section-anchor py-20 sm:py-24"
+        className="section-anchor py-12 sm:py-20 lg:py-24"
         aria-labelledby="labor-extras-heading"
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -303,7 +303,7 @@ export function LaborLanding() {
               description="Подключение по трудовому договору отдельно; документы на авто оформляем по запросу."
             />
           </FadeIn>
-          <FadeIn delay={0.08} className="mt-12 grid gap-5 sm:grid-cols-2">
+          <FadeIn delay={0.08} className="mt-8 sm:mt-12 grid gap-5 sm:grid-cols-2">
             <Link
               href="/license/"
               className="group rounded-2xl border border-border/80 bg-[#0b111c]/40 p-6 transition-colors hover:border-accent/35"
@@ -348,7 +348,7 @@ export function LaborLanding() {
 
       <section
         id="faq"
-        className="section-anchor border-t border-border py-20 sm:py-24"
+        className="section-anchor border-t border-border py-12 sm:py-20 lg:py-24"
         aria-labelledby="labor-faq-heading"
       >
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -373,7 +373,7 @@ export function LaborLanding() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20" aria-labelledby="labor-final-cta">
+      <section className="py-10 sm:py-16 lg:py-20" aria-labelledby="labor-final-cta">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <FadeIn>
             <h2

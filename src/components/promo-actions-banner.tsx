@@ -35,7 +35,7 @@ export function PromoActionsBanner({ className = "" }: { className?: string }) {
         height={1024}
         loading="lazy"
         decoding="async"
-        className="mx-auto h-auto w-full max-w-full rounded-2xl object-contain shadow-[0_24px_60px_-28px_rgba(0,0,0,0.85)]"
+        className="mx-auto h-auto w-full max-w-full max-h-[min(92vw,360px)] rounded-2xl object-contain shadow-[0_24px_60px_-28px_rgba(0,0,0,0.85)] sm:max-h-[420px]"
       />
     </picture>
   );

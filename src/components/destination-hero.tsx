@@ -38,7 +38,7 @@ export function DestinationHero({
   return (
     <section
       data-hero
-      className="relative isolate overflow-hidden border-b border-border bg-[#080b11] pt-24 sm:pt-28"
+      className="relative isolate overflow-hidden border-b border-border bg-[#080b11] pt-[72px] sm:pt-28"
     >
       <Image
         src={image}
@@ -51,7 +51,7 @@ export function DestinationHero({
       <div className="absolute inset-0 bg-gradient-to-r from-[#07090d] via-[#07090d]/88 to-[#07090d]/30" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#07090d] via-transparent to-[#07090d]/35" />
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-14 sm:px-6 sm:pb-16 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 pb-10 sm:px-6 sm:pb-16 lg:px-8">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -59,7 +59,7 @@ export function DestinationHero({
           <ArrowLeft className="h-4 w-4" aria-hidden />
           На главную
         </Link>
-        <div className="mt-10 max-w-3xl sm:mt-12">
+        <div className="mt-6 max-w-3xl sm:mt-12">
           <p
             className={cn(
               "inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] backdrop-blur",
@@ -112,7 +112,7 @@ export function DestinationHero({
               </Button>
             ) : null}
           </div>
-          {children ? <div className="mt-8 sm:mt-10">{children}</div> : null}
+          {children ? <div className="mt-6 sm:mt-10">{children}</div> : null}
         </div>
       </div>
     </section>

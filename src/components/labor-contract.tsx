@@ -65,7 +65,7 @@ export function LaborContract({
   return (
     <section
       id="labor-contract"
-      className="section-anchor relative py-20 sm:py-24"
+      className="section-anchor relative py-12 sm:py-20 lg:py-24"
       aria-labelledby="labor-heading"
     >
       <div

@@ -8,7 +8,7 @@ export function FunnyVideo() {
   return (
     <section
       id="video"
-      className="section-anchor relative py-16 sm:py-20"
+      className="section-anchor relative py-10 sm:py-16 lg:py-20"
       aria-labelledby="video-heading"
     >
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">

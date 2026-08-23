@@ -46,7 +46,7 @@ export function DocumentServiceLanding({ type }: { type: ServiceType }) {
   const Icon = content.icon;
 
   return (
-    <div className="pb-20">
+    <div>
       <DestinationHero
         eyebrow={content.eyebrow}
         title={content.title}
@@ -67,7 +67,7 @@ export function DocumentServiceLanding({ type }: { type: ServiceType }) {
         </div>
       </DestinationHero>
 
-      <section className="py-20 sm:py-24">
+      <section className="py-12 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <SectionHeading
@@ -76,7 +76,7 @@ export function DocumentServiceLanding({ type }: { type: ServiceType }) {
               description="Соберите документы, затем оставьте заявку через поддержку парка — менеджер уточнит детали."
             />
           </FadeIn>
-          <FadeIn delay={0.08} className="mt-12">
+          <FadeIn delay={0.08} className="mt-8 sm:mt-12">
             <div className="premium-card grid gap-8 rounded-3xl p-6 sm:grid-cols-[auto,1fr] sm:p-10">
               <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-accent/25 bg-accent/10 text-accent">
                 <Icon className="h-7 w-7" aria-hidden />
@@ -110,7 +110,7 @@ export function DocumentServiceLanding({ type }: { type: ServiceType }) {
 
       <section
         id="apply-service"
-        className="section-anchor premium-grid relative overflow-hidden py-20 sm:py-24"
+        className="section-anchor premium-grid relative overflow-hidden py-12 sm:py-20 lg:py-24"
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <FadeIn>

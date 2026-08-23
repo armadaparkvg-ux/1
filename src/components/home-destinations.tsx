@@ -111,7 +111,7 @@ export function HomeDestinations() {
                     href={item.href}
                     onClick={() => trackGoal(item.goal)}
                     className={cn(
-                      "group relative flex min-h-[210px] flex-col overflow-hidden rounded-[1.35rem] border border-white/5 p-5 transition-all duration-500 sm:min-h-[240px] sm:p-6",
+                      "group relative flex min-h-0 flex-col overflow-hidden rounded-[1.35rem] border border-white/5 p-5 transition-all duration-500 sm:min-h-[240px] sm:p-6",
                       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                       item.featured
                         ? "ring-1 ring-emerald-glow/25 sm:min-h-[260px]"
@@ -159,7 +159,7 @@ export function HomeDestinations() {
 
                       <p
                         className={cn(
-                          "mt-8 text-[11px] font-semibold uppercase tracking-[0.16em]",
+                          "mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] sm:mt-8",
                           isEmerald ? "text-emerald-glow" : "text-accent"
                         )}
                       >
@@ -173,7 +173,7 @@ export function HomeDestinations() {
                       </p>
                       <span
                         className={cn(
-                          "mt-auto pt-6 text-sm font-semibold",
+                          "mt-5 pt-0 text-sm font-semibold sm:mt-auto sm:pt-6",
                           isEmerald ? "text-emerald-glow" : "text-accent"
                         )}
                       >

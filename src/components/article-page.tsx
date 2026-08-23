@@ -5,7 +5,7 @@ import { CONTACTS } from "@/lib/constants";
 
 export function ArticlePage({ article }: { article: Article }) {
   return (
-    <article className="mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
+    <article className="mx-auto max-w-3xl px-4 pb-8 pt-24 sm:pb-12 sm:pt-28 sm:px-6 lg:px-8">
       <p className="text-sm text-muted-foreground">
         <Link href="/blog/" className="text-accent hover:underline">
           Статьи

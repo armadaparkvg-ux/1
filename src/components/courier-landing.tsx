@@ -95,7 +95,7 @@ export function CourierLanding() {
   const { openRegister } = useRegisterChooser();
 
   return (
-    <div className="pb-20">
+    <div>
       <section
         data-hero
         className="relative isolate overflow-hidden border-b border-border bg-[#080b11] pt-[72px]"
@@ -124,7 +124,7 @@ export function CourierLanding() {
           </div>
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-2 sm:px-6 sm:pb-16 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-2 sm:px-6 sm:pb-16 lg:px-8">
           <p className="text-sm font-medium uppercase tracking-wide text-emerald-glow">
             Яндекс Доставка · парк «Армада»
           </p>
@@ -166,7 +166,7 @@ export function CourierLanding() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20" aria-labelledby="courier-benefits">
+      <section className="py-10 sm:py-16 lg:py-20" aria-labelledby="courier-benefits">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <SectionHeading
@@ -177,7 +177,7 @@ export function CourierLanding() {
             />
           </FadeIn>
           <Stagger
-            className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+            className="mt-8 grid gap-6 sm:mt-10 sm:grid-cols-2 lg:grid-cols-4"
             stagger={0.08}
           >
             {COURIER_BENEFITS.map((item) => (
@@ -198,7 +198,7 @@ export function CourierLanding() {
 
       <section
         id="courier-steps"
-        className="section-anchor py-16 sm:py-20"
+        className="section-anchor py-10 sm:py-16 lg:py-20"
         aria-labelledby="courier-steps-heading"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -210,7 +210,7 @@ export function CourierLanding() {
               description="Сначала поймите путь, затем выберите тариф и пройдите авторегистрацию."
             />
           </FadeIn>
-          <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-8 grid sm:mt-10 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {COURIER_STEPS.map((step, i) => (
               <li key={step.title} className="premium-card rounded-2xl p-5">
                 <p className="font-display text-3xl font-bold text-accent/80">
@@ -233,7 +233,7 @@ export function CourierLanding() {
 
       <section
         id="courier-tariffs"
-        className="section-anchor premium-grid relative overflow-hidden py-16 sm:py-20"
+        className="section-anchor premium-grid relative overflow-hidden py-10 sm:py-16 lg:py-20"
         aria-labelledby="courier-tariffs-heading"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -247,7 +247,7 @@ export function CourierLanding() {
           </FadeIn>
 
           <Stagger
-            className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4"
+            className="mt-8 grid gap-6 sm:mt-10 sm:grid-cols-2 xl:grid-cols-4"
             stagger={0.1}
           >
             {COURIER_TARIFFS.map((tariff) => (
@@ -259,7 +259,7 @@ export function CourierLanding() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20" aria-labelledby="courier-guides">
+      <section className="py-10 sm:py-16 lg:py-20" aria-labelledby="courier-guides">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <SectionHeading
@@ -269,7 +269,7 @@ export function CourierLanding() {
               description="Короткие гайды под запросы «работа курьером», «сколько зарабатывает курьер» и выбор формата."
             />
           </FadeIn>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-3">
+          <ul className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3">
             {RELATED_ARTICLES.map((item) => (
               <li key={item.href}>
                 <Link
@@ -287,7 +287,7 @@ export function CourierLanding() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20" aria-labelledby="courier-contacts">
+      <section className="py-10 sm:py-16 lg:py-20" aria-labelledby="courier-contacts">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <FadeIn>
             <h2

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function RequisitesPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-3xl px-4 pb-8 pt-24 sm:pb-12 sm:pt-28 sm:px-6 lg:px-8">
       <h1 className="font-display text-3xl font-semibold text-foreground">
         Реквизиты компании
       </h1>

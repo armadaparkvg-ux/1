@@ -35,7 +35,7 @@ export function Directions() {
   return (
     <section
       id="directions"
-      className="section-anchor premium-grid relative overflow-hidden py-20 sm:py-24"
+      className="section-anchor premium-grid relative overflow-hidden py-12 sm:py-20 lg:py-24"
       aria-labelledby="directions-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -52,13 +52,13 @@ export function AboutParkLanding() {
   const registerHref = fleetGoPath("taxi", "smz");
 
   return (
-    <div className="pb-20">
+    <div>
       <section
         data-hero
         className="relative isolate overflow-hidden border-b border-border bg-[#080b11] pt-[72px]"
       >
         <div className="relative mx-auto w-full max-w-[1600px]">
-          <div className="relative aspect-[21/9] min-h-[220px] w-full sm:min-h-[300px]">
+          <div className="relative h-[160px] w-full overflow-hidden sm:h-[260px] lg:h-[320px]">
             <Image
               src="/images/trust-city.webp"
               alt="Ночной город и работа такси"
@@ -78,7 +78,7 @@ export function AboutParkLanding() {
           </div>
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-2 sm:px-6 sm:pb-16 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-2 sm:px-6 sm:pb-16 lg:px-8">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -86,7 +86,7 @@ export function AboutParkLanding() {
             <ArrowLeft className="h-4 w-4" aria-hidden />
             На главную
           </Link>
-          <p className="mt-8 inline-flex rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-accent backdrop-blur">
+          <p className="mt-5 inline-flex rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-accent backdrop-blur sm:mt-8">
             О парке «Армада»
           </p>
           <h1 className="mt-4 max-w-3xl font-display text-3xl font-semibold tracking-tight text-foreground text-balance sm:text-4xl lg:text-5xl">
@@ -121,7 +121,7 @@ export function AboutParkLanding() {
 
       <section
         id="about"
-        className="section-anchor py-16 sm:py-20"
+        className="section-anchor py-10 sm:py-16 lg:py-20"
         aria-labelledby="about-facts-heading"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -138,7 +138,7 @@ export function AboutParkLanding() {
           </FadeIn>
 
           <Stagger
-            className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+            className="mt-8 sm:mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
             stagger={0.08}
           >
             {FACTS.map((fact) => {

@@ -38,7 +38,7 @@ export function DeliveryHeroBanner({ className = "" }: { className?: string }) {
         height={1024}
         decoding="async"
         fetchPriority="high"
-        className="mx-auto h-auto w-full max-w-full object-contain"
+        className="mx-auto h-auto w-full max-w-full max-h-[min(58vw,420px)] object-contain sm:max-h-[min(52vw,560px)] lg:max-h-none"
       />
     </picture>
   );

@@ -35,7 +35,7 @@ export function LaborContractBanner({ className = "" }: { className?: string }) 
         height={1024}
         loading="lazy"
         decoding="async"
-        className="h-auto w-full rounded-xl object-contain"
+        className="mx-auto h-auto w-full max-h-[min(88vw,340px)] rounded-xl object-contain sm:max-h-[400px]"
       />
     </picture>
   );

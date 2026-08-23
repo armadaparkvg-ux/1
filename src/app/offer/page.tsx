@@ -29,7 +29,7 @@ export default function OfferPage() {
   const blocks = paragraphs(OFFER_TEXT);
 
   return (
-    <div className="mx-auto max-w-3xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-3xl px-4 pb-8 pt-24 sm:pb-12 sm:pt-28 sm:px-6 lg:px-8">
       <p className="text-sm font-medium uppercase tracking-wide text-accent">
         Документ · ст. 435, 437 ГК РФ
       </p>

@@ -67,7 +67,7 @@ export function TaxiLanding() {
   const { openRegister } = useRegisterChooser();
 
   return (
-    <div className="pb-20">
+    <div>
       <DestinationHero
         eyebrow="Яндекс Такси · парк «Армада»"
         title="Подключение к Яндекс Такси"
@@ -98,7 +98,7 @@ export function TaxiLanding() {
 
       <section
         id="formats"
-        className="section-anchor premium-grid relative overflow-hidden py-20 sm:py-24"
+        className="section-anchor premium-grid relative overflow-hidden py-12 sm:py-20 lg:py-24"
         aria-labelledby="taxi-formats-heading"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -110,7 +110,7 @@ export function TaxiLanding() {
               description="После выбора формата — авторегистрация онлайн или оформление через поддержку парка в чате."
             />
           </FadeIn>
-          <Stagger className="mt-12 grid gap-5 lg:grid-cols-3" stagger={0.1}>
+          <Stagger className="mt-8 sm:mt-12 grid gap-5 lg:grid-cols-3" stagger={0.1}>
             {FORMATS.map((format) => (
               <StaggerItem key={format.id}>
                 <article
@@ -165,7 +165,7 @@ export function TaxiLanding() {
 
       <section
         id="step-class"
-        className="section-anchor py-20 sm:py-24"
+        className="section-anchor py-12 sm:py-20 lg:py-24"
         aria-labelledby="taxi-class-heading"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -177,7 +177,7 @@ export function TaxiLanding() {
               description="Проверьте автомобиль в официальном классификаторе Яндекса — открывается в новой вкладке."
             />
           </FadeIn>
-          <Stagger className="mt-12 grid gap-5 md:grid-cols-3" stagger={0.08}>
+          <Stagger className="mt-8 sm:mt-12 grid gap-5 md:grid-cols-3" stagger={0.08}>
             {CLASSES.map((item) => {
               const Icon = item.icon;
               return (
@@ -217,7 +217,7 @@ export function TaxiLanding() {
 
       <LaborContract />
 
-      <section className="py-16 sm:py-20" aria-labelledby="taxi-help">
+      <section className="py-10 sm:py-16 lg:py-20" aria-labelledby="taxi-help">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <FadeIn>
             <h2

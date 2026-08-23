@@ -38,7 +38,7 @@ export function LaborLimitHeroBanner({ className = "" }: { className?: string })
         height={1280}
         decoding="async"
         fetchPriority="high"
-        className="mx-auto h-auto w-full max-w-full object-contain"
+        className="mx-auto h-auto w-full max-w-full max-h-[min(88vw,380px)] object-contain sm:max-h-[min(70vw,520px)] lg:max-h-[560px]"
       />
     </picture>
   );

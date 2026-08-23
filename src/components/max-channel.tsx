@@ -10,12 +10,12 @@ export function MaxChannel() {
   return (
     <section
       id="max-channel"
-      className="section-anchor relative py-20 sm:py-24"
+      className="section-anchor relative py-12 sm:py-20 lg:py-24"
       aria-labelledby="max-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
-          <div className="relative overflow-hidden rounded-3xl border border-accent/25 bg-gradient-to-br from-[#1a1408] via-surface to-surface-elevated px-4 py-10 sm:px-10 sm:py-14 lg:px-12">
+          <div className="relative overflow-hidden rounded-3xl border border-accent/25 bg-gradient-to-br from-[#1a1408] via-surface to-surface-elevated px-4 py-8 sm:px-10 sm:py-14 lg:px-12">
             <div
               className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-accent/20 blur-3xl"
               aria-hidden

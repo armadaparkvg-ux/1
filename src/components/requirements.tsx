@@ -18,7 +18,7 @@ export function Requirements() {
   return (
     <section
       id="requirements"
-      className="section-anchor relative py-20 sm:py-24"
+      className="section-anchor relative py-12 sm:py-20 lg:py-24"
       aria-labelledby="requirements-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

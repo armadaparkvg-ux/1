@@ -12,7 +12,7 @@ export function ApplySection() {
   return (
     <section
       id="apply"
-      className="section-anchor relative py-20 sm:py-24"
+      className="section-anchor relative py-12 sm:py-20 lg:py-24"
       aria-labelledby="apply-heading"
     >
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
