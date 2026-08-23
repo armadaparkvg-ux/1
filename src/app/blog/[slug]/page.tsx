@@ -74,7 +74,8 @@ export default function BlogArticlePage({
         <p className="text-sm font-semibold text-foreground">Читайте также</p>
         <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
           {ARTICLES.filter((a) => a.slug !== article.slug)
-            .slice(0, 3)
+            .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+            .slice(0, 5)
             .map((a) => (
               <li key={a.slug}>
                 <a

@@ -36,12 +36,16 @@ const RELATED_ARTICLES = [
     title: "Работа курьером и доходы",
   },
   {
-    href: "/blog/vidy-sotrudnichestva-kurer/",
-    title: "Виды сотрудничества курьера",
-  },
-  {
     href: "/blog/vidy-dostavki-peshiy-avto-gruzovoy/",
     title: "Пеший, авто и грузовой",
+  },
+  {
+    href: "/blog/motokurer-yandex-dostavka/",
+    title: "Мотокурьер: кому подходит",
+  },
+  {
+    href: "/blog/vidy-sotrudnichestva-kurer/",
+    title: "Виды сотрудничества курьера",
   },
 ] as const;
 
@@ -269,7 +273,7 @@ export function CourierLanding() {
               description="Короткие гайды под запросы «работа курьером», «сколько зарабатывает курьер» и выбор формата."
             />
           </FadeIn>
-          <ul className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3">
+          <ul className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 lg:grid-cols-4">
             {RELATED_ARTICLES.map((item) => (
               <li key={item.href}>
                 <Link

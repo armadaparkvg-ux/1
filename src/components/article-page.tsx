@@ -22,9 +22,22 @@ export function ArticlePage({ article }: { article: Article }) {
 
       <div className="mt-8 space-y-4 text-sm leading-relaxed text-foreground/90 sm:text-base">
         {article.paragraphs.map((p) => (
-          <p key={p.slice(0, 40)}>{p}</p>
+          <p key={p.slice(0, 48)}>{p}</p>
         ))}
       </div>
+
+      {article.sections?.map((section) => (
+        <section key={section.heading} className="mt-8">
+          <h2 className="font-display text-xl font-semibold text-foreground sm:text-2xl">
+            {section.heading}
+          </h2>
+          <div className="mt-3 space-y-3 text-sm leading-relaxed text-foreground/90 sm:text-base">
+            {section.paragraphs.map((p) => (
+              <p key={p.slice(0, 48)}>{p}</p>
+            ))}
+          </div>
+        </section>
+      ))}
 
       {article.bullets?.length ? (
         <ul className="mt-6 space-y-2 rounded-2xl border border-border bg-surface/40 p-5 text-sm text-foreground/90">
@@ -37,6 +50,24 @@ export function ArticlePage({ article }: { article: Article }) {
             </li>
           ))}
         </ul>
+      ) : null}
+
+      {article.relatedLinks?.length ? (
+        <nav className="mt-8" aria-label="По теме">
+          <p className="text-sm font-semibold text-foreground">По теме</p>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {article.relatedLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="inline-flex rounded-full border border-border px-3 py-1 text-sm text-muted-foreground hover:border-accent/40 hover:text-accent"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       ) : null}
 
       <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

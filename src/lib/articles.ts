@@ -1,3 +1,10 @@
+import { SEO_ARTICLES } from "@/lib/articles-seo";
+
+export type ArticleSection = {
+  heading: string;
+  paragraphs: string[];
+};
+
 export type Article = {
   slug: string;
   title: string;
@@ -6,11 +13,13 @@ export type Article = {
   readingMinutes: number;
   paragraphs: string[];
   bullets?: string[];
+  sections?: ArticleSection[];
+  relatedLinks?: { href: string; label: string }[];
   ctaLabel?: string;
   ctaHref?: string;
 };
 
-export const ARTICLES: Article[] = [
+export const CORE_ARTICLES: Article[] = [
   {
     slug: "kak-podklyuchitsya-k-yandex-taxi",
     title: "Как подключиться к Яндекс Такси в 2026 году",
@@ -162,6 +171,8 @@ export const ARTICLES: Article[] = [
     ctaHref: "/delivery/#courier-tariffs",
   },
 ];
+
+export const ARTICLES: Article[] = [...CORE_ARTICLES, ...SEO_ARTICLES];
 
 export function getArticle(slug: string): Article | undefined {
   return ARTICLES.find((a) => a.slug === slug);
