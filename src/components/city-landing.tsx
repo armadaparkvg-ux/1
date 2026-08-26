@@ -35,7 +35,7 @@ export function CityLanding({ city }: { city: CityPage }) {
       <div
         hidden
         dangerouslySetInnerHTML={{
-          __html: `<!-- {{УТОЧНИТЬ У ВЛАДЕЛЬЦА: число водителей парка в ${city.name}}} -->\n<!-- {{УТОЧНИТЬ У ВЛАДЕЛЬЦА: диапазон недельного заработка в ${city.name}}} -->`,
+          __html: `<!-- {{УТОЧНИТЬ У ВЛАДЕЛЬЦА: число водителей парка в ${city.prepositional}}} -->\n<!-- {{УТОЧНИТЬ У ВЛАДЕЛЬЦА: диапазон недельного заработка в ${city.prepositional}}} -->`,
         }}
       />
       <section

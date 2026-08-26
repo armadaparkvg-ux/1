@@ -3,10 +3,11 @@
  * Локальная проверка критериев ТЗ SEO (блоки A–D).
  * Запуск после `npm run build:static`: node scripts/check-seo-tz.mjs
  */
-const fs = require("fs");
-const path = require("path");
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = path.join(__dirname, "..");
+const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = path.join(ROOT, "out");
 
 function walkHtml(dir, acc = []) {
@@ -99,7 +100,7 @@ if (!/"@type":"Article"/.test(articleHtml) && !/"@type": "Article"/.test(article
 }
 
 const cityHtml = fs.readFileSync(path.join(OUT, "goroda/moskva/index.html"), "utf8");
-if (!/УТОЧНИТЬ У ВЛАДЕЛЬЦА: число водителей парка в Москва/.test(cityHtml)) {
+if (!/УТОЧНИТЬ У ВЛАДЕЛЬЦА: число водителей парка/.test(cityHtml)) {
   fail("городская страница без HTML-заглушки C-2");
 }
 if (/"@type":"FAQPage"/.test(cityHtml) || /"@type": "FAQPage"/.test(cityHtml)) {
