@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { JsonLd } from "@/components/json-ld";
 import { RelatedGuides } from "@/components/related-guides";
 import { CITIES } from "@/lib/cities";
+import { SITE } from "@/lib/constants";
 import { breadcrumbJsonLd, graphJsonLd, webpageJsonLd } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo-meta";
 

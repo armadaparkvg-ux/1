@@ -81,7 +81,7 @@ export function getRelatedArticles(slug: string, limit = 4): Article[] {
   const pinnedSlugs = PINNED_RELATED[slug] ?? [];
   const pinned = pinnedSlugs
     .map((item) => ARTICLES.find((article) => article.slug === item))
-    .filter((article): article is Article => Boolean(article) && article.slug !== slug);
+    .filter((article): article is Article => !!article && article.slug !== slug);
   const sameTopic = articlesByTopic(topic).filter(
     (article) =>
       article.slug !== slug && !pinned.some((item) => item.slug === article.slug)

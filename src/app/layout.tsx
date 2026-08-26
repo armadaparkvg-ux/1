@@ -9,7 +9,7 @@ import { YandexVarioqub } from "@/components/yandex-varioqub";
 import { Providers } from "@/components/providers";
 import { JsonLd } from "@/components/json-ld";
 import { SITE } from "@/lib/constants";
-import { organizationJsonLd } from "@/lib/schema";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/schema";
 import { SEO_KEYWORDS } from "@/lib/seo";
 import { DEFAULT_OG_IMAGE } from "@/lib/seo-meta";
 import "./globals.css";
@@ -84,6 +84,7 @@ export default function RootLayout({
     <html lang="ru" className="dark">
       <head>
         <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={websiteJsonLd()} />
         <link rel="describedby" href={`${SITE.url}/llms.txt`} />
         <link
           rel="alternate"

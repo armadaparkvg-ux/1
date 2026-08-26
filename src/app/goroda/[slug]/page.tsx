@@ -32,7 +32,6 @@ export default function CityPage({ params }: { params: { slug: string } }) {
       <RelatedGuides
         topic="taxi"
         title={`Подключение ${city.inCity}: такси, трудовой, доставка`}
-        description="Оформление удалённое — те же форматы, что на федеральных страницах."
       />
     </>
   );

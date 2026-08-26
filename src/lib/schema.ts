@@ -6,6 +6,18 @@ export type BreadcrumbItem = {
   href?: string;
 };
 
+export function websiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE.url}/#website`,
+    url: `${SITE.url}/`,
+    name: SITE.fullName,
+    inLanguage: "ru-RU",
+    publisher: { "@id": `${SITE.url}/#organization` },
+  };
+}
+
 export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",

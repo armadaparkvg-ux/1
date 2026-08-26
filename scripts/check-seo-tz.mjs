@@ -82,6 +82,30 @@ if (/Краснодарский край<\/a>/.test(goroda)) {
   fail("хаб /goroda/: регион всё ещё в анкоре ссылки");
 }
 
+const home = fs.readFileSync(path.join(OUT, "index.html"), "utf8");
+if (!/"@type":"Organization"/.test(home) && !/"@type": "Organization"/.test(home)) {
+  fail("на главной нет Organization JSON-LD");
+}
+
+const articleHtml = fs.readFileSync(
+  path.join(OUT, "blog/kak-podklyuchitsya-k-yandex-taxi/index.html"),
+  "utf8"
+);
+if (!/property="og:type" content="article"/.test(articleHtml)) {
+  fail("статья блога без og:type=article");
+}
+if (!/"@type":"Article"/.test(articleHtml) && !/"@type": "Article"/.test(articleHtml)) {
+  fail("статья блога без Article JSON-LD");
+}
+
+const cityHtml = fs.readFileSync(path.join(OUT, "goroda/moskva/index.html"), "utf8");
+if (!/УТОЧНИТЬ У ВЛАДЕЛЬЦА: число водителей парка в Москва/.test(cityHtml)) {
+  fail("городская страница без HTML-заглушки C-2");
+}
+if (/"@type":"FAQPage"/.test(cityHtml) || /"@type": "FAQPage"/.test(cityHtml)) {
+  fail("городская страница с FAQPage");
+}
+
 console.log("lang=ru:", langOk);
 console.log("titles checked:", pages.length);
 if (!process.exitCode) console.log("OK: критерии A/B локально пройдены");

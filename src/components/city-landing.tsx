@@ -32,8 +32,12 @@ export function CityLanding({ city }: { city: CityPage }) {
   return (
     <>
       <JsonLd data={jsonLd} />
-      {/* {{УТОЧНИТЬ У ВЛАДЕЛЬЦА: число водителей парка в {{Городе}}}} */}
-      {/* {{УТОЧНИТЬ У ВЛАДЕЛЬЦА: диапазон недельного заработка в {{Городе}}}} */}
+      <div
+        hidden
+        dangerouslySetInnerHTML={{
+          __html: `<!-- {{УТОЧНИТЬ У ВЛАДЕЛЬЦА: число водителей парка в ${city.name}}} -->\n<!-- {{УТОЧНИТЬ У ВЛАДЕЛЬЦА: диапазон недельного заработка в ${city.name}}} -->`,
+        }}
+      />
       <section
         data-hero
         className="border-b border-border bg-[#080b11] pt-[72px]"

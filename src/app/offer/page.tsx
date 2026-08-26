@@ -21,13 +21,13 @@ export const metadata: Metadata = pageMetadata({
 
 function tidyOfferPunctuation(text: string): string {
   return text
-    .replace(/^(\d+(?:\.\d+)*)[.,:;]+(?:\s+)?/u, (_, n: string) => `${n}. `)
+    .replace(/^(\d+(?:\.\d+)*)[.,:;]+(?:\s+)?/, (_, n: string) => `${n}. `)
     .replace(/\s+/g, " ")
     .trim();
 }
 
 function isSectionHeading(block: string): { heading: string; rest: string } | null {
-  const match = block.match(/^(\d{1,2})\.\s+(.+)$/u);
+  const match = block.match(/^(\d{1,2})\.\s+(.+)$/);
   if (!match) return null;
   const num = Number(match[1]);
   if (num < 1 || num > 13) return null;
