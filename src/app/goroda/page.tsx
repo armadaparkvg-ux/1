@@ -44,7 +44,7 @@ export default function CitiesIndexPage() {
 
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd id="jsonld-page" data={jsonLd} />
       <div className="border-b border-border bg-[#080b11] pt-[72px]">
         <div className="mx-auto max-w-3xl px-4 pb-10 pt-6 sm:px-6 lg:px-8">
           <Link

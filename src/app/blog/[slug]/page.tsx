@@ -38,7 +38,7 @@ export default function BlogArticlePage({
 
   return (
     <>
-      <JsonLd data={articleJsonLd(article)} />
+      <JsonLd id="jsonld-page" data={articleJsonLd(article)} />
       <ArticlePage article={article} />
     </>
   );

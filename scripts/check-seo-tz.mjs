@@ -26,6 +26,10 @@ function fail(msg) {
   process.exitCode = 1;
 }
 
+function idJsonLd(html, id) {
+  return html.includes(`id="${id}"`) && html.includes("application/ld+json");
+}
+
 if (!fs.existsSync(OUT)) {
   fail("Нет каталога out/. Сначала npm run build:static");
   process.exit(1);
@@ -105,6 +109,24 @@ if (!/УТОЧНИТЬ У ВЛАДЕЛЬЦА: число водителей па
 }
 if (/"@type":"FAQPage"/.test(cityHtml) || /"@type": "FAQPage"/.test(cityHtml)) {
   fail("городская страница с FAQPage");
+}
+
+const faqHtml = fs.readFileSync(path.join(OUT, "faq/index.html"), "utf8");
+const faqH1s = [...faqHtml.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/gi)].map((m) =>
+  m[1].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim()
+);
+const faqH2s = [...faqHtml.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)].map((m) =>
+  m[1].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim()
+);
+if (!faqH1s.length) fail("/faq/: нет H1");
+if (faqH1s[0] && faqH2s[0] && faqH1s[0] === faqH2s[0]) {
+  fail(`/faq/: H1 и H2 совпадают (${faqH1s[0]})`);
+}
+if (!/itemType="https:\/\/schema.org\/BreadcrumbList"/.test(faqHtml)) {
+  fail("/faq/: нет microdata BreadcrumbList");
+}
+if (!idJsonLd(home, "jsonld-organization")) {
+  fail("на главной нет id=jsonld-organization");
 }
 
 console.log("lang=ru:", langOk);

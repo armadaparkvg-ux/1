@@ -9,9 +9,11 @@ import { FAQ_ITEMS } from "@/lib/seo";
 type FaqProps = {
   /** Homepage preview: first N items + link to /faq/ */
   previewCount?: number;
+  /** На /faq/ H1 уже в шапке страницы — не дублировать тем же H2. */
+  hideHeading?: boolean;
 };
 
-export function Faq({ previewCount }: FaqProps) {
+export function Faq({ previewCount, hideHeading = false }: FaqProps) {
   const items =
     typeof previewCount === "number"
       ? FAQ_ITEMS.slice(0, previewCount)
@@ -25,16 +27,18 @@ export function Faq({ previewCount }: FaqProps) {
       aria-labelledby="faq-heading"
     >
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <FadeIn>
-          <SectionHeading
-            id="faq-heading"
-            eyebrow="FAQ"
-            title="Частые вопросы о подключении к Яндекс Такси"
-            description="Ответы про самозанятость, трудовой договор, лицензию ФГИС, ОСГОП, доставку и оформление в таксопарке «Армада»."
-          />
-        </FadeIn>
+        {hideHeading ? null : (
+          <FadeIn>
+            <SectionHeading
+              id="faq-heading"
+              eyebrow="FAQ"
+              title="Частые вопросы о подключении к Яндекс Такси"
+              description="Ответы про самозанятость, трудовой договор, лицензию ФГИС, ОСГОП, доставку и оформление в таксопарке «Армада»."
+            />
+          </FadeIn>
+        )}
 
-        <FadeIn className="mt-8 sm:mt-10">
+        <FadeIn className={hideHeading ? undefined : "mt-8 sm:mt-10"}>
           <FaqList items={items} />
         </FadeIn>
 

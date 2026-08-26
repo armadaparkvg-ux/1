@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LaborLanding } from "@/components/labor-landing";
 import { RelatedGuides } from "@/components/related-guides";
+import { JsonLd } from "@/components/json-ld";
 import { SITE } from "@/lib/constants";
 import { buildLaborJsonLd } from "@/lib/labor-faq";
 import { pageMetadata } from "@/lib/seo-meta";
@@ -38,10 +39,7 @@ export default function TrudovojDogovorPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd id="jsonld-page" data={jsonLd} />
       <LaborLanding />
       <RelatedGuides
         topic="labor"

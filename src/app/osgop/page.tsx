@@ -43,7 +43,7 @@ export default function OsgopPage() {
   ]);
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd id="jsonld-page" data={jsonLd} />
       <DocumentServiceLanding type="osgop" />
       <PageFaq title="Частые вопросы про ОСГОП" items={OSGOP_FAQ} />
       <RelatedGuides

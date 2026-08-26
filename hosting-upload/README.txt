@@ -1,10 +1,10 @@
 Архив для загрузки на хостинг Reg.ru
 ====================================
 
-Актуальный релиз: hosting-v62 (26.08.2026)
+Актуальный релиз: hosting-v63 (26.08.2026)
 
-Скачать (этот файл в репозитории):
-https://github.com/armadaparkvg-ux/1/raw/cursor/armada-landing-1d2d/hosting-upload/park-armada-hosting-v62.zip
+Скачать:
+https://github.com/armadaparkvg-ux/1/raw/cursor/armada-landing-1d2d/hosting-upload/park-armada-hosting-v63.zip
 
 Всегда свежая копия того же архива:
 https://github.com/armadaparkvg-ux/1/raw/cursor/armada-landing-1d2d/hosting-upload/park-armada-hosting-latest.zip
@@ -15,8 +15,8 @@ https://github.com/armadaparkvg-ux/1/raw/cursor/armada-landing-1d2d/hosting-uplo
 
 index.html должен оказаться в корне этой папки.
 
-После заливки проверить:
-  https://park-armada.ru/
-  https://park-armada.ru/llms.txt
-  https://park-armada.ru/feed.xml
-  https://park-armada.ru/armadaidx7Kq2Nm9Px4Rt8Wv.txt
+После заливки проверить исходник (Ctrl+U):
+  <html lang="ru"
+  <script id="jsonld-organization" type="application/ld+json">
+  <script type="application/ld+json"> с @type Organization / BreadcrumbList / Article
+  meta property="og:image"

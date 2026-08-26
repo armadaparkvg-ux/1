@@ -51,7 +51,7 @@ export default function LicensePage() {
   ]);
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd id="jsonld-page" data={jsonLd} />
       <DocumentServiceLanding type="license" />
       <PageFaq title="Частые вопросы про лицензию ФГИС" items={LICENSE_FAQ} />
       <RelatedGuides

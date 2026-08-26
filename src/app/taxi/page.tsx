@@ -76,7 +76,7 @@ export default function TaxiPage() {
   ]);
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd id="jsonld-page" data={jsonLd} />
       <TaxiLanding />
       <PageFaq title="Частые вопросы про подключение к такси" items={TAXI_FAQ} />
       <RelatedGuides

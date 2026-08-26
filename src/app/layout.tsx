@@ -83,8 +83,8 @@ export default function RootLayout({
   return (
     <html lang="ru" className="dark">
       <head>
-        <JsonLd data={organizationJsonLd()} />
-        <JsonLd data={websiteJsonLd()} />
+        <JsonLd id="jsonld-organization" data={organizationJsonLd()} />
+        <JsonLd id="jsonld-website" data={websiteJsonLd()} />
         <link rel="describedby" href={`${SITE.url}/llms.txt`} />
         <link
           rel="alternate"

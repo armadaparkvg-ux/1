@@ -31,7 +31,7 @@ export default function AboutParkPage() {
   ]);
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd id="jsonld-page" data={jsonLd} />
       <AboutParkLanding />
       <RelatedGuides
         topic="park"

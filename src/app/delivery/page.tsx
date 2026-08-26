@@ -74,7 +74,7 @@ export default function DeliveryPage() {
   ]);
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd id="jsonld-page" data={jsonLd} />
       <CourierLanding />
       <PageFaq
         title="Частые вопросы про курьера Яндекс Доставки"

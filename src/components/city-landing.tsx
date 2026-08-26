@@ -31,7 +31,7 @@ export function CityLanding({ city }: { city: CityPage }) {
 
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd id="jsonld-page" data={jsonLd} />
       <div
         hidden
         dangerouslySetInnerHTML={{
