@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Article } from "@/lib/articles";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Button } from "@/components/ui/button";
+import { RichText } from "@/components/rich-text";
 import { CONTACTS, SITE } from "@/lib/constants";
 import { getRelatedArticles } from "@/lib/topics";
 import { headingId } from "@/lib/utils";
@@ -16,7 +17,7 @@ export function ArticlePage({ article }: { article: Article }) {
         items={[
           { name: "Главная", href: "/" },
           { name: "Статьи", href: "/blog/" },
-          { name: article.title, href: `/blog/${article.slug}/` },
+          { name: article.title },
         ]}
       />
 
@@ -77,7 +78,7 @@ export function ArticlePage({ article }: { article: Article }) {
 
       <div className="mt-8 space-y-4 text-sm leading-relaxed text-foreground/90 sm:text-base">
         {article.paragraphs.map((p) => (
-          <p key={p.slice(0, 48)}>{p}</p>
+          <RichText key={p.slice(0, 48)} text={p} />
         ))}
       </div>
 
@@ -92,7 +93,7 @@ export function ArticlePage({ article }: { article: Article }) {
           </h2>
           <div className="mt-3 space-y-3 text-sm leading-relaxed text-foreground/90 sm:text-base">
             {section.paragraphs.map((p) => (
-              <p key={p.slice(0, 48)}>{p}</p>
+              <RichText key={p.slice(0, 48)} text={p} />
             ))}
           </div>
         </section>

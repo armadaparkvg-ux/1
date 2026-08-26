@@ -3,20 +3,29 @@ import { DocumentServiceLanding } from "@/components/document-service-landing";
 import { JsonLd } from "@/components/json-ld";
 import { PageFaq } from "@/components/page-faq";
 import { RelatedGuides } from "@/components/related-guides";
-import { SITE } from "@/lib/constants";
 import { OSGOP_FAQ } from "@/lib/page-faq";
 import {
   breadcrumbJsonLd,
-  faqJsonLd,
   graphJsonLd,
   webpageJsonLd,
 } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
-  title: "ОСГОП для такси",
-  description:
-    "Оформление ОСГОП для работы в такси через парк «Армада»: 3 400 ₽ на 1 год, консультация по документам.",
-  alternates: { canonical: `${SITE.url}/osgop/` },
+  ...pageMetadata({
+    title: "ОСГОП для такси: оформить страховку пассажиров",
+    description:
+      "Оформление ОСГОП для работы в такси через парк «Армада»: 3 400 ₽ на 1 год, консультация по документам. Это не ОСАГО — полис перевозчика перед пассажирами.",
+    path: "/osgop/",
+    images: [
+      {
+        url: "/images/service-osgop.jpg",
+        width: 1200,
+        height: 800,
+        alt: "Полис ОСГОП — страхование гражданской ответственности перевозчика в такси",
+      },
+    ],
+  }),
 };
 
 export default function OsgopPage() {
@@ -29,9 +38,8 @@ export default function OsgopPage() {
     }),
     breadcrumbJsonLd([
       { name: "Главная", href: "/" },
-      { name: "ОСГОП", href: "/osgop/" },
+      { name: "ОСГОП" },
     ]),
-    faqJsonLd(OSGOP_FAQ, `${SITE.url}/osgop/`),
   ]);
   return (
     <>

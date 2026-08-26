@@ -77,7 +77,6 @@ export function buildLaborJsonLd(siteUrl: string) {
             "@type": "ListItem",
             position: 2,
             name: "Трудовой договор",
-            item: `${siteUrl}/trudovoj-dogovor/`,
           },
         ],
       },
@@ -85,39 +84,11 @@ export function buildLaborJsonLd(siteUrl: string) {
         "@type": "Service",
         name: "Трудовой договор для Яндекс Такси",
         provider: { "@id": `${siteUrl}/#organization` },
-        areaServed: "RU",
+        areaServed: { "@type": "Country", name: "Россия" },
+        serviceType: "Трудовой договор для работы в Яндекс Такси",
         url: `${siteUrl}/trudovoj-dogovor/`,
         description:
           "Официальное трудоустройство водителя в таксопарке без самозанятости и ИП. Три схемы комиссии.",
-        offers: [
-          {
-            "@type": "Offer",
-            name: "3% + 300₽",
-            description: "Трудовой договор: комиссия 3% и 300₽ ежедневные списания",
-          },
-          {
-            "@type": "Offer",
-            name: "5% + 100₽",
-            description: "Трудовой договор: комиссия 5% и 100₽ ежедневные списания",
-          },
-          {
-            "@type": "Offer",
-            name: "6% без ежедневных списаний",
-            description: "Трудовой договор: комиссия 6% без ежедневных списаний",
-          },
-        ],
-      },
-      {
-        "@type": "FAQPage",
-        "@id": `${siteUrl}/trudovoj-dogovor/#faq`,
-        mainEntity: LABOR_FAQ.map((item) => ({
-          "@type": "Question",
-          name: item.q,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: item.a,
-          },
-        })),
       },
     ],
   };

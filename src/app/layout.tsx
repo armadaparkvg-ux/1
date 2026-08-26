@@ -7,8 +7,11 @@ import { StickyActions } from "@/components/sticky-actions";
 import { YandexMetrika } from "@/components/yandex-metrika";
 import { YandexVarioqub } from "@/components/yandex-varioqub";
 import { Providers } from "@/components/providers";
+import { JsonLd } from "@/components/json-ld";
 import { SITE } from "@/lib/constants";
+import { organizationJsonLd } from "@/lib/schema";
 import { SEO_KEYWORDS } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE } from "@/lib/seo-meta";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -38,14 +41,7 @@ export const metadata: Metadata = {
     siteName: SITE.fullName,
     title: SITE.title,
     description: SITE.description,
-    images: [
-      {
-        url: "/og.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Подключение к Яндекс Такси — таксопарк Армада",
-      },
-    ],
+    images: [{ ...DEFAULT_OG_IMAGE }],
   },
   twitter: {
     card: "summary_large_image",
@@ -87,6 +83,7 @@ export default function RootLayout({
   return (
     <html lang="ru" className="dark">
       <head>
+        <JsonLd data={organizationJsonLd()} />
         <link rel="describedby" href={`${SITE.url}/llms.txt`} />
         <link
           rel="alternate"

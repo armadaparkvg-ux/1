@@ -3,20 +3,30 @@ import { DocumentServiceLanding } from "@/components/document-service-landing";
 import { JsonLd } from "@/components/json-ld";
 import { PageFaq } from "@/components/page-faq";
 import { RelatedGuides } from "@/components/related-guides";
-import { SITE } from "@/lib/constants";
 import { LICENSE_FAQ } from "@/lib/page-faq";
 import {
   breadcrumbJsonLd,
-  faqJsonLd,
   graphJsonLd,
+  serviceJsonLd,
   webpageJsonLd,
 } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
-  title: "Лицензия такси ФГИС",
-  description:
-    "Внесение автомобиля в реестр такси ФГИС через парк «Армада»: 3 500 ₽ на 5 лет, обычно 1–3 дня.",
-  alternates: { canonical: `${SITE.url}/license/` },
+  ...pageMetadata({
+    title: "Лицензия такси ФГИС: внесение авто в реестр",
+    description:
+      "Внесение автомобиля в реестр такси ФГИС через парк «Армада»: 3 500 ₽ на 5 лет, обычно 1–3 дня. Фото СТС и авто с четырёх сторон, оплата по факту.",
+    path: "/license/",
+    images: [
+      {
+        url: "/images/service-license.jpg",
+        width: 1200,
+        height: 800,
+        alt: "СТС и автомобиль: документы для внесения машины в реестр такси ФГИС",
+      },
+    ],
+  }),
 };
 
 export default function LicensePage() {
@@ -29,9 +39,15 @@ export default function LicensePage() {
     }),
     breadcrumbJsonLd([
       { name: "Главная", href: "/" },
-      { name: "Лицензия ФГИС", href: "/license/" },
+      { name: "Лицензия ФГИС" },
     ]),
-    faqJsonLd(LICENSE_FAQ, `${SITE.url}/license/`),
+    serviceJsonLd({
+      name: "Лицензия такси ФГИС",
+      serviceType: "Внесение автомобиля в реестр такси",
+      description:
+        "Внесение автомобиля в реестр такси ФГИС через парк «Армада»: 3 500 ₽ на 5 лет.",
+      path: "/license/",
+    }),
   ]);
   return (
     <>

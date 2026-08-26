@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { ArticlePage } from "@/components/article-page";
 import { JsonLd } from "@/components/json-ld";
 import { getAllArticleSlugs, getArticle } from "@/lib/articles";
-import { SITE } from "@/lib/constants";
 import { articleJsonLd } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo-meta";
 
 export function generateStaticParams() {
   return getAllArticleSlugs().map((slug) => ({ slug }));
@@ -17,19 +17,15 @@ export function generateMetadata({
 }): Metadata {
   const article = getArticle(params.slug);
   if (!article) return {};
-  return {
+  return pageMetadata({
     title: article.title,
     description: article.description,
-    alternates: { canonical: `${SITE.url}/blog/${article.slug}/` },
-    openGraph: {
-      type: "article",
-      title: article.title,
-      description: article.description,
-      url: `${SITE.url}/blog/${article.slug}/`,
-      publishedTime: article.date,
-      modifiedTime: article.date,
-    },
-  };
+    path: `/blog/${article.slug}/`,
+    blog: true,
+    ogType: "article",
+    publishedTime: article.date,
+    modifiedTime: article.date,
+  });
 }
 
 export default function BlogArticlePage({

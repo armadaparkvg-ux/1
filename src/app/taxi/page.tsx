@@ -3,14 +3,14 @@ import { TaxiLanding } from "@/components/taxi-landing";
 import { JsonLd } from "@/components/json-ld";
 import { PageFaq } from "@/components/page-faq";
 import { RelatedGuides } from "@/components/related-guides";
-import { SITE } from "@/lib/constants";
 import { TAXI_FAQ } from "@/lib/page-faq";
 import {
   breadcrumbJsonLd,
-  faqJsonLd,
   graphJsonLd,
+  serviceJsonLd,
   webpageJsonLd,
 } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo-meta";
 
 const TAXI_KEYWORDS = [
   "подключение к яндекс такси",
@@ -37,17 +37,21 @@ const TAXI_KEYWORDS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Подключение к Яндекс Такси — комиссия от 1,9%",
-  description:
-    "Подключение к Яндекс Такси через парк «Армада»: самозанятый и ИП от 1,9%, трудовой договор, классы Эконом–Элит. Удалённо по России, активация 10–15 минут.",
-  keywords: TAXI_KEYWORDS,
-  alternates: { canonical: `${SITE.url}/taxi/` },
-  openGraph: {
-    title: "Подключение к Яндекс Такси — парк «Армада»",
+  ...pageMetadata({
+    title: "Подключение к Яндекс Такси — комиссия от 1,9%",
     description:
-      "Самозанятый и ИП от 1,9%, трудовой договор, авторегистрация.",
-    url: `${SITE.url}/taxi/`,
-  },
+      "Подключение к Яндекс Такси через парк «Армада»: самозанятый и ИП от 1,9%, трудовой договор, классы Эконом–Элит. Удалённо по России, активация 10–15 минут.",
+    path: "/taxi/",
+    keywords: TAXI_KEYWORDS,
+    images: [
+      {
+        url: "/images/taxi-premium-hero.webp",
+        width: 1536,
+        height: 1024,
+        alt: "Автомобиль для работы в Яндекс Такси на вечерней городской улице",
+      },
+    ],
+  }),
 };
 
 export default function TaxiPage() {
@@ -60,9 +64,15 @@ export default function TaxiPage() {
     }),
     breadcrumbJsonLd([
       { name: "Главная", href: "/" },
-      { name: "Такси", href: "/taxi/" },
+      { name: "Такси" },
     ]),
-    faqJsonLd(TAXI_FAQ, `${SITE.url}/taxi/`),
+    serviceJsonLd({
+      name: "Подключение к Яндекс Такси",
+      serviceType: "Подключение водителей к Яндекс Такси",
+      description:
+        "Подключение к Яндекс Такси через парк «Армада»: самозанятый и ИП от 1,9%, трудовой договор.",
+      path: "/taxi/",
+    }),
   ]);
   return (
     <>

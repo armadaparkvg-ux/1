@@ -17,6 +17,9 @@ const CONTENT = {
     price: "3 500 ₽",
     priceHint: "на 5 лет",
     icon: FileCheck2,
+    heroImage: "/images/service-license.jpg",
+    heroAlt:
+      "СТС и автомобиль: документы для внесения машины в реестр такси ФГИС",
     points: [
       "Обычно оформление занимает 1–3 дня",
       "Нужны фото СТС с двух сторон",
@@ -32,6 +35,9 @@ const CONTENT = {
     price: "3 400 ₽",
     priceHint: "на 1 год",
     icon: ShieldCheck,
+    heroImage: "/images/service-osgop.jpg",
+    heroAlt:
+      "Полис ОСГОП — страхование гражданской ответственности перевозчика в такси",
     points: [
       "Страхование для легальной работы в такси",
       "Консультация по документам перед оформлением",
@@ -51,8 +57,8 @@ export function DocumentServiceLanding({ type }: { type: ServiceType }) {
         eyebrow={content.eyebrow}
         title={content.title}
         description={content.description}
-        image="/images/legal-documents-hero.webp"
-        imageAlt="Документы и автомобиль для оформления услуг таксопарка"
+        image={content.heroImage}
+        imageAlt={content.heroAlt}
         primaryHref="#apply-service"
         primaryLabel="Перейти к заявке"
       >

@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ARTICLES } from "@/lib/articles";
-import { SITE } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo-meta";
 import {
   TOPIC_META,
   articlesByTopic,
   type ContentTopic,
 } from "@/lib/topics";
 
-export const metadata: Metadata = {
-  title: "Статьи: Яндекс Такси и Доставка",
+export const metadata: Metadata = pageMetadata({
+  title: "Статьи: подключение к Яндекс Такси и доставка",
   description:
     "Гайды таксопарка «Армада»: как подключиться к Яндекс Такси, сменить парк, парковый самозанятый и ИП, трудовой договор, ФГИС, ОСГОП, курьер Яндекс Доставка.",
+  path: "/blog/",
   keywords: [
     "подключение к яндекс такси",
     "сменить таксопарк",
@@ -20,8 +21,7 @@ export const metadata: Metadata = {
     "работа курьером яндекс",
     "лицензия такси фгис",
   ],
-  alternates: { canonical: `${SITE.url}/blog/` },
-};
+});
 
 const TOPIC_ORDER: ContentTopic[] = [
   "taxi",

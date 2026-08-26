@@ -7,24 +7,13 @@ import { Faq } from "@/components/faq";
 import { Contacts } from "@/components/contacts";
 import { LegacyHashRedirect } from "@/components/legacy-hash-redirect";
 import { SITE } from "@/lib/constants";
-import { buildJsonLd } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo-meta";
 
-export const metadata: Metadata = {
-  title: {
-    absolute: SITE.title,
-  },
+export const metadata: Metadata = pageMetadata({
+  title: SITE.title,
   description: SITE.description,
-  alternates: {
-    canonical: SITE.url,
-  },
-  openGraph: {
-    title: SITE.title,
-    description: SITE.description,
-    url: SITE.url,
-  },
-};
-
-const jsonLd = buildJsonLd();
+  path: "/",
+});
 
 /**
  * Главная — компактная витрина направлений.
@@ -33,10 +22,6 @@ const jsonLd = buildJsonLd();
 export default function HomePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <LegacyHashRedirect />
       <Hero />
       <HomeDestinations />

@@ -7,15 +7,9 @@ import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/json-ld";
 import { useRegisterChooser } from "@/components/register-chooser";
 import type { CityPage } from "@/lib/cities";
-import { CITIES } from "@/lib/cities";
+import { getCityNeighbors } from "@/lib/cities";
 import { CONTACTS } from "@/lib/constants";
-import {
-  breadcrumbJsonLd,
-  faqJsonLd,
-  graphJsonLd,
-  webpageJsonLd,
-} from "@/lib/schema";
-import { SITE } from "@/lib/constants";
+import { breadcrumbJsonLd, graphJsonLd, webpageJsonLd } from "@/lib/schema";
 
 export function CityLanding({ city }: { city: CityPage }) {
   const { openRegister } = useRegisterChooser();
@@ -23,8 +17,9 @@ export function CityLanding({ city }: { city: CityPage }) {
   const crumbs = [
     { name: "Главная", href: "/" },
     { name: "Города", href: "/goroda/" },
-    { name: city.name, href: path },
+    { name: `Подключение к Яндекс Такси ${city.inCity}` },
   ];
+  const neighbors = getCityNeighbors(city.slug);
   const jsonLd = graphJsonLd([
     webpageJsonLd({
       path,
@@ -32,23 +27,13 @@ export function CityLanding({ city }: { city: CityPage }) {
       description: city.description,
     }),
     breadcrumbJsonLd(crumbs),
-    faqJsonLd(city.faq, `${SITE.url}${path}`),
-    {
-      "@type": "Service",
-      name: `Подключение к Яндекс Такси ${city.inCity}`,
-      provider: { "@id": `${SITE.url}/#organization` },
-      areaServed: {
-        "@type": "City",
-        name: city.name,
-        containedInPlace: { "@type": "AdministrativeArea", name: city.region },
-      },
-      url: `${SITE.url}${path}`,
-    },
   ]);
 
   return (
     <>
       <JsonLd data={jsonLd} />
+      {/* {{УТОЧНИТЬ У ВЛАДЕЛЬЦА: число водителей парка в {{Городе}}}} */}
+      {/* {{УТОЧНИТЬ У ВЛАДЕЛЬЦА: диапазон недельного заработка в {{Городе}}}} */}
       <section
         data-hero
         className="border-b border-border bg-[#080b11] pt-[72px]"
@@ -62,7 +47,13 @@ export function CityLanding({ city }: { city: CityPage }) {
             Все города
           </Link>
           <div className="mt-5">
-            <Breadcrumbs items={crumbs} />
+            <Breadcrumbs
+              items={[
+                { name: "Главная", href: "/" },
+                { name: "Города", href: "/goroda/" },
+                { name: city.name, href: path },
+              ]}
+            />
           </div>
           <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-accent">
             <MapPin className="h-3.5 w-3.5" aria-hidden />
@@ -72,6 +63,7 @@ export function CityLanding({ city }: { city: CityPage }) {
             {city.h1}
           </h1>
           <div className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p>{city.lead}</p>
             {city.intro.map((p) => (
               <p key={p.slice(0, 48)}>{p}</p>
             ))}
@@ -100,6 +92,9 @@ export function CityLanding({ city }: { city: CityPage }) {
           <h2 className="font-display text-2xl font-semibold text-foreground">
             Спрос {city.inCity}
           </h2>
+          <h3 className="mt-4 font-display text-lg font-semibold text-foreground">
+            {city.demandSubheading}
+          </h3>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
             {city.demand}
           </p>
@@ -119,6 +114,55 @@ export function CityLanding({ city }: { city: CityPage }) {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      <section className="border-t border-border py-8 sm:py-12">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <h2 className="font-display text-2xl font-semibold text-foreground">
+            Условия подключения
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Федеральные условия парка «Армада» одинаковы {city.inCity} и в
+            остальных регионах. Локальные цифры по водителям и заработку на
+            странице не публикуем, пока их не подтвердит парк.
+          </p>
+
+          <h3 className="mt-6 font-display text-lg font-semibold text-foreground">
+            Гражданство и формат работы
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Нужно гражданство РФ. Самозанятый и ИП подключаются авторегистрацией
+            на странице такси. Трудовой договор — только через поддержку парка,
+            авторегистрации на этот формат нет.
+          </p>
+
+          <h3 className="mt-6 font-display text-lg font-semibold text-foreground">
+            Какие документы нужны
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Паспорт, водительское удостоверение, СТС. Для трудового договора —
+            ИНН и СНИЛС. Для ФГИС — фото автомобиля с четырёх сторон и СТС с
+            двух сторон.
+          </p>
+
+          <h3 className="mt-6 font-display text-lg font-semibold text-foreground">
+            ФГИС и ОСГОП
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Внесение авто в реестр такси — 3 500 ₽ на 5 лет, обычно 1–3 дня.
+            ОСГОП — 3 400 ₽ в год. Оплата по факту оформления, без ежемесячной
+            «подписки парка».
+          </p>
+
+          <h3 className="mt-6 font-display text-lg font-semibold text-foreground">
+            Комиссия парка
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Самозанятый и ИП — от 1,9%. По трудовому договору три схемы: 3% +
+            300 ₽ в день, 5% + 100 ₽ в день или 6% без ежедневных списаний.
+            Комиссия Яндекс Такси начисляется отдельно.
+          </p>
         </div>
       </section>
 
@@ -145,20 +189,25 @@ export function CityLanding({ city }: { city: CityPage }) {
             </Link>
             .
           </p>
-          <ul className="mt-6 flex flex-wrap gap-2">
-            {CITIES.filter((c) => c.slug !== city.slug)
-              .slice(0, 6)
-              .map((c) => (
-                <li key={c.slug}>
-                  <Link
-                    href={`/goroda/${c.slug}/`}
-                    className="inline-flex rounded-full border border-border px-3 py-1 text-xs text-muted-foreground hover:border-accent/40 hover:text-foreground"
-                  >
-                    {c.name}
-                  </Link>
-                </li>
-              ))}
-          </ul>
+          {neighbors.length ? (
+            <div className="mt-8">
+              <h2 className="font-display text-xl font-semibold text-foreground">
+                Соседние города
+              </h2>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {neighbors.map((item) => (
+                  <li key={item.slug}>
+                    <Link
+                      href={`/goroda/${item.slug}/`}
+                      className="inline-flex rounded-full border border-border px-3 py-1.5 text-sm text-foreground hover:border-accent/40 hover:text-accent"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
       </section>
     </>

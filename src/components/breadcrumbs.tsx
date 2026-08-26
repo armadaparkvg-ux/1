@@ -9,11 +9,11 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
         {items.map((item, i) => {
           const last = i === items.length - 1;
           return (
-            <li key={item.href} className="inline-flex items-center gap-1">
+            <li key={item.href ?? item.name} className="inline-flex items-center gap-1">
               {i > 0 ? (
                 <ChevronRight className="h-3.5 w-3.5 shrink-0 opacity-60" aria-hidden />
               ) : null}
-              {last ? (
+              {last || !item.href ? (
                 <span className="text-foreground/80">{item.name}</span>
               ) : (
                 <Link

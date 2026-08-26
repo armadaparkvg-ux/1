@@ -1,22 +1,82 @@
 import type { Article } from "@/lib/articles";
-import { SITE } from "@/lib/constants";
+import { CONTACTS, LEGAL, SITE } from "@/lib/constants";
 
 export type BreadcrumbItem = {
   name: string;
-  href: string;
+  href?: string;
 };
+
+export function organizationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SITE.url}/#organization`,
+    name: SITE.fullName,
+    legalName: LEGAL.legalName,
+    url: `${SITE.url}/`,
+    logo: `${SITE.url}/icon.svg`,
+    image: `${SITE.url}/og.jpg`,
+    taxID: LEGAL.inn,
+    vatID: LEGAL.inn,
+    identifier: [
+      { "@type": "PropertyValue", name: "ОГРН", value: LEGAL.ogrn },
+      { "@type": "PropertyValue", name: "КПП", value: LEGAL.kpp },
+    ],
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "ул. Неделина, д. 23",
+      addressLocality: "Щёлково",
+      addressRegion: "Московская область",
+      postalCode: "141107",
+      addressCountry: "RU",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+7-918-052-10-22",
+      contactType: "customer service",
+      areaServed: "RU",
+      availableLanguage: "Russian",
+      hoursAvailable: {
+        "@type": "OpeningHoursSpecification",
+        opens: "08:00",
+        closes: "21:00",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+      },
+    },
+    sameAs: [CONTACTS.telegram, CONTACTS.max],
+  };
+}
 
 export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
   return {
     "@type": "BreadcrumbList",
-    itemListElement: items.map((item, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: item.name,
-      item: item.href.startsWith("http")
-        ? item.href
-        : `${SITE.url}${item.href}`,
-    })),
+    itemListElement: items.map((item, i) => {
+      const isLast = i === items.length - 1;
+      const node: {
+        "@type": "ListItem";
+        position: number;
+        name: string;
+        item?: string;
+      } = {
+        "@type": "ListItem",
+        position: i + 1,
+        name: item.name,
+      };
+      if (!isLast && item.href) {
+        node.item = item.href.startsWith("http")
+          ? item.href
+          : `${SITE.url}${item.href}`;
+      }
+      return node;
+    }),
   };
 }
 
@@ -38,18 +98,20 @@ export function webpageJsonLd(opts: {
   };
 }
 
-export function faqJsonLd(
-  items: readonly { q: string; a: string }[],
-  pageUrl: string
-) {
+export function serviceJsonLd(opts: {
+  name: string;
+  serviceType: string;
+  description: string;
+  path: string;
+}) {
   return {
-    "@type": "FAQPage",
-    "@id": `${pageUrl}#faq`,
-    mainEntity: items.map((item) => ({
-      "@type": "Question",
-      name: item.q,
-      acceptedAnswer: { "@type": "Answer", text: item.a },
-    })),
+    "@type": "Service",
+    name: opts.name,
+    provider: { "@id": `${SITE.url}/#organization` },
+    areaServed: { "@type": "Country", name: "Россия" },
+    serviceType: opts.serviceType,
+    description: opts.description,
+    url: `${SITE.url}${opts.path}`,
   };
 }
 
@@ -75,42 +137,25 @@ export function articlePlainText(article: Article) {
 export function articleJsonLd(article: Article) {
   const path = `/blog/${article.slug}/`;
   const url = `${SITE.url}${path}`;
-  const text = articlePlainText(article);
-  const wordCount = text.split(/\s+/).filter(Boolean).length;
 
   return graphJsonLd([
-    webpageJsonLd({
-      path,
-      name: article.title,
-      description: article.description,
-    }),
     breadcrumbJsonLd([
       { name: "Главная", href: "/" },
-      { name: "Статьи", href: "/blog/" },
-      { name: article.title, href: path },
+      { name: "Блог", href: "/blog/" },
+      { name: article.title },
     ]),
     {
       "@type": "Article",
-      "@id": `${url}#article`,
-      headline: article.title,
+      headline: article.title.slice(0, 110),
       description: article.description,
+      image: `${SITE.url}/og.jpg`,
       datePublished: article.date,
       dateModified: article.date,
-      inLanguage: "ru-RU",
-      wordCount,
-      timeRequired: `PT${article.readingMinutes}M`,
-      image: `${SITE.url}/og.jpg`,
       author: { "@id": `${SITE.url}/#organization` },
       publisher: { "@id": `${SITE.url}/#organization` },
-      isPartOf: { "@id": `${SITE.url}/#website` },
-      mainEntityOfPage: { "@id": `${url}#webpage` },
-      about: {
-        "@type": "Thing",
-        name: article.title,
-      },
-      speakable: {
-        "@type": "SpeakableSpecification",
-        cssSelector: [".article-summary", ".article-takeaways", "h1", "h2"],
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": url,
       },
     },
   ]);

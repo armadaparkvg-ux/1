@@ -78,15 +78,65 @@ export function articlesByTopic(topic: ContentTopic): Article[] {
 export function getRelatedArticles(slug: string, limit = 4): Article[] {
   const current = ARTICLES.find((article) => article.slug === slug);
   const topic = current ? getArticleTopic(current) : "taxi";
-  const sameTopic = articlesByTopic(topic).filter((article) => article.slug !== slug);
-  if (sameTopic.length >= limit) return sameTopic.slice(0, limit);
+  const pinnedSlugs = PINNED_RELATED[slug] ?? [];
+  const pinned = pinnedSlugs
+    .map((item) => ARTICLES.find((article) => article.slug === item))
+    .filter((article): article is Article => Boolean(article) && article.slug !== slug);
+  const sameTopic = articlesByTopic(topic).filter(
+    (article) =>
+      article.slug !== slug && !pinned.some((item) => item.slug === article.slug)
+  );
   const extra = ARTICLES.filter(
     (article) =>
       article.slug !== slug &&
+      !pinned.some((item) => item.slug === article.slug) &&
       !sameTopic.some((item) => item.slug === article.slug)
   ).sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
-  return [...sameTopic, ...extra].slice(0, limit);
+  return [...pinned, ...sameTopic, ...extra].slice(0, limit);
 }
+
+/** Сироты кластера «подключение» — в «Читайте также» соседних статей. */
+const PINNED_RELATED: Record<string, string[]> = {
+  "smenit-taksopark-yandex": [
+    "kak-podklyuchitsya-k-yandex-taxi",
+    "dokumenty-dlya-voditelya-yandex",
+    "pervyj-vyhod-na-liniyu",
+  ],
+  "udalennoe-podklyuchenie-po-rossii": [
+    "kak-podklyuchitsya-k-yandex-taxi",
+    "dokumenty-dlya-voditelya-yandex",
+    "pervyj-vyhod-na-liniyu",
+  ],
+  "kak-vybrat-taksopark": [
+    "kak-podklyuchitsya-k-yandex-taxi",
+    "dokumenty-dlya-voditelya-yandex",
+  ],
+  "parkovyj-samozanyatyj": [
+    "kak-podklyuchitsya-k-yandex-taxi",
+    "dokumenty-dlya-voditelya-yandex",
+  ],
+  "komissiya-parka-i-yandex-taxi": ["kak-podklyuchitsya-k-yandex-taxi"],
+  "klassifikator-avto-yandex-taxi": [
+    "kak-podklyuchitsya-k-yandex-taxi",
+    "dokumenty-dlya-voditelya-yandex",
+  ],
+  "samozanyatyj-ip-trudovoj": [
+    "kak-podklyuchitsya-k-yandex-taxi",
+    "dokumenty-dlya-voditelya-yandex",
+  ],
+  "tip-zanyatosti-ne-podtverzhden": [
+    "kak-podklyuchitsya-k-yandex-taxi",
+    "dokumenty-dlya-voditelya-yandex",
+  ],
+  "dokumenty-dlya-voditelya-yandex": [
+    "kak-podklyuchitsya-k-yandex-taxi",
+    "pervyj-vyhod-na-liniyu",
+  ],
+  "pervyj-vyhod-na-liniyu": [
+    "kak-podklyuchitsya-k-yandex-taxi",
+    "dokumenty-dlya-voditelya-yandex",
+  ],
+};
 
 export function latestArticleDate(): string {
   return ARTICLES.reduce(

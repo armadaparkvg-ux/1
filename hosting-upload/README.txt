@@ -1,10 +1,10 @@
 Архив для загрузки на хостинг Reg.ru
 ====================================
 
-Актуальный релиз: hosting-v61 (23.08.2026)
+Актуальный релиз: hosting-v62 (26.08.2026)
 
 Скачать (этот файл в репозитории):
-https://github.com/armadaparkvg-ux/1/raw/cursor/armada-landing-1d2d/hosting-upload/park-armada-hosting-v61.zip
+https://github.com/armadaparkvg-ux/1/raw/cursor/armada-landing-1d2d/hosting-upload/park-armada-hosting-v62.zip
 
 Всегда свежая копия того же архива:
 https://github.com/armadaparkvg-ux/1/raw/cursor/armada-landing-1d2d/hosting-upload/park-armada-hosting-latest.zip

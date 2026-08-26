@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { CourierLanding } from "@/components/courier-landing";
 import { JsonLd } from "@/components/json-ld";
 import { PageFaq } from "@/components/page-faq";
-import { SITE } from "@/lib/constants";
 import { DELIVERY_FAQ } from "@/lib/page-faq";
 import {
   breadcrumbJsonLd,
-  faqJsonLd,
   graphJsonLd,
+  serviceJsonLd,
   webpageJsonLd,
 } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo-meta";
 
 const DELIVERY_KEYWORDS = [
   "курьер яндекс доставка",
@@ -35,16 +35,12 @@ const DELIVERY_KEYWORDS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Курьер Яндекс Доставка — подключение и вакансии",
-  description:
-    "Вакансия курьера Яндекс Доставка через парк «Армада»: пеший, авто, мото и грузовой. Авторегистрация, официальный доход, поддержка 8:00–21:00 Мск.",
-  keywords: DELIVERY_KEYWORDS,
-  alternates: { canonical: `${SITE.url}/delivery/` },
-  openGraph: {
-    title: "Курьер Яндекс Доставка — парк «Армада»",
+  ...pageMetadata({
+    title: "Курьер Яндекс Доставка — подключение и вакансии",
     description:
-      "Пеший, авто, мото и грузовой курьер. Подключение удалённо по России.",
-    url: `${SITE.url}/delivery/`,
+      "Вакансия курьера Яндекс Доставка через парк «Армада»: пеший, авто, мото и грузовой. Авторегистрация, официальный доход, поддержка 8:00–21:00 Мск.",
+    path: "/delivery/",
+    keywords: DELIVERY_KEYWORDS,
     images: [
       {
         url: "/images/delivery-hero-banner.jpg",
@@ -53,7 +49,7 @@ export const metadata: Metadata = {
         alt: "Армада — партнёр Яндекс Доставки",
       },
     ],
-  },
+  }),
 };
 
 export default function DeliveryPage() {
@@ -66,9 +62,15 @@ export default function DeliveryPage() {
     }),
     breadcrumbJsonLd([
       { name: "Главная", href: "/" },
-      { name: "Доставка", href: "/delivery/" },
+      { name: "Доставка" },
     ]),
-    faqJsonLd(DELIVERY_FAQ, `${SITE.url}/delivery/`),
+    serviceJsonLd({
+      name: "Подключение курьеров к Яндекс Доставке",
+      serviceType: "Подключение курьеров к Яндекс Доставке",
+      description:
+        "Пеший, авто, мото и грузовой курьер Яндекс Доставки через парк «Армада».",
+      path: "/delivery/",
+    }),
   ]);
   return (
     <>

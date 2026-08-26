@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CONTACTS, LEGAL, SITE } from "@/lib/constants";
+import { CONTACTS, LEGAL } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo-meta";
 
-export const metadata: Metadata = {
-  title: "Реквизиты компании",
-  description: `Реквизиты ${LEGAL.legalName}: ИНН ${LEGAL.inn}, ОГРН ${LEGAL.ogrn}. Контакты таксопарка «Армада».`,
-  alternates: { canonical: `${SITE.url}/requisites/` },
+export const metadata: Metadata = pageMetadata({
+  title: "Реквизиты таксопарка «Армада» для водителей и партнёров",
+  description: `Реквизиты ${LEGAL.legalName}: ИНН ${LEGAL.inn}, КПП ${LEGAL.kpp}, ОГРН ${LEGAL.ogrn}, адрес в Щёлково. Контактный телефон парка «Армада».`,
+  path: "/requisites/",
   robots: { index: true, follow: true },
-};
+});
 
 export default function RequisitesPage() {
   return (
@@ -16,10 +17,14 @@ export default function RequisitesPage() {
         Реквизиты компании
       </h1>
       <div className="mt-8 space-y-5 text-sm leading-relaxed text-muted-foreground">
+        <h2 className="font-display text-xl font-semibold text-foreground">
+          Юридические данные
+        </h2>
         <p>
           Юридические реквизиты {LEGAL.brandName}. Платёжные реквизиты для
           оплаты услуг уточняйте у менеджера при оформлении.
         </p>
+        {/* {{УТОЧНИТЬ У ВЛАДЕЛЬЦА: канонический телефон и email для Organization — на /offer/ другие значения}} */}
         <dl className="space-y-3 rounded-2xl border border-border bg-surface/50 p-6">
           <div>
             <dt className="text-xs uppercase tracking-wide text-muted-foreground">
@@ -57,6 +62,12 @@ export default function RequisitesPage() {
             </dt>
             <dd className="mt-1 text-foreground">{LEGAL.address}</dd>
           </div>
+        </dl>
+
+        <h2 className="pt-2 font-display text-xl font-semibold text-foreground">
+          Контакты парка
+        </h2>
+        <dl className="space-y-3 rounded-2xl border border-border bg-surface/50 p-6">
           <div>
             <dt className="text-xs uppercase tracking-wide text-muted-foreground">
               Контактный телефон

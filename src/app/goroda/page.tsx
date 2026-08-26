@@ -5,25 +5,19 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { JsonLd } from "@/components/json-ld";
 import { RelatedGuides } from "@/components/related-guides";
 import { CITIES } from "@/lib/cities";
-import { SITE } from "@/lib/constants";
 import { breadcrumbJsonLd, graphJsonLd, webpageJsonLd } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo-meta";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Подключение к Яндекс Такси по городам России",
   description:
     "Таксопарк «Армада» подключает водителей и курьеров удалённо: Москва, Санкт-Петербург, Краснодар, Казань, Екатеринбург и другие города. Комиссия от 1,9%.",
-  alternates: { canonical: `${SITE.url}/goroda/` },
-  openGraph: {
-    title: "Подключение к Яндекс Такси по городам",
-    description:
-      "Удалённое оформление в парк «Армада» по всей России — выберите свой город.",
-    url: `${SITE.url}/goroda/`,
-  },
-};
+  path: "/goroda/",
+});
 
 const crumbs = [
   { name: "Главная", href: "/" },
-  { name: "Города", href: "/goroda/" },
+  { name: "Города" },
 ];
 
 export default function CitiesIndexPage() {
@@ -76,24 +70,25 @@ export default function CitiesIndexPage() {
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <ul className="grid gap-3 sm:grid-cols-2">
             {CITIES.map((city) => (
-              <li key={city.slug}>
+              <li
+                key={city.slug}
+                className="rounded-2xl border border-border bg-surface/40 p-4 transition-colors hover:border-accent/40"
+              >
                 <Link
                   href={`/goroda/${city.slug}/`}
-                  className="flex items-start gap-3 rounded-2xl border border-border bg-surface/40 p-4 transition-colors hover:border-accent/40"
+                  className="flex items-start gap-3 text-foreground hover:text-accent"
                 >
                   <MapPin
                     className="mt-0.5 h-5 w-5 shrink-0 text-accent"
                     aria-hidden
                   />
-                  <span>
-                    <span className="block font-display text-lg font-semibold text-foreground">
-                      {city.name}
-                    </span>
-                    <span className="mt-0.5 block text-sm text-muted-foreground">
-                      {city.region}
-                    </span>
+                  <span className="font-display text-lg font-semibold">
+                    {city.name}
                   </span>
                 </Link>
+                <span className="mt-1 block pl-8 text-sm text-muted-foreground">
+                  {city.region}
+                </span>
               </li>
             ))}
           </ul>

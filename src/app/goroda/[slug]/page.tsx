@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { CityLanding } from "@/components/city-landing";
 import { RelatedGuides } from "@/components/related-guides";
 import { getCity, getCitySlugs } from "@/lib/cities";
-import { SITE } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo-meta";
 
 export function generateStaticParams() {
   return getCitySlugs().map((slug) => ({ slug }));
@@ -16,16 +16,11 @@ export function generateMetadata({
 }): Metadata {
   const city = getCity(params.slug);
   if (!city) return {};
-  return {
+  return pageMetadata({
     title: city.title,
     description: city.description,
-    alternates: { canonical: `${SITE.url}/goroda/${city.slug}/` },
-    openGraph: {
-      title: city.title,
-      description: city.description,
-      url: `${SITE.url}/goroda/${city.slug}/`,
-    },
-  };
+    path: `/goroda/${city.slug}/`,
+  });
 }
 
 export default function CityPage({ params }: { params: { slug: string } }) {

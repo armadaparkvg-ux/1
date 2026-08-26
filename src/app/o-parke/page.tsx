@@ -2,25 +2,19 @@ import type { Metadata } from "next";
 import { AboutParkLanding } from "@/components/about-park-landing";
 import { JsonLd } from "@/components/json-ld";
 import { RelatedGuides } from "@/components/related-guides";
-import { SITE } from "@/lib/constants";
 import {
   breadcrumbJsonLd,
   graphJsonLd,
   webpageJsonLd,
 } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo-meta";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "О парке «Армада» — знакомство с таксопарком",
   description:
     "Таксопарк «Армада»: 7+ лет на рынке, 3 800+ самозанятых водителей, 1 180 по трудовому договору, 2 368+ курьеров, более 5 000 реестров ФГИС.",
-  alternates: { canonical: `${SITE.url}/o-parke/` },
-  openGraph: {
-    title: "О парке «Армада»",
-    description:
-      "7+ лет на рынке · 3 800+ самозанятых · 1 180 трудовых · 2 368+ курьеров · 5 000+ ФГИС",
-    url: `${SITE.url}/o-parke/`,
-  },
-};
+  path: "/o-parke/",
+});
 
 export default function AboutParkPage() {
   const jsonLd = graphJsonLd([
@@ -32,7 +26,7 @@ export default function AboutParkPage() {
     }),
     breadcrumbJsonLd([
       { name: "Главная", href: "/" },
-      { name: "О парке", href: "/o-parke/" },
+      { name: "О парке" },
     ]),
   ]);
   return (

@@ -4,31 +4,19 @@ import { ArrowLeft } from "lucide-react";
 import { Faq } from "@/components/faq";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { JsonLd } from "@/components/json-ld";
-import { SITE } from "@/lib/constants";
-import { FAQ_ITEMS } from "@/lib/seo";
-import {
-  breadcrumbJsonLd,
-  faqJsonLd,
-  graphJsonLd,
-  webpageJsonLd,
-} from "@/lib/schema";
+import { breadcrumbJsonLd, graphJsonLd, webpageJsonLd } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo-meta";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Частые вопросы (FAQ) — подключение к Яндекс Такси",
   description:
     "Ответы таксопарка «Армада»: самозанятый, ИП, трудовой договор, ФГИС, ОСГОП, курьеры Яндекс Доставка, сроки активации и документы.",
-  alternates: { canonical: `${SITE.url}/faq/` },
-  openGraph: {
-    title: "FAQ — частые вопросы | Армада",
-    description:
-      "Самозанятый, ИП, трудовой договор, ФГИС, ОСГОП и доставка — ответы парка «Армада».",
-    url: `${SITE.url}/faq/`,
-  },
-};
+  path: "/faq/",
+});
 
 const crumbs = [
   { name: "Главная", href: "/" },
-  { name: "FAQ", href: "/faq/" },
+  { name: "FAQ" },
 ];
 
 const jsonLd = graphJsonLd([
@@ -39,7 +27,6 @@ const jsonLd = graphJsonLd([
       "Ответы таксопарка «Армада»: самозанятый, ИП, трудовой договор, ФГИС, ОСГОП и доставка.",
   }),
   breadcrumbJsonLd(crumbs),
-  faqJsonLd(FAQ_ITEMS, `${SITE.url}/faq/`),
 ]);
 
 export default function FaqPage() {

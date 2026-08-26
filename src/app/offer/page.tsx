@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Download } from "lucide-react";
-import { LEGAL, SITE } from "@/lib/constants";
+import { LEGAL } from "@/lib/constants";
 import {
   OFFER_EFFECTIVE_AT,
   OFFER_PDF_HREF,
@@ -10,18 +10,51 @@ import {
   OFFER_TITLE,
 } from "@/content/offer-text";
 import { Button } from "@/components/ui/button";
+import { pageMetadata } from "@/lib/seo-meta";
 
-export const metadata: Metadata = {
-  title: "Агентское соглашение (оферта)",
-  description: `Публичная оферта ${LEGAL.legalName}: агентское соглашение для водителей и курьеров. Дата размещения ${OFFER_PUBLISHED_AT}.`,
-  alternates: { canonical: `${SITE.url}/offer/` },
+export const metadata: Metadata = pageMetadata({
+  title: "Агентское соглашение (оферта) для водителей",
+  description: `Публичная оферта ${LEGAL.legalName}: агентское соглашение для водителей и курьеров таксопарка. Дата размещения ${OFFER_PUBLISHED_AT}, HTML и PDF на этой странице.`,
+  path: "/offer/",
   robots: { index: true, follow: true },
-};
+});
+
+function tidyOfferPunctuation(text: string): string {
+  return text
+    .replace(/^(\d+(?:\.\d+)*)[.,:;]+(?:\s+)?/u, (_, n: string) => `${n}. `)
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function isSectionHeading(block: string): { heading: string; rest: string } | null {
+  const match = block.match(/^(\d{1,2})\.\s+(.+)$/u);
+  if (!match) return null;
+  const num = Number(match[1]);
+  if (num < 1 || num > 13) return null;
+  const rest = match[2];
+  const words = rest.split(/\s+/);
+  const titleWords: string[] = [];
+  for (const word of words) {
+    const letters = word.replace(/[^A-ZА-ЯЁa-zа-яё]/gi, "");
+    if (!letters) {
+      titleWords.push(word);
+      continue;
+    }
+    const isUpper = letters === letters.toUpperCase() && /[А-ЯЁ]/.test(letters);
+    if (isUpper) titleWords.push(word);
+    else break;
+  }
+  const headingCore = titleWords.join(" ").trim();
+  if (headingCore.length < 8) return null;
+  const heading = `${num}. ${headingCore}`;
+  const leftover = rest.slice(headingCore.length).trim();
+  return { heading, rest: leftover };
+}
 
 function paragraphs(text: string) {
   return text
     .split(/\n+/)
-    .map((p) => p.trim())
+    .map((p) => tidyOfferPunctuation(p))
     .filter(Boolean);
 }
 
@@ -86,17 +119,15 @@ export default function OfferPage() {
           Текст оферты
         </h2>
         {blocks.map((block, i) => {
-          const isHeading =
-            /^(АГЕНТСКОЕ|\d+\.\s|[А-ЯЁ]{3,}|\d+\.\d+)/.test(block) &&
-            block.length < 120;
-          if (isHeading) {
+          const section = isSectionHeading(block);
+          if (section) {
             return (
-              <h3
-                key={i}
-                className="pt-4 font-display text-base font-semibold text-foreground"
-              >
-                {block}
-              </h3>
+              <div key={i} className="space-y-3">
+                <h2 className="pt-4 font-display text-xl font-semibold text-foreground">
+                  {section.heading}
+                </h2>
+                {section.rest ? <p>{section.rest}</p> : null}
+              </div>
             );
           }
           return <p key={i}>{block}</p>;
