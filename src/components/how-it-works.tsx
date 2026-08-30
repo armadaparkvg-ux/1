@@ -1,0 +1,62 @@
+import { FadeIn, SectionHeading } from "@/components/fade-in";
+import { HOW_TO_STEPS } from "@/lib/seo";
+
+export function HowItWorks() {
+  return (
+    <section
+      id="how-it-works"
+      className="section-anchor relative py-10 sm:py-16 lg:py-20"
+      aria-labelledby="how-heading"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <FadeIn>
+          <SectionHeading
+            id="how-heading"
+            eyebrow="Ориентир · Как это работает"
+            title="Путь от знакомства до выхода на линию"
+            description="Сначала направление (такси или доставка), затем класс заказов и формат оформления в парке — заявка или авторегистрация."
+          />
+        </FadeIn>
+
+        <div className="relative mt-10 sm:mt-14">
+          <div
+            className="absolute left-[19px] top-4 bottom-4 w-px bg-divider-glow sm:left-1/2 sm:-translate-x-px"
+            aria-hidden
+          />
+          <ol className="space-y-0">
+            {HOW_TO_STEPS.map((step, index) => {
+              const isEven = index % 2 === 0;
+              return (
+                <li
+                  key={step.title}
+                  className="relative grid gap-4 py-5 sm:grid-cols-2 sm:gap-10 sm:py-8"
+                >
+                  <div
+                    className={`pl-12 sm:pl-0 ${
+                      isEven
+                        ? "sm:text-right sm:pr-12"
+                        : "sm:col-start-2 sm:pl-12"
+                    }`}
+                  >
+                    <p className="font-display text-sm font-semibold text-accent">
+                      Шаг {index + 1}
+                    </p>
+                    <h3 className="mt-1 font-display text-xl font-semibold text-foreground">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                      {step.text}
+                    </p>
+                  </div>
+                  <span className="absolute left-0 top-8 flex h-10 w-10 items-center justify-center rounded-full border border-accent/40 bg-surface text-sm font-bold text-accent shadow-glow-sm sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
+                    {index + 1}
+                  </span>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </div>
+    </section>
+  );
+}

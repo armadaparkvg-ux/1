@@ -1,0 +1,59 @@
+# Apache config for Reg.ru / shared hosting (public_html)
+Options -Indexes
+DirectoryIndex index.html
+
+# IMPORTANT:
+# Do NOT force HTTPS here on Reg.ru.
+# SSL terminates on nginx in front of Apache; %{HTTPS} is often "off"
+# even for https:// requests → endless 301 loop (site unavailable).
+# HTTP→HTTPS is already handled by Reg.ru hosting panel / nginx.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Legacy courier URL → delivery
+  RewriteRule ^courier/?$ /delivery/ [R=301,L]
+  RewriteRule ^courier/(.*)$ /delivery/$1 [R=301,L]
+
+  # Indexed 404: former PSMZ landing
+  RewriteRule ^yandex-taxi-psmz/?$ /blog/parkovyj-samozanyatyj/ [R=301,L]
+
+  # Keep real files/folders
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Fallback for clean URLs without trailing slash
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.*)$ $1.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Карта для ИИ-агентов и RSS — без долгого кеша, чтобы свежие статьи подтягивались
+<IfModule mod_headers.c>
+  <FilesMatch "^(llms|llms-full)\.txt$">
+    Header set Content-Type "text/plain; charset=utf-8"
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+  <Files "feed.xml">
+    Header set Content-Type "application/rss+xml; charset=utf-8"
+    Header set Cache-Control "public, max-age=3600"
+  </Files>
+</IfModule>
+
+# Cache static assets
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType font/woff2 "access plus 30 days"
+</IfModule>
