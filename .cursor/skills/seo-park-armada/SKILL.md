@@ -11,6 +11,8 @@ color: yellow
 
 Полные чеклисты: [references/acceptance.md](references/acceptance.md), запреты: [references/forbidden.md](references/forbidden.md).
 
+Внешний профессиональный слой (Sanity): `../vendor/seo-aeo-best-practices/`. На этом сайте **этот файл главнее** — из Sanity не переносить FAQPage, HowTo, QAPage, AggregateRating, `offers` и правки canonical/sitemap/robots. Происхождение: `../vendor/SOURCES.md`.
+
 ## Стек
 
 Next.js 14 App Router, **статический экспорт** (`STATIC_EXPORT=1`), trailing slash. Домен `https://park-armada.ru`. Метрика `110811547` — не ломать ID целей.

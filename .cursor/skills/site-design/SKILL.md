@@ -11,6 +11,8 @@ color: orange
 
 Токены и компоненты: [references/tokens.md](references/tokens.md).
 
+Внешний слой (не меняет бренд): Anthropic `frontend-design`, Vercel `web-design-guidelines`, Emil Kowalski `emil-design-eng`, Paul Bakaus `impeccable`. На существующих страницах Армады **этот файл главнее** — без новой палитры, светлой темы и второго шрифта. Происхождение: `../vendor/SOURCES.md`.
+
 ## Стек UI
 
 Next.js 14, Tailwind 3, Radix (accordion), CVA-кнопки, Lucide. Шрифт **Manrope** (`--font-manrope`, latin + cyrillic). `<html lang="ru" class="dark">` — **только dark**.
