@@ -43,9 +43,9 @@ export const metadata: Metadata = {
     keywords: DELIVERY_KEYWORDS,
     images: [
       {
-        url: "/images/delivery-hero-banner.jpg",
-        width: 1536,
-        height: 1024,
+        url: "/images/delivery-hero-banner-og.jpg",
+        width: 1200,
+        height: 630,
         alt: "Армада — партнёр Яндекс Доставки",
       },
     ],

@@ -11,6 +11,7 @@ import {
 import { DeliveryHeroBanner } from "@/components/delivery-hero-banner";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { DualPathActions } from "@/components/funnel-actions";
+import { NextStops } from "@/components/next-stops";
 import { ContactButtons } from "@/components/contact-buttons";
 import { Button } from "@/components/ui/button";
 import {
@@ -290,6 +291,8 @@ export function CourierLanding() {
           </ul>
         </div>
       </section>
+
+      <NextStops current="delivery" />
 
       <section className="py-10 sm:py-16 lg:py-20" aria-labelledby="courier-contacts">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">

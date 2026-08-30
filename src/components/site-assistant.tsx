@@ -228,7 +228,7 @@ function SiteAssistantDialog({
           <label htmlFor={inputId} className="sr-only">
             Поиск по сайту
           </label>
-          <div className="flex items-center gap-2 rounded-xl border border-border bg-surface px-3">
+          <div className="flex items-center gap-2 rounded-xl border border-border bg-surface px-3 focus-within:border-accent/50 focus-within:ring-2 focus-within:ring-accent">
             <Search className="h-4 w-4 shrink-0 text-accent" aria-hidden />
             <input
               ref={inputRef}

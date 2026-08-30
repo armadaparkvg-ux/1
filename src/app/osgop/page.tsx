@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     path: "/osgop/",
     images: [
       {
-        url: "/images/service-osgop.jpg",
+        url: "/images/service-osgop-og.jpg",
         width: 1200,
-        height: 800,
+        height: 630,
         alt: "Полис ОСГОП — страхование гражданской ответственности перевозчика в такси",
       },
     ],

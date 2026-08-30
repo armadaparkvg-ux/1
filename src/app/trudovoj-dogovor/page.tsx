@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     ],
     images: [
       {
-        url: "/images/labor-limit-hero.jpg",
-        width: 1024,
-        height: 1024,
+        url: "/images/labor-limit-hero-og.jpg",
+        width: 1200,
+        height: 630,
         alt: "Превысил лимит по самозанятости — подключайся в парк Армада по ТК РФ",
       },
     ],

@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     path: "/license/",
     images: [
       {
-        url: "/images/service-license.jpg",
+        url: "/images/service-license-og.jpg",
         width: 1200,
-        height: 800,
+        height: 630,
         alt: "СТС и автомобиль: документы для внесения машины в реестр такси ФГИС",
       },
     ],

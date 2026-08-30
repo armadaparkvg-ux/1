@@ -45,9 +45,9 @@ export const metadata: Metadata = {
     keywords: TAXI_KEYWORDS,
     images: [
       {
-        url: "/images/taxi-premium-hero.webp",
-        width: 1536,
-        height: 1024,
+        url: "/images/taxi-premium-hero-og.jpg",
+        width: 1200,
+        height: 630,
         alt: "Автомобиль для работы в Яндекс Такси на вечерней городской улице",
       },
     ],
