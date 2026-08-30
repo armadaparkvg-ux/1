@@ -5,6 +5,8 @@ import { Car, CheckCircle2, ExternalLink, Landmark, Sparkles } from "lucide-reac
 import { DestinationHero } from "@/components/destination-hero";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { DualPathActions } from "@/components/funnel-actions";
+import { NextStops } from "@/components/next-stops";
+import { useSiteAssistant } from "@/components/site-assistant";
 import { LaborContract } from "@/components/labor-contract";
 import { LaborContractBanner } from "@/components/labor-contract-banner";
 import { Button } from "@/components/ui/button";
@@ -65,6 +67,7 @@ const FORMATS = [
 export function TaxiLanding() {
   const registerHref = fleetGoPath("taxi", "smz");
   const { openRegister } = useRegisterChooser();
+  const { openAssistant } = useSiteAssistant();
 
   return (
     <div>
@@ -186,9 +189,9 @@ export function TaxiLanding() {
                     <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
                       <Icon className="h-5 w-5" aria-hidden />
                     </span>
-                    <h2 className="mt-5 font-display text-xl font-semibold text-foreground">
+                    <h3 className="mt-5 font-display text-xl font-semibold text-foreground">
                       {item.title}
-                    </h2>
+                    </h3>
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                       {item.text}
                     </p>
@@ -224,13 +227,25 @@ export function TaxiLanding() {
               id="taxi-help"
               className="font-display text-2xl font-semibold text-foreground sm:text-3xl"
             >
-              Не уверены, какой формат выбрать?
+              Как выбрать формат работы
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Напишите в чат — подскажем по документам и подключению.{" "}
-              {CONTACTS.hours}.
+              Напишите в чат или спросите пультом сайта. {CONTACTS.hours}.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4">
+              <Button
+                type="button"
+                variant="secondary"
+                size="lg"
+                onClick={() =>
+                  openAssistant({
+                    query: "какой формат такси выбрать",
+                    place: "taxi-help",
+                  })
+                }
+              >
+                Подобрать формат в пульте
+              </Button>
               <Button asChild shine size="lg">
                 <Link
                   href={registerHref}
@@ -251,6 +266,7 @@ export function TaxiLanding() {
           </FadeIn>
         </div>
       </section>
+      <NextStops current="taxi" />
     </div>
   );
 }

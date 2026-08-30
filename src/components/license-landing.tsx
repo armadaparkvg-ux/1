@@ -12,6 +12,7 @@ import { DestinationHero } from "@/components/destination-hero";
 import { FadeIn, SectionHeading } from "@/components/fade-in";
 import { FgisCheckButton } from "@/components/fgis-check-button";
 import { DualPathActions } from "@/components/funnel-actions";
+import { NextStops } from "@/components/next-stops";
 import { CONTACTS } from "@/lib/constants";
 
 const PROCESS = [
@@ -273,6 +274,7 @@ export function LicenseLanding() {
           </FadeIn>
         </div>
       </section>
+      <NextStops current="license" />
     </div>
   );
 }

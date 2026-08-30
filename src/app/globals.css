@@ -20,6 +20,7 @@
 }
 
 html {
+  color-scheme: dark;
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + 16px);
   scroll-padding-bottom: 88px;
@@ -46,6 +47,7 @@ html {
 }
 
 body {
+  touch-action: manipulation;
   color: var(--foreground);
   background:
     radial-gradient(ellipse 70% 36% at 50% -8%, rgba(53, 65, 105, 0.24), transparent 72%),
@@ -174,6 +176,12 @@ body {
 
   .btn-fgis {
     isolation: isolate;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hover-lift:hover {
+    transform: scale(1.02);
   }
 }
 

@@ -76,6 +76,18 @@ export function buildApplyMessage(topic: ApplyTopic = "общая заявка")
   return appendUtmBlock(message);
 }
 
+export function buildQuestionApplyMessage(question: string): string {
+  const clean = question.replace(/\s+/g, " ").trim().slice(0, 240);
+  const message = [
+    "Здравствуйте! Вопрос с сайта park-armada.ru",
+    "",
+    `Вопрос: ${clean || "нужна консультация по подключению"}`,
+    "",
+    "Прошу ответить в чате.",
+  ].join("\n");
+  return appendUtmBlock(message);
+}
+
 export function telegramApplyUrl(message: string): string {
   return `${CONTACTS.telegram}?text=${encodeURIComponent(message)}`;
 }

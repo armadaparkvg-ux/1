@@ -48,6 +48,16 @@ export const NAV_LINKS = [
   { href: "/#contacts", label: "Контакты" },
 ] as const;
 
+/** Десктоп: шесть рабочих путей. Остальное — в поиске, подвале и мобильном меню. */
+export const NAV_PRIMARY = [
+  { href: "/taxi/", label: "Такси" },
+  { href: "/trudovoj-dogovor/", label: "Трудовой" },
+  { href: "/delivery/", label: "Доставка" },
+  { href: "/license/", label: "Лицензия" },
+  { href: "/osgop/", label: "ОСГОП" },
+  { href: "/goroda/", label: "Города" },
+] as const;
+
 export const FOOTER_LINKS = [
   { href: "/o-parke/", label: "О парке" },
   { href: "/taxi/", label: "Подключение к Яндекс Такси" },

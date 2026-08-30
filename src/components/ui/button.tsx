@@ -11,20 +11,20 @@ import { cn } from "@/lib/utils";
  * - pulse: reserved for chat — soft static glow, no aggressive rings
  */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold relative overflow-hidden disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-[transform,box-shadow,background-color,border-color,filter,color] duration-160 ease-out hover-lift active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100",
   {
     variants: {
       variant: {
         default:
-          "bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-accent-foreground shadow-[0_8px_28px_-10px_rgba(245,158,11,0.55)] hover:brightness-105 hover:scale-[1.02]",
+          "bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-accent-foreground shadow-[0_8px_28px_-10px_rgba(245,158,11,0.55)] hover:brightness-105",
         secondary:
-          "bg-surface-elevated text-foreground border border-border/90 hover:border-amber-400/35 hover:bg-muted/80 hover:scale-[1.02]",
+          "bg-surface-elevated text-foreground border border-border/90 hover:border-amber-400/35 hover:bg-muted/80",
         outline:
-          "border border-amber-400/40 bg-transparent text-amber-200 hover:bg-amber-400/10 hover:border-amber-300/55 hover:scale-[1.02]",
+          "border border-amber-400/40 bg-transparent text-amber-200 hover:bg-amber-400/10 hover:border-amber-300/55",
         ghost:
           "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted/60",
         emerald:
-          "bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-400 text-white shadow-[0_8px_28px_-10px_rgba(16,185,129,0.45)] hover:brightness-105 hover:scale-[1.02]",
+          "bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-400 text-white shadow-[0_8px_28px_-10px_rgba(16,185,129,0.45)] hover:brightness-105",
         link: "text-accent underline-offset-4 hover:underline",
       },
       size: {

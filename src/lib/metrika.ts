@@ -33,7 +33,10 @@ export type GoalName =
   | "lead_messenger"
   | "quiz_goal"
   | "quiz_to_courier"
-  | "quiz_finish";
+  | "quiz_finish"
+  | "assistant_open"
+  | "assistant_select"
+  | "assistant_ask";
 
 /** Имена целей — создать такие же в кабинете Метрики */
 export const METRIKA_GOALS = {
@@ -55,6 +58,9 @@ export const METRIKA_GOALS = {
   click_classifier: "click_classifier",
   scroll_50: "scroll_50",
   sticky_shown: "sticky_shown",
+  assistant_open: "assistant_open",
+  assistant_select: "assistant_select",
+  assistant_ask: "assistant_ask",
 } as const;
 
 export type MetrikaGoal = keyof typeof METRIKA_GOALS | string;

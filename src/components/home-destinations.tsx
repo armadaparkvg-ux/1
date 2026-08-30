@@ -89,8 +89,8 @@ export function HomeDestinations() {
               Выберите путь подключения
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Трудовой договор, такси, доставка и документы — всё в одном парке,
-              с переходом на отдельные посадочные.
+              Сначала направление: трудовой договор, Яндекс Такси, доставка или
+              документы ФГИС и ОСГОП. Каждая карточка ведёт на свою посадочную.
             </p>
           </div>
         </FadeIn>
@@ -111,7 +111,7 @@ export function HomeDestinations() {
                     href={item.href}
                     onClick={() => trackGoal(item.goal)}
                     className={cn(
-                      "group relative flex min-h-0 flex-col overflow-hidden rounded-[1.35rem] border border-white/5 p-5 transition-all duration-500 sm:min-h-[240px] sm:p-6",
+                      "group relative flex min-h-0 flex-col overflow-hidden rounded-[1.35rem] border border-white/5 p-5 transition-[border-color,box-shadow,transform] duration-200 ease-out sm:min-h-[240px] sm:p-6",
                       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                       item.featured
                         ? "ring-1 ring-emerald-glow/25 sm:min-h-[260px]"
@@ -195,7 +195,7 @@ export function HomeDestinations() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "group relative flex items-center gap-4 overflow-hidden rounded-[1.25rem] border border-white/5 px-4 py-4 transition-all duration-300 sm:px-5 sm:py-5",
+                    "group relative flex items-center gap-4 overflow-hidden rounded-[1.25rem] border border-white/5 px-4 py-4 transition-[border-color,box-shadow,transform] duration-200 ease-out sm:px-5 sm:py-5",
                     "bg-gradient-to-r from-[#101722]/95 to-[#0b1018]/90",
                     "hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   )}

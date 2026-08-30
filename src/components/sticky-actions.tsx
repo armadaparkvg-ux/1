@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useApply } from "@/components/messenger-apply";
 import { useRegisterChooser } from "@/components/register-chooser";
 import { CONTACTS } from "@/lib/constants";
 import { goal, trackGoal } from "@/lib/metrika";
@@ -16,6 +17,7 @@ import { cn } from "@/lib/utils";
 export function StickyActions() {
   const pathname = usePathname();
   const { openRegister } = useRegisterChooser();
+  const { openApply } = useApply();
   const [visible, setVisible] = useState(false);
   const shownTracked = useRef(false);
 
@@ -55,6 +57,14 @@ export function StickyActions() {
       window.open(CONTACTS.max, "_blank", "noopener,noreferrer");
       return;
     }
+    if (pathname?.startsWith("/license")) {
+      openApply("лицензия ФГИС");
+      return;
+    }
+    if (pathname?.startsWith("/osgop")) {
+      openApply("ОСГОП");
+      return;
+    }
     if (pathname?.startsWith("/taxi")) {
       openRegister({ startAt: "taxi-format" });
       return;
@@ -68,7 +78,11 @@ export function StickyActions() {
 
   const registerLabel = pathname?.startsWith("/trudovoj-dogovor")
     ? "Оформить трудовой"
-    : "Зарегистрироваться";
+    : pathname?.startsWith("/license")
+      ? "Оформить лицензию"
+      : pathname?.startsWith("/osgop")
+        ? "Оформить ОСГОП"
+        : "Зарегистрироваться";
 
   return (
     <div

@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { Search } from "lucide-react";
 import { FadeIn, SectionHeading } from "@/components/fade-in";
 import { FaqList } from "@/components/faq-list";
+import { useSiteAssistant } from "@/components/site-assistant";
 import { Button } from "@/components/ui/button";
 import { FAQ_ITEMS } from "@/lib/seo";
 
@@ -14,6 +16,7 @@ type FaqProps = {
 };
 
 export function Faq({ previewCount, hideHeading = false }: FaqProps) {
+  const { openAssistant } = useSiteAssistant();
   const items =
     typeof previewCount === "number"
       ? FAQ_ITEMS.slice(0, previewCount)
@@ -42,13 +45,22 @@ export function Faq({ previewCount, hideHeading = false }: FaqProps) {
           <FaqList items={items} />
         </FadeIn>
 
-        {isPreview ? (
-          <div className="mt-8 flex justify-center">
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          {isPreview ? (
             <Button asChild size="lg" variant="secondary">
-              <Link href="/faq/">Все вопросы и ответы →</Link>
+              <Link href="/faq/">Все вопросы и ответы</Link>
             </Button>
-          </div>
-        ) : null}
+          ) : null}
+          <Button
+            type="button"
+            size="lg"
+            variant={isPreview ? "outline" : "secondary"}
+            onClick={() => openAssistant({ place: "faq" })}
+          >
+            <Search className="h-4 w-4" aria-hidden />
+            Спросить пультом
+          </Button>
+        </div>
       </div>
     </section>
   );
