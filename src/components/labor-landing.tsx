@@ -311,8 +311,8 @@ export function LaborLanding() {
                 </span>
               </p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Внесение автомобиля в реестр такси. Обычно 1–3 дня. Нужны фото СТС и
-                авто с 4 сторон.
+                Внесение автомобиля в реестр такси. Чат, фото авто и СТС с двух
+                сторон, документ за 1–3 дня по региону, оплата 3 500 ₽ после проверки.
               </p>
               <p className="mt-4 text-sm font-medium text-foreground group-hover:text-accent">
                 Подробнее о лицензии →

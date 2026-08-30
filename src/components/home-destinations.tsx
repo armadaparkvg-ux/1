@@ -55,7 +55,7 @@ const DOCS = [
     href: "/license/",
     icon: FileCheck2,
     title: "Лицензия ФГИС",
-    text: "Внесение авто в реестр такси",
+    text: "Чат, фото авто и СТС, документ за 1–3 дня",
     meta: "3 500 ₽ · 5 лет",
     tone: "accent" as const,
   },
