@@ -44,7 +44,7 @@ cp -f "$SRC_PATH" "${ARTIFACTS}/${SRC_ZIP}"
 cat > out/КАК_ЗАГРУЗИТЬ.txt <<'EOF'
 Загрузка сайта таксопарка «Армада» на хостинг
 ==============================================
-Релиз: hosting-v66 (30.08.2026)
+Релиз: hosting-v67 (30.08.2026)
 
 1. Распакуйте этот ZIP.
 2. В файловом менеджере Reg.ru (server54) откройте КОРЕНЬ сайта:
@@ -61,6 +61,7 @@ cat > out/КАК_ЗАГРУЗИТЬ.txt <<'EOF'
    https://park-armada.ru/feed.xml
    https://park-armada.ru/armadaidx7Kq2Nm9Px4Rt8Wv.txt
    https://park-armada.ru/yandex_618ea4dc33112d20.html
+   https://park-armada.ru/yandex_b7c2eeb461f1dc01.html
 
 Заявка на статике открывает MAX/Telegram с готовым текстом.
 После заливки из репозитория можно отправить IndexNow: npm run indexnow
@@ -75,16 +76,16 @@ rm -f "$ZIP_PATH" "${ARTIFACTS}/${ZIP_NAME}"
     -x "**/.DS_Store"
 )
 cp -f "$ZIP_PATH" "${ARTIFACTS}/${ZIP_NAME}"
-cp -f "$ZIP_PATH" "${OUT_DIR}/park-armada-hosting-v66.zip"
-cp -f "$ZIP_PATH" "${ARTIFACTS}/park-armada-hosting-v66.zip"
+cp -f "$ZIP_PATH" "${OUT_DIR}/park-armada-hosting-v67.zip"
+cp -f "$ZIP_PATH" "${ARTIFACTS}/park-armada-hosting-v67.zip"
 
 # Публичная ссылка на скачивание: GitHub raw из папки hosting-upload/
 mkdir -p "${ROOT}/hosting-upload"
-cp -f "$ZIP_PATH" "${ROOT}/hosting-upload/park-armada-hosting-v66.zip"
+cp -f "$ZIP_PATH" "${ROOT}/hosting-upload/park-armada-hosting-v67.zip"
 cp -f "$ZIP_PATH" "${ROOT}/hosting-upload/park-armada-hosting-latest.zip"
-echo "Download: https://github.com/armadaparkvg-ux/1/raw/cursor/armada-landing-1d2d/hosting-upload/park-armada-hosting-v66.zip"
+echo "Download: https://github.com/armadaparkvg-ux/1/raw/cursor/armada-landing-1d2d/hosting-upload/park-armada-hosting-v67.zip"
 
-ls -lh "$ZIP_PATH" "$SRC_PATH" "${OUT_DIR}/park-armada-hosting-v66.zip"
+ls -lh "$ZIP_PATH" "$SRC_PATH" "${OUT_DIR}/park-armada-hosting-v67.zip"
 echo "Artifacts:"
-ls -lh "${ARTIFACTS}/${ZIP_NAME}" "${ARTIFACTS}/${SRC_ZIP}" "${ARTIFACTS}/park-armada-hosting-v66.zip"
+ls -lh "${ARTIFACTS}/${ZIP_NAME}" "${ARTIFACTS}/${SRC_ZIP}" "${ARTIFACTS}/park-armada-hosting-v67.zip"
 echo "OK: ${ZIP_PATH}"

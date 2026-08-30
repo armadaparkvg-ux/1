@@ -30,7 +30,7 @@ echo "==> Building static site..."
 STATIC_EXPORT=1 npm run build
 
 # Ensure verification + htaccess present
-cp -f public/yandex_618ea4dc33112d20.html out/ 2>/dev/null || true
+cp -f public/yandex_*.html out/ 2>/dev/null || true
 cp -f public/.htaccess out/ 2>/dev/null || true
 
 echo "==> Static site ready in ./out"

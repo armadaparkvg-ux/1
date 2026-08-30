@@ -73,6 +73,9 @@ export const metadata: Metadata = {
     "geo.region": "RU",
     "format-detection": "telephone=yes",
   },
+  verification: {
+    yandex: ["b7c2eeb461f1dc01", "618ea4dc33112d20"],
+  },
 };
 
 export default function RootLayout({
