@@ -55,6 +55,40 @@ const STOPS: Record<string, Stop[]> = {
       text: "Откройте реестр до оплаты",
     },
   ],
+  labor: [
+    {
+      href: "/taxi/",
+      title: "Такси без трудового",
+      text: "Самозанятый и ИП от 1,9%",
+    },
+    {
+      href: "/license/",
+      title: "Лицензия ФГИС",
+      text: "Выписка на авто, 3 500 ₽ на 5 лет",
+    },
+    {
+      href: "/blog/spravka-2ndfl-voditel-taxi/",
+      title: "Справка 2‑НДФЛ",
+      text: "Когда парк выдаёт документы",
+    },
+  ],
+  osgop: [
+    {
+      href: "/license/",
+      title: "Лицензия ФГИС",
+      text: "Реестр такси — отдельно от ОСГОП",
+    },
+    {
+      href: "/taxi/",
+      title: "Подключение к такси",
+      text: "Формат работы в парке",
+    },
+    {
+      href: "/blog/osgop-dlya-taxi-chto-eto/",
+      title: "Что такое ОСГОП",
+      text: "Чем полис отличается от ОСАГО",
+    },
+  ],
 };
 
 export function NextStops({
@@ -74,7 +108,7 @@ export function NextStops({
         </p>
         <ul className="mt-5 grid gap-3 sm:grid-cols-3">
           {items.map((item) => (
-            <li key={item.href}>
+            <li key={item.href} className="cv-auto">
               <Link
                 href={item.href}
                 className="premium-card group flex h-full items-start justify-between gap-3 rounded-2xl p-5 hover:border-accent/40"

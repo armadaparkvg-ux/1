@@ -73,7 +73,6 @@ export function pageMetadata(opts: {
   return {
     title: { absolute: title },
     description: opts.description,
-    ...(opts.keywords ? { keywords: opts.keywords } : {}),
     ...(opts.robots ? { robots: opts.robots } : {}),
     alternates: { canonical: url },
     openGraph: pageOpenGraph({

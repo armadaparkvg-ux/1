@@ -28,8 +28,8 @@ export function HomeIntent() {
               Что вам нужно на сайте
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Выберите путь или откройте пульт: поиск ведёт на страницы и
-              готовые ответы с сайта.
+              Выберите путь или откройте пульт: он ищет по страницам сайта и
+              показывает готовые ответы, без выдуманных цифр.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">

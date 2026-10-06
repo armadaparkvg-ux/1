@@ -28,6 +28,7 @@ export function Hero() {
           srcSet="/images/hero-bg-768.webp"
           type="image/webp"
         />
+        <source srcSet="/images/hero-bg.webp" type="image/webp" />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/hero-bg.webp"

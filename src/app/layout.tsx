@@ -10,7 +10,6 @@ import { Providers } from "@/components/providers";
 import { JsonLd } from "@/components/json-ld";
 import { SITE } from "@/lib/constants";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/schema";
-import { SEO_KEYWORDS } from "@/lib/seo";
 import { DEFAULT_OG_IMAGE } from "@/lib/seo-meta";
 import "./globals.css";
 
@@ -28,7 +27,6 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
-  keywords: SEO_KEYWORDS.slice(0, 28),
   authors: [{ name: SITE.fullName }],
   creator: SITE.fullName,
   publisher: SITE.fullName,

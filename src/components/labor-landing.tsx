@@ -19,6 +19,9 @@ import { DualPathActions } from "@/components/funnel-actions";
 import { LaborContract } from "@/components/labor-contract";
 import { LaborLimitHeroBanner } from "@/components/labor-limit-hero-banner";
 import { ContactButtons } from "@/components/contact-buttons";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { PageAnswer } from "@/components/page-answer";
+import { NextStops } from "@/components/next-stops";
 import { Button } from "@/components/ui/button";
 import { FaqList } from "@/components/faq-list";
 import { CONTACTS } from "@/lib/constants";
@@ -134,7 +137,13 @@ export function LaborLanding() {
         </div>
 
         <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-3 sm:px-6 sm:pb-16 lg:px-8">
-          <p className="text-sm font-medium uppercase tracking-wide text-emerald-glow">
+          <Breadcrumbs
+            items={[
+              { name: "Главная", href: "/" },
+              { name: "Трудовой договор" },
+            ]}
+          />
+          <p className="mt-5 text-sm font-medium uppercase tracking-wide text-emerald-glow">
             Таксопарк «Армада» · трудовой договор
           </p>
           <h1 className="mt-3 max-w-3xl font-display text-3xl font-semibold tracking-tight text-foreground text-balance sm:text-4xl lg:text-5xl">
@@ -168,6 +177,14 @@ export function LaborLanding() {
               ))}
             </ul>
           </div>
+          <PageAnswer
+            items={[
+              { label: "Тарифы", value: "3%+300₽ или 5%+100₽" },
+              { label: "Налоги", value: "платит парк" },
+              { label: "Оформление", value: "только через поддержку, без Fleet" },
+              { label: "Документы", value: "2‑НДФЛ и договор по запросу" },
+            ]}
+          />
         </div>
       </section>
 
@@ -407,6 +424,7 @@ export function LaborLanding() {
           </FadeIn>
         </div>
       </section>
+      <NextStops current="labor" />
     </div>
   );
 }

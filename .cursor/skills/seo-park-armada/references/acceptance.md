@@ -15,7 +15,7 @@ curl -sI https://park-armada.ru/yandex-taxi-psmz/             # → 301 на /bl
 - Статьи блога без хвоста `| Армада`.
 - `og:image` и `og:type` на всех 45.
 - `og.jpg` физически 1200×630.
-- 3 тарифа на `/trudovoj-dogovor/` с осмысленным `alt`.
+- 2 тарифа на `/trudovoj-dogovor/` с осмысленным `alt`.
 - Анкоры хаба `/goroda/` — имя города, регион вне `<a>`.
 - https://validator.schema.org/ — 0 ошибок на главной, статье, городской.
 - Яндекс.Вебмастер → Валидатор микроразметки: Organization и BreadcrumbList (делает владелец под своим логином).

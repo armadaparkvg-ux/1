@@ -7,7 +7,6 @@ import {
   MessageCircle,
   Wallet,
 } from "lucide-react";
-import { Breadcrumbs } from "@/components/breadcrumbs";
 import { DestinationHero } from "@/components/destination-hero";
 import { FadeIn, SectionHeading } from "@/components/fade-in";
 import { FgisCheckButton } from "@/components/fgis-check-button";
@@ -61,6 +60,16 @@ export function LicenseLanding() {
         primaryLabel="Смотреть процесс"
         secondaryHref="#apply-service"
         secondaryLabel="Написать в чат"
+        crumbs={[
+          { name: "Главная", href: "/" },
+          { name: "Лицензия такси ФГИС" },
+        ]}
+        answer={[
+          { label: "Стоимость", value: "3 500 ₽ на 5 лет" },
+          { label: "Срок", value: "обычно 1–3 дня по региону" },
+          { label: "Оплата", value: "после проверки документа" },
+          { label: "Что прислать", value: "фото авто и СТС с двух сторон" },
+        ]}
       >
         <div className="inline-flex items-center gap-3 rounded-2xl border border-accent/25 bg-[#0b111c]/75 px-4 py-3 backdrop-blur">
           <p className="font-display text-xl font-semibold text-foreground">
@@ -71,15 +80,6 @@ export function LicenseLanding() {
           </p>
         </div>
       </DestinationHero>
-
-      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-        <Breadcrumbs
-          items={[
-            { name: "Главная", href: "/" },
-            { name: "Лицензия такси ФГИС" },
-          ]}
-        />
-      </div>
 
       <section
         id="oformlenie"

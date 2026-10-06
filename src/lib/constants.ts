@@ -48,7 +48,7 @@ export const NAV_LINKS = [
   { href: "/#contacts", label: "Контакты" },
 ] as const;
 
-/** Десктоп: шесть рабочих путей. Остальное — в поиске, подвале и мобильном меню. */
+/** Десктоп: шесть рабочих путей. Остальное — в «Ещё», поиске и подвале. */
 export const NAV_PRIMARY = [
   { href: "/taxi/", label: "Такси" },
   { href: "/trudovoj-dogovor/", label: "Трудовой" },
@@ -56,6 +56,71 @@ export const NAV_PRIMARY = [
   { href: "/license/", label: "Лицензия" },
   { href: "/osgop/", label: "ОСГОП" },
   { href: "/goroda/", label: "Города" },
+] as const;
+
+export const NAV_MORE = [
+  { href: "/faq/", label: "FAQ" },
+  { href: "/blog/", label: "Статьи" },
+  { href: "/o-parke/", label: "О парке" },
+] as const;
+
+export const NAV_MOBILE_GROUPS = [
+  {
+    title: "Подключение",
+    links: [
+      { href: "/taxi/", label: "Такси" },
+      { href: "/trudovoj-dogovor/", label: "Трудовой договор" },
+      { href: "/delivery/", label: "Доставка" },
+    ],
+  },
+  {
+    title: "Документы на авто",
+    links: [
+      { href: "/license/", label: "Лицензия ФГИС" },
+      { href: "/osgop/", label: "ОСГОП" },
+    ],
+  },
+  {
+    title: "Справка",
+    links: [
+      { href: "/goroda/", label: "Города" },
+      { href: "/faq/", label: "FAQ" },
+      { href: "/blog/", label: "Статьи" },
+      { href: "/o-parke/", label: "О парке" },
+      { href: "/#contacts", label: "Контакты" },
+    ],
+  },
+] as const;
+
+export const FOOTER_GROUPS = [
+  {
+    title: "Подключение",
+    links: [
+      { href: "/taxi/", label: "Яндекс Такси" },
+      { href: "/trudovoj-dogovor/", label: "Трудовой договор" },
+      { href: "/delivery/", label: "Яндекс Доставка" },
+      { href: "/o-parke/", label: "О парке" },
+    ],
+  },
+  {
+    title: "Документы на авто",
+    links: [
+      { href: "/license/", label: "Лицензия ФГИС" },
+      { href: "/osgop/", label: "ОСГОП" },
+      { href: "/requisites/", label: "Реквизиты" },
+      { href: "/offer/", label: "Оферта" },
+    ],
+  },
+  {
+    title: "Справка",
+    links: [
+      { href: "/faq/", label: "FAQ" },
+      { href: "/goroda/", label: "Города" },
+      { href: "/blog/", label: "Статьи" },
+      { href: "/#max-channel", label: "Акции в MAX" },
+      { href: "/privacy/", label: "Конфиденциальность" },
+    ],
+  },
 ] as const;
 
 export const FOOTER_LINKS = [

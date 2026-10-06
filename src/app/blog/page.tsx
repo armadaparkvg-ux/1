@@ -82,7 +82,7 @@ export default function BlogIndexPage() {
             </div>
             <ul className="mt-5 space-y-3">
               {articles.map((article) => (
-                <li key={article.slug}>
+                <li key={article.slug} className="cv-auto">
                   <Link
                     href={`/blog/${article.slug}/`}
                     className="block rounded-2xl border border-border bg-surface/40 p-5 transition-colors hover:border-accent/40 hover:bg-muted/30"

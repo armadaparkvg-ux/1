@@ -251,17 +251,23 @@ function SiteAssistantDialog({
         </div>
 
         {showEmpty ? (
-          <div className="flex flex-wrap gap-2 px-4 py-4 sm:px-5">
-            {SITE_INTENTS.map((intent) => (
-              <button
-                key={intent.id}
-                type="button"
-                onClick={() => setQuery(intent.query)}
-                className="rounded-full border border-border bg-surface px-3 py-1.5 text-sm text-foreground hover:border-accent/40 hover:text-accent"
-              >
-                {intent.label}
-              </button>
-            ))}
+          <div className="px-4 py-4 sm:px-5">
+            <p className="text-sm text-muted-foreground">
+              Пульт читает страницы «Армады» и отвечает только ими. Это не
+              нейросеть: если на сайте нет ответа — отправим вопрос в MAX.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {SITE_INTENTS.map((intent) => (
+                <button
+                  key={intent.id}
+                  type="button"
+                  onClick={() => setQuery(intent.query)}
+                  className="rounded-full border border-border bg-surface px-3 py-1.5 text-sm text-foreground hover:border-accent/40 hover:text-accent"
+                >
+                  {intent.label}
+                </button>
+              ))}
+            </div>
           </div>
         ) : null}
 

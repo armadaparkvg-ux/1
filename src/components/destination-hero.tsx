@@ -1,7 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { PageAnswer } from "@/components/page-answer";
 import { Button } from "@/components/ui/button";
+import type { BreadcrumbItem } from "@/lib/schema";
 import { cn } from "@/lib/utils";
 
 type DestinationHeroProps = {
@@ -16,6 +19,8 @@ type DestinationHeroProps = {
   secondaryLabel?: string;
   onPrimaryClick?: () => void;
   accent?: "amber" | "emerald";
+  crumbs?: BreadcrumbItem[];
+  answer?: readonly { label: string; value: string }[];
   children?: React.ReactNode;
 };
 
@@ -31,6 +36,8 @@ export function DestinationHero({
   secondaryLabel,
   onPrimaryClick,
   accent = "amber",
+  crumbs,
+  answer,
   children,
 }: DestinationHeroProps) {
   const isEmerald = accent === "emerald";
@@ -52,13 +59,17 @@ export function DestinationHero({
       <div className="absolute inset-0 bg-gradient-to-t from-[#07090d] via-transparent to-[#07090d]/35" />
 
       <div className="relative mx-auto max-w-7xl px-4 pb-10 sm:px-6 sm:pb-16 lg:px-8">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-        >
-          <ArrowLeft className="h-4 w-4" aria-hidden />
-          На главную
-        </Link>
+        {crumbs?.length ? (
+          <Breadcrumbs items={crumbs} />
+        ) : (
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden />
+            На главную
+          </Link>
+        )}
         <div className="mt-6 max-w-3xl sm:mt-12">
           <p
             className={cn(
@@ -112,6 +123,7 @@ export function DestinationHero({
               </Button>
             ) : null}
           </div>
+          {answer?.length ? <PageAnswer items={answer} /> : null}
           {children ? <div className="mt-6 sm:mt-10">{children}</div> : null}
         </div>
       </div>

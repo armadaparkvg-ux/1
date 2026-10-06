@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CONTACTS, FOOTER_LINKS, SITE } from "@/lib/constants";
+import { CONTACTS, FOOTER_GROUPS, LEGAL, SITE } from "@/lib/constants";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -22,92 +22,67 @@ export function Footer() {
             <p className="mt-3 text-xs text-muted-foreground/80">{SITE.domain}</p>
           </div>
 
-          <div>
-            <p className="text-sm font-semibold text-foreground">Разделы</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              {FOOTER_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="hover:text-accent transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-sm font-semibold text-foreground">Документы</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/privacy/" className="hover:text-accent transition-colors">
-                  Политика конфиденциальности
-                </Link>
-              </li>
-              <li>
-                <Link href="/offer/" className="hover:text-accent transition-colors">
-                  Агентское соглашение (оферта)
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/requisites/"
-                  className="hover:text-accent transition-colors"
-                >
-                  Реквизиты компании
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog/" className="hover:text-accent transition-colors">
-                  Полезные статьи
-                </Link>
-              </li>
-              <li>
-                <a href="/feed.xml" className="hover:text-accent transition-colors">
-                  RSS-лента статей
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-sm font-semibold text-foreground">Связь</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              <li>
-                <a
-                  href={CONTACTS.phoneHref}
-                  className="hover:text-accent transition-colors"
-                >
-                  {CONTACTS.phoneDisplay}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={CONTACTS.telegram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-accent transition-colors"
-                >
-                  Telegram
-                </a>
-              </li>
-              <li>
-                <a
-                  href={CONTACTS.max}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-accent transition-colors"
-                >
-                  MAX
-                </a>
-              </li>
-            </ul>
-          </div>
+          {FOOTER_GROUPS.map((group) => (
+            <div key={group.title}>
+              <p className="text-sm font-semibold text-foreground">{group.title}</p>
+              <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+                {group.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="transition-colors hover:text-accent"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        <div className="divider-glow mt-10" />
+        <div className="mt-10 grid gap-6 border-t border-border/70 pt-6 md:grid-cols-2">
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li>
+              <a
+                href={CONTACTS.phoneHref}
+                className="transition-colors hover:text-accent"
+              >
+                {CONTACTS.phoneDisplay}
+              </a>
+            </li>
+            <li>
+              <a
+                href={CONTACTS.max}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-accent"
+              >
+                MAX — основной чат заявок
+              </a>
+            </li>
+            <li>
+              <a
+                href={CONTACTS.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-accent"
+              >
+                Telegram — запасной канал
+              </a>
+            </li>
+            <li>
+              <a href="/feed.xml" className="transition-colors hover:text-accent">
+                RSS статей
+              </a>
+            </li>
+          </ul>
+          <p className="text-xs leading-relaxed text-muted-foreground md:text-right">
+            Юрлицо: {LEGAL.legalName}, ИНН {LEGAL.inn}. Парк не сдаёт автомобили.
+          </p>
+        </div>
+
+        <div className="divider-glow mt-8" />
         <p className="mt-6 text-center text-xs text-muted-foreground">
           © {year} {SITE.fullName}. Подключение к Яндекс Такси. Все права
           защищены.

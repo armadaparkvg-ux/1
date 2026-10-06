@@ -56,8 +56,8 @@ const FORMATS = [
   {
     id: "labor",
     title: "Трудовой договор",
-    value: "3 формата",
-    text: "Официальное оформление: выберите один из трёх вариантов ниже.",
+    value: "2 тарифа",
+    text: "Официальное оформление: 3%+300₽ или 5%+100₽ — через поддержку парка.",
     registerHref: null as string | null,
     iframeSrc: null as string | null,
     featured: false,
@@ -81,6 +81,16 @@ export function TaxiLanding() {
         secondaryHref="#formats"
         secondaryLabel="Форматы на странице"
         onPrimaryClick={() => openRegister({ startAt: "taxi-format" })}
+        crumbs={[
+          { name: "Главная", href: "/" },
+          { name: "Такси" },
+        ]}
+        answer={[
+          { label: "Комиссия парка", value: "от 1,9% для самозанятого и ИП" },
+          { label: "Активация", value: "обычно 10–15 минут" },
+          { label: "Авто", value: "своё, парк машины не сдаёт" },
+          { label: "Трудовой", value: "3%+300₽ или 5%+100₽, через чат" },
+        ]}
       >
         <ol className="grid gap-2 sm:grid-cols-3">
           {[

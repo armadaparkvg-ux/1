@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import {
-  ArrowLeft,
   Bike,
   Car,
   Package,
@@ -13,6 +12,8 @@ import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-
 import { DualPathActions } from "@/components/funnel-actions";
 import { NextStops } from "@/components/next-stops";
 import { ContactButtons } from "@/components/contact-buttons";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { PageAnswer } from "@/components/page-answer";
 import { Button } from "@/components/ui/button";
 import {
   COURIER_BENEFITS,
@@ -106,13 +107,12 @@ export function CourierLanding() {
         className="relative isolate overflow-hidden border-b border-border bg-[#080b11] pt-[72px]"
       >
         <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          >
-            <ArrowLeft className="h-4 w-4" aria-hidden />
-            На главную
-          </Link>
+          <Breadcrumbs
+            items={[
+              { name: "Главная", href: "/" },
+              { name: "Доставка" },
+            ]}
+          />
         </div>
 
         <div className="relative mx-auto w-full max-w-[1600px] bg-[#0a0a0a]">
@@ -154,6 +154,14 @@ export function CourierLanding() {
               <Link href="#courier-tariffs">Тарифы на странице</Link>
             </Button>
           </div>
+          <PageAnswer
+            items={[
+              { label: "Тарифы", value: "пеший, авто, мото, грузовой" },
+              { label: "Активация", value: "обычно 10–15 минут" },
+              { label: "Оформление", value: "форма Fleet или заявка в чат" },
+              { label: "Выплаты", value: "через парк «Армада»" },
+            ]}
+          />
           <ol className="mt-8 grid gap-2 sm:grid-cols-3">
             {[
               "1. Регистрация",

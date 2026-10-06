@@ -4,6 +4,7 @@ import { DestinationHero } from "@/components/destination-hero";
 import { FadeIn, SectionHeading } from "@/components/fade-in";
 import { DualPathActions } from "@/components/funnel-actions";
 import { FgisCheckButton } from "@/components/fgis-check-button";
+import { NextStops } from "@/components/next-stops";
 import { CONTACTS } from "@/lib/constants";
 
 type ServiceType = "license" | "osgop";
@@ -62,6 +63,25 @@ export function DocumentServiceLanding({ type }: { type: ServiceType }) {
         imageAlt={content.heroAlt}
         primaryHref="#apply-service"
         primaryLabel="Перейти к заявке"
+        crumbs={[
+          { name: "Главная", href: "/" },
+          { name: type === "license" ? "Лицензия такси ФГИС" : "ОСГОП" },
+        ]}
+        answer={
+          type === "license"
+            ? [
+                { label: "Стоимость", value: "3 500 ₽ на 5 лет" },
+                { label: "Срок", value: "обычно 1–3 дня" },
+                { label: "Оплата", value: "после проверки документа" },
+                { label: "Что прислать", value: "фото авто и СТС с двух сторон" },
+              ]
+            : [
+                { label: "Стоимость", value: "3 400 ₽ на 1 год" },
+                { label: "Что это", value: "страховка перевозчика, не ОСАГО" },
+                { label: "Оформление", value: "через поддержку парка" },
+                { label: "Консультация", value: CONTACTS.hours },
+              ]
+        }
       >
         <div className="inline-flex items-center gap-3 rounded-2xl border border-accent/25 bg-[#0b111c]/75 px-4 py-3 backdrop-blur">
           <Icon className="h-5 w-5 text-accent" aria-hidden />
@@ -152,6 +172,7 @@ export function DocumentServiceLanding({ type }: { type: ServiceType }) {
           </FadeIn>
         </div>
       </section>
+      <NextStops current={type === "license" ? "license" : "osgop"} />
     </div>
   );
 }

@@ -6,6 +6,17 @@ export type BreadcrumbItem = {
   href?: string;
 };
 
+const SITE_PARTS = [
+  { path: "/taxi/", name: "Подключение к Яндекс Такси" },
+  { path: "/trudovoj-dogovor/", name: "Трудовой договор" },
+  { path: "/delivery/", name: "Курьер Яндекс Доставка" },
+  { path: "/license/", name: "Лицензия такси ФГИС" },
+  { path: "/osgop/", name: "ОСГОП" },
+  { path: "/goroda/", name: "Подключение по городам" },
+  { path: "/faq/", name: "Частые вопросы" },
+  { path: "/blog/", name: "Статьи" },
+] as const;
+
 export function websiteJsonLd() {
   return {
     "@context": "https://schema.org",
@@ -13,8 +24,17 @@ export function websiteJsonLd() {
     "@id": `${SITE.url}/#website`,
     url: `${SITE.url}/`,
     name: SITE.fullName,
+    description: SITE.description,
     inLanguage: "ru-RU",
     publisher: { "@id": `${SITE.url}/#organization` },
+    about: { "@id": `${SITE.url}/#organization` },
+    hasPart: SITE_PARTS.map((part) => ({
+      "@type": "WebPage",
+      "@id": `${SITE.url}${part.path}#webpage`,
+      url: `${SITE.url}${part.path}`,
+      name: part.name,
+      isPartOf: { "@id": `${SITE.url}/#website` },
+    })),
   };
 }
 
@@ -25,6 +45,7 @@ export function organizationJsonLd() {
     "@id": `${SITE.url}/#organization`,
     name: SITE.fullName,
     legalName: LEGAL.legalName,
+    description: SITE.description,
     url: `${SITE.url}/`,
     logo: `${SITE.url}/icon.svg`,
     image: `${SITE.url}/og.jpg`,
@@ -64,6 +85,13 @@ export function organizationJsonLd() {
       },
     },
     sameAs: [CONTACTS.telegram, CONTACTS.max],
+    knowsAbout: [
+      "Яндекс Такси",
+      "Яндекс Доставка",
+      "трудовой договор для водителей такси",
+      "лицензия такси ФГИС",
+      "ОСГОП",
+    ],
   };
 }
 
@@ -163,6 +191,8 @@ export function articleJsonLd(article: Article) {
       image: `${SITE.url}/og.jpg`,
       datePublished: article.date,
       dateModified: article.date,
+      inLanguage: "ru-RU",
+      isAccessibleForFree: true,
       author: { "@id": `${SITE.url}/#organization` },
       publisher: { "@id": `${SITE.url}/#organization` },
       mainEntityOfPage: {

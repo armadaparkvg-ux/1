@@ -2,8 +2,9 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
-import { Menu, Search, X } from "lucide-react";
-import { CONTACTS, NAV_LINKS, NAV_PRIMARY, SITE } from "@/lib/constants";
+import { usePathname } from "next/navigation";
+import { ChevronDown, Menu, Search, X } from "lucide-react";
+import { CONTACTS, NAV_MORE, NAV_MOBILE_GROUPS, NAV_PRIMARY, SITE } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { IconContactLinks } from "@/components/contact-buttons";
 import { useSiteAssistant } from "@/components/site-assistant";
@@ -11,6 +12,7 @@ import { cn } from "@/lib/utils";
 
 export function Header() {
   const { openAssistant } = useSiteAssistant();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuId = useId();
@@ -45,6 +47,12 @@ export function Header() {
     openAssistant({ place: "header" });
   };
 
+  const isCurrent = (href: string) => {
+    if (!pathname || href.startsWith("/#")) return false;
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(href);
+  };
+
   return (
     <header
       className={cn(
@@ -70,11 +78,43 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-lg px-2.5 py-2 text-sm text-muted-foreground transition-colors duration-160 hover:bg-muted/50 hover:text-foreground"
+              aria-current={isCurrent(link.href) ? "page" : undefined}
+              className={cn(
+                "rounded-lg px-2.5 py-2 text-sm transition-colors duration-160 hover:bg-muted/50 hover:text-foreground",
+                isCurrent(link.href)
+                  ? "bg-muted/60 font-medium text-foreground"
+                  : "text-muted-foreground"
+              )}
             >
               {link.label}
             </Link>
           ))}
+          <details className="relative">
+            <summary
+              className="flex cursor-pointer list-none items-center gap-1 rounded-lg px-2.5 py-2 text-sm text-muted-foreground transition-colors duration-160 hover:bg-muted/50 hover:text-foreground [&::-webkit-details-marker]:hidden"
+              aria-label="Ещё разделы: FAQ, статьи, о парке"
+            >
+              Ещё
+              <ChevronDown className="h-3.5 w-3.5" aria-hidden />
+            </summary>
+            <div className="absolute right-0 z-20 mt-1 min-w-[11rem] rounded-xl border border-border bg-[#0b0f14] p-1 shadow-lg">
+              {NAV_MORE.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isCurrent(link.href) ? "page" : undefined}
+                  className={cn(
+                    "block rounded-lg px-3 py-2 text-sm hover:bg-muted/50 hover:text-foreground",
+                    isCurrent(link.href)
+                      ? "bg-muted/60 font-medium text-foreground"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </details>
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
@@ -121,21 +161,38 @@ export function Header() {
             <button
               type="button"
               onClick={openSearch}
-              className="mb-1 inline-flex items-center gap-2 rounded-xl px-4 py-3 text-left text-base text-foreground hover:bg-muted"
+              className="mb-2 inline-flex items-center gap-2 rounded-xl px-4 py-3 text-left text-base text-foreground hover:bg-muted"
             >
               <Search className="h-4 w-4 text-accent" aria-hidden />
-              Поиск по сайту
+              Найти на сайте
             </button>
-            {NAV_LINKS.map((link, index) => (
-              <Link
-                key={link.href}
-                ref={index === 0 ? firstLinkRef : undefined}
-                href={link.href}
-                className="rounded-xl px-4 py-3 text-base text-foreground hover:bg-muted"
-                onClick={() => setOpen(false)}
-              >
-                {link.label}
-              </Link>
+            {NAV_MOBILE_GROUPS.map((group) => (
+              <div key={group.title} className="mt-2 flex flex-col">
+                <p className="px-4 pb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+                  {group.title}
+                </p>
+                {group.links.map((link, index) => (
+                  <Link
+                    key={link.href}
+                    ref={
+                      group.title === "Подключение" && index === 0
+                        ? firstLinkRef
+                        : undefined
+                    }
+                    href={link.href}
+                    aria-current={isCurrent(link.href) ? "page" : undefined}
+                    className={cn(
+                      "rounded-xl px-4 py-3 text-base hover:bg-muted",
+                      isCurrent(link.href)
+                        ? "bg-muted/70 font-medium text-foreground"
+                        : "text-foreground"
+                    )}
+                    onClick={() => setOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
             ))}
             <div className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
               <Button asChild shine className="w-full">
