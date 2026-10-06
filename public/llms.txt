@@ -15,7 +15,7 @@ RSS статей: https://park-armada.ru/feed.xml
 - [Главная](https://park-armada.ru/): направления такси, трудовой договор, доставка, ФГИС, ОСГОП
 - [О парке](https://park-armada.ru/o-parke/): цифры парка и форматы сотрудничества
 - [Подключение к Яндекс Такси](https://park-armada.ru/taxi/): самозанятый, ИП, трудовой
-- [Трудовой договор](https://park-armada.ru/trudovoj-dogovor/): без СМЗ и ИП, три тарифа
+- [Трудовой договор](https://park-armada.ru/trudovoj-dogovor/): без СМЗ и ИП, два тарифа
 - [Курьер Яндекс Доставка](https://park-armada.ru/delivery/): пеший, авто, мото, грузовой
 - [Лицензия ФГИС](https://park-armada.ru/license/): 3 500 ₽ на 5 лет
 - [ОСГОП](https://park-armada.ru/osgop/): 3 400 ₽ на 1 год

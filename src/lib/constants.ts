@@ -84,12 +84,6 @@ export const LABOR_OPTIONS = [
     title: "5% + 100₽ ежедневные списания",
     short: "5% + 100₽",
   },
-  {
-    id: "6pct",
-    value: "6% без списаний",
-    title: "6% без ежедневных списаний",
-    short: "6% без списаний",
-  },
 ] as const;
 
 export const SITE = {

@@ -22,11 +22,7 @@ import {
 import { trackGoal } from "@/lib/metrika";
 import { cn } from "@/lib/utils";
 
-const LABOR_TOPICS = new Set<ApplyTopic>([
-  "3% + 300₽",
-  "5% + 100₽",
-  "6% без списаний",
-]);
+const LABOR_TOPICS = new Set<ApplyTopic>(["3% + 300₽", "5% + 100₽"]);
 
 function trackApplyLead(topic: ApplyTopic, channel: "telegram" | "max") {
   trackGoal("lead_messenger", { channel, topic });

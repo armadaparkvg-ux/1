@@ -29,7 +29,7 @@ UTM campaign: `p4_trudovoj`
 | Название | Описание | URL |
 |----------|----------|-----|
 | Трудовой договор | 3 тарифа без СМЗ и ИП | `https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=sitelink_labor&utm_content={ad_id}&utm_term={keyword}` |
-| Тарифы 3% / 5% / 6% | Выбрать схему комиссии | `https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=sitelink_labor&utm_content={ad_id}&utm_term={keyword}#labor-tariffs` |
+| Тарифы 3% / 5% | Выбрать схему комиссии | `https://park-armada.ru/trudovoj-dogovor/?utm_source=yandex&utm_medium=cpc&utm_campaign=sitelink_labor&utm_content={ad_id}&utm_term={keyword}#labor-tariffs` |
 | Лицензия ФГИС | Реестр такси 3500₽ / 5 лет | `https://park-armada.ru/license/?utm_source=yandex&utm_medium=cpc&utm_campaign=sitelink_license&utm_content={ad_id}&utm_term={keyword}` |
 | ОСГОП | Страхование 3400₽ / год | `https://park-armada.ru/osgop/?utm_source=yandex&utm_medium=cpc&utm_campaign=sitelink_osgop&utm_content={ad_id}&utm_term={keyword}` |
 | Все форматы такси | СМЗ, ИП, трудовой | `https://park-armada.ru/taxi/?utm_source=yandex&utm_medium=cpc&utm_campaign=sitelink_formats&utm_content={ad_id}&utm_term={keyword}#formats` |
@@ -172,7 +172,7 @@ hh
 
 **Заголовок 1:** Трудовой договор в Яндекс Такси  
 **Заголовок 2:** Без самозанятости и ИП  
-**Текст:** Парк «Армада»: 3 тарифа (3%+300₽ / 5%+100₽ / 6%). Налоги платит парк. 2‑НДФЛ. Удалённо по РФ.
+**Текст:** Парк «Армада»: 2 тарифа (3%+300₽ / 5%+100₽). Налоги платит парк. 2‑НДФЛ. Удалённо по РФ.
 
 **Заголовок 1:** Превысили лимит самозанятого?  
 **Заголовок 2:** Подключаем по ТК РФ  

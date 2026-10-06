@@ -40,18 +40,6 @@ const OPTIONS: {
       "Более низкие ежедневные списания при чуть большем проценте комиссии. Подходит тем, кто хочет снизить фиксированную часть расходов на налоги.",
     ],
   },
-  {
-    id: "opt-6pct",
-    topic: LABOR_OPTIONS[2].value,
-    title: "6% без ежедневных списаний",
-    badge: "Без фикс. списаний",
-    image: "/images/tariff-selfemployed.jpg",
-    imageAlt:
-      "Трудовой договор без ежедневных списаний — комиссия 6% для подтверждения занятости в Яндекс Про",
-    body: [
-      "Суть документа (трудового договора) — только для подтверждения типа занятости в аккаунте Яндекса. Раз в месяц для прохождения проверки в аккаунте парка делаете нам запрос и мы вас оформляем, проходите проверку — увольняем по договору, но продолжаете работать в парке.",
-    ],
-  },
 ];
 
 type LaborContractProps = {
@@ -62,7 +50,7 @@ type LaborContractProps = {
 
 export function LaborContract({
   eyebrow = "Шаг 3 · Трудовой договор",
-  title = "Выберите один из трёх форматов",
+  title = "Выберите один из двух тарифов",
   description = "Авторегистрации для трудового договора нет — оформление только через поддержку парка. Выберите вариант и отправьте заявку в чат.",
 }: LaborContractProps = {}) {
   return (
@@ -85,7 +73,7 @@ export function LaborContract({
           />
         </FadeIn>
 
-        <Stagger className="mt-14 grid gap-6 lg:grid-cols-3" stagger={0.1}>
+        <Stagger className="mt-14 grid gap-6 lg:grid-cols-2" stagger={0.1}>
           {OPTIONS.map((opt) => (
             <StaggerItem key={opt.id}>
               <article
@@ -97,7 +85,7 @@ export function LaborContract({
                     src={opt.image}
                     alt={opt.imageAlt}
                     fill
-                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover transition-transform duration-500 hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f1724] via-transparent to-transparent" />
