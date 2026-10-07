@@ -45,9 +45,9 @@ const STOPS: Record<string, Stop[]> = {
       text: "Формат и регистрация в парке",
     },
     {
-      href: "/osgop/",
-      title: "ОСГОП",
-      text: "Страхование 3 400 ₽ на год",
+      href: "/goroda/",
+      title: "Города подключения",
+      text: "Условия в вашем городе, оформление удалённо",
     },
     {
       href: "/blog/proverit-avto-v-fgis/",
@@ -70,23 +70,6 @@ const STOPS: Record<string, Stop[]> = {
       href: "/blog/spravka-2ndfl-voditel-taxi/",
       title: "Справка 2‑НДФЛ",
       text: "Когда парк выдаёт документы",
-    },
-  ],
-  osgop: [
-    {
-      href: "/license/",
-      title: "Лицензия ФГИС",
-      text: "Реестр такси — отдельно от ОСГОП",
-    },
-    {
-      href: "/taxi/",
-      title: "Подключение к такси",
-      text: "Формат работы в парке",
-    },
-    {
-      href: "/blog/osgop-dlya-taxi-chto-eto/",
-      title: "Что такое ОСГОП",
-      text: "Чем полис отличается от ОСАГО",
     },
   ],
 };

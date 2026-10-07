@@ -19,6 +19,10 @@ DirectoryIndex index.html
   # Indexed 404: former PSMZ landing
   RewriteRule ^yandex-taxi-psmz/?$ /blog/parkovyj-samozanyatyj/ [R=301,L]
 
+  # Услуга ОСГОП снята — не оставляем битые URL
+  RewriteRule ^osgop/?$ /taxi/ [R=301,L]
+  RewriteRule ^blog/osgop-dlya-taxi-chto-eto/?$ /blog/ [R=301,L]
+
   # Keep real files/folders
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d

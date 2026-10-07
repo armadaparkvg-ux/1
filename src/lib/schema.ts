@@ -11,7 +11,6 @@ const SITE_PARTS = [
   { path: "/trudovoj-dogovor/", name: "Трудовой договор" },
   { path: "/delivery/", name: "Курьер Яндекс Доставка" },
   { path: "/license/", name: "Лицензия такси ФГИС" },
-  { path: "/osgop/", name: "ОСГОП" },
   { path: "/goroda/", name: "Подключение по городам" },
   { path: "/faq/", name: "Частые вопросы" },
   { path: "/blog/", name: "Статьи" },
@@ -90,7 +89,6 @@ export function organizationJsonLd() {
       "Яндекс Доставка",
       "трудовой договор для водителей такси",
       "лицензия такси ФГИС",
-      "ОСГОП",
     ],
   };
 }

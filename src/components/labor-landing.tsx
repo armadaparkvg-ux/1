@@ -311,14 +311,14 @@ export function LaborLanding() {
             <SectionHeading
               id="labor-extras-heading"
               eyebrow="Дополнительно"
-              title="Лицензия и ОСГОП — если нужно под ключ"
-              description="Подключение по трудовому договору отдельно; документы на авто оформляем по запросу."
+              title="Лицензия ФГИС — если нужно под ключ"
+              description="Подключение по трудовому договору отдельно; запись авто в реестр такси оформляем по запросу."
             />
           </FadeIn>
-          <FadeIn delay={0.08} className="mt-8 sm:mt-12 grid gap-5 sm:grid-cols-2">
+          <FadeIn delay={0.08} className="mt-8 sm:mt-12">
             <Link
               href="/license/"
-              className="group rounded-2xl border border-border/80 bg-[#0b111c]/40 p-6 transition-colors hover:border-accent/35"
+              className="group block max-w-xl rounded-2xl border border-border/80 bg-[#0b111c]/40 p-6 transition-colors hover:border-accent/35"
             >
               <p className="text-sm font-medium text-accent">ФГИС · реестр такси</p>
               <p className="mt-2 font-display text-2xl font-semibold text-foreground">
@@ -333,25 +333,6 @@ export function LaborLanding() {
               </p>
               <p className="mt-4 text-sm font-medium text-foreground group-hover:text-accent">
                 Подробнее о лицензии →
-              </p>
-            </Link>
-            <Link
-              href="/osgop/"
-              className="group rounded-2xl border border-border/80 bg-[#0b111c]/40 p-6 transition-colors hover:border-accent/35"
-            >
-              <p className="text-sm font-medium text-accent">Страхование</p>
-              <p className="mt-2 font-display text-2xl font-semibold text-foreground">
-                3 400 ₽{" "}
-                <span className="text-sm font-medium text-muted-foreground">
-                  на 1 год
-                </span>
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                ОСГОП для легальной работы в такси. Консультация по документам перед
-                оформлением.
-              </p>
-              <p className="mt-4 text-sm font-medium text-foreground group-hover:text-accent">
-                Подробнее об ОСГОП →
               </p>
             </Link>
           </FadeIn>

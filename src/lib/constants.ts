@@ -41,20 +41,18 @@ export const NAV_LINKS = [
   { href: "/trudovoj-dogovor/", label: "Трудовой" },
   { href: "/delivery/", label: "Доставка" },
   { href: "/license/", label: "Лицензия" },
-  { href: "/osgop/", label: "ОСГОП" },
   { href: "/faq/", label: "FAQ" },
   { href: "/goroda/", label: "Города" },
   { href: "/#max-channel", label: "Акции" },
   { href: "/#contacts", label: "Контакты" },
 ] as const;
 
-/** Десктоп: шесть рабочих путей. Остальное — в «Ещё», поиске и подвале. */
+/** Десктоп: пять рабочих путей. Остальное — в «Ещё», поиске и подвале. */
 export const NAV_PRIMARY = [
   { href: "/taxi/", label: "Такси" },
   { href: "/trudovoj-dogovor/", label: "Трудовой" },
   { href: "/delivery/", label: "Доставка" },
   { href: "/license/", label: "Лицензия" },
-  { href: "/osgop/", label: "ОСГОП" },
   { href: "/goroda/", label: "Города" },
 ] as const;
 
@@ -75,10 +73,7 @@ export const NAV_MOBILE_GROUPS = [
   },
   {
     title: "Документы на авто",
-    links: [
-      { href: "/license/", label: "Лицензия ФГИС" },
-      { href: "/osgop/", label: "ОСГОП" },
-    ],
+    links: [{ href: "/license/", label: "Лицензия ФГИС" }],
   },
   {
     title: "Справка",
@@ -106,7 +101,6 @@ export const FOOTER_GROUPS = [
     title: "Документы на авто",
     links: [
       { href: "/license/", label: "Лицензия ФГИС" },
-      { href: "/osgop/", label: "ОСГОП" },
       { href: "/requisites/", label: "Реквизиты" },
       { href: "/offer/", label: "Оферта" },
     ],
@@ -129,7 +123,6 @@ export const FOOTER_LINKS = [
   { href: "/trudovoj-dogovor/", label: "Трудовой договор без СМЗ и ИП" },
   { href: "/delivery/", label: "Курьеры Яндекс Доставка" },
   { href: "/license/", label: "Лицензия такси ФГИС" },
-  { href: "/osgop/", label: "ОСГОП для такси" },
   { href: "/faq/", label: "Частые вопросы (FAQ)" },
   { href: "/goroda/", label: "Подключение по городам" },
   { href: "/#max-channel", label: "Акции и бонусы в MAX" },

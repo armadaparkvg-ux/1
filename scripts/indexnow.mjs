@@ -30,7 +30,6 @@ function urlsFromSitemap() {
     `${SITE}/trudovoj-dogovor/`,
     `${SITE}/delivery/`,
     `${SITE}/license/`,
-    `${SITE}/osgop/`,
     `${SITE}/faq/`,
     `${SITE}/blog/`,
     `${SITE}/goroda/`,

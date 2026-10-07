@@ -42,12 +42,6 @@ export const SITE_INTENTS: SiteIntent[] = [
     query: "лицензия такси фгис",
   },
   {
-    id: "osgop",
-    label: "ОСГОП",
-    href: "/osgop/",
-    query: "осгоп страхование",
-  },
-  {
     id: "delivery",
     label: "Доставка",
     href: "/delivery/",
@@ -127,15 +121,6 @@ const PAGES: SiteEntry[] = [
     applyTopic: "лицензия ФГИС",
   },
   {
-    id: "page-osgop",
-    kind: "service",
-    title: "ОСГОП для такси",
-    href: "/osgop/",
-    keywords: ["осгоп", "страховка", "страхование", "3400", "3 400"],
-    snippet: "Страхование ОСГОП — 3 400 ₽ на 1 год. Оформление через чат парка.",
-    applyTopic: "ОСГОП",
-  },
-  {
     id: "page-about",
     kind: "page",
     title: "О парке «Армада»",
@@ -150,7 +135,7 @@ const PAGES: SiteEntry[] = [
     title: "Частые вопросы",
     href: "/faq/",
     keywords: ["faq", "вопрос", "ответы"],
-    snippet: "Ответы про тарифы, ФГИС, ОСГОП, доставку и оформление в парке.",
+    snippet: "Ответы про тарифы, ФГИС, доставку и оформление в парке.",
   },
   {
     id: "page-cities",
@@ -210,7 +195,6 @@ const ARTICLES_SLIM: { slug: string; title: string }[] = [
   { slug: "parkovyj-samozanyatyj", title: "Парковый самозанятый в Яндекс Такси" },
   { slug: "parkovyj-ip-momentalnyj-vyvod", title: "Парковый ИП и моментальный вывод" },
   { slug: "tip-zanyatosti-ne-podtverzhden", title: "«Тип занятости не подтверждён» в Яндекс Такси" },
-  { slug: "osgop-dlya-taxi-chto-eto", title: "ОСГОП для такси: что это и сколько стоит" },
   { slug: "klassifikator-avto-yandex-taxi", title: "Классификатор авто Яндекс Такси" },
   { slug: "dokumenty-dlya-voditelya-yandex", title: "Какие документы нужны водителю Яндекс Такси" },
   { slug: "udalennoe-podklyuchenie-po-rossii", title: "Удалённое подключение по всей России" },
@@ -273,7 +257,6 @@ export const DESTINATION_LABELS: Record<string, string> = {
   "/trudovoj-dogovor/": "Трудовой договор",
   "/delivery/": "Доставка",
   "/license/": "Лицензия ФГИС",
-  "/osgop/": "ОСГОП",
   "/courier/": "Курьер",
   "/goroda/": "Города",
   ...CITY_PATH_LABELS,

@@ -22,8 +22,8 @@ export const TOPIC_META: Record<
     landing: "/delivery/",
   },
   docs: {
-    title: "ФГИС и ОСГОП",
-    description: "Лицензия такси, реестр, страхование ОСГОП.",
+    title: "Лицензия ФГИС",
+    description: "Запись авто в реестр такси, чеклист документов.",
     landing: "/license/",
   },
   park: {
@@ -46,7 +46,6 @@ const SLUG_TOPIC: Record<string, ContentTopic> = {
   "parkovyj-samozanyatyj": "taxi",
   "parkovyj-ip-momentalnyj-vyvod": "taxi",
   "tip-zanyatosti-ne-podtverzhden": "labor",
-  "osgop-dlya-taxi-chto-eto": "docs",
   "klassifikator-avto-yandex-taxi": "taxi",
   "dokumenty-dlya-voditelya-yandex": "taxi",
   "udalennoe-podklyuchenie-po-rossii": "park",
@@ -64,7 +63,7 @@ export function getArticleTopic(article: Pick<Article, "slug" | "ctaHref">): Con
   const href = article.ctaHref ?? "";
   if (href.includes("/delivery")) return "delivery";
   if (href.includes("/trudovoj")) return "labor";
-  if (href.includes("/license") || href.includes("/osgop")) return "docs";
+  if (href.includes("/license")) return "docs";
   if (href.includes("/o-parke") || href.includes("/goroda")) return "park";
   return "taxi";
 }
@@ -166,8 +165,8 @@ export const SERVICE_LINKS: Record<
   ],
   docs: [
     { href: "/license/", label: "Лицензия ФГИС" },
-    { href: "/osgop/", label: "ОСГОП" },
     { href: "/taxi/", label: "Подключение к такси" },
+    { href: "/faq/", label: "Частые вопросы" },
   ],
   park: [
     { href: "/o-parke/", label: "О парке" },

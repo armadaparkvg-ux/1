@@ -151,12 +151,11 @@ export function CityLanding({ city }: { city: CityPage }) {
           </p>
 
           <h3 className="mt-6 font-display text-lg font-semibold text-foreground">
-            ФГИС и ОСГОП
+            Лицензия ФГИС
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
             Внесение авто в реестр такси — 3 500 ₽ на 5 лет, обычно 1–3 дня.
-            ОСГОП — 3 400 ₽ в год. Оплата по факту оформления, без ежемесячной
-            «подписки парка».
+            Оплата по факту оформления, без ежемесячной «подписки парка».
           </p>
 
           <h3 className="mt-6 font-display text-lg font-semibold text-foreground">

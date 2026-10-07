@@ -44,15 +44,6 @@ const SERVICES: {
     cta: "Уточнить условия",
     topic: "реестр перевозчиков",
   },
-  {
-    image: "/images/service-osgop.jpg",
-    imageAlt: "Страхование ОСГОП для такси",
-    title: "ОСГОП (страхование)",
-    description: "Оформляем страхование ОСГОП. Стоимость — 3 400 ₽ на 1 год.",
-    docs: null,
-    cta: "Оформить ОСГОП",
-    topic: "ОСГОП",
-  },
 ];
 
 export function Services() {
@@ -67,12 +58,12 @@ export function Services() {
           <SectionHeading
             id="services-heading"
             eyebrow="Доп. услуги"
-            title="Лицензия такси, реестр перевозчиков и ОСГОП"
-            description="Дополнительные услуги парка «Армада»: внесение авто в реестр такси (ФГИС), реестр перевозчиков и страхование ОСГОП."
+            title="Лицензия такси и реестр перевозчиков"
+            description="Дополнительные услуги парка «Армада»: внесение авто в реестр такси (ФГИС) и реестр перевозчиков."
           />
         </FadeIn>
 
-        <Stagger className="mt-14 grid gap-6 md:grid-cols-3" stagger={0.1}>
+        <Stagger className="mt-14 grid gap-6 md:grid-cols-2" stagger={0.1}>
           {SERVICES.map((service) => (
             <StaggerItem key={service.title}>
               <article className="glass flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">

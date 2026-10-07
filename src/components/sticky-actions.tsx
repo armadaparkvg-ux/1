@@ -61,10 +61,6 @@ export function StickyActions() {
       openApply("лицензия ФГИС");
       return;
     }
-    if (pathname?.startsWith("/osgop")) {
-      openApply("ОСГОП");
-      return;
-    }
     if (pathname?.startsWith("/taxi")) {
       openRegister({ startAt: "taxi-format" });
       return;
@@ -80,9 +76,7 @@ export function StickyActions() {
     ? "Оформить трудовой"
     : pathname?.startsWith("/license")
       ? "Оформить лицензию"
-      : pathname?.startsWith("/osgop")
-        ? "Оформить ОСГОП"
-        : "Зарегистрироваться";
+      : "Зарегистрироваться";
 
   return (
     <div

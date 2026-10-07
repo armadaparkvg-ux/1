@@ -265,10 +265,6 @@ export function LicenseLanding() {
                 <Link href="/taxi/" className="text-accent hover:underline">
                   Сначала подключение к Яндекс Такси
                 </Link>
-                {" · "}
-                <Link href="/osgop/" className="text-accent hover:underline">
-                  ОСГОП отдельно
-                </Link>
               </p>
             </div>
           </FadeIn>

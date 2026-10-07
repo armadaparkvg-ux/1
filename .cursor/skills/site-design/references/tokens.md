@@ -70,7 +70,7 @@ PWA: `background_color` `#0B0F14`, `theme_color` `#F59E0B`.
 | Sticky mobile | `sticky-actions.tsx` | не перекрывать |
 | Подвал | `footer.tsx` | 4 колонки с `md` |
 | Статья | `article-page.tsx` | блог |
-| Сервисы ФГИС/ОСГОП | `document-service-landing.tsx` | разные фото |
+| Лицензия ФГИС | `license-landing.tsx` | своё фото, не путать с другими услугами |
 
 Утилиты CSS: `.premium-card`, `.glass`, `.premium-grid`, `.metric-tile`, `.gradient-text`, `.divider-glow`, `.section-anchor`.
 

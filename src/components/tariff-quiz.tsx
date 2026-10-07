@@ -69,9 +69,7 @@ export function TariffQuiz() {
     answers.goal === "connect" || answers.goal === "unsure";
   const maxSteps = !answers.goal
     ? 3
-    : answers.goal === "delivery" ||
-        answers.goal === "fgis" ||
-        answers.goal === "osgop"
+    : answers.goal === "delivery" || answers.goal === "fgis"
       ? 2
       : needsFormat
         ? answers.format === "labor" || answers.format === "help"
@@ -96,11 +94,7 @@ export function TariffQuiz() {
   const chooseGoal = (goal: QuizGoal) => {
     setAnswers({ goal });
     trackGoal("quiz_goal", { goal });
-    if (
-      goal === "fgis" ||
-      goal === "osgop" ||
-      goal === "delivery"
-    ) {
+    if (goal === "fgis" || goal === "delivery") {
       setStep(4);
     } else {
       setStep(2);

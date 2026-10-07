@@ -45,7 +45,7 @@ export function HomeIntent() {
           </div>
         </div>
 
-        <ul className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+        <ul className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
           {SITE_INTENTS.map((intent) => (
             <li key={intent.id}>
               <Link

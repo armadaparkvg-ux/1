@@ -8,7 +8,6 @@ import {
   Car,
   FileCheck2,
   Package,
-  ShieldCheck,
 } from "lucide-react";
 import { FadeIn, Stagger, StaggerItem } from "@/components/fade-in";
 import { trackGoal } from "@/lib/metrika";
@@ -57,15 +56,6 @@ const DOCS = [
     title: "Лицензия ФГИС",
     text: "Чат, фото авто и СТС, документ за 1–3 дня",
     meta: "3 500 ₽ · 5 лет",
-    tone: "accent" as const,
-  },
-  {
-    href: "/osgop/",
-    icon: ShieldCheck,
-    title: "ОСГОП",
-    text: "Страхование для легальной работы",
-    meta: "3 400 ₽ · 1 год",
-    tone: "emerald" as const,
   },
 ] as const;
 
@@ -90,7 +80,7 @@ export function HomeDestinations() {
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
               Сначала направление: трудовой договор, Яндекс Такси, доставка или
-              документы ФГИС и ОСГОП. Каждая карточка ведёт на свою посадочную.
+              лицензия ФГИС. Каждая карточка ведёт на свою посадочную.
             </p>
           </div>
         </FadeIn>
@@ -186,10 +176,9 @@ export function HomeDestinations() {
             })}
           </Stagger>
 
-          <div className="mt-3 grid gap-3 sm:mt-4 sm:grid-cols-2 sm:gap-4">
+          <div className="mt-3 grid gap-3 sm:mt-4 sm:gap-4">
             {DOCS.map((item) => {
               const Icon = item.icon;
-              const isEmerald = item.tone === "emerald";
               return (
                 <Link
                   key={item.href}
@@ -200,14 +189,7 @@ export function HomeDestinations() {
                     "hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   )}
                 >
-                  <span
-                    className={cn(
-                      "inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border",
-                      isEmerald
-                        ? "border-emerald-glow/30 bg-emerald-glow/12 text-emerald-glow"
-                        : "border-accent/30 bg-accent/12 text-accent"
-                    )}
-                  >
+                  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-accent/30 bg-accent/12 text-accent">
                     <Icon className="h-5 w-5" aria-hidden />
                   </span>
                   <span className="min-w-0 flex-1">
@@ -217,20 +199,12 @@ export function HomeDestinations() {
                     <span className="mt-0.5 block text-sm text-muted-foreground">
                       {item.text}
                     </span>
-                    <span
-                      className={cn(
-                        "mt-1.5 block text-xs font-semibold tracking-wide",
-                        isEmerald ? "text-emerald-glow" : "text-accent"
-                      )}
-                    >
+                    <span className="mt-1.5 block text-xs font-semibold tracking-wide text-accent">
                       {item.meta}
                     </span>
                   </span>
                   <ArrowUpRight
-                    className={cn(
-                      "h-5 w-5 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5",
-                      isEmerald ? "text-emerald-glow" : "text-accent"
-                    )}
+                    className="h-5 w-5 shrink-0 text-accent transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                     aria-hidden
                   />
                 </Link>

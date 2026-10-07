@@ -59,12 +59,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.75,
     },
     {
-      url: `${SITE.url}/osgop/`,
-      lastModified: today,
-      changeFrequency: "monthly",
-      priority: 0.75,
-    },
-    {
       url: `${SITE.url}/faq/`,
       lastModified: new Date("2026-08-23"),
       changeFrequency: "monthly",

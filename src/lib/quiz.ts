@@ -5,7 +5,6 @@ export type QuizGoal =
   | "connect"
   | "delivery"
   | "fgis"
-  | "osgop"
   | "unsure";
 export type QuizFormat = "self" | "ip" | "labor" | "help";
 export type QuizPriority =
@@ -49,11 +48,6 @@ export const QUIZ_GOALS: {
     id: "fgis",
     label: "Лицензия ФГИС",
     hint: "Внести авто в реестр такси",
-  },
-  {
-    id: "osgop",
-    label: "Оформить ОСГОП",
-    hint: "Страхование 3 400 ₽ / год",
   },
   {
     id: "unsure",
@@ -217,20 +211,6 @@ export function resolveQuizResult(answers: QuizAnswers): QuizResult {
         "Оплата по факту выполненной работы",
         "Нужны фото авто и СТС с двух сторон",
         "Оформление удалённо по всей России",
-      ],
-    };
-  }
-
-  if (answers.goal === "osgop") {
-    return {
-      topic: "ОСГОП",
-      title: "ОСГОП (страхование)",
-      summary:
-        "Оформим ОСГОП за 3 400 ₽ на 1 год — для легальной работы в такси.",
-      why: [
-        "Нужно для допуска к заказам",
-        "Поможем собрать документы",
-        "Консультация 8:00–21:00 Мск",
       ],
     };
   }
