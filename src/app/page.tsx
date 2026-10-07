@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/hero";
 import { HomeIntent } from "@/components/home-intent";
 import { HomeDestinations } from "@/components/home-destinations";
-import { ConnectPath } from "@/components/connect-path";
 import { HomeCities } from "@/components/home-cities";
 import { MaxChannel } from "@/components/max-channel";
 import { Faq } from "@/components/faq";
@@ -28,7 +27,6 @@ export default function HomePage() {
       <Hero />
       <HomeIntent />
       <HomeDestinations />
-      <ConnectPath />
       <HomeCities />
       <MaxChannel />
       <Faq previewCount={10} />

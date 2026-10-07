@@ -42,11 +42,11 @@ export function HomeIntent() {
               id="intent-heading"
               className="mt-2 font-display text-2xl font-semibold tracking-tight text-foreground text-balance sm:text-3xl"
             >
-              Три шага, без обходных кнопок
+              Три шага до заявки
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Сначала направление, потом формат, потом заявка. Пульт ищет по
-              страницам сайта и не подставляет чужие цифры.
+              Сначала направление, потом формат, потом заявка. Если путь
+              неочевиден — откройте пульт, он отвечает текстами с сайта.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
