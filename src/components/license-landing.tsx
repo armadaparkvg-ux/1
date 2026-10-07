@@ -12,6 +12,7 @@ import { FadeIn, SectionHeading } from "@/components/fade-in";
 import { FgisCheckButton } from "@/components/fgis-check-button";
 import { DualPathActions } from "@/components/funnel-actions";
 import { NextStops } from "@/components/next-stops";
+import { RouteHint } from "@/components/route-hint";
 import { CONTACTS } from "@/lib/constants";
 
 const PROCESS = [
@@ -95,6 +96,10 @@ export function LicenseLanding() {
               description="Пять шагов по порядку. Не начинайте со оплаты: сначала чат, фото, выписка и проверка."
             />
           </FadeIn>
+
+          <div className="mx-auto mt-8 max-w-3xl">
+            <RouteHint id="license" />
+          </div>
 
           <ol className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 xl:grid-cols-5 xl:gap-5">
             {PROCESS.map((step) => {

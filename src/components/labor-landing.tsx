@@ -22,6 +22,7 @@ import { ContactButtons } from "@/components/contact-buttons";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PageAnswer } from "@/components/page-answer";
 import { NextStops } from "@/components/next-stops";
+import { RouteHint } from "@/components/route-hint";
 import { Button } from "@/components/ui/button";
 import { FaqList } from "@/components/faq-list";
 import { CONTACTS } from "@/lib/constants";
@@ -204,6 +205,12 @@ export function LaborLanding() {
               </StaggerItem>
             ))}
           </Stagger>
+        </div>
+      </section>
+
+      <section className="border-b border-border py-8 sm:py-10" aria-label="Подсказка по трудовому договору">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <RouteHint id="labor" />
         </div>
       </section>
 

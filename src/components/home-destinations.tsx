@@ -21,6 +21,8 @@ const MAIN = [
     eyebrow: "Главное направление",
     title: "Трудовой договор",
     text: "Официальное оформление без СМЗ и ИП. Тарифы 3%+300 и 5%+100 — по ТК РФ с парком.",
+    next: "Дальше: выбрать тариф и написать в чат",
+    action: "Смотреть тарифы",
     tone: "emerald" as const,
     goal: "click_labor_apply" as const,
     featured: true,
@@ -32,6 +34,8 @@ const MAIN = [
     eyebrow: "Яндекс Такси",
     title: "Такси",
     text: "Самозанятый и ИП от 1,9%. Классы Эконом–Элит, авторегистрация онлайн.",
+    next: "Дальше: самозанятый, ИП или переход на трудовой",
+    action: "Выбрать формат",
     tone: "accent" as const,
     goal: "directions_taxi" as const,
     featured: false,
@@ -43,6 +47,8 @@ const MAIN = [
     eyebrow: "Яндекс Доставка",
     title: "Доставка",
     text: "Пеший, авто, мото и грузовой курьер — отдельные тарифы и формы.",
+    next: "Дальше: тип курьера, затем форма или чат",
+    action: "Выбрать тип курьера",
     tone: "emerald" as const,
     goal: "directions_delivery" as const,
     featured: false,
@@ -54,8 +60,9 @@ const DOCS = [
     href: "/license/",
     icon: FileCheck2,
     title: "Лицензия ФГИС",
-    text: "Чат, фото авто и СТС, документ за 1–3 дня",
+    text: "Сначала проверка реестра, затем фото и оплата по факту",
     meta: "3 500 ₽ · 5 лет",
+    action: "Оформить выписку",
   },
 ] as const;
 
@@ -79,8 +86,8 @@ export function HomeDestinations() {
               Выберите путь подключения
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Сначала направление: трудовой договор, Яндекс Такси, доставка или
-              лицензия ФГИС. Каждая карточка ведёт на свою посадочную.
+              Одна карточка — один маршрут. На странице уже будут формат, цена и
+              кнопка заявки.
             </p>
           </div>
         </FadeIn>
@@ -161,13 +168,14 @@ export function HomeDestinations() {
                       <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
                         {item.text}
                       </p>
+                      <p className="mt-2 text-sm text-foreground/80">{item.next}</p>
                       <span
                         className={cn(
                           "mt-5 pt-0 text-sm font-semibold sm:mt-auto sm:pt-6",
                           isEmerald ? "text-emerald-glow" : "text-accent"
                         )}
                       >
-                        Открыть страницу
+                        {item.action}
                       </span>
                     </div>
                   </Link>
@@ -201,6 +209,9 @@ export function HomeDestinations() {
                     </span>
                     <span className="mt-1.5 block text-xs font-semibold tracking-wide text-accent">
                       {item.meta}
+                    </span>
+                    <span className="mt-2 block text-sm font-semibold text-accent">
+                      {item.action}
                     </span>
                   </span>
                   <ArrowUpRight

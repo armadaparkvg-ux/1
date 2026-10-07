@@ -6,6 +6,7 @@ import { DestinationHero } from "@/components/destination-hero";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { DualPathActions } from "@/components/funnel-actions";
 import { NextStops } from "@/components/next-stops";
+import { RouteHint } from "@/components/route-hint";
 import { useSiteAssistant } from "@/components/site-assistant";
 import { LaborContract } from "@/components/labor-contract";
 import { LaborContractBanner } from "@/components/labor-contract-banner";
@@ -173,6 +174,9 @@ export function TaxiLanding() {
               </StaggerItem>
             ))}
           </Stagger>
+          <div className="mx-auto mt-6 max-w-3xl">
+            <RouteHint id="taxi" />
+          </div>
         </div>
       </section>
 

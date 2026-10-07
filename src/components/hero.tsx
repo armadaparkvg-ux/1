@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { CheckCircle2, MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRegisterChooser } from "@/components/register-chooser";
@@ -64,14 +65,8 @@ export function Hero() {
           </p>
 
           <div className="mt-5 flex flex-col gap-2.5 sm:mt-8 sm:gap-3">
-            <Button
-              type="button"
-              shine
-              size="lg"
-              className="w-full shadow-glow sm:w-auto"
-              onClick={() => openRegister()}
-            >
-              Зарегистрироваться онлайн
+            <Button asChild shine size="lg" className="w-full shadow-glow sm:w-auto">
+              <Link href="/#directions">Выбрать направление</Link>
             </Button>
             <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap sm:items-center sm:gap-3">
               <Button
@@ -118,6 +113,13 @@ export function Hero() {
                 </a>
               </Button>
             </div>
+            <button
+              type="button"
+              onClick={() => openRegister()}
+              className="self-start text-sm font-semibold text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              Уже знаю формат — к регистрации
+            </button>
           </div>
 
           <ul className="mt-5 flex flex-wrap gap-x-3 gap-y-1.5 text-[11px] font-medium text-foreground/85 sm:mt-7 sm:gap-x-4 sm:gap-y-2 sm:text-sm">

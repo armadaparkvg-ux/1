@@ -11,6 +11,7 @@ import { DeliveryHeroBanner } from "@/components/delivery-hero-banner";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { DualPathActions } from "@/components/funnel-actions";
 import { NextStops } from "@/components/next-stops";
+import { RouteHint } from "@/components/route-hint";
 import { ContactButtons } from "@/components/contact-buttons";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PageAnswer } from "@/components/page-answer";
@@ -164,9 +165,9 @@ export function CourierLanding() {
           />
           <ol className="mt-8 grid gap-2 sm:grid-cols-3">
             {[
-              "1. Регистрация",
-              "2. Тариф курьера",
-              "3. Первые заказы",
+              "1. Тип курьера",
+              "2. Форма или чат",
+              "3. Первый слот",
             ].map((item) => (
               <li
                 key={item}
@@ -277,22 +278,24 @@ export function CourierLanding() {
           <FadeIn>
             <SectionHeading
               id="courier-guides"
-              eyebrow="Полезные статьи"
-              title="Доходы, оформление и виды доставки"
-              description="Короткие гайды под запросы «работа курьером», «сколько зарабатывает курьер» и выбор формата."
+              eyebrow="Перед заявкой"
+              title="Чем курьер отличается от такси"
+              description="Одна выдержка из статьи. Остальные гайды — ссылками, без второй витрины."
             />
           </FadeIn>
-          <ul className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 lg:grid-cols-4">
-            {RELATED_ARTICLES.map((item) => (
+          <div className="mx-auto mt-8 max-w-3xl">
+            <RouteHint id="delivery" />
+          </div>
+          <ul className="mx-auto mt-4 flex max-w-3xl flex-wrap gap-x-4 gap-y-2 text-sm">
+            {RELATED_ARTICLES.filter(
+              (item) => item.href !== "/blog/vidy-sotrudnichestva-kurer/"
+            ).map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="premium-card block rounded-2xl p-5 transition-colors hover:border-accent/40"
+                  className="font-semibold text-accent underline-offset-4 hover:underline"
                 >
-                  <p className="font-display text-lg font-semibold text-foreground">
-                    {item.title}
-                  </p>
-                  <p className="mt-2 text-sm text-accent">Читать →</p>
+                  {item.title}
                 </Link>
               </li>
             ))}
