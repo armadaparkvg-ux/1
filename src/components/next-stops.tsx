@@ -8,7 +8,7 @@ const STOPS: Record<string, Stop[]> = {
     {
       href: "/trudovoj-dogovor/",
       title: "Трудовой договор",
-      text: "Если нужен ТК без СМЗ и ИП",
+      text: "Если нужен договор без самозанятости и ИП",
     },
     {
       href: "/license/",
@@ -35,14 +35,14 @@ const STOPS: Record<string, Stop[]> = {
     {
       href: "/trudovoj-dogovor/",
       title: "Трудовой договор",
-      text: "Если нужен ТК без СМЗ и ИП",
+      text: "Если нужен договор без самозанятости и ИП",
     },
   ],
   license: [
     {
       href: "/taxi/",
       title: "Подключение к такси",
-      text: "Формат и регистрация в парке",
+      text: "Самозанятый, ИП или трудовой договор",
     },
     {
       href: "/goroda/",
@@ -84,10 +84,10 @@ export function NextStops({
     <nav aria-label="Что открыть дальше" className="py-10 sm:py-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-          Дальше по сайту
+          Другие услуги
         </p>
-        <p className="mt-2 font-display text-xl font-semibold text-foreground sm:text-2xl">
-          Следующие страницы по теме
+        <p className="mt-2 max-w-2xl font-display text-xl font-semibold text-foreground sm:text-2xl">
+          Если нужно другое
         </p>
         <ul className="mt-5 grid gap-3 sm:grid-cols-3">
           {items.map((item) => (

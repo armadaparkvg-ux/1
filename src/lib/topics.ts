@@ -13,7 +13,7 @@ export const TOPIC_META: Record<
   },
   labor: {
     title: "Трудовой договор",
-    description: "Работа без СМЗ и ИП, деприоритет, 2‑НДФЛ, лимит самозанятости.",
+    description: "Работа без самозанятости и ИП, справка 2‑НДФЛ, лимит самозанятого.",
     landing: "/trudovoj-dogovor/",
   },
   delivery: {

@@ -26,7 +26,7 @@ const FACTS = [
     icon: Car,
     value: "3 800+",
     label: "водителей такси самозанятых",
-    hint: "парковый СМЗ и ИП",
+    hint: "самозанятые и ИП через парк",
   },
   {
     icon: Briefcase,
@@ -113,7 +113,7 @@ export function AboutParkLanding() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="secondary">
-              <Link href="/#directions">Выбрать направление</Link>
+              <Link href="/#directions">Что вам нужно</Link>
             </Button>
           </div>
         </div>

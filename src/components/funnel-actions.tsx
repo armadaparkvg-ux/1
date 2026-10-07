@@ -38,12 +38,12 @@ type DualPathProps = {
  */
 export function DualPathActions({
   registerHref,
-  registerLabel = "Авторегистрация",
+  registerLabel = "Зарегистрироваться",
   iframeSrc,
   iframeTitle = "Форма регистрации",
   fleetTrack,
   applyTopic,
-  applyLabel = "Оформить через поддержку парка",
+  applyLabel = "Написать менеджеру",
   className,
   chats = true,
 }: DualPathProps) {
@@ -104,7 +104,7 @@ export function DualPathActions({
               setShowForm(true);
             }}
           >
-            Открыть форму на сайте
+            Заполнить заявку здесь
           </Button>
         )
       ) : null}
@@ -119,8 +119,8 @@ export function DualPathActions({
         <div className="pt-1">
           <p className="mb-2 text-center text-xs font-medium uppercase tracking-wide text-muted-foreground">
             {registerHref || applyTopic
-              ? "или напишите в поддержку парка"
-              : "Напишите в поддержку парка"}
+              ? "или напишите менеджеру"
+              : "Напишите менеджеру"}
           </p>
           <ContactButtons showLabels size="sm" className="justify-center" />
         </div>

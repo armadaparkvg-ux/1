@@ -4,8 +4,8 @@ import { pageMetadata } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
   ...pageMetadata({
-    title: "Переход к авторегистрации",
-    description: "Переход к форме авторегистрации Яндекс Fleet через парк «Армада».",
+    title: "Открываем заявку",
+    description: "Переход к заявке на подключение через парк «Армада».",
     path: "/go/fleet/",
     robots: { index: false, follow: false },
   }),

@@ -91,7 +91,7 @@ export function FleetGoClient() {
     return (
       <div className="mx-auto flex min-h-[50vh] max-w-lg flex-col items-center justify-center gap-4 px-4 text-center">
         <p className="text-lg text-foreground">
-          Ссылка авторегистрации недействительна.
+          Ссылка на заявку недействительна.
         </p>
         <Link href="/delivery/" className="text-accent hover:underline">
           К доставке
@@ -111,7 +111,7 @@ export function FleetGoClient() {
       <p className="text-lg text-foreground">
         {isLabor
           ? "Переходим к оформлению трудового договора…"
-          : "Переходим к авторегистрации Яндекс…"}
+          : "Открываем заявку на подключение…"}
       </p>
       <p className="text-sm text-muted-foreground">
         {manualUrl ? (
@@ -123,7 +123,7 @@ export function FleetGoClient() {
               rel="noopener noreferrer"
               className="text-accent hover:underline"
             >
-              {isLabor ? "откройте чат вручную" : "откройте форму вручную"}
+              {isLabor ? "откройте чат вручную" : "откройте заявку вручную"}
             </a>
             .
           </>

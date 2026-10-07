@@ -6,6 +6,7 @@ import { DestinationHero } from "@/components/destination-hero";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { DualPathActions } from "@/components/funnel-actions";
 import { NextStops } from "@/components/next-stops";
+import { RouteHint } from "@/components/route-hint";
 import { useSiteAssistant } from "@/components/site-assistant";
 import { LaborContract } from "@/components/labor-contract";
 import { LaborContractBanner } from "@/components/labor-contract-banner";
@@ -30,7 +31,7 @@ const CLASSES = [
   {
     icon: Landmark,
     title: "Любой подходящий класс",
-    text: "Сначала проверьте авто в классификаторе — затем выберите формат оформления ниже.",
+    text: "Сначала проверьте авто в классификаторе. Ниже выберите самозанятого, ИП или трудовой договор.",
   },
 ] as const;
 
@@ -48,7 +49,7 @@ const FORMATS = [
     id: "ip",
     title: "Парковый ИП",
     value: "1,9%",
-    text: "Формат ИП и моментальный вывод средств.",
+    text: "ИП и моментальный вывод денег.",
     registerHref: FORMS.ip,
     iframeSrc: FORMS.ipIframe,
     featured: true,
@@ -57,7 +58,7 @@ const FORMATS = [
     id: "labor",
     title: "Трудовой договор",
     value: "2 тарифа",
-    text: "Официальное оформление: 3%+300₽ или 5%+100₽ — через поддержку парка.",
+    text: "Официальное оформление: 3%+300₽ или 5%+100₽. Напишите в MAX или Telegram.",
     registerHref: null as string | null,
     iframeSrc: null as string | null,
     featured: false,
@@ -77,9 +78,9 @@ export function TaxiLanding() {
         description="Комиссия от 1,9%. Самозанятый, ИП или трудовой договор. Активация 10–15 минут, удалённо по всей России."
         image="/images/taxi-premium-hero.webp"
         imageAlt="Автомобиль для работы в Яндекс Такси на вечерней городской улице"
-        primaryLabel="Зарегистрироваться — выбрать формат"
+        primaryLabel="Зарегистрироваться"
         secondaryHref="#formats"
-        secondaryLabel="Форматы на странице"
+        secondaryLabel="Как оформиться"
         onPrimaryClick={() => openRegister({ startAt: "taxi-format" })}
         crumbs={[
           { name: "Главная", href: "/" },
@@ -94,9 +95,9 @@ export function TaxiLanding() {
       >
         <ol className="grid gap-2 sm:grid-cols-3">
           {[
-            "1. Формат работы",
+            "1. Как оформиться",
             "2. Класс авто",
-            "3. Регистрация или чат",
+            "3. Заявка",
           ].map((item) => (
             <li
               key={item}
@@ -118,9 +119,9 @@ export function TaxiLanding() {
           <FadeIn>
             <SectionHeading
               id="taxi-formats-heading"
-              eyebrow="Шаг 1 · Формат работы"
-              title="Выберите оформление с парком"
-              description="После выбора формата — авторегистрация онлайн или оформление через поддержку парка в чате."
+              eyebrow="Как оформиться"
+              title="Самозанятый, ИП или трудовой договор"
+              description="Самозанятый и ИП — кнопка «Зарегистрироваться». Трудовой договор — сообщение в MAX или Telegram."
             />
           </FadeIn>
           <Stagger className="mt-8 sm:mt-12 grid gap-5 lg:grid-cols-3" stagger={0.1}>
@@ -153,7 +154,7 @@ export function TaxiLanding() {
                         </Link>
                       </Button>
                       <p className="text-center text-xs text-muted-foreground">
-                        Без СМЗ и ИП · оформление через поддержку парка
+                        Без самозанятости и ИП · заявка в чат
                       </p>
                     </div>
                   ) : (
@@ -173,6 +174,9 @@ export function TaxiLanding() {
               </StaggerItem>
             ))}
           </Stagger>
+          <div className="mx-auto mt-6 max-w-3xl">
+            <RouteHint id="taxi" />
+          </div>
         </div>
       </section>
 
@@ -222,7 +226,7 @@ export function TaxiLanding() {
               <ExternalLink className="ml-1.5 inline h-3.5 w-3.5 align-text-bottom" aria-hidden />
             </a>
             <Button asChild size="lg" variant="secondary">
-              <Link href="#formats">К форматам работы →</Link>
+              <Link href="#formats">К способам оформления →</Link>
             </Button>
           </div>
         </div>
@@ -237,10 +241,10 @@ export function TaxiLanding() {
               id="taxi-help"
               className="font-display text-2xl font-semibold text-foreground sm:text-3xl"
             >
-              Как выбрать формат работы
+              Самозанятый, ИП или трудовой?
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Напишите в чат или спросите пультом сайта. {CONTACTS.hours}.
+              Напишите в чат или найдите ответ на сайте. {CONTACTS.hours}.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4">
               <Button
@@ -249,12 +253,12 @@ export function TaxiLanding() {
                 size="lg"
                 onClick={() =>
                   openAssistant({
-                    query: "какой формат такси выбрать",
+                    query: "самозанятый ип или трудовой",
                     place: "taxi-help",
                   })
                 }
               >
-                Подобрать формат в пульте
+                Найти ответ на сайте
               </Button>
               <Button asChild shine size="lg">
                 <Link

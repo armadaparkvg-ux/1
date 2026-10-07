@@ -20,7 +20,9 @@ const MAIN = [
     icon: Briefcase,
     eyebrow: "Главное направление",
     title: "Трудовой договор",
-    text: "Официальное оформление без СМЗ и ИП. Тарифы 3%+300 и 5%+100 — по ТК РФ с парком.",
+    text: "Официальный договор с парком, без самозанятости и без ИП. Тарифы 3%+300 и 5%+100.",
+    next: "Дальше: выбрать тариф и написать в чат",
+    action: "Смотреть тарифы",
     tone: "emerald" as const,
     goal: "click_labor_apply" as const,
     featured: true,
@@ -31,7 +33,9 @@ const MAIN = [
     icon: Car,
     eyebrow: "Яндекс Такси",
     title: "Такси",
-    text: "Самозанятый и ИП от 1,9%. Классы Эконом–Элит, авторегистрация онлайн.",
+    text: "Самозанятый и ИП от 1,9%. Класс от Эконома до Элита, заявка на сайте.",
+    next: "Дальше: самозанятый, ИП или трудовой договор",
+    action: "Как оформиться",
     tone: "accent" as const,
     goal: "directions_taxi" as const,
     featured: false,
@@ -42,7 +46,9 @@ const MAIN = [
     icon: Package,
     eyebrow: "Яндекс Доставка",
     title: "Доставка",
-    text: "Пеший, авто, мото и грузовой курьер — отдельные тарифы и формы.",
+    text: "Пеший, авто, мото или грузовой. Заявку оставляете на странице.",
+    next: "Дальше: как возите заказы и заявка",
+    action: "Выбрать тип курьера",
     tone: "emerald" as const,
     goal: "directions_delivery" as const,
     featured: false,
@@ -54,8 +60,9 @@ const DOCS = [
     href: "/license/",
     icon: FileCheck2,
     title: "Лицензия ФГИС",
-    text: "Чат, фото авто и СТС, документ за 1–3 дня",
+    text: "Сначала проверка реестра, затем фото и оплата по факту",
     meta: "3 500 ₽ · 5 лет",
+    action: "Оформить выписку",
   },
 ] as const;
 
@@ -76,11 +83,10 @@ export function HomeDestinations() {
               id="directions-heading"
               className="mt-2 font-display text-2xl font-semibold tracking-tight text-foreground text-balance sm:text-3xl lg:text-4xl"
             >
-              Выберите путь подключения
+              Что вам нужно
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Сначала направление: трудовой договор, Яндекс Такси, доставка или
-              лицензия ФГИС. Каждая карточка ведёт на свою посадочную.
+              Откройте свою карточку: на странице будут цена и кнопка заявки.
             </p>
           </div>
         </FadeIn>
@@ -161,13 +167,14 @@ export function HomeDestinations() {
                       <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
                         {item.text}
                       </p>
+                      <p className="mt-2 text-sm text-foreground/80">{item.next}</p>
                       <span
                         className={cn(
                           "mt-5 pt-0 text-sm font-semibold sm:mt-auto sm:pt-6",
                           isEmerald ? "text-emerald-glow" : "text-accent"
                         )}
                       >
-                        Открыть страницу
+                        {item.action}
                       </span>
                     </div>
                   </Link>
@@ -201,6 +208,9 @@ export function HomeDestinations() {
                     </span>
                     <span className="mt-1.5 block text-xs font-semibold tracking-wide text-accent">
                       {item.meta}
+                    </span>
+                    <span className="mt-2 block text-sm font-semibold text-accent">
+                      {item.action}
                     </span>
                   </span>
                   <ArrowUpRight

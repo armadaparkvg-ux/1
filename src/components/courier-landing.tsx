@@ -11,6 +11,7 @@ import { DeliveryHeroBanner } from "@/components/delivery-hero-banner";
 import { FadeIn, SectionHeading, Stagger, StaggerItem } from "@/components/fade-in";
 import { DualPathActions } from "@/components/funnel-actions";
 import { NextStops } from "@/components/next-stops";
+import { RouteHint } from "@/components/route-hint";
 import { ContactButtons } from "@/components/contact-buttons";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PageAnswer } from "@/components/page-answer";
@@ -90,7 +91,7 @@ function CourierCard({ tariff }: { tariff: CourierTariff }) {
         registerHref={tariff.formUrl}
         registerLabel="Зарегистрироваться"
         iframeSrc={tariff.formIframe}
-        iframeTitle={`Форма: ${tariff.title}`}
+        iframeTitle={`Заявка: ${tariff.title}`}
         fleetTrack={{ channel: "courier", type: tariff.id, place: "card" }}
       />
     </article>
@@ -158,15 +159,15 @@ export function CourierLanding() {
             items={[
               { label: "Тарифы", value: "пеший, авто, мото, грузовой" },
               { label: "Активация", value: "обычно 10–15 минут" },
-              { label: "Оформление", value: "форма Fleet или заявка в чат" },
+              { label: "Оформление", value: "заявка на сайте или в чате" },
               { label: "Выплаты", value: "через парк «Армада»" },
             ]}
           />
           <ol className="mt-8 grid gap-2 sm:grid-cols-3">
             {[
-              "1. Регистрация",
-              "2. Тариф курьера",
-              "3. Первые заказы",
+              "1. Тип курьера",
+              "2. Заявка на сайте или в чат",
+              "3. Первый слот",
             ].map((item) => (
               <li
                 key={item}
@@ -220,7 +221,7 @@ export function CourierLanding() {
               id="courier-steps-heading"
               eyebrow="Шаг 1 · Как подключиться"
               title="4 шага до заказов"
-              description="Сначала поймите путь, затем выберите тариф и пройдите авторегистрацию."
+              description="Сначала выберите, как возите заказы, затем оставьте заявку."
             />
           </FadeIn>
           <ol className="mt-8 grid sm:mt-10 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -254,8 +255,8 @@ export function CourierLanding() {
             <SectionHeading
               id="courier-tariffs-heading"
               eyebrow="Шаг 2 · Тариф"
-              title="Выберите формат курьера"
-              description="Пеший, легковой авто, мото или грузовой — затем авторегистрация или поддержка парка в чате."
+              title="Как будете возить заказы"
+              description="Пеший, легковой, мото или грузовой — затем заявка на сайте или сообщение в чат."
             />
           </FadeIn>
 
@@ -277,22 +278,24 @@ export function CourierLanding() {
           <FadeIn>
             <SectionHeading
               id="courier-guides"
-              eyebrow="Полезные статьи"
-              title="Доходы, оформление и виды доставки"
-              description="Короткие гайды под запросы «работа курьером», «сколько зарабатывает курьер» и выбор формата."
+              eyebrow="Перед заявкой"
+              title="Чем курьер отличается от такси"
+              description="Коротко о разнице с такси. Подробности — в статьях ниже."
             />
           </FadeIn>
-          <ul className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 lg:grid-cols-4">
-            {RELATED_ARTICLES.map((item) => (
+          <div className="mx-auto mt-8 max-w-3xl">
+            <RouteHint id="delivery" />
+          </div>
+          <ul className="mx-auto mt-4 flex max-w-3xl flex-wrap gap-x-4 gap-y-2 text-sm">
+            {RELATED_ARTICLES.filter(
+              (item) => item.href !== "/blog/vidy-sotrudnichestva-kurer/"
+            ).map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="premium-card block rounded-2xl p-5 transition-colors hover:border-accent/40"
+                  className="font-semibold text-accent underline-offset-4 hover:underline"
                 >
-                  <p className="font-display text-lg font-semibold text-foreground">
-                    {item.title}
-                  </p>
-                  <p className="mt-2 text-sm text-accent">Читать →</p>
+                  {item.title}
                 </Link>
               </li>
             ))}

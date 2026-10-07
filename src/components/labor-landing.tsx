@@ -22,10 +22,10 @@ import { ContactButtons } from "@/components/contact-buttons";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PageAnswer } from "@/components/page-answer";
 import { NextStops } from "@/components/next-stops";
+import { RouteHint } from "@/components/route-hint";
 import { Button } from "@/components/ui/button";
 import { FaqList } from "@/components/faq-list";
 import { CONTACTS } from "@/lib/constants";
-import { fleetGoPath } from "@/lib/fleet-forms";
 import { LABOR_FAQ } from "@/lib/labor-faq";
 import { trackGoal } from "@/lib/metrika";
 
@@ -33,17 +33,17 @@ const AUDIENCE = [
   {
     icon: UserX,
     title: "Не можете работать как самозанятый",
-    text: "Упёрлись в лимит дохода, слетел статус СМЗ или не хотите дальше работать через «Мой налог» — подключим через трудовой договор с парком.",
+    text: "Упёрлись в лимит дохода, статус самозанятого пропал или не хотите дальше работать через «Мой налог» — подключим по трудовому договору с парком.",
   },
   {
     icon: AlertTriangle,
-    title: "Деприоритет −15 и «тип занятости не подтверждён»",
-    text: "Трудовые отношения с парком подтверждаются официально. Это помогает убрать деприоритет по типу занятости в Яндекс Pro.",
+    title: "В Яндекс Про «тип занятости не подтверждён»",
+    text: "Договор с парком подтверждает занятость. Это нужно, когда приложение пишет это сообщение и заказов становится меньше.",
   },
   {
     icon: Scale,
     title: "Ограничения по счетам, блокировки, взыскания",
-    text: "Когда формат СМЗ или ИП неудобен или недоступен — трудовой договор даёт понятный легальный путь к заказам.",
+    text: "Когда самозанятость или ИП неудобны или недоступны — трудовой договор даёт официальную работу с заказами.",
   },
   {
     icon: FileText,
@@ -93,10 +93,10 @@ const DOCS = [
 const BENEFITS = [
   {
     title: "Официально через парк",
-    text: "Трудовой договор с ООО «АРМАДА ДРАЙВЕР» — без СМЗ и без ИП.",
+    text: "Трудовой договор с ООО «АРМАДА ДРАЙВЕР» — без самозанятости и без ИП.",
   },
   {
-    title: "Две схемы комиссии",
+    title: "Два тарифа",
     text: "3% + 300₽ · 5% + 100₽.",
   },
   {
@@ -150,7 +150,7 @@ export function LaborLanding() {
             Работа в Яндекс Такси без самозанятости и ИП
           </h1>
           <p className="mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Превысили лимит СМЗ и не хотите открывать ИП — оформите трудовой
+            Превысили лимит самозанятого и не хотите открывать ИП — оформите трудовой
             договор с парком «Армада». Два тарифа, документы онлайн, поддержка по
             всей России.
           </p>
@@ -160,9 +160,9 @@ export function LaborLanding() {
             </Button>
             <ul className="flex flex-wrap gap-2">
               {[
-                "Без СМЗ и без ИП",
+                "Без самозанятости и без ИП",
                 "По ТК РФ",
-                "Заявка в Telegram / MAX",
+                "Заявка в MAX или Telegram",
               ].map((item) => (
                 <li
                   key={item}
@@ -181,7 +181,7 @@ export function LaborLanding() {
             items={[
               { label: "Тарифы", value: "3%+300₽ или 5%+100₽" },
               { label: "Налоги", value: "платит парк" },
-              { label: "Оформление", value: "только через поддержку, без Fleet" },
+              { label: "Оформление", value: "заявка в MAX или Telegram" },
               { label: "Документы", value: "2‑НДФЛ и договор по запросу" },
             ]}
           />
@@ -204,6 +204,12 @@ export function LaborLanding() {
               </StaggerItem>
             ))}
           </Stagger>
+        </div>
+      </section>
+
+      <section className="border-b border-border py-8 sm:py-10" aria-label="Подсказка по трудовому договору">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <RouteHint id="labor" />
         </div>
       </section>
 
@@ -244,7 +250,7 @@ export function LaborLanding() {
           <FadeIn delay={0.1} className="mt-10 flex justify-center">
             <DualPathActions
               applyTopic="3% + 300₽"
-              applyLabel="Оставить заявку в поддержку парка"
+              applyLabel="Написать менеджеру"
               chats
               className="w-full max-w-md"
             />
@@ -256,7 +262,7 @@ export function LaborLanding() {
         <LaborContract
           eyebrow="Условия · два тарифа «Армады»"
           title="Простые условия без скрытых списаний"
-          description="Выберите схему комиссии. Авторегистрации для трудового договора нет — оформление только через поддержку парка в Telegram или MAX."
+          description="Выберите тариф и напишите в MAX или Telegram. Менеджер оформит договор."
         />
       </div>
 
@@ -374,22 +380,25 @@ export function LaborLanding() {
               <span className="text-foreground/90">ООО «АРМАДА ДРАЙВЕР»</span>.
             </p>
             <div className="mt-8 flex flex-col items-center gap-6">
-              <Button asChild shine size="lg" className="w-full max-w-md">
-                <Link
-                  href={fleetGoPath("taxi", "labor")}
+              <Button asChild shine size="lg" variant="emerald" className="w-full max-w-md">
+                <a
+                  href={CONTACTS.max}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() =>
                     trackGoal("click_labor_apply", {
                       place: "footer",
                       format: "labor",
+                      channel: "max",
                     })
                   }
                 >
-                  Зарегистрироваться — трудовой договор
-                </Link>
+                  Написать в MAX
+                </a>
               </Button>
               <DualPathActions
                 applyTopic="3% + 300₽"
-                applyLabel="Оформить через поддержку парка"
+                applyLabel="Написать менеджеру"
                 chats={false}
                 className="w-full max-w-md"
               />
@@ -397,7 +406,7 @@ export function LaborLanding() {
               <p className="text-sm text-muted-foreground">
                 Также смотрите{" "}
                 <Link href="/taxi/" className="text-accent hover:underline">
-                  все форматы на странице такси
+                  самозанятого и ИП на странице такси
                 </Link>{" "}
                 — самозанятый и ИП от 1,9%.
               </p>

@@ -195,7 +195,7 @@ function SiteAssistantDialog({
       <button
         type="button"
         className="absolute inset-0 bg-black/72 backdrop-blur-sm"
-        aria-label="Закрыть пульт"
+        aria-label="Закрыть поиск"
         onClick={onClose}
       />
       <div
@@ -205,13 +205,13 @@ function SiteAssistantDialog({
         <div className="flex items-start justify-between gap-3 border-b border-border px-4 pb-3 pt-4 sm:px-5">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
-              Пульт сайта
+              Поиск
             </p>
             <h2
               id={titleId}
               className="mt-1 font-display text-lg font-semibold text-foreground"
             >
-              Куда ехать на сайте
+              Найти на сайте
             </h2>
           </div>
           <button
@@ -253,8 +253,8 @@ function SiteAssistantDialog({
         {showEmpty ? (
           <div className="px-4 py-4 sm:px-5">
             <p className="text-sm text-muted-foreground">
-              Пульт читает страницы «Армады» и отвечает только ими. Это не
-              нейросеть: если на сайте нет ответа — отправим вопрос в MAX.
+              Поиск показывает только то, что написано на страницах «Армады».
+              Это не нейросеть: если ответа нет — вопрос уйдёт в MAX.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {SITE_INTENTS.map((intent) => (
@@ -319,7 +319,7 @@ function SiteAssistantDialog({
         >
           {copied
             ? "Текст скопирован. Вставьте в MAX, если чат открылся пустым."
-            : "Ответы только со страниц «Армады». Это поиск по сайту, не нейросеть. Ctrl K открывает пульт."}
+            : "Ответы только со страниц «Армады». Это поиск по сайту, не нейросеть. Ctrl K открывает поиск."}
         </p>
       </div>
     </div>

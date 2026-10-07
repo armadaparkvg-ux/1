@@ -32,7 +32,7 @@ export function ApplySection() {
             </p>
             <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Button asChild size="lg" shine>
-                <Link href="/#directions">Выбрать направление</Link>
+                <Link href="/#directions">Что вам нужно</Link>
               </Button>
               <Button asChild size="lg" variant="emerald" shine>
                 <Link href="/courier/">Курьеры / доставка</Link>

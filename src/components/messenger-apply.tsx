@@ -122,7 +122,7 @@ export function ApplyProvider({ children }: { children: ReactNode }) {
               id="apply-dialog-title"
               className="mt-2 font-display text-2xl font-semibold text-foreground text-balance"
             >
-              Куда удобнее написать?
+              Напишите менеджеру
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               Текст заявки с выбранным тарифом уже готов — откройте мессенджер и

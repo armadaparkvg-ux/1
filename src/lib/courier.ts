@@ -38,7 +38,7 @@ export const COURIER_TARIFFS: CourierTariff[] = [
     ],
     formUrl: COURIER_FORMS.foot,
     formIframe: iframeOf(COURIER_FORMS.foot),
-    cta: "Авторегистрация",
+    cta: "Зарегистрироваться",
   },
   {
     id: "auto",
@@ -50,11 +50,11 @@ export const COURIER_TARIFFS: CourierTariff[] = [
     points: [
       "Больше заказов и выше средний чек",
       "Оплата за км, сложность и спрос",
-      "Авторегистрация онлайн за минуты",
+      "Заявка на сайте за несколько минут",
     ],
     formUrl: COURIER_FORMS.auto,
     formIframe: iframeOf(COURIER_FORMS.auto),
-    cta: "Авторегистрация",
+    cta: "Зарегистрироваться",
   },
   {
     id: "moto",
@@ -70,7 +70,7 @@ export const COURIER_TARIFFS: CourierTariff[] = [
     ],
     formUrl: COURIER_FORMS.moto,
     formIframe: iframeOf(COURIER_FORMS.moto),
-    cta: "Авторегистрация",
+    cta: "Зарегистрироваться",
   },
   {
     id: "cargo",
@@ -78,7 +78,7 @@ export const COURIER_TARIFFS: CourierTariff[] = [
     shortTitle: "Грузовой",
     eyebrow: "Водитель грузового",
     description:
-      "Крупные и объёмные заказы на грузовом авто. Формат паркового самозанятого с выплатами через парк.",
+      "Крупные и объёмные заказы на грузовом авто. Самозанятость через парк, выплаты тоже через парк.",
     points: [
       "Заказы крупнее и дороже",
       "Приоритет паркового самозанятого (+10)",
@@ -86,7 +86,7 @@ export const COURIER_TARIFFS: CourierTariff[] = [
     ],
     formUrl: COURIER_FORMS.cargo,
     formIframe: iframeOf(COURIER_FORMS.cargo),
-    cta: "Авторегистрация",
+    cta: "Зарегистрироваться",
   },
 ] as const;
 
@@ -111,16 +111,16 @@ export const COURIER_BENEFITS = [
 
 export const COURIER_STEPS = [
   {
-    title: "Выберите формат",
+    title: "Как возите заказы",
     text: "Пеший, авто, мото или грузовой — под ваш транспорт и город.",
   },
   {
-    title: "Авторегистрация или чат",
-    text: "Заполните форму Яндекс Fleet или напишите в Telegram / MAX.",
+    title: "Заявка",
+    text: "Заполните заявку на сайте или напишите в MAX или Telegram.",
   },
   {
-    title: "Мой налог + диагностика",
-    text: "Статус самозанятого, подтверждение партнёра и проверки в Яндекс Про.",
+    title: "Статус самозанятого",
+    text: "Подтвердите самозанятость в «Мой налог» и дождитесь проверки в Яндекс Про.",
   },
   {
     title: "На линию",
