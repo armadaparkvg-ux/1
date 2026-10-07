@@ -58,7 +58,7 @@ export function Faq({ previewCount, hideHeading = false }: FaqProps) {
             onClick={() => openAssistant({ place: "faq" })}
           >
             <Search className="h-4 w-4" aria-hidden />
-            Спросить пультом
+            Найти на сайте
           </Button>
         </div>
       </div>

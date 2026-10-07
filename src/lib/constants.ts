@@ -120,7 +120,7 @@ export const FOOTER_GROUPS = [
 export const FOOTER_LINKS = [
   { href: "/o-parke/", label: "О парке" },
   { href: "/taxi/", label: "Подключение к Яндекс Такси" },
-  { href: "/trudovoj-dogovor/", label: "Трудовой договор без СМЗ и ИП" },
+  { href: "/trudovoj-dogovor/", label: "Трудовой договор без самозанятости и ИП" },
   { href: "/delivery/", label: "Курьеры Яндекс Доставка" },
   { href: "/license/", label: "Лицензия такси ФГИС" },
   { href: "/faq/", label: "Частые вопросы (FAQ)" },

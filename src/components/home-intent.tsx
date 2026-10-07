@@ -9,18 +9,18 @@ import { Button } from "@/components/ui/button";
 const ROUTE = [
   {
     n: "1",
-    title: "Направление",
-    text: "Карточки ниже: такси, трудовой, доставка или лицензия ФГИС.",
+    title: "Что нужно",
+    text: "Такси с пассажирами, трудовой договор, доставка или запись авто в реестр.",
   },
   {
     n: "2",
-    title: "Формат",
-    text: "На открытой странице — комиссия, тариф и кому писать заявку.",
+    title: "Условия",
+    text: "На странице — комиссия парка и как оформиться: самозанятый, ИП или договор.",
   },
   {
     n: "3",
     title: "Заявка",
-    text: "Форма Fleet для самозанятого и ИП. Трудовой и ФГИС — только чат.",
+    text: "Самозанятый и ИП — кнопка «Зарегистрироваться». Трудовой договор и лицензия — сообщение в MAX или Telegram.",
   },
 ] as const;
 
@@ -36,17 +36,17 @@ export function HomeIntent() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-              Маршрут
+              С чего начать
             </p>
             <h2
               id="intent-heading"
               className="mt-2 font-display text-2xl font-semibold tracking-tight text-foreground text-balance sm:text-3xl"
             >
-              Три шага до заявки
+              Как оставить заявку
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Сначала направление, потом формат, потом заявка. Если путь
-              неочевиден — откройте пульт, он отвечает текстами с сайта.
+              Сначала выберите, что вам нужно. Если раздел не нашёлся — откройте
+              поиск.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -57,7 +57,7 @@ export function HomeIntent() {
               onClick={() => openAssistant({ place: "home-intent" })}
             >
               <Search className="h-4 w-4" aria-hidden />
-              Открыть пульт
+              Найти на сайте
             </Button>
           </div>
         </div>

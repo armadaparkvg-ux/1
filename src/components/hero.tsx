@@ -66,7 +66,7 @@ export function Hero() {
 
           <div className="mt-5 flex flex-col gap-2.5 sm:mt-8 sm:gap-3">
             <Button asChild shine size="lg" className="w-full shadow-glow sm:w-auto">
-              <Link href="/#directions">Выбрать направление</Link>
+              <Link href="/#directions">Выбрать, что нужно</Link>
             </Button>
             <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap sm:items-center sm:gap-3">
               <Button
@@ -118,7 +118,7 @@ export function Hero() {
               onClick={() => openRegister()}
               className="self-start text-sm font-semibold text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              Уже знаю формат — к регистрации
+              Уже знаю, как оформляться
             </button>
           </div>
 

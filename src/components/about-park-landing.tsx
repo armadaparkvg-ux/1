@@ -26,7 +26,7 @@ const FACTS = [
     icon: Car,
     value: "3 800+",
     label: "водителей такси самозанятых",
-    hint: "парковый СМЗ и ИП",
+    hint: "самозанятые и ИП через парк",
   },
   {
     icon: Briefcase,

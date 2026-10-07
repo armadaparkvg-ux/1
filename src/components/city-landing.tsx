@@ -133,12 +133,12 @@ export function CityLanding({ city }: { city: CityPage }) {
           </p>
 
           <h3 className="mt-6 font-display text-lg font-semibold text-foreground">
-            Гражданство и формат работы
+            Гражданство и как оформиться
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Нужно гражданство РФ. Самозанятый и ИП подключаются авторегистрацией
-            на странице такси. Трудовой договор — только через поддержку парка,
-            авторегистрации на этот формат нет.
+            Нужно гражданство РФ. Самозанятый и ИП оставляют заявку на странице
+            такси. Трудовой договор оформляет менеджер: напишите в MAX или
+            Telegram.
           </p>
 
           <h3 className="mt-6 font-display text-lg font-semibold text-foreground">
@@ -162,7 +162,7 @@ export function CityLanding({ city }: { city: CityPage }) {
             Комиссия парка
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Самозанятый и ИП — от 1,9%. По трудовому договору две схемы: 3% +
+            Самозанятый и ИП — от 1,9%. По трудовому договору два тарифа: 3% +
             300 ₽ в день или 5% + 100 ₽ в день.
             Комиссия Яндекс Такси начисляется отдельно.
           </p>

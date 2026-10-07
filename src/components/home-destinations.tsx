@@ -20,7 +20,7 @@ const MAIN = [
     icon: Briefcase,
     eyebrow: "Главное направление",
     title: "Трудовой договор",
-    text: "Официальное оформление без СМЗ и ИП. Тарифы 3%+300 и 5%+100 — по ТК РФ с парком.",
+    text: "Официальный договор с парком, без самозанятости и без ИП. Тарифы 3%+300 и 5%+100.",
     next: "Дальше: выбрать тариф и написать в чат",
     action: "Смотреть тарифы",
     tone: "emerald" as const,
@@ -33,9 +33,9 @@ const MAIN = [
     icon: Car,
     eyebrow: "Яндекс Такси",
     title: "Такси",
-    text: "Самозанятый и ИП от 1,9%. Классы Эконом–Элит, авторегистрация онлайн.",
-    next: "Дальше: самозанятый, ИП или переход на трудовой",
-    action: "Выбрать формат",
+    text: "Самозанятый и ИП от 1,9%. Класс от Эконома до Элита, заявка на сайте.",
+    next: "Дальше: самозанятый, ИП или трудовой договор",
+    action: "Как оформиться",
     tone: "accent" as const,
     goal: "directions_taxi" as const,
     featured: false,
@@ -46,8 +46,8 @@ const MAIN = [
     icon: Package,
     eyebrow: "Яндекс Доставка",
     title: "Доставка",
-    text: "Пеший, авто, мото и грузовой курьер — отдельные тарифы и формы.",
-    next: "Дальше: тип курьера, затем форма или чат",
+    text: "Пеший, авто, мото или грузовой. Заявку оставляете на странице.",
+    next: "Дальше: как возите заказы и заявка",
     action: "Выбрать тип курьера",
     tone: "emerald" as const,
     goal: "directions_delivery" as const,
@@ -83,11 +83,10 @@ export function HomeDestinations() {
               id="directions-heading"
               className="mt-2 font-display text-2xl font-semibold tracking-tight text-foreground text-balance sm:text-3xl lg:text-4xl"
             >
-              Выберите путь подключения
+              Что вам нужно
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Одна карточка — один маршрут. На странице уже будут формат, цена и
-              кнопка заявки.
+              Откройте свою карточку: на странице будут цена и кнопка заявки.
             </p>
           </div>
         </FadeIn>

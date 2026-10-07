@@ -91,7 +91,7 @@ function CourierCard({ tariff }: { tariff: CourierTariff }) {
         registerHref={tariff.formUrl}
         registerLabel="Зарегистрироваться"
         iframeSrc={tariff.formIframe}
-        iframeTitle={`Форма: ${tariff.title}`}
+        iframeTitle={`Заявка: ${tariff.title}`}
         fleetTrack={{ channel: "courier", type: tariff.id, place: "card" }}
       />
     </article>
@@ -159,14 +159,14 @@ export function CourierLanding() {
             items={[
               { label: "Тарифы", value: "пеший, авто, мото, грузовой" },
               { label: "Активация", value: "обычно 10–15 минут" },
-              { label: "Оформление", value: "форма Fleet или заявка в чат" },
+              { label: "Оформление", value: "заявка на сайте или в чате" },
               { label: "Выплаты", value: "через парк «Армада»" },
             ]}
           />
           <ol className="mt-8 grid gap-2 sm:grid-cols-3">
             {[
               "1. Тип курьера",
-              "2. Форма или чат",
+              "2. Заявка на сайте или в чат",
               "3. Первый слот",
             ].map((item) => (
               <li
@@ -221,7 +221,7 @@ export function CourierLanding() {
               id="courier-steps-heading"
               eyebrow="Шаг 1 · Как подключиться"
               title="4 шага до заказов"
-              description="Сначала поймите путь, затем выберите тариф и пройдите авторегистрацию."
+              description="Сначала выберите, как возите заказы, затем оставьте заявку."
             />
           </FadeIn>
           <ol className="mt-8 grid sm:mt-10 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -255,8 +255,8 @@ export function CourierLanding() {
             <SectionHeading
               id="courier-tariffs-heading"
               eyebrow="Шаг 2 · Тариф"
-              title="Выберите формат курьера"
-              description="Пеший, легковой авто, мото или грузовой — затем авторегистрация или поддержка парка в чате."
+              title="Как будете возить заказы"
+              description="Пеший, легковой, мото или грузовой — затем заявка на сайте или сообщение в чат."
             />
           </FadeIn>
 
@@ -280,7 +280,7 @@ export function CourierLanding() {
               id="courier-guides"
               eyebrow="Перед заявкой"
               title="Чем курьер отличается от такси"
-              description="Одна выдержка из статьи. Остальные гайды — ссылками, без второй витрины."
+              description="Коротко о разнице с такси. Подробности — в статьях ниже."
             />
           </FadeIn>
           <div className="mx-auto mt-8 max-w-3xl">

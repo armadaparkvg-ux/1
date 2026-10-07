@@ -62,7 +62,7 @@ const DIRECTIONS = [
   {
     id: "taxi" as const,
     title: "Такси",
-    hint: "Яндекс Такси · авторегистрация или трудовой",
+    hint: "Поездки с пассажирами: самозанятый, ИП или трудовой договор",
     icon: Car,
   },
   {
@@ -89,7 +89,7 @@ const TAXI_FORMATS = [
   {
     id: "labor" as const,
     title: "Трудовой договор",
-    hint: "Без авторегистрации — напишите в чат",
+    hint: "Напишите в чат — менеджер оформит договор",
     icon: Briefcase,
   },
 ] as const;
@@ -232,12 +232,12 @@ function RegisterQuizSheet({
 
   const title =
     phase === "direction"
-      ? "Шаг 1 · Куда регистрироваться?"
+      ? "Такси или доставка?"
       : phase === "branch" && direction === "taxi"
-        ? "Шаг 2 · Формат в такси"
+        ? "Как оформиться в такси"
         : phase === "branch" && direction === "delivery"
-          ? "Шаг 2 · Тариф курьера"
-          : "Шаг 3 · Готово";
+          ? "Как возите заказы"
+          : "Заявка";
 
   const goBack = () => {
     if (phase === "result") {
@@ -415,8 +415,7 @@ function RegisterQuizSheet({
                     Трудовой договор
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Авторегистрации нет — оформите через поддержку парка в чате.
-                    Основной канал — MAX, Telegram запасной.
+                    Напишите в MAX или Telegram — менеджер оформит договор.
                   </p>
                   <div className="mt-5 flex flex-col gap-2">
                     <Button asChild shine size="lg" variant="emerald">
@@ -483,7 +482,7 @@ function RegisterQuizSheet({
                     {direction === "taxi"
                       ? taxiResult?.hint
                       : deliveryResult?.hint}
-                    . Дальше откроется форма авторегистрации Яндекс Fleet.
+                    . Сейчас откроется заявка на подключение.
                   </p>
                   {registerHref ? (
                     <Button asChild shine size="lg" className="mt-5 w-full">
@@ -493,13 +492,10 @@ function RegisterQuizSheet({
                           onClose();
                         }}
                       >
-                        Перейти к авторегистрации
+                        Перейти к заявке
                       </Link>
                     </Button>
                   ) : null}
-                  <p className="mt-3 break-all text-center text-[11px] text-muted-foreground/80">
-                    {registerHref ? `park-armada.ru${registerHref}` : null}
-                  </p>
                 </>
               )}
 
@@ -509,7 +505,7 @@ function RegisterQuizSheet({
                 className="mt-5 inline-flex w-full items-center justify-center gap-2 text-sm text-muted-foreground hover:text-foreground"
               >
                 <RotateCcw className="h-3.5 w-3.5" aria-hidden />
-                Пройти квиз заново
+                Выбрать заново
               </button>
             </div>
           ) : null}
