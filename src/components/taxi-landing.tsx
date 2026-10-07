@@ -58,7 +58,7 @@ const FORMATS = [
     id: "labor",
     title: "Трудовой договор",
     value: "2 тарифа",
-    text: "Официальное оформление: 3%+300₽ или 5%+100₽ — через поддержку парка.",
+    text: "Официальное оформление: 3%+300₽ или 5%+100₽. Напишите в MAX или Telegram.",
     registerHref: null as string | null,
     iframeSrc: null as string | null,
     featured: false,

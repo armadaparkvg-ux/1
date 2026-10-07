@@ -132,7 +132,7 @@ export function Header() {
           <div className="hidden items-center gap-2 sm:flex">
             <IconContactLinks />
             <Button asChild shine size="sm" className="hidden lg:inline-flex">
-              <Link href="/#directions">Выбрать направление</Link>
+              <Link href="/#directions">Что нужно</Link>
             </Button>
           </div>
 
@@ -197,7 +197,7 @@ export function Header() {
             <div className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
               <Button asChild shine className="w-full">
                 <Link href="/#directions" onClick={() => setOpen(false)}>
-                  Выбрать направление
+                  Что вам нужно
                 </Link>
               </Button>
               <a

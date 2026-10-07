@@ -10,7 +10,7 @@ export function LegalAcceptanceNote({ className }: { className?: string }) {
         className
       )}
     >
-      Нажимая «Зарегистрироваться» или «Написать менеджеру», вы принимаете{" "}
+      Нажимая кнопку заявки или обращаясь в чат, вы принимаете{" "}
       <Link href="/offer/" className="text-accent underline-offset-2 hover:underline">
         агентское соглашение (оферту)
       </Link>{" "}
