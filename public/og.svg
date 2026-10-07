@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0F14"/>
+      <stop offset="45%" stop-color="#0F1724"/>
+      <stop offset="100%" stop-color="#151d2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="64" y="64" width="56" height="56" rx="14" fill="#F59E0B"/>
+  <text x="88" y="102" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#0B0F14">A</text>
+  <text x="140" y="102" font-family="Arial, sans-serif" font-size="36" font-weight="700" fill="#FBBF24">@<040</text>
+  <text x="64" y="280" font-family="Arial, sans-serif" font-size="52" font-weight="700" fill="#F8FAFC">>4:;NG5=85 : /=45:A "0:A8</text>
+  <text x="64" y="350" font-family="Arial, sans-serif" font-size="26" fill="#94A3B8">!0<>70=OBK9 8  >B 1,9% · "@C4>2>9 4>3>2>@ · 8F5=78O $!</text>
+  <text x="64" y="560" font-family="Arial, sans-serif" font-size="22" fill="#64748B">park-armada.ru</text>
+  <text x="900" y="560" font-family="Arial, sans-serif" font-size="22" fill="#64748B">8:0021:00 A:</text>
+</svg>
